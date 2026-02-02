@@ -75,12 +75,21 @@ const HeroSection = () => {
               transition={{ delay: 0.8 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <Button variant="cta" size="xl" className="group">
+              <Button 
+                variant="cta" 
+                size="xl" 
+                className="group"
+                onClick={() => window.open('https://pay.kiwify.com.br/TNXfTZT', '_blank')}
+              >
                 <span className="relative z-10">Começar Agora</span>
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               </Button>
               
-              <Button variant="mysticalOutline" size="xl">
+              <Button 
+                variant="mysticalOutline" 
+                size="xl"
+                onClick={() => window.open('https://pay.kiwify.com.br/TNXfTZT', '_blank')}
+              >
                 Saiba Mais
               </Button>
             </motion.div>
