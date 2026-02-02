@@ -86,7 +86,12 @@ const CTASection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <Button variant="cta" size="xl" className="group text-lg px-12">
+            <Button 
+              variant="cta" 
+              size="xl" 
+              className="group text-lg px-12"
+              onClick={() => window.open('https://pay.kiwify.com.br/TNXfTZT', '_blank')}
+            >
               <span className="relative z-10">QUERO COMEÇAR MEU RESET</span>
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </Button>

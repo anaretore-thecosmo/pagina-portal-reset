@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
@@ -101,6 +102,25 @@ const TestimonialsSection = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* CTA Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center mt-16"
+        >
+          <Button 
+            variant="cta" 
+            size="xl" 
+            className="group"
+            onClick={() => window.open('https://pay.kiwify.com.br/TNXfTZT', '_blank')}
+          >
+            <span className="relative z-10">QUERO RESULTADOS ASSIM</span>
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
