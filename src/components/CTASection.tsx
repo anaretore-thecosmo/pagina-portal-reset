@@ -70,9 +70,9 @@ const CTASection = () => {
             <p className="font-philosopher text-foreground/60 text-sm mb-2">Investimento</p>
             <div className="flex items-baseline justify-center gap-2">
               <span className="font-philosopher text-foreground/40 text-lg line-through">R$ 497</span>
-              <span className="font-cinzel text-gradient-gold text-5xl font-bold">R$ 97</span>
+              <span className="font-cinzel text-gradient-gold text-5xl font-bold">R$ 197</span>
             </div>
-            <p className="font-philosopher text-primary text-sm mt-2">ou 12x de R$ 9,70</p>
+            <p className="font-philosopher text-primary text-sm mt-2">ou 12x de R$ 19,70</p>
             <div className="mt-4 pt-4 border-t border-primary/20">
               <p className="font-philosopher text-foreground/70 text-sm">
                 ✓ Acesso imediato • ✓ 10 dias de conteúdo • ✓ Suporte exclusivo
