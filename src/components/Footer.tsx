@@ -13,10 +13,10 @@ const Footer = () => {
           {/* Logo/Brand */}
           <div className="mb-6">
             <h3 className="font-cinzel text-gradient-gold text-2xl font-bold">
-              RESET MENTAL 10D
+              O PORTAL RESET
             </h3>
             <p className="font-philosopher text-foreground/50 text-sm mt-1">
-              Reprogramação Alquímica
+              Espaço de Consciência e Escolha
             </p>
           </div>
 
@@ -49,7 +49,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="pt-6 border-t border-primary/10">
             <p className="font-philosopher text-foreground/40 text-sm">
-              © {new Date().getFullYear()} Reset Mental 10D. Todos os direitos reservados.
+              © {new Date().getFullYear()} O Portal Reset. Todos os direitos reservados.
             </p>
             <p className="font-philosopher text-foreground/30 text-xs mt-2">
               Este produto não garante a obtenção de resultados. Qualquer referência ao desempenho 
