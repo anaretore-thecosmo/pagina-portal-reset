@@ -1,70 +1,25 @@
 
-
-# Plano: Adicionar Botões de Compra em Cada Seção
+# Plano: Atualizar Preço do Produto
 
 ## Objetivo
-Adicionar um botão CTA em cada dobra (seção) da landing page, todos direcionando para o link de pagamento do Kiwify: `https://pay.kiwify.com.br/TNXfTZT`
+Corrigir o preço do produto de R$ 97 para R$ 197 na seção de CTA.
 
-## Seções a Modificar
+## Alteração no CTASection.tsx
 
-A página atual tem 5 seções principais + footer:
+### Linha 72-75 - Atualizar valores:
+| Campo | Valor Atual | Novo Valor |
+|-------|-------------|------------|
+| Preço riscado (de) | R$ 497 | R$ 497 (manter) |
+| Preço atual | R$ 97 | R$ 197 |
+| Parcelamento | 12x de R$ 9,70 | 12x de R$ 19,70 |
 
-| Seção | Status Atual | Ação |
-|-------|--------------|------|
-| HeroSection | Tem 2 botões (sem link) | Adicionar link Kiwify |
-| TransformationSection | Sem botão | Adicionar botão CTA |
-| JourneySection | Sem botão | Adicionar botão CTA |
-| TestimonialsSection | Sem botão | Adicionar botão CTA |
-| CTASection | Tem 1 botão (sem link) | Adicionar link Kiwify |
-
-## Alterações por Componente
-
-### 1. HeroSection.tsx
-- Modificar o botão "Começar Agora" para abrir o link Kiwify em nova aba
-- Modificar o botão "Saiba Mais" para scroll suave para próxima seção (ou também link para Kiwify)
-
-### 2. TransformationSection.tsx
-- Adicionar import do Button
-- Adicionar botão CTA centralizado ao final da seção, após os cards de transformação
-- Texto sugerido: "QUERO MINHA TRANSFORMAÇÃO"
-
-### 3. JourneySection.tsx
-- Adicionar import do Button
-- Adicionar botão CTA centralizado ao final da seção, após a grade dos 10 dias
-- Texto sugerido: "COMEÇAR MEUS 10 DIAS"
-
-### 4. TestimonialsSection.tsx
-- Adicionar import do Button
-- Adicionar botão CTA centralizado ao final dos depoimentos
-- Texto sugerido: "QUERO RESULTADOS ASSIM"
-
-### 5. CTASection.tsx
-- Modificar o botão existente para abrir o link Kiwify em nova aba
-
-## Detalhes Técnicos
-
-```text
-Padrão do botão em cada seção:
-+------------------------------------------+
-|  <Button                                 |
-|    variant="cta"                         |
-|    size="xl"                             |
-|    className="group"                     |
-|    onClick={() => window.open(           |
-|      'https://pay.kiwify.com.br/TNXfTZT',|
-|      '_blank'                            |
-|    )}                                    |
-|  >                                       |
-|    TEXTO DO CTA                          |
-|  </Button>                               |
-+------------------------------------------+
+### Código atualizado:
+```tsx
+<span className="font-philosopher text-foreground/40 text-lg line-through">R$ 497</span>
+<span className="font-cinzel text-gradient-gold text-5xl font-bold">R$ 197</span>
+// ...
+<p className="font-philosopher text-primary text-sm mt-2">ou 12x de R$ 19,70</p>
 ```
 
-- Todos os botões usarão `variant="cta"` para manter consistência visual
-- Os botões terão animação de hover com efeito shimmer
-- O link abrirá em nova aba (`_blank`) para não perder o usuário da página
-
-## Resultado Final
-
-Após as alterações, a página terá um botão de compra visível em cada dobra, facilitando a conversão em qualquer ponto da jornada do usuário na página.
-
+## Resultado
+O preço será exibido corretamente como R$ 197 (ou 12x de R$ 19,70), com o preço original de R$ 497 riscado mostrando o desconto.
