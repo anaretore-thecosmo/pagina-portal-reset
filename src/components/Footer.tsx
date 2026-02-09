@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="relative py-12 border-t border-primary/20">
+    <footer className="relative py-12 border-t border-foreground/10">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0 }}
@@ -10,48 +10,35 @@ const Footer = () => {
           viewport={{ once: true }}
           className="text-center"
         >
-          {/* Logo/Brand */}
+          {/* Brand */}
           <div className="mb-6">
-            <h3 className="font-cinzel text-gradient-gold text-2xl font-bold">
+            <h3 className="font-playfair text-xl font-bold text-foreground tracking-tight">
               O PORTAL RESET
             </h3>
-            <p className="font-philosopher text-foreground/50 text-sm mt-1">
+            <p className="font-inter text-muted-foreground text-sm mt-1">
               Espaço de Consciência e Escolha
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex justify-center gap-8 mb-8 text-sm font-philosopher">
-            <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
+          <div className="flex justify-center gap-8 mb-8 text-sm font-inter">
+            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
               Termos de Uso
             </a>
-            <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
               Política de Privacidade
             </a>
-            <a href="#" className="text-foreground/60 hover:text-primary transition-colors">
+            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
               Contato
             </a>
           </div>
 
-          {/* Social */}
-          <div className="flex justify-center gap-4 mb-8">
-            <a href="#" className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center text-foreground/60 hover:text-primary hover:border-primary/60 transition-all">
-              <span className="text-lg">📷</span>
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center text-foreground/60 hover:text-primary hover:border-primary/60 transition-all">
-              <span className="text-lg">📱</span>
-            </a>
-            <a href="#" className="w-10 h-10 rounded-full border border-primary/30 flex items-center justify-center text-foreground/60 hover:text-primary hover:border-primary/60 transition-all">
-              <span className="text-lg">✉️</span>
-            </a>
-          </div>
-
           {/* Copyright */}
-          <div className="pt-6 border-t border-primary/10">
-            <p className="font-philosopher text-foreground/40 text-sm">
+          <div className="pt-6 border-t border-foreground/5">
+            <p className="font-inter text-muted-foreground text-sm">
               © {new Date().getFullYear()} O Portal Reset. Todos os direitos reservados.
             </p>
-            <p className="font-philosopher text-foreground/30 text-xs mt-2">
+            <p className="font-inter text-muted-foreground/70 text-xs mt-2 max-w-lg mx-auto">
               Este produto não garante a obtenção de resultados. Qualquer referência ao desempenho 
               de uma estratégia não deve ser interpretada como uma garantia de resultados.
             </p>

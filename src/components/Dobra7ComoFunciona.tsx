@@ -1,41 +1,21 @@
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import AccessibilityReader from "@/components/AccessibilityReader";
-import crystalGrimoire from "@/assets/crystal-grimoire.png";
-
-const deliverables = [
-  "Protocolo inicial RESET MENTAL — 10D",
-  "Práticas diárias de 2 a 5 minutos",
-  "Exercícios de clareza e presença",
-  "Rituais simples de reorganização mental",
-  "Acesso contínuo ao ambiente",
-];
 
 const Dobra7ComoFunciona = () => {
   return (
     <section
-      className="relative py-20 overflow-hidden"
+      className="relative py-24"
       role="region"
       aria-labelledby="dobra7-title"
     >
-      {/* Background */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <img
-          src={crystalGrimoire}
-          alt=""
-          className="w-full h-full object-cover opacity-10"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-      </div>
-
       <div className="container relative z-10 px-4">
         <motion.article
           id="dobra7-content"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center"
+          transition={{ duration: 0.7 }}
+          className="max-w-[680px] mx-auto"
         >
           {/* 3 seconds phrase */}
           <motion.h2
@@ -44,81 +24,47 @@ const Dobra7ComoFunciona = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="font-cinzel text-2xl md:text-3xl lg:text-4xl font-bold mb-8 leading-tight"
+            className="font-playfair text-2xl md:text-3xl lg:text-4xl font-bold mb-10 leading-tight tracking-tight"
           >
-            <span className="text-gradient-gold">Simples. Aplicável. Habitável.</span>
+            <span className="text-editorial-black">OS 10 DIAS NÃO SÃO O FIM.</span>
+            <br />
+            <span className="text-editorial-gold">SÃO A ENTRADA.</span>
           </motion.h2>
 
-          {/* 10 seconds - intro */}
-          <motion.p
+          {/* 10 seconds text */}
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="font-philosopher text-lg text-foreground/80 leading-relaxed mb-10"
+            className="space-y-5 mb-12"
           >
-            Ao entrar no PORTAL RESET, você acessa:
-          </motion.p>
-
-          {/* Deliverables list */}
-          <motion.ul
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="space-y-4 mb-10"
-            role="list"
-            aria-label="O que você recebe no Portal Reset"
-          >
-            {deliverables.map((item, index) => (
-              <motion.li
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + index * 0.1 }}
-                className="flex items-center justify-center gap-3"
-              >
-                <span className="text-primary" aria-hidden="true">✦</span>
-                <span className="font-philosopher text-lg text-foreground/80">
-                  {item}
-                </span>
-              </motion.li>
-            ))}
-          </motion.ul>
-
-          {/* Closing text */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.9 }}
-            className="space-y-2 mb-10"
-          >
-            <p className="font-philosopher text-lg text-foreground/70">
-              Nada de sobrecarga.
+            <p className="font-inter text-lg text-foreground/80 leading-relaxed">
+              O Reset 10D existe para reorganizar sua mente e te colocar de volta no comando.
             </p>
-            <p className="font-philosopher text-lg text-foreground/70">
-              Nada de performance espiritual.
+            <p className="font-inter text-lg text-foreground/70 leading-relaxed">
+              2 a 5 minutos por dia. Sem sobrecarga. Sem performance.
+            </p>
+            <p className="font-inter text-lg text-foreground/80 leading-relaxed">
+              Você aprende o caminho — e depois permanece no Portal para sustentar.
             </p>
           </motion.div>
 
-          {/* CTA */}
+          {/* Timeline - 10 points */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 1 }}
-            className="mb-8"
+            transition={{ delay: 0.6 }}
+            className="flex items-center justify-center gap-2 mb-12"
+            aria-label="Linha do tempo de 10 dias"
           >
-            <Button
-              variant="mysticalOutline"
-              size="lg"
-              onClick={() => window.open('https://pay.kiwify.com.br/TNXfTZT', '_blank')}
-              aria-label="Entrar no Portal Reset - abre página de compra em nova aba"
-            >
-              QUERO ENTRAR NO PORTAL
-            </Button>
+            {Array.from({ length: 10 }, (_, i) => (
+              <div key={i} className="flex flex-col items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-primary/60 border border-primary" />
+                <span className="font-inter text-xs text-muted-foreground">{i + 1}</span>
+              </div>
+            ))}
           </motion.div>
 
           {/* Accessibility */}
@@ -126,7 +72,7 @@ const Dobra7ComoFunciona = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 0.7 }}
           >
             <AccessibilityReader contentId="dobra7-content" label="Ouvir esta seção" />
           </motion.div>
