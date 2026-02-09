@@ -1,32 +1,21 @@
 import { motion } from "framer-motion";
 import AccessibilityReader from "@/components/AccessibilityReader";
-import alchemistScroll from "@/assets/alchemist-scroll.png";
 
 const Dobra9Origem = () => {
   return (
     <section
-      className="relative py-20 overflow-hidden"
+      className="relative py-24"
       role="region"
       aria-labelledby="dobra9-title"
     >
-      {/* Background */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <img
-          src={alchemistScroll}
-          alt=""
-          className="w-full h-full object-cover opacity-10"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-      </div>
-
       <div className="container relative z-10 px-4">
         <motion.article
           id="dobra9-content"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center"
+          transition={{ duration: 0.7 }}
+          className="max-w-[680px] mx-auto"
         >
           {/* 3 seconds phrase */}
           <motion.h2
@@ -35,9 +24,9 @@ const Dobra9Origem = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="font-cinzel text-2xl md:text-3xl lg:text-4xl font-bold mb-8 leading-tight"
+            className="font-playfair text-2xl md:text-3xl lg:text-4xl font-bold mb-10 leading-tight tracking-tight text-editorial-black"
           >
-            <span className="text-gradient-gold">Isso nasceu de uma necessidade real.</span>
+            EU CRIEI ISSO POR NECESSIDADE REAL.
           </motion.h2>
 
           {/* 10 seconds text */}
@@ -46,40 +35,39 @@ const Dobra9Origem = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="space-y-4 mb-10"
+            className="space-y-5 mb-10"
           >
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed">
-              Eu criei o PORTAL RESET depois de perceber que saber não bastava.
+            <p className="font-inter text-lg text-foreground/80 leading-relaxed">
+              Em 2016 eu tive uma epifania: meu trabalho é ajudar pessoas a descobrir propósito — e traduzir isso em vida prática.
             </p>
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed">
-              Era preciso coerência aplicada.
+            <p className="font-inter text-lg text-foreground/70 leading-relaxed">
+              Mas eu vi um loop rodando em mim enquanto eu jurava que estava "fazendo tudo certo".
+              Crenças antigas. Programas automáticos. Mentiras elegantes.
             </p>
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed mt-6">
-              Não é método milagroso.
+            <p className="font-inter text-lg text-foreground/70 leading-relaxed">
+              O custo foi concreto: energia drenada, dinheiro indo pro "mais uma coisa", relações sentindo o peso do desalinhamento.
             </p>
-            <p className="font-philosopher text-lg text-primary font-semibold leading-relaxed">
-              É arquitetura de sustentação interna.
+            <p className="font-inter text-lg text-foreground/80 leading-relaxed font-medium">
+              A decisão foi virar a chave do como: método, execução e sistema.
             </p>
           </motion.div>
 
-          {/* Decorative element */}
+          {/* Gold editorial line as signature */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, scaleX: 0 }}
+            whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="py-8"
+            className="w-20 h-px bg-primary mb-10"
             aria-hidden="true"
-          >
-            <div className="w-24 h-px bg-gradient-to-r from-transparent via-primary to-transparent mx-auto" />
-          </motion.div>
+          />
 
           {/* Accessibility */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 0.7 }}
           >
             <AccessibilityReader contentId="dobra9-content" label="Ouvir esta seção" />
           </motion.div>

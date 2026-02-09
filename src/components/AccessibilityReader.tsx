@@ -16,31 +16,18 @@ const AccessibilityReader = ({ contentId, label = "Ouvir conteúdo" }: Accessibi
     const element = document.getElementById(contentId);
     if (!element) return;
 
-    // Cancel any ongoing speech
     window.speechSynthesis.cancel();
 
     const text = element.innerText || element.textContent || "";
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // Configure for Portuguese
     utterance.lang = "pt-BR";
     utterance.rate = 0.9;
     utterance.pitch = 1;
 
-    utterance.onstart = () => {
-      setIsPlaying(true);
-      setIsPaused(false);
-    };
-
-    utterance.onend = () => {
-      setIsPlaying(false);
-      setIsPaused(false);
-    };
-
-    utterance.onerror = () => {
-      setIsPlaying(false);
-      setIsPaused(false);
-    };
+    utterance.onstart = () => { setIsPlaying(true); setIsPaused(false); };
+    utterance.onend = () => { setIsPlaying(false); setIsPaused(false); };
+    utterance.onerror = () => { setIsPlaying(false); setIsPaused(false); };
 
     window.speechSynthesis.speak(utterance);
   }, [contentId]);
@@ -76,7 +63,7 @@ const AccessibilityReader = ({ contentId, label = "Ouvir conteúdo" }: Accessibi
             variant="outline"
             size="sm"
             onClick={speak}
-            className="gap-2 border-primary/30 hover:border-primary hover:bg-primary/10"
+            className="gap-2"
             aria-label={label}
           >
             <Volume2 className="h-4 w-4" aria-hidden="true" />
@@ -94,7 +81,7 @@ const AccessibilityReader = ({ contentId, label = "Ouvir conteúdo" }: Accessibi
               variant="outline"
               size="sm"
               onClick={togglePause}
-              className="gap-2 border-primary/30 hover:border-primary hover:bg-primary/10"
+              className="gap-2"
               aria-label={isPaused ? "Continuar leitura" : "Pausar leitura"}
             >
               {isPaused ? (
@@ -109,7 +96,7 @@ const AccessibilityReader = ({ contentId, label = "Ouvir conteúdo" }: Accessibi
               variant="outline"
               size="sm"
               onClick={stop}
-              className="gap-2 border-destructive/30 hover:border-destructive hover:bg-destructive/10"
+              className="gap-2"
               aria-label="Parar leitura"
             >
               <VolumeX className="h-4 w-4" aria-hidden="true" />

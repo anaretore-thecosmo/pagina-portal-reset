@@ -1,32 +1,21 @@
 import { motion } from "framer-motion";
 import AccessibilityReader from "@/components/AccessibilityReader";
-import bannerBrain from "@/assets/banner-brain.webp";
 
 const Dobra3CausaInvisivel = () => {
   return (
     <section
-      className="relative py-20 overflow-hidden"
+      className="relative py-24 bg-card"
       role="region"
       aria-labelledby="dobra3-title"
     >
-      {/* Background image */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <img
-          src={bannerBrain}
-          alt=""
-          className="w-full h-full object-cover opacity-10"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-      </div>
-
       <div className="container relative z-10 px-4">
         <motion.article
           id="dobra3-content"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center"
+          transition={{ duration: 0.7 }}
+          className="max-w-[680px] mx-auto"
         >
           {/* 3 seconds phrase */}
           <motion.h2
@@ -35,9 +24,11 @@ const Dobra3CausaInvisivel = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="font-cinzel text-2xl md:text-3xl lg:text-4xl font-bold mb-8 leading-tight"
+            className="font-playfair text-2xl md:text-3xl lg:text-4xl font-bold mb-10 leading-tight tracking-tight"
           >
-            <span className="text-gradient-gold">O problema não é falta de disciplina.</span>
+            <span className="text-editorial-black">O PROBLEMA NÃO É DISCIPLINA.</span>
+            <br />
+            <span className="text-editorial-gold">É SISTEMA.</span>
           </motion.h2>
 
           {/* 10 seconds text */}
@@ -46,35 +37,29 @@ const Dobra3CausaInvisivel = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
-            className="space-y-4 mb-8"
+            className="space-y-5 mb-10"
           >
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed">
-              Segundo a neurociência, o cérebro foi projetado para economizar energia,
+            <p className="font-inter text-lg text-foreground/80 leading-relaxed">
+              Seu cérebro é uma máquina de economia de energia.
+              Ele repete o que é familiar porque isso custa menos do que escolher de novo.
             </p>
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed">
-              não para gerar clareza.
+            <p className="font-inter text-lg text-foreground/70 leading-relaxed">
+              Sem um ambiente que sustente clareza, o automático vence — e você chama isso de "normal".
             </p>
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed mt-6">
-              Ele repete o que é familiar.
-            </p>
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed">
-              Mesmo quando isso custa caro.
-            </p>
-            <p className="font-philosopher text-lg text-foreground/80 leading-relaxed mt-6">
-              Tradições antigas já sabiam:<br />
-              uma mente não observada governa a vida inteira.
+            <p className="font-inter text-lg text-foreground/80 leading-relaxed font-medium">
+              O Portal existe para reduzir atrito e proteger seu estado interno.
             </p>
           </motion.div>
 
           {/* Quote */}
           <motion.blockquote
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6 }}
-            className="border-l-4 border-primary pl-6 py-2 mb-8"
+            className="editorial-border-left pl-6 py-2 mb-10"
           >
-            <p className="font-crimson text-xl md:text-2xl italic text-foreground/90">
+            <p className="font-playfair text-lg md:text-xl italic text-foreground/70">
               "Pensamentos não escolhidos governam vidas inteiras."
             </p>
           </motion.blockquote>
@@ -84,7 +69,7 @@ const Dobra3CausaInvisivel = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 0.7 }}
           >
             <AccessibilityReader contentId="dobra3-content" label="Ouvir esta seção" />
           </motion.div>
