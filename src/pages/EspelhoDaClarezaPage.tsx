@@ -11,6 +11,8 @@ const EspelhoDaClarezaPage = () => {
   const [searchParams] = useSearchParams();
   const state = location.state as { session?: QuizSession } | null;
 
+  const sid = searchParams.get("sid") || undefined;
+
   const resolved = useMemo(() => {
     // Try navigation state first
     if (state?.session?.answers?.length === 24) {
@@ -20,7 +22,7 @@ const EspelhoDaClarezaPage = () => {
         const q2 = 10 - (answers[i * 2 + 1] ?? 5);
         return (q1 + q2) / 2;
       });
-      return { scores, answers: answers as (number | null)[] };
+      return { scores, answers: answers as (number | null)[], sessionId: state.session.sessionId };
     }
 
     // Fallback: localStorage
@@ -28,7 +30,6 @@ const EspelhoDaClarezaPage = () => {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const session: QuizSession = JSON.parse(raw);
-        const sid = searchParams.get("sid");
         if (sid && session.sessionId !== sid) return null;
         if (session.answers.length === 24) {
           const answers = session.answers.map((a) => a.value);
@@ -37,13 +38,13 @@ const EspelhoDaClarezaPage = () => {
             const q2 = 10 - (answers[i * 2 + 1] ?? 5);
             return (q1 + q2) / 2;
           });
-          return { scores, answers: answers as (number | null)[] };
+          return { scores, answers: answers as (number | null)[], sessionId: session.sessionId };
         }
       }
     } catch {}
 
     return null;
-  }, [state, searchParams]);
+  }, [state, sid]);
 
   useEffect(() => {
     if (!resolved) navigate("/quiz-mapa-do-padrao");
@@ -53,7 +54,7 @@ const EspelhoDaClarezaPage = () => {
 
   return (
     <main className="min-h-screen bg-background">
-      <DiagnosticoResult scores={resolved.scores} userName="" answers={resolved.answers} />
+      <DiagnosticoResult scores={resolved.scores} userName="" answers={resolved.answers} sessionId={resolved.sessionId} />
     </main>
   );
 };

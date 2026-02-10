@@ -217,7 +217,8 @@ export async function generateDiagnosticoPDF(
   y += 14;
 
   // Editorial diagnostic
-  const editorialText = generateEditorialDiagnostic(data);
+  const editorialParagraphs = generateEditorialDiagnostic(data);
+  const editorialText = editorialParagraphs.join("\n\n");
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(10);
   pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
