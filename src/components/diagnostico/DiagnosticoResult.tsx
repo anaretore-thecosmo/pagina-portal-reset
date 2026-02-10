@@ -56,7 +56,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
         <motion.div initial="hidden" animate="visible" custom={0} variants={fade}>
           <p className="kicker mb-4 text-center">Resultado</p>
           <h1
-            className="font-cormorant font-bold text-center uppercase"
+            className="font-playfair font-bold text-center uppercase"
             style={{ fontSize: "clamp(32px, 4vw, 52px)", lineHeight: 1.08, letterSpacing: "0.1em" }}
           >
             Espelho da Clareza
@@ -68,7 +68,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
             Mapa do seu padrão atual
           </p>
           {userName && (
-            <p className="text-center mt-2 font-cormorant text-lg" style={{ color: "hsl(var(--graphite) / 0.6)" }}>
+            <p className="text-center mt-2 font-playfair text-lg" style={{ color: "hsl(var(--graphite) / 0.6)" }}>
               {userName}
             </p>
           )}
@@ -84,7 +84,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
             {editorial}
           </p>
           <p
-            className="text-sm mt-2 italic font-cormorant"
+            className="text-sm mt-2 italic font-playfair"
             style={{ color: "hsl(var(--graphite) / 0.45)" }}
           >
             Um retrato do seu padrão recente, sem julgamento.
@@ -124,7 +124,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
                   >
                     <div className="flex items-baseline justify-between">
                       <span className="text-sm font-medium">{axis.label}</span>
-                      <span className="font-cormorant font-bold text-lg" style={{ color: "hsl(30 55% 48%)" }}>
+                      <span className="font-playfair font-bold text-lg" style={{ color: "hsl(30 55% 48%)" }}>
                         {axis.mean.toFixed(1)}
                       </span>
                     </div>
@@ -149,7 +149,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
                   >
                     <div className="flex items-baseline justify-between">
                       <span className="text-sm font-medium">{axis.label}</span>
-                      <span className="font-cormorant font-bold text-lg" style={{ color: "hsl(215 12% 32%)" }}>
+                      <span className="font-playfair font-bold text-lg" style={{ color: "hsl(215 12% 32%)" }}>
                         {axis.mean.toFixed(1)}
                       </span>
                     </div>
@@ -173,7 +173,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
               background: "hsl(80 20% 28% / 0.06)",
             }}
           >
-            <p className="font-cormorant font-semibold text-lg" style={{ color: "hsl(var(--foreground))" }}>
+            <p className="font-playfair font-semibold text-lg" style={{ color: "hsl(var(--foreground))" }}>
               {data.centralAxis.label}
               <span className="text-sm font-inter font-normal ml-2" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
                 tensão {data.centralAxis.tension.toFixed(0)}
@@ -202,7 +202,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
                 className="flex gap-3 py-3 border-b text-sm"
                 style={{ borderColor: "hsl(var(--graphite) / 0.06)", color: "hsl(var(--graphite) / 0.72)" }}
               >
-                <span className="font-cormorant font-bold shrink-0" style={{ color: "hsl(var(--matte-gold))" }}>
+                <span className="font-playfair font-bold shrink-0" style={{ color: "hsl(var(--matte-gold))" }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span>{day.replace(/^Dia \d+ — /, "")}</span>
@@ -222,7 +222,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
         {/* Dobra: Não foi um teste */}
         <motion.div initial="hidden" animate="visible" custom={6} variants={fade}>
           <h2
-            className="font-cormorant font-bold"
+            className="font-playfair font-bold"
             style={{ fontSize: "clamp(24px, 3vw, 36px)", lineHeight: 1.1 }}
           >
             Isso não foi um teste. Foi um espelho.
@@ -237,7 +237,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
         {/* Dobra: Sustentar esse retorno */}
         <motion.div initial="hidden" animate="visible" custom={7} variants={fade} className="mt-12">
           <h2
-            className="font-cormorant font-bold"
+            className="font-playfair font-bold"
             style={{ fontSize: "clamp(24px, 3vw, 36px)", lineHeight: 1.1 }}
           >
             Se você quer sustentar esse retorno, o caminho é simples.
