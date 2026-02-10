@@ -1,183 +1,117 @@
 
+# ESPELHO DA CLAREZA — Plano de Implementacao
 
-# Plano: Redesign Visual Completo - Sistema Editorial Premium
+## Problema atual
 
-## Visao Geral
+Existem **4 arquivos ausentes** que impedem o funcionamento do quiz e do resultado:
 
-Transformacao total do sistema visual: sair do tema mistico/alquimico escuro para um estilo editorial de revista premium com fundo claro, tipografia refinada e luxo sobrio.
+1. `src/data/diagnosticoQuestions.ts` — dados das 24 perguntas, labels dos 12 eixos, textos dos respiros
+2. `src/components/diagnostico/DiagnosticoIntro.tsx` — tela de entrada do quiz
+3. `src/components/diagnostico/DiagnosticoQuestion.tsx` — tela de pergunta individual (escala 1-9)
+4. `src/components/diagnostico/DiagnosticoRespiro.tsx` — telas de respiro entre blocos
 
----
+Alem disso, o `DiagnosticoResult.tsx` usa `font-cormorant` que nao existe no Tailwind config (deve ser `font-playfair`).
 
-## 1. Nova Paleta e Tipografia
+## O que ja funciona e sera mantido
 
-### Cores (substituem todo o tema atual)
+- **`espelhoEngine.ts`** — motor de calculo completo (normalizacao, classificacao, editorial, plano 7 dias, CTA params)
+- **`DiagnosticoRadarChart.tsx`** — mandala com cores por categoria (cobre top3, carvao bottom3, oliva central)
+- **`diagnosticoPdfGenerator.ts`** — PDF de 5 paginas
+- **`DiagnosticoPage.tsx`** — fluxo do quiz (intro > pergunta > respiro > resultado)
+- **`EspelhoPage.tsx`** — pagina wrapper que recebe dados via Router state
+- **`App.tsx`** — rotas /diagnostico e /espelho ja registradas
 
-| Token | Hex | Uso |
-|-------|-----|-----|
-| Off-white quente | #F6F1E8 | Fundo principal |
-| Areia | #E7D9C3 | Cards, planos |
-| Grafite | #1E1E1C | Texto primario |
-| Preto quente | #0B0B0A | Titulos, contraste |
-| Dourado fosco | #B08D57 | Acento principal |
-| Ambar | #C08A2C | CTA hover, detalhes |
-| Salvia | #6B7B67 | Apoio discreto |
-| Argila | #A46A4A | Apoio raro |
+## Plano de execucao
 
-### Fontes (substituem Cinzel/Philosopher/Crimson)
+### 1. Criar `src/data/diagnosticoQuestions.ts`
 
-| Uso | Fonte | Fallback |
-|-----|-------|----------|
-| Headlines (serif editorial) | Playfair Display | Libre Baskerville, serif |
-| Texto (sans limpa) | Inter | Helvetica Neue, sans-serif |
-| Citacoes (serif italica) | Playfair Display Italic | serif |
+Conteudo:
+- Array `diagnosticoQuestions` com 24 objetos `{ id: "q01"..."q24", text: "..." }` usando exatamente as perguntas fornecidas nos comandos anteriores
+- Array `dimensionLabels` com 12 labels internos para os eixos (ex: "Eixo 1", "Eixo 2"... ate "Eixo 12") — nomes neutros, sem mencionar astrologia/chakras/neurociencia
+- Array `respiroTexts` com 4 frases ancora dos respiros
 
----
+### 2. Criar `src/components/diagnostico/DiagnosticoIntro.tsx`
 
-## 2. Arquivos a Modificar
+Tela de abertura editorial:
+- Titulo: "MAPA DO PADRAO" (font-playfair, grande)
+- Subtitulo: "Mapeie seu padrao atual"
+- Instrucao: "Responda pensando nos ultimos 30 dias"
+- Botao "Comecar" estilo selo editorial (variant="cta")
+- Fundo escuro (azul editorial) com texto off-white
 
-### 2.1 `index.html`
-- Trocar Google Fonts import de Cinzel/Philosopher/Crimson para Playfair Display + Inter
+### 3. Criar `src/components/diagnostico/DiagnosticoQuestion.tsx`
 
-### 2.2 `src/index.css`
-- Trocar import de fontes para Playfair Display + Inter
-- Reescrever todas as CSS variables com a nova paleta clara
-- Fundo body: `#F6F1E8` em vez de preto
-- Remover gradientes misticos, glows neon
-- Bordas: `1px rgba(30,30,28,0.10)`; sombras quase invisiveis
-- Atualizar classes utilitarias (`.text-gradient-gold`, `.mystical-card`, etc.) para o novo visual editorial
-- Largura de leitura: max 640-720px para texto
+Uma pergunta por tela:
+- Barra de progresso editorial (X de 24)
+- Texto da pergunta em font-playfair
+- Escala 1-9 com botoes circulares, labels "1 quase nunca" e "9 quase sempre"
+- Botoes Voltar e Proxima
+- Animacao fade com framer-motion
+- Alternancia de fundo claro/escuro por bloco de 6
 
-### 2.3 `tailwind.config.ts`
-- Atualizar `fontFamily` para `playfair` e `inter`
-- Atualizar cores customizadas (mystical tokens -> editorial tokens)
-- Remover gradientes misticos, adicionar gradientes sutis
-- Ajustar keyframes/animacoes para serem mais discretas
+### 4. Criar `src/components/diagnostico/DiagnosticoRespiro.tsx`
 
-### 2.4 `src/components/ui/button.tsx`
-- Variante `cta`: fundo grafite `#1E1E1C` com texto off-white, hover ambar `#C08A2C`
-- Remover variantes `mystical` e `mysticalOutline` (substituir por `editorial` e `editorialOutline`)
-- Sem glows neon, sem sombras exageradas
+Tela de pausa:
+- Frase ancora centralizada (font-playfair, grande)
+- Fundo verde oliva profundo
+- Botao "Continuar" (ou "Ver meu Espelho" no ultimo respiro)
+- Animacao suave de entrada
 
-### 2.5 Todas as 12 Dobras (componentes)
-Cada componente sera reescrito com:
+### 5. Atualizar `DiagnosticoResult.tsx`
 
-**Dobra 1** (`Dobra1InterrupcaoTotal.tsx`):
-- Novo copy: "A VERDADE NAO TRANSFORMA. SUA ESCOLHA, SIM."
-- Texto 10s reescrito (Portal Reset como espaco de mentalidade)
-- CTA primario acima da dobra
-- Fundo off-white, titulo preto quente, acento dourado
-- H1 Playfair 64-84px; subtitulo Inter 18-20px
-- Remover glows e efeitos neon
+- Substituir todas as referencias `font-cormorant` por `font-playfair`
+- Aplicar estilo editorial com alternancia de fundos escuros/claros nos blocos
+- Manter toda a logica de calculo e exibicao intacta
 
-**Dobra 2** (`Dobra2Identificacao.tsx`):
-- Copy mantido (ja esta correto)
-- Layout editorial: imagem lateral (direita), texto (esquerda)
-- Grafite em fundo off-white; acento dourado so em 1 palavra
+### 6. Rota `/espelho` — fallback localStorage
 
-**Dobra 3** (`Dobra3CausaInvisivel.tsx`):
-- Novo 3s: "O PROBLEMA NAO E DISCIPLINA. E SISTEMA."
-- Texto 10s reescrito (foco em economia de energia + ambiente)
-- Fundo areia + grafite; salvia discreta
-- Remover imagem brain mistica, usar visual limpo
-
-**Dobra 4** (`Dobra4OQueNaoFunciona.tsx`):
-- Copy praticamente mantido
-- Adicionar citacao: "Meu mundo e o que eu escolho perceber." -- William James
-- Faixa fina dourada como detalhe editorial
-
-**Dobra 5** (`Dobra5NovaPerspectiva.tsx`):
-- Texto 10s reescrito (treino + ambiente + eixo em poucos minutos)
-- Citacao: "Atencao, no grau mais alto, e oracao." -- Simone Weil
-
-**Dobra 6** (`Dobra6OProduto.tsx`):
-- Novo 3s: "O PORTAL RESET E UM ESPACO. NAO UM APP PARA 'DAR CONTA'."
-- Texto 10s reescrito (sustentar presenca, voltar ao Portal)
-- Remover card mistico, usar bloco visual calmo editorial
-
-**Dobra 7** (`Dobra7ComoFunciona.tsx`) -- REESTRUTURADO como "RITO DE ENTRADA":
-- Novo 3s: "OS 10 DIAS NAO SAO O FIM. SAO A ENTRADA."
-- Texto 10s sobre Reset 10D como reorganizacao (2-5 min/dia)
-- Visual: linha do tempo minimalista (10 pontos)
-- Remover imagem crystal-grimoire
-
-**Dobra 8** (`Dobra8Diferencial.tsx`) -- REESTRUTURADO como "O QUE TEM DENTRO":
-- Novo 3s: "VOCE NAO ENTRA SOZINHA. VOCE ENTRA COM SUPORTE."
-- Novos entregaveis:
-  - AYRA (clareza mental)
-  - CLEO (presenca e magnetismo)
-  - NOTION INTEGRADO
-  - SERIE: DESTRAVANDO OS CADEADOS DA MENTE (7 episodios listados)
-- Icones lineares em grafite, off-white + dourado fosco
-
-**Dobra 9** (`Dobra9Origem.tsx`):
-- Novo 3s: "EU CRIEI ISSO POR NECESSIDADE REAL."
-- Texto 10s totalmente reescrito (historia 2016, epifania, loop, custo concreto, virada de chave)
-- Remover imagem alchemist-scroll
-- Linha dourada editorial como assinatura
-
-**Dobra 10** (`Dobra10ParaQuemE.tsx`):
-- Texto 10s ajustado: "ja percebeu que sabe mas nao sustenta", "sair do automatico sem depender de motivacao"
-- Anti-qualificacao: "pico emocional, atalho, promessa barulhenta"
-- Encerrar com: "Sem julgamento. So alinhamento."
-
-**Dobra 11** (`Dobra11Transformacao.tsx`):
-- Texto 10s ajustado: "Nao porque a vida vira perfeita -- mas porque voce volta a agir de dentro."
-- Adicionar: "Isso e poder feminino: presenca que governa."
-- Citacao Jung: "Quando uma situacao interna nao se torna consciente, ela aparece fora, como destino."
-- Remover elementos decorativos misticos (circulos pulsantes)
-
-**Dobra 12** (`Dobra12CTA.tsx`):
-- Manter preco R$47/mes
-- Microcopy abaixo do botao: "Um espaco para sustentar clareza no dia a dia."
-- Botao: fundo grafite #1E1E1C, texto off-white, hover ambar
-- Fundo limpo, sem distracao
-- Remover elementos decorativos rotativos
-
-### 2.6 `src/components/Footer.tsx`
-- Adaptar ao novo visual claro/editorial
-
-### 2.7 `src/components/AccessibilityReader.tsx`
-- Adaptar estilos dos botoes ao novo tema (bordas sutis, sem glow)
+- Atualizar `EspelhoPage.tsx` para tambem tentar carregar dados do `localStorage` (chave `mapa-padrao-session`) caso o Router state esteja vazio, permitindo acesso direto e testes
 
 ---
 
-## 3. Regras de Design (aplicadas em todos os componentes)
+## Secao tecnica
 
-- Largura de leitura: `max-w-[680px]` para texto
-- Espaco branco generoso (luxo = respiro)
-- Bordas: `border border-[rgba(30,30,28,0.10)]`
-- Sombras quase invisiveis
-- Icones minimalistas (linha fina)
-- Sem emojis decorativos
-- Animacoes discretas (sem glows, sem pulsos neon)
+### Fluxo de dados
 
----
+```text
+Quiz (/diagnostico)
+  -> 24 respostas raw (1-9)
+  -> salva localStorage "mapa-padrao-answers"
+  -> calcula meanScores normalizados (10 - raw)
+  -> navigate("/espelho", { state: { scores, answers } })
 
-## 4. Ordem de Execucao
+Espelho (/espelho)
+  -> recebe scores + answers via state (ou localStorage fallback)
+  -> computeEspelho(answers) gera EspelhoData
+  -> renderiza resultado editorial + mandala + PDF
+```
 
-1. Atualizar `index.html` (fontes)
-2. Reescrever `src/index.css` (paleta + utilitarios)
-3. Atualizar `tailwind.config.ts` (tokens + fontes)
-4. Atualizar `button.tsx` (variantes editoriais)
-5. Reescrever as 12 dobras com novo copy + novo visual
-6. Atualizar Footer e AccessibilityReader
-7. Limpar `src/App.css` (remover estilos antigos)
+### Como testar com respostas falsas
 
----
+Apos a implementacao, basta abrir o console do navegador e executar:
 
-## 5. Resumo das Mudancas
+```javascript
+// Simular respostas e ir direto ao Espelho
+localStorage.setItem("mapa-padrao-answers", JSON.stringify([3,7,2,8,5,5,9,1,4,6,7,3,2,8,6,4,5,5,3,7,8,2,4,6]));
+```
 
-| Item | Antes | Depois |
-|------|-------|--------|
-| Fundo | Preto (#0a0a0a) | Off-white quente (#F6F1E8) |
-| Texto | Dourado/pergaminho | Grafite (#1E1E1C) |
-| Titulos | Cinzel + gradient gold | Playfair Display + preto quente |
-| Corpo | Philosopher | Inter |
-| Acentos | Teal neon + gold glow | Dourado fosco + ambar sutil |
-| CTA | Gold gradient + glow | Grafite solido + hover ambar |
-| Cards | Mistico escuro + borda dourada | Areia + borda quase invisivel |
-| Vibe geral | Alquimia mistica | Revista editorial premium |
-| Dobra 7 | Como Funciona (lista) | Rito de Entrada (Reset 10D) |
-| Dobra 8 | Diferencial (recorrencia) | O Que Tem Dentro (AYRA, CLEO, serie) |
-| Dobra 9 | Historia curta | Historia completa (2016, epifania) |
+E depois navegar para `/espelho` — o fallback de localStorage carregara os dados.
 
+### Onde fica cada coisa
+
+| O que | Arquivo |
+|-------|---------|
+| Calculo completo | `src/data/espelhoEngine.ts` |
+| Perguntas + labels | `src/data/diagnosticoQuestions.ts` (novo) |
+| Botao Baixar PDF | `DiagnosticoResult.tsx` linha 257 |
+| Botao Receber plano | `DiagnosticoResult.tsx` linha 252 |
+| Mandala/grafico | `DiagnosticoRadarChart.tsx` |
+
+### Arquivos criados/editados
+
+- **Criar**: `src/data/diagnosticoQuestions.ts`
+- **Criar**: `src/components/diagnostico/DiagnosticoIntro.tsx`
+- **Criar**: `src/components/diagnostico/DiagnosticoQuestion.tsx`
+- **Criar**: `src/components/diagnostico/DiagnosticoRespiro.tsx`
+- **Editar**: `src/components/diagnostico/DiagnosticoResult.tsx` (font fix)
+- **Editar**: `src/pages/EspelhoPage.tsx` (localStorage fallback)
