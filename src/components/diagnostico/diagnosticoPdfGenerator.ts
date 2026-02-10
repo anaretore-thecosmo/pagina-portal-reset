@@ -5,7 +5,50 @@ import {
   getAxisMicro,
   generate7DayPlan,
   generateEditorialDiagnostic,
+  buildCtaParams,
 } from "@/data/espelhoEngine";
+
+/* ── Color tokens (RGB) ──────────────────────────────── */
+const GRAPHITE: [number, number, number] = [30, 30, 28];
+const GOLD: [number, number, number] = [176, 141, 87];
+const LIGHT_GRAY: [number, number, number] = [200, 195, 185];
+const BODY: [number, number, number] = [90, 90, 85];
+const COPPER: [number, number, number] = [163, 104, 56];
+const SLATE: [number, number, number] = [70, 77, 88];
+const DARK_BG: [number, number, number] = [24, 27, 33];
+const OFF_WHITE: [number, number, number] = [246, 241, 232];
+const OLIVE: [number, number, number] = [58, 64, 45];
+
+const PAGE_W = 210;
+const MARGIN = 22;
+const CONTENT_W = PAGE_W - MARGIN * 2;
+
+/* ── Helper: horizontal rule ────────────────────────── */
+function drawRule(pdf: jsPDF, y: number, color = GOLD) {
+  pdf.setDrawColor(color[0], color[1], color[2]);
+  pdf.setLineWidth(0.3);
+  pdf.line(MARGIN, y, PAGE_W - MARGIN, y);
+}
+
+/* ── Helper: dark page background ───────────────────── */
+function fillDarkBg(pdf: jsPDF) {
+  pdf.setFillColor(DARK_BG[0], DARK_BG[1], DARK_BG[2]);
+  pdf.rect(0, 0, 210, 297, "F");
+}
+
+/* ── Helper: light page background ──────────────────── */
+function fillLightBg(pdf: jsPDF) {
+  pdf.setFillColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+  pdf.rect(0, 0, 210, 297, "F");
+}
+
+/* ── Helper: olive page background ──────────────────── */
+function fillOliveBg(pdf: jsPDF) {
+  pdf.setFillColor(OLIVE[0], OLIVE[1], OLIVE[2]);
+  pdf.rect(0, 0, 210, 297, "F");
+}
+
+/* ── Main generator ─────────────────────────────────── */
 
 export async function generateDiagnosticoPDF(
   data: EspelhoData,
@@ -13,81 +56,95 @@ export async function generateDiagnosticoPDF(
   chartElementId: string
 ) {
   const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-  const pageWidth = 210;
-  const margin = 20;
-  const contentWidth = pageWidth - margin * 2;
+  const dateStr = new Date().toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 
-  const graphite: [number, number, number] = [30, 30, 28];
-  const gold: [number, number, number] = [176, 141, 87];
-  const lightGray: [number, number, number] = [200, 195, 185];
-  const bodyGray: [number, number, number] = [100, 100, 95];
-  const copper: [number, number, number] = [163, 104, 56];
-  const slate: [number, number, number] = [70, 77, 88];
+  // ===================================================================
+  // PAGE 1 — CAPA (fundo escuro)
+  // ===================================================================
+  fillDarkBg(pdf);
 
-  // ===== CAPA =====
+  // Top rule
+  drawRule(pdf, 30, GOLD);
+
+  // Kicker
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
-  pdf.setTextColor(gold[0], gold[1], gold[2]);
-  pdf.text("PORTAL RESET", margin, 25);
+  pdf.setFontSize(9);
+  pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
+  pdf.text("PORTAL RESET", MARGIN, 25);
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8);
-  pdf.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
-  pdf.text(`Gerado em ${new Date().toLocaleDateString("pt-BR")}`, pageWidth - margin, 25, { align: "right" });
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  pdf.text(dateStr, PAGE_W - MARGIN, 25, { align: "right" });
 
-  pdf.setDrawColor(gold[0], gold[1], gold[2]);
-  pdf.setLineWidth(0.3);
-  pdf.line(margin, 30, pageWidth - margin, 30);
-
+  // Title block — centered vertically
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(28);
-  pdf.setTextColor(graphite[0], graphite[1], graphite[2]);
-  pdf.text("Espelho da Clareza", margin, 55);
-
-  pdf.setFontSize(14);
-  pdf.setTextColor(bodyGray[0], bodyGray[1], bodyGray[2]);
-  pdf.text("Mapa do seu padrão atual", margin, 65);
-
-  if (userName) {
-    pdf.setFontSize(16);
-    pdf.setTextColor(gold[0], gold[1], gold[2]);
-    pdf.text(userName, margin, 80);
-  }
-
-  // ===== PAGE 1: Diagnóstico editorial =====
-  pdf.addPage();
-  let y = 25;
-
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
-  pdf.setTextColor(gold[0], gold[1], gold[2]);
-  pdf.text("ESPELHO DA CLAREZA", margin, y);
-  y += 12;
-
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(16);
-  pdf.setTextColor(graphite[0], graphite[1], graphite[2]);
-  pdf.text("Diagnóstico editorial", margin, y);
-  y += 10;
-
-  const editorialText = generateEditorialDiagnostic(data);
+  pdf.setFontSize(36);
+  pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+  pdf.text("ESPELHO DA", PAGE_W / 2, 110, { align: "center" });
+  pdf.text("CLAREZA", PAGE_W / 2, 125, { align: "center" });
 
   pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(10);
-  pdf.setTextColor(bodyGray[0], bodyGray[1], bodyGray[2]);
-  const editLines = pdf.splitTextToSize(editorialText, contentWidth);
-  pdf.text(editLines, margin, y);
+  pdf.setFontSize(13);
+  pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
+  pdf.text("Mapa do padrão atual", PAGE_W / 2, 138, { align: "center" });
 
-  // ===== PAGE 2: Mandala =====
+  if (userName) {
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(14);
+    pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+    pdf.text(userName, PAGE_W / 2, 155, { align: "center" });
+  }
+
+  // Bottom rule
+  drawRule(pdf, 267, GOLD);
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(7);
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  pdf.text("Documento pessoal · uso individual", PAGE_W / 2, 275, { align: "center" });
+
+  // ===================================================================
+  // PAGE 2 — MANDALA (fundo claro)
+  // ===================================================================
   pdf.addPage();
-  y = 25;
+  fillLightBg(pdf);
+  let y = 28;
 
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
-  pdf.setTextColor(gold[0], gold[1], gold[2]);
-  pdf.text("MANDALA DO PADRÃO", margin, y);
-  y += 12;
+  pdf.setFontSize(9);
+  pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
+  pdf.text("ESPELHO DA CLAREZA", MARGIN, y);
 
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  pdf.text("02", PAGE_W - MARGIN, y, { align: "right" });
+
+  y += 5;
+  drawRule(pdf, y, GOLD);
+  y += 14;
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(18);
+  pdf.setTextColor(GRAPHITE[0], GRAPHITE[1], GRAPHITE[2]);
+  pdf.text("Mandala do padrão", MARGIN, y);
+  y += 8;
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(9);
+  pdf.setTextColor(BODY[0], BODY[1], BODY[2]);
+  pdf.text(
+    "Quanto mais preenchida a fatia, mais estável está seu padrão naquele eixo.",
+    MARGIN,
+    y
+  );
+  y += 10;
+
+  // Capture chart as PNG
   const chartEl = document.getElementById(chartElementId);
   if (chartEl) {
     try {
@@ -97,163 +154,269 @@ export async function generateDiagnosticoPDF(
         useCORS: true,
       });
       const imgData = canvas.toDataURL("image/png");
-      const imgHeight = (canvas.height / canvas.width) * contentWidth;
-      pdf.addImage(imgData, "PNG", margin, y, contentWidth, Math.min(imgHeight, 160));
+      const imgW = CONTENT_W;
+      const imgH = (canvas.height / canvas.width) * imgW;
+      const centeredX = MARGIN;
+      pdf.addImage(imgData, "PNG", centeredX, y, imgW, Math.min(imgH, 160));
+      y += Math.min(imgH, 160) + 8;
     } catch {
       pdf.setFontSize(10);
-      pdf.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
-      pdf.text("(Gráfico indisponível)", margin, y + 20);
+      pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+      pdf.text("(Gráfico indisponível)", MARGIN, y + 20);
+      y += 30;
     }
   }
 
-  // ===== PAGE 3: Base e Vazamento =====
+  // Mini legend
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(7);
+  pdf.setTextColor(BODY[0], BODY[1], BODY[2]);
+
+  // Copper dot = base
+  pdf.setFillColor(COPPER[0], COPPER[1], COPPER[2]);
+  pdf.circle(MARGIN + 2, y, 1.5, "F");
+  pdf.text("Zonas de base (top 3)", MARGIN + 6, y + 1);
+
+  // Slate dot = vazamento
+  pdf.setFillColor(SLATE[0], SLATE[1], SLATE[2]);
+  pdf.circle(MARGIN + 55, y, 1.5, "F");
+  pdf.text("Zonas de vazamento (bottom 3)", MARGIN + 59, y + 1);
+
+  // Olive dot = tensão
+  pdf.setFillColor(OLIVE[0], OLIVE[1], OLIVE[2]);
+  pdf.circle(MARGIN + 120, y, 1.5, "F");
+  pdf.text("Conflito central", MARGIN + 124, y + 1);
+
+  // ===================================================================
+  // PAGE 3 — BASE E VAZAMENTO (fundo escuro)
+  // ===================================================================
   pdf.addPage();
-  y = 25;
+  fillDarkBg(pdf);
+  y = 28;
 
   pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(9);
+  pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
+  pdf.text("ESPELHO DA CLAREZA", MARGIN, y);
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  pdf.text("03", PAGE_W - MARGIN, y, { align: "right" });
+
+  y += 5;
+  drawRule(pdf, y, GOLD);
+  y += 14;
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(18);
+  pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+  pdf.text("O que está firme", MARGIN, y);
+  y += 7;
+  pdf.text("e o que está vazando", MARGIN, y);
+  y += 14;
+
+  // Editorial diagnostic
+  const editorialText = generateEditorialDiagnostic(data);
+  pdf.setFont("helvetica", "normal");
   pdf.setFontSize(10);
-  pdf.setTextColor(gold[0], gold[1], gold[2]);
-  pdf.text("O QUE ESTÁ FIRME E O QUE ESTÁ DRENANDO", margin, y);
-  y += 12;
+  pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+  const editLines = pdf.splitTextToSize(editorialText, CONTENT_W);
+  pdf.text(editLines, MARGIN, y);
+  y += editLines.length * 5 + 12;
 
-  // Top 3
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(13);
-  pdf.setTextColor(copper[0], copper[1], copper[2]);
-  pdf.text("Zonas de base", margin, y);
+  // Top 3 — Zonas de base
+  drawRule(pdf, y, COPPER);
   y += 8;
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(12);
+  pdf.setTextColor(COPPER[0], COPPER[1], COPPER[2]);
+  pdf.text("Zonas de base", MARGIN, y);
+  y += 3;
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  const topIndices = data.top3.map((a) => a.axis).join(", ");
+  pdf.text(`Eixos ${topIndices}`, MARGIN, y + 4);
+  y += 10;
 
   data.top3.forEach((axis) => {
     const micro = getAxisMicro(axis.type);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(10);
-    pdf.setTextColor(graphite[0], graphite[1], graphite[2]);
-    pdf.text(`${axis.label} — ${axis.mean.toFixed(1)}`, margin, y);
+    pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+    pdf.text(`${axis.label} — ${axis.mean.toFixed(1)}`, MARGIN, y);
     y += 5;
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(9);
-    pdf.setTextColor(bodyGray[0], bodyGray[1], bodyGray[2]);
-    const lines = pdf.splitTextToSize(micro.micro, contentWidth);
-    pdf.text(lines, margin, y);
+    pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+    const lines = pdf.splitTextToSize(micro.micro, CONTENT_W);
+    pdf.text(lines, MARGIN, y);
     y += lines.length * 4 + 6;
   });
 
   y += 6;
 
-  // Bottom 3
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(13);
-  pdf.setTextColor(slate[0], slate[1], slate[2]);
-  pdf.text("Zonas de vazamento", margin, y);
+  // Bottom 3 — Zonas de vazamento
+  drawRule(pdf, y, SLATE);
   y += 8;
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(12);
+  pdf.setTextColor(SLATE[0], SLATE[1], SLATE[2]);
+  pdf.text("Zonas de vazamento", MARGIN, y);
+  y += 3;
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  const botIndices = data.bottom3.map((a) => a.axis).join(", ");
+  pdf.text(`Eixos ${botIndices}`, MARGIN, y + 4);
+  y += 10;
 
   data.bottom3.forEach((axis) => {
     const micro = getAxisMicro(axis.type);
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(10);
-    pdf.setTextColor(graphite[0], graphite[1], graphite[2]);
-    pdf.text(`${axis.label} — ${axis.mean.toFixed(1)}`, margin, y);
+    pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+    pdf.text(`${axis.label} — ${axis.mean.toFixed(1)}`, MARGIN, y);
     y += 5;
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(9);
-    pdf.setTextColor(bodyGray[0], bodyGray[1], bodyGray[2]);
-    const lines = pdf.splitTextToSize(micro.micro, contentWidth);
-    pdf.text(lines, margin, y);
+    pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+    const lines = pdf.splitTextToSize(micro.micro, CONTENT_W);
+    pdf.text(lines, MARGIN, y);
     y += lines.length * 4 + 6;
   });
 
-  // ===== PAGE 4: Conflito central + Plano 7 dias =====
+  // ===================================================================
+  // PAGE 4 — PLANO DE 7 DIAS (fundo claro)
+  // ===================================================================
   pdf.addPage();
-  y = 25;
-
-  const { centralAxis } = data;
-
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
-  pdf.setTextColor(gold[0], gold[1], gold[2]);
-  pdf.text("CONFLITO CENTRAL", margin, y);
-  y += 10;
+  fillLightBg(pdf);
+  y = 28;
 
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(14);
-  pdf.setTextColor(graphite[0], graphite[1], graphite[2]);
-  pdf.text(`${centralAxis.label} (tensão ${centralAxis.tension.toFixed(0)})`, margin, y);
-  y += 7;
-
-  const conflictText =
-    centralAxis.clinical > centralAxis.symbolic
-      ? `Em ${centralAxis.label}, você executa mais do que sente. A ação corre na frente da presença.`
-      : centralAxis.clinical < centralAxis.symbolic
-        ? `Em ${centralAxis.label}, você sente mais do que consegue sustentar. A percepção existe, mas falta chão.`
-        : `Em ${centralAxis.label}, existe uma oscilação entre sentir e agir. O ponto de equilíbrio ainda não estabilizou.`;
-
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(10);
-  pdf.setTextColor(bodyGray[0], bodyGray[1], bodyGray[2]);
-  const conflictLines = pdf.splitTextToSize(conflictText, contentWidth);
-  pdf.text(conflictLines, margin, y);
-  y += conflictLines.length * 5 + 14;
-
-  // 7-day plan
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(10);
-  pdf.setTextColor(gold[0], gold[1], gold[2]);
-  pdf.text("PLANO DE SUSTENTAÇÃO LEVE · 7 DIAS", margin, y);
-  y += 8;
+  pdf.setFontSize(9);
+  pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
+  pdf.text("ESPELHO DA CLAREZA", MARGIN, y);
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8);
-  pdf.setTextColor(lightGray[0], lightGray[1], lightGray[2]);
-  pdf.text("3 minutos por dia. Sem teatro. Sem pico.", margin, y);
-  y += 8;
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  pdf.text("04", PAGE_W - MARGIN, y, { align: "right" });
+
+  y += 5;
+  drawRule(pdf, y, GOLD);
+  y += 14;
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(18);
+  pdf.setTextColor(GRAPHITE[0], GRAPHITE[1], GRAPHITE[2]);
+  pdf.text("Plano de sustentação leve", MARGIN, y);
+  y += 7;
+  pdf.text("7 dias · 3 minutos por dia", MARGIN, y);
+  y += 5;
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(8);
+  pdf.setTextColor(BODY[0], BODY[1], BODY[2]);
+  pdf.text("Sem teatro. Sem pico. Sem intensidade forçada.", MARGIN, y);
+  y += 12;
 
   const plan = generate7DayPlan(data);
   plan.forEach((day, i) => {
     if (y > 265) {
       pdf.addPage();
-      y = 25;
+      fillLightBg(pdf);
+      y = 28;
     }
-    pdf.setFont("helvetica", "bold");
-    pdf.setFontSize(9);
-    pdf.setTextColor(gold[0], gold[1], gold[2]);
-    pdf.text(String(i + 1).padStart(2, "0"), margin, y);
 
+    // Day number
+    pdf.setFont("helvetica", "bold");
+    pdf.setFontSize(22);
+    pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
+    pdf.text(String(i + 1).padStart(2, "0"), MARGIN, y + 1);
+
+    // Day text
     pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(9);
-    pdf.setTextColor(bodyGray[0], bodyGray[1], bodyGray[2]);
-    const dayLines = pdf.splitTextToSize(day.replace(/^Dia \d+ — /, ""), contentWidth - 12);
-    pdf.text(dayLines, margin + 10, y);
-    y += dayLines.length * 4 + 5;
+    pdf.setFontSize(10);
+    pdf.setTextColor(GRAPHITE[0], GRAPHITE[1], GRAPHITE[2]);
+    const dayText = day.replace(/^Dia \d+ — /, "");
+    const dayLines = pdf.splitTextToSize(dayText, CONTENT_W - 18);
+    pdf.text(dayLines, MARGIN + 16, y);
+    y += Math.max(dayLines.length * 5, 8) + 8;
+
+    // Subtle separator
+    if (i < plan.length - 1) {
+      pdf.setDrawColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+      pdf.setLineWidth(0.15);
+      pdf.line(MARGIN + 16, y - 5, PAGE_W - MARGIN, y - 5);
+    }
   });
 
-  // Footer
-  y += 8;
+  // Footer note
+  y += 6;
   pdf.setFont("helvetica", "italic");
   pdf.setFontSize(8);
-  pdf.setTextColor(bodyGray[0], bodyGray[1], bodyGray[2]);
-  const footerText = `Seu foco esta semana é estabilizar ${data.bottom3[0].label}, ${data.bottom3[1].label} e reduzir a tensão em ${centralAxis.label}. Proteja ${data.top3[0].label} para não virar sobrecarga.`;
-  const footerLines = pdf.splitTextToSize(footerText, contentWidth);
-  pdf.text(footerLines, margin, y);
+  pdf.setTextColor(BODY[0], BODY[1], BODY[2]);
+  const footerText = `Seu foco esta semana é estabilizar Eixos ${botIndices} e reduzir a tensão em ${data.centralAxis.label}. Proteja Eixos ${topIndices} para não virar sobrecarga.`;
+  const footerLines = pdf.splitTextToSize(footerText, CONTENT_W);
+  pdf.text(footerLines, MARGIN, y);
 
-  // ===== PÁGINA FINAL =====
+  // ===================================================================
+  // PAGE 5 — CTA FINAL (fundo oliva)
+  // ===================================================================
   pdf.addPage();
-  y = 100;
+  fillOliveBg(pdf);
 
-  pdf.setDrawColor(gold[0], gold[1], gold[2]);
-  pdf.setLineWidth(0.3);
-  pdf.line(margin, y, pageWidth - margin, y);
-  y += 10;
+  // Centered content
+  const ctaY = 100;
+
+  drawRule(pdf, ctaY, GOLD);
 
   pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(14);
-  pdf.setTextColor(graphite[0], graphite[1], graphite[2]);
-  pdf.text("Pronta para transformar esse mapa em prática?", margin, y);
-  y += 8;
+  pdf.setFontSize(22);
+  pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+  pdf.text("Pronta para transformar", PAGE_W / 2, ctaY + 18, { align: "center" });
+  pdf.text("esse mapa em prática?", PAGE_W / 2, ctaY + 28, { align: "center" });
 
   pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(10);
-  pdf.setTextColor(gold[0], gold[1], gold[2]);
-  pdf.text("Acesse o Portal Reset → portalreset.com", margin, y);
+  pdf.setFontSize(11);
+  pdf.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
+  pdf.text("Receber plano de ação", PAGE_W / 2, ctaY + 44, { align: "center" });
 
-  pdf.save(`espelho-da-clareza-${userName ? userName.toLowerCase().replace(/\s+/g, "-") : "resultado"}.pdf`);
+  // Clickable link
+  const ctaParams = buildCtaParams(data);
+  const checkoutUrl = `https://pay.kiwify.com.br/TNXfTZT${ctaParams}`;
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(9);
+  pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+  pdf.textWithLink("Acessar o Portal Reset →", PAGE_W / 2 - 22, ctaY + 56, {
+    url: checkoutUrl,
+  });
+
+  // Underline the link manually
+  pdf.setDrawColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+  pdf.setLineWidth(0.2);
+  pdf.line(PAGE_W / 2 - 22, ctaY + 57, PAGE_W / 2 + 22, ctaY + 57);
+
+  // Bottom
+  drawRule(pdf, 267, GOLD);
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(7);
+  pdf.setTextColor(LIGHT_GRAY[0], LIGHT_GRAY[1], LIGHT_GRAY[2]);
+  pdf.text("PORTAL RESET · portalreset.com", PAGE_W / 2, 275, { align: "center" });
+
+  // ===================================================================
+  // SAVE
+  // ===================================================================
+  const fileName = userName
+    ? `espelho-da-clareza-${userName.toLowerCase().replace(/\s+/g, "-")}.pdf`
+    : "espelho-da-clareza.pdf";
+
+  pdf.save(fileName);
 }
