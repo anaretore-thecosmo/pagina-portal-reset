@@ -296,22 +296,30 @@ const RespiroScreen = ({
 const QuizMapaPadraoPage = () => {
   const navigate = useNavigate();
 
-  const [step, setStep] = useState<Step>("intro");
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [respiroIndex, setRespiroIndex] = useState(0);
-  const [sessionId] = useState(() => generateId());
-  const [answers, setAnswers] = useState<(number | null)[]>(() => {
+  const restored = useMemo(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const session: QuizSession = JSON.parse(saved);
         if (session.quizId === "mapa-do-padrao" && session.answers.length === 24) {
-          return session.answers.map((a) => a.value);
+          const vals = session.answers.map((a) => a.value);
+          // Find first unanswered to resume
+          const firstNull = vals.findIndex((v) => v === 0 || v === null);
+          return { answers: vals as (number | null)[], resumeAt: firstNull === -1 ? 0 : firstNull, sid: session.sessionId };
         }
       }
     } catch {}
-    return Array(24).fill(null);
+    return null;
+  }, []);
+
+  const [step, setStep] = useState<Step>(() => {
+    if (restored && restored.answers.some((a) => a !== null && a !== 0)) return "question";
+    return "intro";
   });
+  const [currentQuestion, setCurrentQuestion] = useState(() => restored?.resumeAt ?? 0);
+  const [respiroIndex, setRespiroIndex] = useState(0);
+  const [sessionId] = useState(() => restored?.sid ?? generateId());
+  const [answers, setAnswers] = useState<(number | null)[]>(() => restored?.answers ?? Array(24).fill(null));
 
   // Persist to localStorage
   const persistSession = useCallback(
