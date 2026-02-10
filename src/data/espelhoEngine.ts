@@ -145,26 +145,74 @@ export function getAxisMicro(type: AxisType) {
   return typeLabels[type];
 }
 
-/* ── Editorial diagnostic text ──────────────────────── */
+/* ── Editorial diagnostic text (4 paragraphs) ──────── */
 
-export function generateEditorialDiagnostic(data: EspelhoData): string {
-  const { top3, bottom3, centralAxis } = data;
+export function generateEditorialDiagnostic(data: EspelhoData): string[] {
+  const { top3, bottom3, centralAxis, axes, overallMean } = data;
+
+  const axesAbove7 = axes.filter((a) => a.mean >= 7).length;
+  const axesBelow4 = axes.filter((a) => a.mean < 4).length;
+  const avgTension = axes.reduce((s, a) => s + a.tension, 0) / axes.length;
+
+  // ── P1 — Panorama ──
+  let clima: string;
+  if (axesAbove7 >= 8) {
+    clima = "Seu padrão atual tem base sólida na maioria dos eixos. A estrutura existe — o risco agora não é fragilidade, é sobrecarga silenciosa.";
+  } else if (axesBelow4 >= 6) {
+    clima = "Seu padrão revela um custo alto de operação. Não é falta de capacidade — é excesso de demanda sem retorno proporcional. O sistema está funcionando, mas no limite.";
+  } else if (avgTension >= 3) {
+    clima = `Há acesso e há custo. ${axesAbove7} eixos operam acima do ruído, ${axesBelow4} estão abaixo da linha de sustentação, e a tensão média entre sentir e agir é alta. O padrão não é estável — oscila.`;
+  } else {
+    clima = `Seu mapa mostra ${axesAbove7} eixos com base firme e ${axesBelow4} em zona de dispersão. A tensão interna é moderada, o que significa que há margem para estabilizar sem forçar intensidade.`;
+  }
+
+  // ── P2 — Onde você está acima do ruído ──
   const t1 = top3[0];
   const t2 = top3[1];
+  const t3 = top3[2];
+  const t1m = getAxisMicro(t1.type);
+  const t2m = getAxisMicro(t2.type);
+
+  let p2 = `${t1.label}, ${t2.label} e ${t3.label} são suas zonas de base — onde o padrão opera com mais estabilidade.`;
+  if (t1.type === "EXCELENCIA" || t1.type === "BASE_ESTAVEL") {
+    p2 += ` Em ${t1.label}, ${t1m.micro.toLowerCase()} O ponto de atenção aqui é não transformar base em sobrecarga: proteger é diferente de exigir mais.`;
+  }
+  if (t2.type === "EXCELENCIA" || t2.type === "BASE_ESTAVEL") {
+    p2 += ` ${t2.label} também sustenta — ${t2m.micro.toLowerCase()}`;
+  } else {
+    p2 += ` Em ${t2.label}, a estabilidade existe mas oscila. Precisa de manutenção, não de intensidade.`;
+  }
+
+  // ── P3 — Onde o automático está ganhando ──
   const b1 = bottom3[0];
   const b2 = bottom3[1];
+  const b3 = bottom3[2];
 
-  const t1Micro = getAxisMicro(t1.type).micro;
-  const b1Micro = getAxisMicro(b1.type).micro;
+  let p3 = `${b1.label}, ${b2.label} e ${b3.label} são os pontos onde a energia se dispersa com mais facilidade.`;
+  for (const b of [b1, b2]) {
+    const micro = getAxisMicro(b.type);
+    if (b.type === "APAGAMENTO") {
+      p3 += ` Em ${b.label}, o ruído está ocupando o espaço da escolha. O caminho é retorno — não correção. Comece pelo mínimo sustentável.`;
+    } else if (b.type === "EXECUTA_SEM_SI") {
+      p3 += ` Em ${b.label}, você executa, mas se perde no processo. Antes de dizer sim, insira uma pausa: a ação sem presença vira custo.`;
+    } else if (b.type === "SENTE_SEM_ESTRUTURA") {
+      p3 += ` Em ${b.label}, a percepção existe mas falta chão. Decisão mínima e ambiente facilitador são o primeiro passo.`;
+    } else {
+      p3 += ` Em ${b.label}, ${micro.micro.toLowerCase()}`;
+    }
+  }
 
+  // ── P4 — A virada ──
   const conflictDir =
     centralAxis.clinical > centralAxis.symbolic
-      ? "você executa mais do que sente"
+      ? `você executa mais do que sente — a ação corre na frente da presença`
       : centralAxis.clinical < centralAxis.symbolic
-        ? "você sente mais do que consegue sustentar"
-        : "existe uma oscilação entre sentir e agir";
+        ? `você sente mais do que consegue sustentar — a percepção existe, mas falta chão para ela`
+        : `existe oscilação entre sentir e agir — o ponto de equilíbrio ainda não estabilizou`;
 
-  return `Seu padrão atual revela uma estrutura com pontos de apoio e zonas que pedem atenção. ${t1.label} e ${t2.label} aparecem como suas áreas mais estáveis — ${t1Micro.toLowerCase()} Já ${b1.label} e ${b2.label} indicam os pontos onde a energia se dispersa com mais facilidade. ${b1Micro} O eixo de maior tensão é ${centralAxis.label}: ${conflictDir}. O próximo passo não é mudar tudo — é estabilizar o que já sustenta e reduzir o vazamento onde a energia se perde sem retorno.`;
+  const p4 = `O conflito central do seu padrão está em ${centralAxis.label}: ${conflictDir}. Essa é a tensão que mais consome energia sem que você perceba. O próximo passo não é mudar tudo — é estabilizar o que já sustenta e reduzir o vazamento onde a energia se perde sem retorno. Clareza sem sustentação vira mais um pico que some. O caminho é retorno, não intensidade.`;
+
+  return [clima, p2, p3, p4];
 }
 
 /* ── 7-day plan ─────────────────────────────────────── */
