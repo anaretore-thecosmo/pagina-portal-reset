@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { DiagnosticoQuestion } from "@/data/diagnosticoQuestions";
 
@@ -31,66 +30,120 @@ const DiagnosticoQuestionComponent = ({
     setSelected(initialValue ?? null);
   }, [currentIndex, initialValue]);
 
-  const blockIndex = Math.floor(currentIndex / 6);
-  const isDark = blockIndex % 2 === 0;
+  // Alternate every screen: even index = light, odd index = dark
+  const isDark = currentIndex % 2 !== 0;
 
-  const bg = isDark ? "hsl(215 25% 12%)" : "hsl(var(--off-white))";
+  const bg = isDark ? "hsl(215 25% 10%)" : "hsl(var(--off-white))";
   const fg = isDark ? "hsl(var(--off-white))" : "hsl(var(--graphite))";
-  const fgMuted = isDark ? "hsl(var(--off-white) / 0.45)" : "hsl(var(--graphite) / 0.45)";
-  const progressColor = "hsl(var(--matte-gold))";
+  const fgMuted = isDark
+    ? "hsl(var(--off-white) / 0.4)"
+    : "hsl(var(--graphite) / 0.4)";
+  const borderSubtle = isDark
+    ? "hsl(0 0% 100% / 0.12)"
+    : "hsl(var(--graphite) / 0.12)";
+  const goldAccent = "hsl(var(--matte-gold))";
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
         key={question.id}
-        initial={{ opacity: 0, x: 40 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -40 }}
-        transition={{ duration: 0.35 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
         className="min-h-screen flex flex-col items-center justify-center px-6"
         style={{ background: bg, color: fg }}
       >
         <div className="w-full max-w-lg">
-          {/* Progress */}
-          <div className="mb-10">
-            <div className="flex justify-between items-center text-xs mb-2" style={{ color: fgMuted }}>
-              <span className="uppercase tracking-[0.15em]">Pergunta</span>
-              <span>{currentIndex + 1} de {total}</span>
+          {/* Progress bar — editorial thin line */}
+          <div className="mb-14">
+            <div
+              className="flex justify-between items-center mb-2"
+              style={{ color: fgMuted }}
+            >
+              <span
+                className="uppercase tracking-[0.2em] font-inter"
+                style={{ fontSize: "10px", letterSpacing: "0.2em" }}
+              >
+                Pergunta
+              </span>
+              <span
+                className="font-inter tabular-nums"
+                style={{ fontSize: "10px" }}
+              >
+                {String(currentIndex + 1).padStart(2, "0")} / {total}
+              </span>
             </div>
-            <div className="w-full h-[2px] rounded-full" style={{ background: isDark ? "hsl(0 0% 100% / 0.08)" : "hsl(var(--graphite) / 0.08)" }}>
+            <div
+              className="w-full h-px"
+              style={{ background: borderSubtle }}
+            >
               <div
-                className="h-full rounded-full transition-all duration-300"
-                style={{ width: `${((currentIndex + 1) / total) * 100}%`, background: progressColor }}
+                className="h-full transition-all duration-500 ease-out"
+                style={{
+                  width: `${((currentIndex + 1) / total) * 100}%`,
+                  background: goldAccent,
+                }}
               />
             </div>
           </div>
 
+          {/* Micro-instruction */}
+          <p
+            className="text-center uppercase tracking-[0.18em] font-inter mb-6"
+            style={{ fontSize: "9px", color: fgMuted }}
+          >
+            Responda pensando nos últimos 30 dias.
+          </p>
+
+          {/* Divider above question */}
+          <div
+            className="w-8 h-px mx-auto mb-6"
+            style={{ background: goldAccent }}
+          />
+
           {/* Question text */}
           <p
-            className="font-playfair text-center leading-snug"
-            style={{ fontSize: "clamp(18px, 3vw, 24px)" }}
+            className="font-playfair text-center leading-relaxed"
+            style={{ fontSize: "clamp(18px, 3.2vw, 26px)" }}
           >
             {question.text}
           </p>
 
-          {/* Scale */}
-          <div className="mt-10">
-            <div className="flex justify-between text-[11px] mb-3 px-1" style={{ color: fgMuted }}>
-              <span>1 quase nunca</span>
-              <span>9 quase sempre</span>
+          {/* Scale — editorial index style */}
+          <div className="mt-14">
+            {/* Labels */}
+            <div
+              className="flex justify-between mb-4 font-inter uppercase tracking-[0.15em]"
+              style={{ fontSize: "9px", color: fgMuted }}
+            >
+              <span>1 — quase nunca</span>
+              <span>9 — quase sempre</span>
             </div>
-            <div className="flex justify-between gap-1">
+
+            {/* Number grid */}
+            <div className="flex justify-between">
               {SCALE.map((val) => {
                 const isSelected = selected === val;
                 return (
                   <button
                     key={val}
                     onClick={() => setSelected(val)}
-                    className="flex-1 aspect-square max-w-[44px] rounded-full flex items-center justify-center text-sm font-medium transition-all duration-200"
+                    className="relative flex items-center justify-center transition-all duration-200"
                     style={{
-                      border: `1.5px solid ${isSelected ? progressColor : (isDark ? "hsl(0 0% 100% / 0.15)" : "hsl(var(--graphite) / 0.15)")}`,
-                      background: isSelected ? progressColor : "transparent",
-                      color: isSelected ? "hsl(var(--warm-black))" : fg,
+                      width: "36px",
+                      height: "48px",
+                      borderTop: `1.5px solid ${isSelected ? goldAccent : borderSubtle}`,
+                      borderBottom: `1.5px solid ${isSelected ? goldAccent : borderSubtle}`,
+                      background: isSelected
+                        ? isDark
+                          ? "hsl(var(--matte-gold) / 0.12)"
+                          : "hsl(var(--matte-gold) / 0.08)"
+                        : "transparent",
+                      color: isSelected ? goldAccent : fg,
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: isSelected ? "18px" : "15px",
+                      fontWeight: isSelected ? 600 : 400,
                     }}
                   >
                     {val}
@@ -101,34 +154,36 @@ const DiagnosticoQuestionComponent = ({
           </div>
 
           {/* Navigation */}
-          <div className="mt-12 flex justify-between items-center">
+          <div className="mt-14 flex justify-between items-center">
             {canGoBack ? (
               <button
                 onClick={onBack}
-                className="flex items-center gap-1 text-xs uppercase tracking-wider"
-                style={{ color: fgMuted }}
+                className="flex items-center gap-1.5 font-inter uppercase tracking-[0.18em] transition-colors duration-200 hover:opacity-70"
+                style={{ fontSize: "10px", color: fgMuted }}
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
+                <ArrowLeft className="w-3 h-3" />
                 Voltar
               </button>
             ) : (
               <div />
             )}
 
-            <Button
+            <button
               onClick={() => selected !== null && onNext(selected)}
               disabled={selected === null}
-              className="px-8 py-2.5 uppercase tracking-[0.12em] text-sm rounded-none border"
+              className="flex items-center gap-1.5 font-inter uppercase tracking-[0.18em] transition-all duration-200"
               style={{
-                background: selected !== null ? progressColor : "transparent",
-                borderColor: progressColor,
-                color: selected !== null ? "hsl(var(--warm-black))" : fgMuted,
-                opacity: selected === null ? 0.4 : 1,
+                fontSize: "10px",
+                color: selected !== null ? goldAccent : fgMuted,
+                opacity: selected === null ? 0.35 : 1,
+                cursor: selected === null ? "default" : "pointer",
+                borderBottom: selected !== null ? `1px solid ${goldAccent}` : "1px solid transparent",
+                paddingBottom: "2px",
               }}
             >
               Próxima
-              <ArrowRight className="w-3.5 h-3.5 ml-1" />
-            </Button>
+              <ArrowRight className="w-3 h-3" />
+            </button>
           </div>
         </div>
       </motion.div>
