@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import AccessibilityReader from "@/components/AccessibilityReader";
 
 const Dobra1InterrupcaoTotal = () => {
+  const navigate = useNavigate();
   return (
     <section
       className="relative min-h-screen flex items-center justify-center py-24"
@@ -68,6 +70,24 @@ const Dobra1InterrupcaoTotal = () => {
               aria-label="Entrar no Portal Reset - abre página de compra em nova aba"
             >
               ENTRAR NO PORTAL RESET
+            </Button>
+          </motion.div>
+
+          {/* Diagnóstico Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.95, duration: 0.5 }}
+            className="mb-8"
+          >
+            <Button
+              variant="editorialOutline"
+              size="lg"
+              className="text-sm px-10 uppercase tracking-[0.12em]"
+              onClick={() => navigate('/quiz-mapa-do-padrao')}
+              aria-label="Fazer o diagnóstico Mapa do Padrão"
+            >
+              Fazer o diagnóstico
             </Button>
           </motion.div>
 
