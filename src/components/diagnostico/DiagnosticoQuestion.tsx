@@ -93,7 +93,7 @@ const DiagnosticoQuestionComponent = ({
             className="text-center uppercase tracking-[0.18em] font-inter mb-6"
             style={{ fontSize: "9px", color: fgMuted }}
           >
-            Responda pensando nos últimos 30 dias.
+            Responda pensando nos últimos 30 dias. Seja brutalmente honesta. Ninguém vai te julgar. Só o seu padrão.
           </p>
 
           {/* Divider above question */}
@@ -117,8 +117,8 @@ const DiagnosticoQuestionComponent = ({
               className="flex justify-between mb-4 font-inter uppercase tracking-[0.15em]"
               style={{ fontSize: "9px", color: fgMuted }}
             >
-              <span>1 — quase nunca</span>
-              <span>9 — quase sempre</span>
+              <span>1 — discordo totalmente</span>
+              <span>9 — concordo totalmente</span>
             </div>
 
             {/* Number grid */}
