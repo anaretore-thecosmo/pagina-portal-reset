@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import DiagnosticoPage from "./pages/DiagnosticoPage";
 import EspelhoPage from "./pages/EspelhoPage";
@@ -21,10 +21,15 @@ const App = () => (
         <Routes>
           <Route path="/" element={<QuizMapaPadraoPage />} />
           <Route path="/quiz-mapa-do-padrao" element={<QuizMapaPadraoPage />} />
-          <Route path="/hub" element={<Index />} />
+          <Route path="/landing-antiga" element={<Index />} />
           <Route path="/diagnostico" element={<DiagnosticoPage />} />
           <Route path="/espelho" element={<EspelhoPage />} />
           <Route path="/espelho-da-clareza" element={<EspelhoDaClarezaPage />} />
+          {/* Redirects de segurança */}
+          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="/index" element={<Navigate to="/" replace />} />
+          <Route path="/landing" element={<Navigate to="/" replace />} />
+          <Route path="/hub" element={<Navigate to="/" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
