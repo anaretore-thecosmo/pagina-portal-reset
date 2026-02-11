@@ -19,10 +19,11 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<QuizMapaPadraoPage />} />
+          <Route path="/quiz-mapa-do-padrao" element={<QuizMapaPadraoPage />} />
+          <Route path="/hub" element={<Index />} />
           <Route path="/diagnostico" element={<DiagnosticoPage />} />
           <Route path="/espelho" element={<EspelhoPage />} />
-          <Route path="/quiz-mapa-do-padrao" element={<QuizMapaPadraoPage />} />
           <Route path="/espelho-da-clareza" element={<EspelhoDaClarezaPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
