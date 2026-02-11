@@ -9,6 +9,7 @@ import {
   quizRespiros,
   type QuizSession,
 } from "@/data/quizMapaPadrao";
+import quizIntroImage from "@/assets/quiz-intro-editorial.jpg";
 
 const STORAGE_KEY = "quiz-mapa-padrao-session";
 const RESPIRO_AFTER = [6, 12, 18, 24]; // 1-based question numbers
@@ -29,184 +30,239 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
     <div
       className="min-h-screen relative overflow-hidden"
       style={{
-        background: "linear-gradient(170deg, hsl(215 30% 10%) 0%, hsl(215 25% 14%) 60%, hsl(220 20% 12%) 100%)",
+        background: "linear-gradient(170deg, hsl(215 30% 8%) 0%, hsl(215 25% 12%) 50%, hsl(220 20% 10%) 100%)",
         color: "hsl(var(--off-white))",
       }}
     >
-      {/* Subtle texture overlay */}
+      {/* Ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse at 30% 20%, hsl(var(--matte-gold) / 0.03) 0%, transparent 60%)",
+          background: "radial-gradient(ellipse at 20% 30%, hsl(var(--matte-gold) / 0.04) 0%, transparent 55%)",
         }}
       />
 
-      {/* Thin gold spine on the left */}
+      {/* Gold spine */}
       <div
-        className="absolute left-6 md:left-12 top-0 bottom-0 w-px"
-        style={{ background: "hsl(var(--matte-gold) / 0.12)" }}
+        className="absolute left-6 md:left-10 top-0 bottom-0 w-px"
+        style={{ background: "hsl(var(--matte-gold) / 0.10)" }}
       />
 
       {/* Watermark number */}
       <p
         className="absolute font-playfair font-bold select-none pointer-events-none"
         style={{
-          fontSize: "clamp(120px, 18vw, 220px)",
+          fontSize: "clamp(160px, 22vw, 320px)",
           lineHeight: 1,
-          color: "hsl(var(--off-white) / 0.02)",
-          right: "5%",
-          top: "8%",
+          color: "hsl(var(--off-white) / 0.015)",
+          right: "4%",
+          bottom: "4%",
         }}
       >
-        00
+        01
       </p>
 
+      {/* Main grid */}
       <div className="relative z-10 min-h-screen flex items-center">
-        <div className="w-full max-w-2xl mx-auto px-8 md:px-16 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Kicker */}
-            <p
-              className="text-[10px] uppercase tracking-[0.3em] mb-8 font-inter"
-              style={{ color: "hsl(var(--matte-gold))" }}
-            >
-              Diagnóstico editorial
-            </p>
+        <div className="w-full max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-            {/* Gold divider */}
-            <div className="w-10 h-px mb-8" style={{ background: "hsl(var(--matte-gold) / 0.5)" }} />
-
-            {/* Title */}
-            <h1
-              className="font-playfair font-bold uppercase"
-              style={{
-                fontSize: "clamp(38px, 6vw, 64px)",
-                lineHeight: 1.02,
-                letterSpacing: "0.1em",
-              }}
+            {/* Left column — text */}
+            <motion.div
+              className="lg:col-span-7 xl:col-span-6"
+              initial={{ opacity: 0, y: 32 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9 }}
             >
-              Mapa do Padrão
-            </h1>
-
-            {/* Subtitle */}
-            <p
-              className="mt-5 font-playfair italic"
-              style={{
-                fontSize: "clamp(17px, 2.5vw, 22px)",
-                color: "hsl(var(--off-white) / 0.65)",
-              }}
-            >
-              Mapeie o lugar de onde você está operando.
-            </p>
-
-            {/* Body copy — 2 editorial paragraphs */}
-            <div
-              className="mt-10 space-y-5 leading-relaxed"
-              style={{
-                fontSize: "clamp(14px, 1.8vw, 16px)",
-                color: "hsl(var(--off-white) / 0.55)",
-                maxWidth: "480px",
-              }}
-            >
-              <p>
-                Você não precisa de mais verdade.
-                <br />
-                Precisa de um espelho que mostre o seu padrão em ação, no dia comum.
-              </p>
-              <p>
-                Este mapa não mede "quanto você sabe".
-                <br />
-                Ele mostra onde você sustenta presença — e onde o automático assume o comando.
-              </p>
-            </div>
-
-            {/* Promise box */}
-            <div
-              className="mt-10 p-6 rounded-sm"
-              style={{
-                border: "1px solid hsl(var(--matte-gold) / 0.15)",
-                background: "hsl(var(--off-white) / 0.02)",
-              }}
-            >
+              {/* Kicker */}
               <p
-                className="text-[10px] uppercase tracking-[0.2em] mb-4 font-inter"
+                className="text-[10px] uppercase tracking-[0.35em] mb-8 font-inter"
                 style={{ color: "hsl(var(--matte-gold) / 0.7)" }}
               >
-                Ao final, você recebe
+                Portal Reset
               </p>
-              <ul
-                className="space-y-2.5 text-sm leading-relaxed"
-                style={{ color: "hsl(var(--off-white) / 0.6)" }}
-              >
-                <li className="flex gap-3 items-start">
-                  <span
-                    className="font-playfair font-bold mt-px"
-                    style={{ color: "hsl(var(--clay))", fontSize: "13px" }}
-                  >
-                    1
-                  </span>
-                  <span>Um Espelho de Clareza com mandala de 12 fatias</span>
-                </li>
-                <li className="flex gap-3 items-start">
-                  <span
-                    className="font-playfair font-bold mt-px"
-                    style={{ color: "hsl(var(--clay))", fontSize: "13px" }}
-                  >
-                    2
-                  </span>
-                  <span>Uma leitura personalizada do seu padrão atual</span>
-                </li>
-                <li className="flex gap-3 items-start">
-                  <span
-                    className="font-playfair font-bold mt-px"
-                    style={{ color: "hsl(var(--clay))", fontSize: "13px" }}
-                  >
-                    3
-                  </span>
-                  <span>Um plano de 7 dias para estabilizar o que está vazando</span>
-                </li>
-              </ul>
-            </div>
 
-            {/* Safety line */}
-            <p
-              className="mt-6 font-inter italic"
-              style={{ fontSize: "12px", color: "hsl(var(--off-white) / 0.35)" }}
+              {/* Gold divider */}
+              <div className="w-12 h-px mb-8" style={{ background: "hsl(var(--matte-gold) / 0.45)" }} />
+
+              {/* Title */}
+              <h1
+                className="font-playfair font-bold uppercase"
+                style={{
+                  fontSize: "clamp(34px, 5.5vw, 62px)",
+                  lineHeight: 1.0,
+                  letterSpacing: "0.08em",
+                }}
+              >
+                Mapeie seu padrão
+              </h1>
+
+              {/* Subtitle */}
+              <p
+                className="mt-5 font-playfair italic"
+                style={{
+                  fontSize: "clamp(16px, 2.2vw, 21px)",
+                  color: "hsl(var(--off-white) / 0.6)",
+                }}
+              >
+                Um espelho do lugar de onde você está operando.
+              </p>
+
+              {/* Body copy */}
+              <div
+                className="mt-10 space-y-5 leading-[1.85]"
+                style={{
+                  fontSize: "clamp(13.5px, 1.6vw, 15.5px)",
+                  color: "hsl(var(--off-white) / 0.5)",
+                  maxWidth: "460px",
+                }}
+              >
+                <p>
+                  Você já entendeu coisas demais.
+                </p>
+                <p>
+                  O problema não é consciência. É execução sustentada.
+                </p>
+                <p>
+                  Este mapa mostra onde você está consistente — e onde você começa a negociar com a sua verdade.
+                </p>
+                <p>
+                  No fim, você recebe um guia simples e cirúrgico para fazer o que já sabe que precisa ser feito.
+                </p>
+              </div>
+
+              {/* "Ao final" block */}
+              <div
+                className="mt-12 p-7 rounded-sm"
+                style={{
+                  border: "1px solid hsl(var(--matte-gold) / 0.12)",
+                  background: "hsl(var(--off-white) / 0.015)",
+                }}
+              >
+                <p
+                  className="text-[10px] uppercase tracking-[0.25em] mb-5 font-inter"
+                  style={{ color: "hsl(var(--matte-gold) / 0.6)" }}
+                >
+                  Ao final, você recebe
+                </p>
+                <ul className="space-y-3.5" style={{ color: "hsl(var(--off-white) / 0.55)" }}>
+                  {[
+                    "Mandala com o gráfico do seu padrão atual",
+                    "Leitura personalizada do seu padrão em ação",
+                    "Um plano de 7 dias para estabilizar o que está vazando",
+                  ].map((item, i) => (
+                    <li key={i} className="flex gap-4 items-start text-sm leading-relaxed">
+                      <span
+                        className="font-playfair font-bold shrink-0"
+                        style={{
+                          color: "hsl(var(--clay))",
+                          fontSize: "16px",
+                          lineHeight: "1.4",
+                          minWidth: "16px",
+                        }}
+                      >
+                        {i + 1}
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Microcopy */}
+              <p
+                className="mt-7 font-inter italic"
+                style={{ fontSize: "12px", color: "hsl(var(--off-white) / 0.3)" }}
+              >
+                Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
+              </p>
+
+              {/* Buttons */}
+              <div className="mt-12 flex flex-wrap gap-5 items-center">
+                <Button
+                  onClick={onStart}
+                  className="group relative px-12 py-4 uppercase tracking-[0.2em] text-sm font-medium rounded-none border overflow-hidden transition-all duration-300"
+                  style={{
+                    background: "hsl(var(--matte-gold) / 0.06)",
+                    borderColor: "hsl(var(--matte-gold))",
+                    color: "hsl(var(--matte-gold))",
+                    boxShadow: "0 2px 12px -4px hsl(var(--matte-gold) / 0.15)",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "hsl(var(--matte-gold) / 0.12)";
+                    e.currentTarget.style.boxShadow = "0 4px 20px -6px hsl(var(--matte-gold) / 0.25)";
+                    e.currentTarget.style.transform = "translateY(-1px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "hsl(var(--matte-gold) / 0.06)";
+                    e.currentTarget.style.boxShadow = "0 2px 12px -4px hsl(var(--matte-gold) / 0.15)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  Abrir o Mapa
+                </Button>
+
+                <button
+                  onClick={() => setShowHow(true)}
+                  className="uppercase tracking-[0.2em] font-inter transition-all duration-200 hover:opacity-70"
+                  style={{
+                    fontSize: "11px",
+                    color: "hsl(var(--off-white) / 0.35)",
+                    borderBottom: "1px solid hsl(var(--off-white) / 0.12)",
+                    paddingBottom: "3px",
+                  }}
+                >
+                  Como funciona
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Right column — image */}
+            <motion.div
+              className="lg:col-span-5 xl:col-span-6 relative"
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
             >
-              Sem julgamento. Sem exposição. Só direção.
-            </p>
+              <div className="relative">
+                {/* Thin gold frame offset */}
+                <div
+                  className="absolute -inset-3 pointer-events-none hidden lg:block"
+                  style={{
+                    border: "1px solid hsl(var(--matte-gold) / 0.08)",
+                  }}
+                />
 
-            {/* Buttons */}
-            <div className="mt-12 flex flex-wrap gap-4 items-center">
-              <Button
-                onClick={onStart}
-                className="px-10 py-3.5 uppercase tracking-[0.18em] text-sm font-medium rounded-none border"
-                style={{
-                  background: "hsl(var(--matte-gold) / 0.08)",
-                  borderColor: "hsl(var(--matte-gold))",
-                  color: "hsl(var(--matte-gold))",
-                }}
-              >
-                Começar o Mapa
-              </Button>
+                <div className="relative overflow-hidden" style={{ aspectRatio: "3/4" }}>
+                  <img
+                    src={quizIntroImage}
+                    alt="Corredor arquitetônico com luz dourada — silêncio e direção"
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                  />
+                  {/* Overlay gradient for text contrast */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: "linear-gradient(to top, hsl(215 30% 8% / 0.6) 0%, transparent 40%)",
+                    }}
+                  />
+                </div>
 
-              <button
-                onClick={() => setShowHow(true)}
-                className="uppercase tracking-[0.18em] font-inter transition-colors duration-200 hover:opacity-80"
-                style={{
-                  fontSize: "11px",
-                  color: "hsl(var(--off-white) / 0.4)",
-                  borderBottom: "1px solid hsl(var(--off-white) / 0.15)",
-                  paddingBottom: "2px",
-                }}
-              >
-                Como funciona
-              </button>
-            </div>
-          </motion.div>
+                {/* Caption */}
+                <p
+                  className="mt-4 font-playfair italic text-right"
+                  style={{
+                    fontSize: "11px",
+                    color: "hsl(var(--off-white) / 0.25)",
+                    letterSpacing: "0.03em",
+                  }}
+                >
+                  "Um mapa não te melhora. Te localiza."
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
@@ -215,8 +271,8 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         <DialogContent
           className="rounded-sm border"
           style={{
-            background: "hsl(215 25% 14%)",
-            borderColor: "hsl(var(--matte-gold) / 0.15)",
+            background: "hsl(215 25% 11%)",
+            borderColor: "hsl(var(--matte-gold) / 0.12)",
             color: "hsl(var(--off-white))",
             maxWidth: "440px",
           }}
@@ -230,16 +286,16 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
             </DialogTitle>
           </DialogHeader>
 
+          <div className="w-8 h-px mt-2 mb-4" style={{ background: "hsl(var(--matte-gold) / 0.3)" }} />
+
           <ul
-            className="space-y-3 text-sm leading-relaxed mt-2"
-            style={{ color: "hsl(var(--off-white) / 0.6)" }}
+            className="space-y-3.5 text-sm leading-relaxed"
+            style={{ color: "hsl(var(--off-white) / 0.55)" }}
           >
             {[
-              "24 perguntas rápidas, uma por vez",
-              "Escala de 1 a 9",
-              "Você responde pensando nos últimos 30 dias",
-              "A cada 6 perguntas, uma pausa de respiro",
-              "No final, seu Espelho fica pronto para baixar em PDF",
+              "Você responde em escala 1 a 9 pensando nos últimos 30 dias.",
+              "A cada 6 etapas, uma pausa curta para recalibrar.",
+              "No final, o mapa vira guia.",
             ].map((item, i) => (
               <li key={i} className="flex gap-3 items-start">
                 <span
@@ -251,13 +307,13 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
             ))}
           </ul>
 
-          <div className="mt-4">
+          <div className="mt-6">
             <Button
               onClick={() => setShowHow(false)}
               className="w-full py-3 uppercase tracking-[0.15em] text-sm font-medium rounded-none border"
               style={{
                 background: "transparent",
-                borderColor: "hsl(var(--matte-gold) / 0.3)",
+                borderColor: "hsl(var(--matte-gold) / 0.25)",
                 color: "hsl(var(--matte-gold))",
               }}
             >
