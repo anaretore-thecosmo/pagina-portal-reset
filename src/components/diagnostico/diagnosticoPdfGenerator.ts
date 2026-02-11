@@ -413,6 +413,29 @@ export async function generateDiagnosticoPDF(
   pdf.text("PORTAL RESET · portalreset.com", PAGE_W / 2, 275, { align: "center" });
 
   // ===================================================================
+  // AUTHOR CREDIT (on every page)
+  // ===================================================================
+  const totalPages = pdf.getNumberOfPages();
+  for (let p = 1; p <= totalPages; p++) {
+    pdf.setPage(p);
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(7);
+    // Determine text color based on page background
+    const isLightPage = p === 2 || p === 4;
+    if (isLightPage) {
+      pdf.setTextColor(GRAPHITE[0], GRAPHITE[1], GRAPHITE[2]);
+    } else {
+      pdf.setTextColor(OFF_WHITE[0], OFF_WHITE[1], OFF_WHITE[2]);
+    }
+    // Use low opacity via alpha-like lighter color
+    const creditColor: [number, number, number] = isLightPage
+      ? [Math.round(GRAPHITE[0] * 0.65 + 246 * 0.35), Math.round(GRAPHITE[1] * 0.65 + 241 * 0.35), Math.round(GRAPHITE[2] * 0.65 + 232 * 0.35)]
+      : [Math.round(OFF_WHITE[0] * 0.65 + DARK_BG[0] * 0.35), Math.round(OFF_WHITE[1] * 0.65 + DARK_BG[1] * 0.35), Math.round(OFF_WHITE[2] * 0.65 + DARK_BG[2] * 0.35)];
+    pdf.setTextColor(creditColor[0], creditColor[1], creditColor[2]);
+    pdf.text("© Ana Retore. Todos os direitos de design e copy reservados.", MARGIN, 290);
+  }
+
+  // ===================================================================
   // SAVE
   // ===================================================================
   const fileName = userName
