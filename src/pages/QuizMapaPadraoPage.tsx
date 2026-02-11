@@ -24,227 +24,257 @@ function generateId(): string {
 /* ── Intro Screen ──────────────────────────────────── */
 
 const IntroScreen = ({ onStart }: { onStart: () => void }) => {
-  const [showHow, setShowHow] = useState(false);
-
   return (
     <div
-      className="min-h-screen relative overflow-hidden"
+      className="relative overflow-hidden"
       style={{
-        background: "linear-gradient(170deg, hsl(215 30% 8%) 0%, hsl(215 25% 12%) 50%, hsl(220 20% 10%) 100%)",
-        color: "hsl(var(--off-white))",
+        background: "linear-gradient(175deg, hsl(215 35% 6%) 0%, hsl(218 30% 10%) 40%, hsl(220 28% 8%) 100%)",
+        color: "#F0EAD6",
       }}
     >
-      {/* Ambient glow */}
+      {/* ── Vignette overlay ── */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="fixed inset-0 pointer-events-none z-[1]"
         style={{
-          background: "radial-gradient(ellipse at 20% 30%, hsl(var(--matte-gold) / 0.04) 0%, transparent 55%)",
+          background: "radial-gradient(ellipse at 50% 50%, transparent 40%, hsl(215 35% 4% / 0.55) 100%)",
         }}
       />
 
-      {/* Gold spine */}
+      {/* ── Film grain overlay ── */}
       <div
-        className="absolute left-6 md:left-10 top-0 bottom-0 w-px"
-        style={{ background: "hsl(var(--matte-gold) / 0.10)" }}
+        className="fixed inset-0 pointer-events-none z-[2] opacity-[0.035]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+        }}
       />
 
-      {/* Watermark number */}
+      {/* ── Gold top rule ── */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px z-10"
+        style={{ background: "linear-gradient(90deg, transparent 5%, hsl(37 35% 52% / 0.25) 30%, hsl(37 35% 52% / 0.25) 70%, transparent 95%)" }}
+      />
+
+      {/* ── Gold spine ── */}
+      <div
+        className="absolute left-6 md:left-10 top-0 bottom-0 w-px z-10"
+        style={{ background: "hsl(37 35% 52% / 0.08)" }}
+      />
+
+      {/* ── Watermark number ── */}
       <p
-        className="absolute font-playfair font-bold select-none pointer-events-none"
+        className="absolute font-playfair font-bold select-none pointer-events-none z-[3]"
         style={{
-          fontSize: "clamp(160px, 22vw, 320px)",
+          fontSize: "clamp(180px, 24vw, 360px)",
           lineHeight: 1,
-          color: "hsl(var(--off-white) / 0.015)",
-          right: "4%",
-          bottom: "4%",
+          color: "hsl(200 20% 80% / 0.018)",
+          right: "3%",
+          bottom: "2%",
         }}
       >
         01
       </p>
 
-      {/* Main grid */}
-      <div className="relative z-10 min-h-screen flex items-center">
-        <div className="w-full max-w-7xl mx-auto px-8 md:px-16 py-16 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      {/* ── Ambient glow ── */}
+      <div
+        className="absolute pointer-events-none z-[3]"
+        style={{
+          top: "15%",
+          left: "-5%",
+          width: "50%",
+          height: "60%",
+          background: "radial-gradient(ellipse, hsl(37 40% 45% / 0.04) 0%, transparent 65%)",
+        }}
+      />
 
-            {/* Left column — text */}
+      {/* ════════ HERO SECTION ════════ */}
+      <section className="relative z-10 min-h-screen flex items-center">
+        <div className="w-full max-w-[1360px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+
+            {/* ── Left column: text ── */}
             <motion.div
-              className="lg:col-span-7 xl:col-span-6"
-              initial={{ opacity: 0, y: 32 }}
+              className="lg:col-span-6 xl:col-span-6"
+              initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9 }}
             >
               {/* Kicker */}
               <p
-                className="text-[10px] uppercase tracking-[0.35em] mb-8 font-inter"
-                style={{ color: "hsl(var(--matte-gold) / 0.7)" }}
+                className="font-inter uppercase mb-7"
+                style={{
+                  fontSize: "10px",
+                  letterSpacing: "0.4em",
+                  color: "hsl(37 35% 52% / 0.65)",
+                }}
               >
                 Portal Reset
               </p>
 
               {/* Gold divider */}
-              <div className="w-12 h-px mb-8" style={{ background: "hsl(var(--matte-gold) / 0.45)" }} />
+              <div
+                className="w-14 h-px mb-9"
+                style={{ background: "linear-gradient(90deg, hsl(37 35% 52% / 0.5), hsl(37 35% 52% / 0.1))" }}
+              />
 
-              {/* Title */}
+              {/* H1 */}
               <h1
                 className="font-playfair font-bold uppercase"
                 style={{
-                  fontSize: "clamp(34px, 5.5vw, 62px)",
-                  lineHeight: 1.0,
-                  letterSpacing: "0.08em",
+                  fontSize: "clamp(36px, 5.8vw, 66px)",
+                  lineHeight: 0.95,
+                  letterSpacing: "0.07em",
+                  color: "#F0EAD6",
+                  textShadow: "0 0 40px hsl(37 40% 60% / 0.06)",
                 }}
               >
-                Mapeie seu padrão
+                Mapeie seu<br />padrão
               </h1>
 
               {/* Subtitle */}
               <p
                 className="mt-5 font-playfair italic"
                 style={{
-                  fontSize: "clamp(16px, 2.2vw, 21px)",
-                  color: "hsl(var(--off-white) / 0.6)",
+                  fontSize: "clamp(15px, 2vw, 20px)",
+                  color: "hsl(36 20% 80% / 0.55)",
                 }}
               >
                 Um espelho do lugar de onde você está operando.
               </p>
 
-              {/* Body copy */}
+              {/* Thesis — 3 short lines */}
               <div
-                className="mt-10 space-y-5 leading-[1.85]"
+                className="mt-10 space-y-4"
                 style={{
-                  fontSize: "clamp(13.5px, 1.6vw, 15.5px)",
-                  color: "hsl(var(--off-white) / 0.5)",
-                  maxWidth: "460px",
+                  maxWidth: "480px",
                 }}
               >
-                <p>
-                  Você já entendeu coisas demais.
-                </p>
-                <p>
-                  O problema não é consciência. É execução sustentada.
-                </p>
-                <p>
-                  Este mapa mostra onde você está consistente — e onde você começa a negociar com a sua verdade.
-                </p>
-                <p>
-                  No fim, você recebe um guia simples e cirúrgico para fazer o que já sabe que precisa ser feito.
-                </p>
+                {[
+                  "Você já entendeu coisas demais.",
+                  "O problema não é consciência. É execução sustentada.",
+                  "Este mapa mostra onde você sustenta clareza — e onde começa a negociar com sua verdade.",
+                ].map((line, i) => (
+                  <p
+                    key={i}
+                    className="font-inter leading-[1.9]"
+                    style={{
+                      fontSize: "clamp(13.5px, 1.5vw, 15px)",
+                      color: i === 2 ? "hsl(36 15% 82% / 0.75)" : "hsl(36 15% 82% / 0.62)",
+                    }}
+                  >
+                    {line}
+                  </p>
+                ))}
               </div>
 
-              {/* "Ao final" block */}
-              <div
-                className="mt-12 p-7 rounded-sm"
-                style={{
-                  border: "1px solid hsl(var(--matte-gold) / 0.12)",
-                  background: "hsl(var(--off-white) / 0.015)",
-                }}
-              >
-                <p
-                  className="text-[10px] uppercase tracking-[0.25em] mb-5 font-inter"
-                  style={{ color: "hsl(var(--matte-gold) / 0.6)" }}
-                >
-                  Ao final, você recebe
-                </p>
-                <ul className="space-y-3.5" style={{ color: "hsl(var(--off-white) / 0.55)" }}>
-                  {[
-                    "Mandala com o gráfico do seu padrão atual",
-                    "Leitura personalizada do seu padrão em ação",
-                    "Um plano de 7 dias para estabilizar o que está vazando",
-                  ].map((item, i) => (
-                    <li key={i} className="flex gap-4 items-start text-sm leading-relaxed">
-                      <span
-                        className="font-playfair font-bold shrink-0"
-                        style={{
-                          color: "hsl(var(--clay))",
-                          fontSize: "16px",
-                          lineHeight: "1.4",
-                          minWidth: "16px",
-                        }}
-                      >
-                        {i + 1}
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Microcopy */}
+              {/* Measurable close */}
               <p
-                className="mt-7 font-inter italic"
-                style={{ fontSize: "12px", color: "hsl(var(--off-white) / 0.3)" }}
+                className="mt-8 font-inter italic"
+                style={{ fontSize: "12px", color: "hsl(36 12% 78% / 0.4)" }}
               >
                 Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
               </p>
 
-              {/* Buttons */}
+              {/* ── CTAs ── */}
               <div className="mt-12 flex flex-wrap gap-5 items-center">
-                <Button
+                {/* Primary CTA */}
+                <button
                   onClick={onStart}
-                  className="group relative px-12 py-4 uppercase tracking-[0.2em] text-sm font-medium rounded-none border overflow-hidden transition-all duration-300"
+                  className="group relative px-14 py-4 uppercase tracking-[0.22em] font-inter font-medium text-sm overflow-hidden transition-all duration-300"
                   style={{
-                    background: "hsl(var(--matte-gold) / 0.06)",
-                    borderColor: "hsl(var(--matte-gold))",
-                    color: "hsl(var(--matte-gold))",
-                    boxShadow: "0 2px 12px -4px hsl(var(--matte-gold) / 0.15)",
+                    background: "linear-gradient(135deg, hsl(37 35% 52% / 0.12) 0%, hsl(37 35% 52% / 0.06) 100%)",
+                    border: "1px solid hsl(37 35% 52% / 0.55)",
+                    color: "hsl(37 40% 62%)",
+                    boxShadow: "0 2px 16px -4px hsl(37 35% 52% / 0.12), inset 0 1px 0 hsl(37 35% 52% / 0.08)",
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "hsl(var(--matte-gold) / 0.12)";
-                    e.currentTarget.style.boxShadow = "0 4px 20px -6px hsl(var(--matte-gold) / 0.25)";
+                    e.currentTarget.style.background = "linear-gradient(135deg, hsl(37 35% 52% / 0.2) 0%, hsl(37 35% 52% / 0.1) 100%)";
+                    e.currentTarget.style.boxShadow = "0 4px 24px -6px hsl(37 35% 52% / 0.2), inset 0 1px 0 hsl(37 35% 52% / 0.12)";
                     e.currentTarget.style.transform = "translateY(-1px)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "hsl(var(--matte-gold) / 0.06)";
-                    e.currentTarget.style.boxShadow = "0 2px 12px -4px hsl(var(--matte-gold) / 0.15)";
+                    e.currentTarget.style.background = "linear-gradient(135deg, hsl(37 35% 52% / 0.12) 0%, hsl(37 35% 52% / 0.06) 100%)";
+                    e.currentTarget.style.boxShadow = "0 2px 16px -4px hsl(37 35% 52% / 0.12), inset 0 1px 0 hsl(37 35% 52% / 0.08)";
                     e.currentTarget.style.transform = "translateY(0)";
                   }}
                 >
-                  Abrir o Mapa
-                </Button>
+                  Começar o Mapa
+                </button>
 
-                <button
-                  onClick={() => setShowHow(true)}
-                  className="uppercase tracking-[0.2em] font-inter transition-all duration-200 hover:opacity-70"
+                {/* Secondary CTA */}
+                <a
+                  href="#como-funciona"
+                  className="uppercase tracking-[0.22em] font-inter transition-all duration-200 hover:opacity-70"
                   style={{
                     fontSize: "11px",
-                    color: "hsl(var(--off-white) / 0.35)",
-                    borderBottom: "1px solid hsl(var(--off-white) / 0.12)",
+                    color: "hsl(220 10% 72% / 0.5)",
+                    borderBottom: "1px solid hsl(220 10% 72% / 0.15)",
                     paddingBottom: "3px",
                   }}
                 >
                   Como funciona
-                </button>
+                </a>
               </div>
             </motion.div>
 
-            {/* Right column — image */}
+            {/* ── Right column: visual window ── */}
             <motion.div
-              className="lg:col-span-5 xl:col-span-6 relative"
+              className="lg:col-span-6 xl:col-span-6 relative"
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.3 }}
+              transition={{ duration: 1.1, delay: 0.25 }}
             >
               <div className="relative">
-                {/* Thin gold frame offset */}
+                {/* Outer frame — thin gold */}
                 <div
-                  className="absolute -inset-3 pointer-events-none hidden lg:block"
+                  className="absolute -inset-4 pointer-events-none hidden lg:block"
                   style={{
-                    border: "1px solid hsl(var(--matte-gold) / 0.08)",
+                    border: "1px solid hsl(37 35% 52% / 0.07)",
+                  }}
+                />
+                {/* Inner frame — stronger */}
+                <div
+                  className="absolute -inset-1.5 pointer-events-none hidden lg:block"
+                  style={{
+                    border: "1px solid hsl(37 35% 52% / 0.14)",
                   }}
                 />
 
-                <div className="relative overflow-hidden" style={{ aspectRatio: "3/4" }}>
+                {/* Image container */}
+                <div
+                  className="relative overflow-hidden"
+                  style={{
+                    aspectRatio: "3/4",
+                    maxHeight: "min(72vh, 600px)",
+                  }}
+                >
                   <img
                     src={quizIntroImage}
-                    alt="Corredor arquitetônico com luz dourada — silêncio e direção"
+                    alt="Corredor de pedra com feixe de luz dourada — silêncio e direção"
                     className="w-full h-full object-cover"
                     loading="eager"
                   />
-                  {/* Overlay gradient for text contrast */}
+                  {/* Navy overlay 50% */}
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: "linear-gradient(to top, hsl(215 30% 8% / 0.6) 0%, transparent 40%)",
+                      background: "linear-gradient(180deg, hsl(215 35% 6% / 0.45) 0%, hsl(215 35% 6% / 0.55) 60%, hsl(215 35% 6% / 0.7) 100%)",
+                      mixBlendMode: "multiply",
+                    }}
+                  />
+                  {/* Grain on image */}
+                  <div
+                    className="absolute inset-0 opacity-[0.05]"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+                      backgroundRepeat: "repeat",
+                    }}
+                  />
+                  {/* Subtle inner glow on edges */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      boxShadow: "inset 0 0 60px hsl(215 35% 6% / 0.3)",
                     }}
                   />
                 </div>
@@ -254,7 +284,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   className="mt-4 font-playfair italic text-right"
                   style={{
                     fontSize: "11px",
-                    color: "hsl(var(--off-white) / 0.25)",
+                    color: "hsl(36 15% 80% / 0.25)",
                     letterSpacing: "0.03em",
                   }}
                 >
@@ -264,64 +294,63 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
             </motion.div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* "Como funciona" modal */}
-      <Dialog open={showHow} onOpenChange={setShowHow}>
-        <DialogContent
-          className="rounded-sm border"
-          style={{
-            background: "hsl(215 25% 11%)",
-            borderColor: "hsl(var(--matte-gold) / 0.12)",
-            color: "hsl(var(--off-white))",
-            maxWidth: "440px",
-          }}
-        >
-          <DialogHeader>
-            <DialogTitle
-              className="font-playfair font-bold uppercase tracking-[0.12em]"
-              style={{ fontSize: "18px" }}
-            >
-              Como funciona
-            </DialogTitle>
-          </DialogHeader>
+      {/* ════════ COMO FUNCIONA (below hero) ════════ */}
+      <section
+        id="como-funciona"
+        className="relative z-10 pb-20 pt-6"
+      >
+        <div className="max-w-[1360px] mx-auto px-6 md:px-12 lg:px-16">
+          {/* Divider */}
+          <div
+            className="w-full h-px mb-14"
+            style={{ background: "linear-gradient(90deg, transparent, hsl(37 35% 52% / 0.12), transparent)" }}
+          />
 
-          <div className="w-8 h-px mt-2 mb-4" style={{ background: "hsl(var(--matte-gold) / 0.3)" }} />
-
-          <ul
-            className="space-y-3.5 text-sm leading-relaxed"
-            style={{ color: "hsl(var(--off-white) / 0.55)" }}
-          >
-            {[
-              "Você responde em escala 1 a 9 pensando nos últimos 30 dias.",
-              "A cada 6 etapas, uma pausa curta para recalibrar.",
-              "No final, o mapa vira guia.",
-            ].map((item, i) => (
-              <li key={i} className="flex gap-3 items-start">
-                <span
-                  className="w-1 h-1 rounded-full mt-2 shrink-0"
-                  style={{ background: "hsl(var(--matte-gold) / 0.5)" }}
-                />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-6">
-            <Button
-              onClick={() => setShowHow(false)}
-              className="w-full py-3 uppercase tracking-[0.15em] text-sm font-medium rounded-none border"
+          <div className="max-w-2xl">
+            <p
+              className="font-inter uppercase mb-8"
               style={{
-                background: "transparent",
-                borderColor: "hsl(var(--matte-gold) / 0.25)",
-                color: "hsl(var(--matte-gold))",
+                fontSize: "10px",
+                letterSpacing: "0.35em",
+                color: "hsl(37 35% 52% / 0.5)",
               }}
             >
-              Entendi
-            </Button>
+              Como funciona
+            </p>
+
+            <div className="space-y-6">
+              {[
+                { num: "01", text: "Escala 1 a 9, pensando nos últimos 30 dias." },
+                { num: "02", text: "Pausas curtas a cada 6 etapas para recalibrar." },
+                { num: "03", text: "No final, o espelho vira guia." },
+              ].map((item) => (
+                <div key={item.num} className="flex gap-5 items-baseline">
+                  <span
+                    className="font-playfair font-bold shrink-0"
+                    style={{
+                      fontSize: "18px",
+                      color: "hsl(20 39% 46% / 0.6)",
+                    }}
+                  >
+                    {item.num}
+                  </span>
+                  <p
+                    className="font-inter leading-relaxed"
+                    style={{
+                      fontSize: "14px",
+                      color: "hsl(220 10% 72% / 0.55)",
+                    }}
+                  >
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </section>
     </div>
   );
 };
