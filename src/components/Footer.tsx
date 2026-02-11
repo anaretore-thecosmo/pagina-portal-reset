@@ -43,6 +43,13 @@ const Footer = () => {
               de uma estratégia não deve ser interpretada como uma garantia de resultados.
             </p>
           </div>
+
+          {/* Author credit */}
+          <div className="mt-8 pt-4" style={{ borderTop: '1px solid hsl(var(--matte-gold) / 0.15)' }}>
+            <p className="font-inter text-[11px] md:text-[12px] text-left" style={{ color: 'hsl(var(--foreground) / 0.65)' }}>
+              © Ana Retore. Todos os direitos de design e copy reservados.
+            </p>
+          </div>
         </motion.div>
       </div>
     </footer>
