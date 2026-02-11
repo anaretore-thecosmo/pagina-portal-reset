@@ -32,15 +32,13 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         color: "#F0EAD6",
       }}
     >
-      {/* ── Vignette overlay ── */}
+      {/* Vignette */}
       <div
         className="fixed inset-0 pointer-events-none z-[1]"
-        style={{
-          background: "radial-gradient(ellipse at 50% 50%, transparent 40%, hsl(215 35% 4% / 0.55) 100%)",
-        }}
+        style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, hsl(215 35% 4% / 0.55) 100%)" }}
       />
 
-      {/* ── Film grain overlay ── */}
+      {/* Film grain */}
       <div
         className="fixed inset-0 pointer-events-none z-[2] opacity-[0.035]"
         style={{
@@ -49,19 +47,19 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         }}
       />
 
-      {/* ── Gold top rule ── */}
+      {/* Gold top rule */}
       <div
         className="absolute top-0 left-0 right-0 h-px z-10"
         style={{ background: "linear-gradient(90deg, transparent 5%, hsl(37 35% 52% / 0.25) 30%, hsl(37 35% 52% / 0.25) 70%, transparent 95%)" }}
       />
 
-      {/* ── Gold spine ── */}
+      {/* Gold spine */}
       <div
         className="absolute left-6 md:left-10 top-0 bottom-0 w-px z-10"
         style={{ background: "hsl(37 35% 52% / 0.08)" }}
       />
 
-      {/* ── Watermark number ── */}
+      {/* Watermark number */}
       <p
         className="absolute font-playfair font-bold select-none pointer-events-none z-[3]"
         style={{
@@ -75,7 +73,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         01
       </p>
 
-      {/* ── Ambient glow ── */}
+      {/* Ambient glow */}
       <div
         className="absolute pointer-events-none z-[3]"
         style={{
@@ -87,14 +85,14 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         }}
       />
 
-      {/* ════════ HERO SECTION ════════ */}
+      {/* ════════ HERO ════════ */}
       <section className="relative z-10 min-h-screen flex items-center">
         <div className="w-full max-w-[1360px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
-            {/* ── Left column: text ── */}
+            {/* Left column */}
             <motion.div
-              className="lg:col-span-6 xl:col-span-6"
+              className="lg:col-span-6 xl:col-span-5"
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9 }}
@@ -102,11 +100,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               {/* Kicker */}
               <p
                 className="font-inter uppercase mb-7"
-                style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.4em",
-                  color: "hsl(37 35% 52% / 0.65)",
-                }}
+                style={{ fontSize: "10px", letterSpacing: "0.4em", color: "hsl(37 35% 52% / 0.65)" }}
               >
                 Portal Reset
               </p>
@@ -134,21 +128,13 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               {/* Subtitle */}
               <p
                 className="mt-5 font-playfair italic"
-                style={{
-                  fontSize: "clamp(15px, 2vw, 20px)",
-                  color: "hsl(36 20% 80% / 0.55)",
-                }}
+                style={{ fontSize: "clamp(15px, 2vw, 20px)", color: "hsl(36 20% 80% / 0.55)" }}
               >
                 Um espelho do lugar de onde você está operando.
               </p>
 
-              {/* Thesis — 3 short lines */}
-              <div
-                className="mt-10 space-y-4"
-                style={{
-                  maxWidth: "480px",
-                }}
-              >
+              {/* Thesis */}
+              <div className="mt-10 space-y-4" style={{ maxWidth: "480px" }}>
                 {[
                   "Você já entendeu coisas demais.",
                   "O problema não é consciência. É execução sustentada.",
@@ -175,9 +161,8 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
               </p>
 
-              {/* ── CTAs ── */}
+              {/* CTAs */}
               <div className="mt-12 flex flex-wrap gap-5 items-center">
-                {/* Primary CTA */}
                 <button
                   onClick={onStart}
                   className="group relative px-14 py-4 uppercase tracking-[0.22em] font-inter font-medium text-sm overflow-hidden transition-all duration-300"
@@ -201,7 +186,6 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   Começar o Mapa
                 </button>
 
-                {/* Secondary CTA */}
                 <a
                   href="#como-funciona"
                   className="uppercase tracking-[0.22em] font-inter transition-all duration-200 hover:opacity-70"
@@ -215,46 +199,46 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   Como funciona
                 </a>
               </div>
+
+              {/* Microcopy */}
+              <p
+                className="mt-6 font-inter italic"
+                style={{ fontSize: "11px", color: "hsl(36 12% 78% / 0.3)" }}
+              >
+                Sem julgamento. Só direção.
+              </p>
             </motion.div>
 
-            {/* ── Right column: visual window ── */}
+            {/* Right column: visual window */}
             <motion.div
-              className="lg:col-span-6 xl:col-span-6 relative"
+              className="lg:col-span-6 xl:col-span-7 relative"
               initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.25 }}
             >
               <div className="relative">
-                {/* Outer frame — thin gold */}
+                {/* Outer frame */}
                 <div
                   className="absolute -inset-4 pointer-events-none hidden lg:block"
-                  style={{
-                    border: "1px solid hsl(37 35% 52% / 0.07)",
-                  }}
+                  style={{ border: "1px solid hsl(37 35% 52% / 0.07)" }}
                 />
-                {/* Inner frame — stronger */}
+                {/* Inner frame */}
                 <div
                   className="absolute -inset-1.5 pointer-events-none hidden lg:block"
-                  style={{
-                    border: "1px solid hsl(37 35% 52% / 0.14)",
-                  }}
+                  style={{ border: "1px solid hsl(37 35% 52% / 0.14)" }}
                 />
 
-                {/* Image container */}
+                {/* Image */}
                 <div
                   className="relative overflow-hidden"
-                  style={{
-                    aspectRatio: "3/4",
-                    maxHeight: "min(72vh, 600px)",
-                  }}
+                  style={{ aspectRatio: "3/4", maxHeight: "min(72vh, 600px)" }}
                 >
                   <img
                     src={quizIntroImage}
-                    alt="Corredor de pedra com feixe de luz dourada — silêncio e direção"
+                    alt="Portal de pedra com luz dourada — silêncio e direção"
                     className="w-full h-full object-cover"
                     loading="eager"
                   />
-                  {/* Navy overlay 50% */}
                   <div
                     className="absolute inset-0"
                     style={{
@@ -262,7 +246,6 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       mixBlendMode: "multiply",
                     }}
                   />
-                  {/* Grain on image */}
                   <div
                     className="absolute inset-0 opacity-[0.05]"
                     style={{
@@ -270,39 +253,80 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       backgroundRepeat: "repeat",
                     }}
                   />
-                  {/* Subtle inner glow on edges */}
                   <div
                     className="absolute inset-0 pointer-events-none"
-                    style={{
-                      boxShadow: "inset 0 0 60px hsl(215 35% 6% / 0.3)",
-                    }}
+                    style={{ boxShadow: "inset 0 0 60px hsl(215 35% 6% / 0.3)" }}
                   />
                 </div>
 
                 {/* Caption */}
                 <p
                   className="mt-4 font-playfair italic text-right"
-                  style={{
-                    fontSize: "11px",
-                    color: "hsl(36 15% 80% / 0.25)",
-                    letterSpacing: "0.03em",
-                  }}
+                  style={{ fontSize: "11px", color: "hsl(36 15% 80% / 0.25)", letterSpacing: "0.03em" }}
                 >
                   "Um mapa não te melhora. Te localiza."
                 </p>
               </div>
             </motion.div>
           </div>
+
+          {/* ── "Ao final, você recebe" block ── */}
+          <motion.div
+            className="mt-20 lg:mt-28"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            <div
+              className="max-w-xl relative px-8 py-10"
+              style={{
+                border: "1px solid hsl(37 35% 52% / 0.1)",
+                background: "hsl(215 30% 8% / 0.5)",
+              }}
+            >
+              {/* Green accent line */}
+              <div
+                className="absolute left-0 top-6 bottom-6 w-[2px]"
+                style={{ background: "hsl(137 9% 44% / 0.3)" }}
+              />
+
+              <p
+                className="font-inter uppercase mb-8"
+                style={{ fontSize: "10px", letterSpacing: "0.35em", color: "hsl(37 35% 52% / 0.6)" }}
+              >
+                Ao final, você recebe
+              </p>
+
+              <div className="space-y-5">
+                {[
+                  { num: "1", text: "Mandala do seu padrão atual" },
+                  { num: "2", text: "Leitura personalizada do seu padrão em ação" },
+                  { num: "3", text: "Um plano de 7 dias para estabilizar o que está vazando" },
+                ].map((item) => (
+                  <div key={item.num} className="flex gap-5 items-baseline">
+                    <span
+                      className="font-playfair font-bold shrink-0"
+                      style={{ fontSize: "16px", color: "hsl(20 39% 46% / 0.55)" }}
+                    >
+                      {item.num}
+                    </span>
+                    <p
+                      className="font-inter leading-relaxed"
+                      style={{ fontSize: "14px", color: "hsl(36 15% 82% / 0.65)" }}
+                    >
+                      {item.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ════════ COMO FUNCIONA (below hero) ════════ */}
-      <section
-        id="como-funciona"
-        className="relative z-10 pb-20 pt-6"
-      >
+      {/* ════════ COMO FUNCIONA ════════ */}
+      <section id="como-funciona" className="relative z-10 pb-20 pt-6">
         <div className="max-w-[1360px] mx-auto px-6 md:px-12 lg:px-16">
-          {/* Divider */}
           <div
             className="w-full h-px mb-14"
             style={{ background: "linear-gradient(90deg, transparent, hsl(37 35% 52% / 0.12), transparent)" }}
@@ -311,11 +335,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
           <div className="max-w-2xl">
             <p
               className="font-inter uppercase mb-8"
-              style={{
-                fontSize: "10px",
-                letterSpacing: "0.35em",
-                color: "hsl(37 35% 52% / 0.5)",
-              }}
+              style={{ fontSize: "10px", letterSpacing: "0.35em", color: "hsl(37 35% 52% / 0.5)" }}
             >
               Como funciona
             </p>
@@ -329,25 +349,40 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 <div key={item.num} className="flex gap-5 items-baseline">
                   <span
                     className="font-playfair font-bold shrink-0"
-                    style={{
-                      fontSize: "18px",
-                      color: "hsl(20 39% 46% / 0.6)",
-                    }}
+                    style={{ fontSize: "18px", color: "hsl(20 39% 46% / 0.6)" }}
                   >
                     {item.num}
                   </span>
                   <p
                     className="font-inter leading-relaxed"
-                    style={{
-                      fontSize: "14px",
-                      color: "hsl(220 10% 72% / 0.55)",
-                    }}
+                    style={{ fontSize: "14px", color: "hsl(220 10% 72% / 0.55)" }}
                   >
                     {item.text}
                   </p>
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* "Já tenho meu Espelho" link */}
+          <div className="mt-16 pt-10" style={{ borderTop: "1px solid hsl(37 35% 52% / 0.06)" }}>
+            <a
+              href="/espelho-da-clareza"
+              className="font-inter transition-all duration-200 hover:opacity-70"
+              style={{ fontSize: "11px", color: "hsl(220 10% 72% / 0.35)", letterSpacing: "0.04em" }}
+            >
+              Já tenho meu Espelho →
+            </a>
+          </div>
+
+          {/* Footer credit */}
+          <div className="mt-12 pt-6" style={{ borderTop: "1px solid hsl(37 35% 52% / 0.1)" }}>
+            <p
+              className="font-inter text-left"
+              style={{ fontSize: "11px", color: "hsl(36 15% 82% / 0.45)" }}
+            >
+              © Ana Retore. Todos os direitos de design e copy reservados.
+            </p>
           </div>
         </div>
       </section>
