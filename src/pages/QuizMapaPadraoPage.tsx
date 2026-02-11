@@ -30,39 +30,34 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
       {/* ════════ DOBRA 1 — HERO FULL-BLEED ════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* Background image — full bleed */}
+        {/* Background image — atmosphere, not banner */}
         <div className="absolute inset-0">
           <img
             src={quizIntroImage}
             alt="Portal de pedra com luz dourada — silêncio e direção"
             className="w-full h-full object-cover"
             loading="eager"
-          />
-          {/* L→R overlay for text legibility */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(90deg, rgba(3,42,51,0.92) 0%, rgba(3,42,51,0.80) 45%, rgba(3,42,51,0.40) 100%)",
-            }}
-          />
-          {/* Bottom fade */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(180deg, transparent 60%, rgba(3,42,51,0.6) 100%)",
-            }}
+            style={{ opacity: 0.22, filter: "blur(1.5px)" }}
           />
         </div>
 
-        {/* Vignette */}
+        {/* Gradient overlay: indigo → black */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(135deg, rgba(3,42,51,0.88) 0%, rgba(0,0,0,0.75) 100%)",
+          }}
+        />
+
+        {/* Black vignette edges */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0,0,0,0.35) 100%)" }}
+          style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.5) 100%)" }}
         />
 
         {/* Film grain */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.04]"
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
             backgroundRepeat: "repeat",
@@ -72,142 +67,170 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         {/* Gold top rule */}
         <div
           className="absolute top-0 left-0 right-0 h-px z-10"
-          style={{ background: "linear-gradient(90deg, transparent 5%, #c8b87040 30%, #c8b87040 70%, transparent 95%)" }}
+          style={{ background: "linear-gradient(90deg, transparent 5%, rgba(200,184,112,0.25) 30%, rgba(200,184,112,0.25) 70%, transparent 95%)" }}
         />
 
-        {/* Watermark 111 */}
-        <p
-          className="absolute font-playfair font-bold select-none pointer-events-none"
-          style={{
-            fontSize: "clamp(160px, 22vw, 340px)",
-            lineHeight: 1,
-            color: "rgba(200,184,112,0.045)",
-            top: "3%",
-            right: "4%",
-          }}
-        >
-          111
-        </p>
+        {/* ── Content: 12-col grid ── */}
+        <div className="relative z-10 w-full max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[80vh] lg:min-h-0">
 
-        {/* ── Content ── */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-
-            {/* Left column — text */}
+            {/* ── LEFT: 6 cols — Title + text ── */}
             <motion.div
-              className="lg:col-span-7 xl:col-span-6"
-              initial={{ opacity: 0, y: 28 }}
+              className="lg:col-span-6"
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9 }}
             >
               {/* Gold editorial line */}
-              <div className="w-10 h-[2px] mb-8" style={{ background: "#c8b870" }} />
+              <div className="w-10 h-[2px] mb-7" style={{ background: "#C8B870" }} />
 
               {/* Kicker */}
               <p
-                className="font-inter uppercase mb-8"
-                style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.7)" }}
+                className="font-inter uppercase mb-7"
+                style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}
               >
                 Portal Reset
               </p>
 
-              {/* H1 */}
+              {/* H1 — very large, Georgia/serif editorial */}
               <h1
                 className="font-playfair font-bold uppercase"
                 style={{
-                  fontSize: "clamp(40px, 6.5vw, 72px)",
-                  lineHeight: 0.92,
-                  letterSpacing: "0.06em",
-                  color: "#F2EBDD",
-                  textShadow: "0 2px 30px rgba(200,184,112,0.08)",
+                  fontSize: "clamp(44px, 7vw, 80px)",
+                  lineHeight: 0.9,
+                  letterSpacing: "0.04em",
+                  color: "#F3EEE6",
                 }}
               >
                 Mapeie seu<br />padrão
               </h1>
 
-              {/* Subtitle — italic only here */}
+              {/* Subtitle — italic ONLY here */}
               <p
                 className="mt-5 font-playfair italic"
-                style={{ fontSize: "clamp(15px, 2vw, 20px)", color: "rgba(209,199,189,0.7)" }}
+                style={{ fontSize: "clamp(15px, 1.8vw, 19px)", color: "rgba(209,199,189,0.65)" }}
               >
                 Um espelho do lugar de onde você está operando.
               </p>
 
-              {/* Thesis — 3 lines, no italic */}
-              <div className="mt-10 space-y-4" style={{ maxWidth: "500px" }}>
-                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(13.5px, 1.5vw, 15px)", color: "rgba(242,235,221,0.78)" }}>
+              {/* Thesis body — no italic, regular weight */}
+              <div className="mt-9 space-y-3" style={{ maxWidth: "480px" }}>
+                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(13.5px, 1.4vw, 15px)", color: "rgba(243,238,230,0.75)" }}>
                   Você já entendeu coisas demais.
                 </p>
-                <p className="font-inter font-semibold leading-[1.85]" style={{ fontSize: "clamp(13.5px, 1.5vw, 15px)", color: "rgba(242,235,221,0.92)" }}>
+                <p className="font-inter font-semibold leading-[1.8]" style={{ fontSize: "clamp(13.5px, 1.4vw, 15px)", color: "rgba(243,238,230,0.92)" }}>
                   O problema não é consciência. É execução sustentada.
                 </p>
-                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(13.5px, 1.5vw, 15px)", color: "rgba(242,235,221,0.72)" }}>
+                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(13.5px, 1.4vw, 15px)", color: "rgba(243,238,230,0.7)" }}>
                   Este mapa mostra onde você sustenta clareza — e onde começa a negociar com sua verdade.
                 </p>
               </div>
 
               {/* Measurable close */}
               <p
-                className="mt-8 font-inter"
-                style={{ fontSize: "12px", color: "rgba(209,199,189,0.45)" }}
+                className="mt-7 font-inter"
+                style={{ fontSize: "11.5px", color: "rgba(209,199,189,0.4)" }}
               >
                 Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
               </p>
-
-              {/* ── CTAs ── */}
-              <div className="mt-12 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                {/* Primary — Amber/Gold/Terracotta gradient */}
-                <button
-                  onClick={onStart}
-                  className="relative px-12 py-4 uppercase tracking-[0.18em] font-inter font-semibold text-sm transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
-                  style={{
-                    background: "linear-gradient(135deg, #c8b870 0%, #b88a3a 50%, #983d06 100%)",
-                    color: "#032a33",
-                    borderRadius: "6px",
-                    boxShadow: "0 4px 20px -4px rgba(152,61,6,0.35), 0 1px 3px rgba(0,0,0,0.2)",
-                    minHeight: "52px",
-                  }}
-                >
-                  Abrir o Mapa
-                </button>
-
-                {/* Secondary — outline dourado */}
-                <a
-                  href="#como-funciona"
-                  className="px-8 py-3 uppercase tracking-[0.18em] font-inter text-xs transition-all duration-200 text-center"
-                  style={{
-                    border: "1px solid rgba(200,184,112,0.4)",
-                    borderRadius: "6px",
-                    color: "#c8b870",
-                    minHeight: "48px",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "rgba(200,184,112,0.08)";
-                    e.currentTarget.style.borderColor = "rgba(200,184,112,0.6)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.borderColor = "rgba(200,184,112,0.4)";
-                  }}
-                >
-                  Como funciona
-                </a>
-              </div>
-
-              {/* Microcopy */}
-              <p className="mt-5 font-inter" style={{ fontSize: "11px", color: "rgba(209,199,189,0.3)" }}>
-                Sem julgamento. Só direção.
-              </p>
             </motion.div>
+
+            {/* ── RIGHT: 6 cols — Decision panel ── */}
+            <motion.div
+              className="lg:col-span-6 flex flex-col items-start lg:items-end"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.15 }}
+            >
+              <div className="w-full max-w-md lg:ml-auto relative">
+
+                {/* Watermark 111 — very subtle */}
+                <p
+                  className="absolute font-playfair font-bold select-none pointer-events-none hidden lg:block"
+                  style={{
+                    fontSize: "clamp(140px, 18vw, 280px)",
+                    lineHeight: 1,
+                    color: "rgba(200,184,112,0.05)",
+                    top: "-60px",
+                    right: "-30px",
+                  }}
+                >
+                  111
+                </p>
+
+                {/* Highlight phrase — the best line, pulled up */}
+                <div
+                  className="mb-10 pl-5 relative"
+                  style={{ borderLeft: "2px solid rgba(200,184,112,0.35)" }}
+                >
+                  <p
+                    className="font-playfair leading-snug"
+                    style={{ fontSize: "clamp(18px, 2.5vw, 24px)", color: "#F3EEE6" }}
+                  >
+                    Sem julgamento.<br />Só direção.
+                  </p>
+                </div>
+
+                {/* CTAs — aligned in panel */}
+                <div className="flex flex-col sm:flex-row gap-4 w-full">
+                  {/* Primary — ABRIR O MAPA */}
+                  <button
+                    onClick={onStart}
+                    className="relative px-10 py-4 uppercase tracking-[0.2em] font-inter font-semibold text-sm transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 flex-1 sm:flex-initial"
+                    style={{
+                      background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+                      color: "#032A33",
+                      borderRadius: "5px",
+                      border: "1px solid rgba(200,184,112,0.5)",
+                      boxShadow: "0 6px 24px -6px rgba(152,61,6,0.4), 0 2px 6px rgba(0,0,0,0.25)",
+                      minHeight: "54px",
+                      fontSize: "13px",
+                    }}
+                  >
+                    Abrir o Mapa
+                  </button>
+
+                  {/* Secondary — COMO FUNCIONA */}
+                  <a
+                    href="#como-funciona"
+                    className="px-8 py-3.5 uppercase tracking-[0.2em] font-inter text-xs transition-all duration-250 text-center flex-1 sm:flex-initial"
+                    style={{
+                      border: "1px solid rgba(209,199,189,0.35)",
+                      borderRadius: "5px",
+                      color: "#F3EEE6",
+                      minHeight: "54px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(200,184,112,0.7)";
+                      e.currentTarget.style.boxShadow = "0 0 16px -4px rgba(200,184,112,0.15)";
+                      e.currentTarget.style.color = "#C8B870";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = "rgba(209,199,189,0.35)";
+                      e.currentTarget.style.boxShadow = "none";
+                      e.currentTarget.style.color = "#F3EEE6";
+                    }}
+                  >
+                    Como funciona
+                  </a>
+                </div>
+
+                {/* Microcopy beneath buttons */}
+                <p className="mt-5 font-inter" style={{ fontSize: "10.5px", color: "rgba(209,199,189,0.3)", letterSpacing: "0.03em" }}>
+                  24 perguntas · escala 1 a 9 · resultado imediato
+                </p>
+              </div>
+            </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* ════════ DOBRA 2 — CLARA (off-white quente) ════════ */}
-      <section style={{ background: "#F6F1E8" }}>
+      {/* ════════ DOBRA 2 — CLARA (marfim quente) ════════ */}
+      <section style={{ background: "#F7F1E8" }}>
         <div className="max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -227,10 +250,10 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
             <div
               className="max-w-xl px-8 md:px-10 py-10"
               style={{
-                border: "1px solid rgba(3,42,51,0.08)",
-                borderRadius: "4px",
-                boxShadow: "0 2px 12px -4px rgba(3,42,51,0.06)",
-                background: "#FFFFFF",
+                border: "1px solid rgba(3,42,51,0.07)",
+                borderRadius: "3px",
+                boxShadow: "0 2px 10px -4px rgba(3,42,51,0.05)",
+                background: "rgba(255,255,255,0.7)",
               }}
             >
               <div className="space-y-7">
@@ -242,13 +265,13 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   <div key={item.num} className="flex gap-6 items-baseline">
                     <span
                       className="font-playfair font-bold shrink-0"
-                      style={{ fontSize: "22px", color: "#c8b870", lineHeight: 1 }}
+                      style={{ fontSize: "24px", color: "#C8B870", lineHeight: 1 }}
                     >
                       {item.num}
                     </span>
                     <p
                       className="font-inter leading-relaxed"
-                      style={{ fontSize: "15px", color: "#032a33" }}
+                      style={{ fontSize: "15px", color: "#032A33" }}
                     >
                       {item.text}
                     </p>
@@ -271,7 +294,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
       <section
         id="como-funciona"
         className="relative"
-        style={{ background: "#032a33" }}
+        style={{ background: "#032A33" }}
       >
         {/* Subtle texture */}
         <div
@@ -291,7 +314,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
           >
             <p
               className="font-inter uppercase mb-10"
-              style={{ fontSize: "10px", letterSpacing: "0.35em", color: "rgba(200,184,112,0.55)" }}
+              style={{ fontSize: "10px", letterSpacing: "0.35em", color: "rgba(200,184,112,0.5)" }}
             >
               Como funciona
             </p>
@@ -305,13 +328,13 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 <div key={item.num} className="flex gap-6 items-baseline">
                   <span
                     className="font-playfair font-bold shrink-0"
-                    style={{ fontSize: "20px", color: "#983d06" }}
+                    style={{ fontSize: "20px", color: "#983D06" }}
                   >
                     {item.num}
                   </span>
                   <p
                     className="font-inter leading-relaxed"
-                    style={{ fontSize: "14px", color: "rgba(209,199,189,0.65)" }}
+                    style={{ fontSize: "14px", color: "rgba(209,199,189,0.6)" }}
                   >
                     {item.text}
                   </p>
@@ -332,7 +355,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
 
             {/* Footer credit — dark bg */}
             <div className="mt-12 pt-6" style={{ borderTop: "1px solid rgba(200,184,112,0.1)" }}>
-              <p className="font-inter text-left" style={{ fontSize: "11px", color: "rgba(209,199,189,0.45)" }}>
+              <p className="font-inter text-left" style={{ fontSize: "11px", color: "rgba(209,199,189,0.7)" }}>
                 © Ana Retore. Todos os direitos de design e copy reservados.
               </p>
             </div>
