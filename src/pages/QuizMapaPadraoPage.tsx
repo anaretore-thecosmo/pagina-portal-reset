@@ -25,45 +25,52 @@ function generateId(): string {
 
 const IntroScreen = ({ onStart }: { onStart: () => void }) => {
   return (
-    <div className="relative" style={{ background: "#032A33" }}>
+    <div className="relative" style={{ background: "#08090D" }}>
 
       {/* ════════ DOBRA 1 — HERO PÔSTER FULL-SCREEN ════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* Background image — full-bleed atmosphere */}
-        <div className="absolute inset-0">
-          <img
-            src={quizIntroImage}
-            alt=""
-            aria-hidden="true"
-            className="w-full h-full object-cover"
-            loading="eager"
-            style={{ opacity: 0.3, objectPosition: "65% center" }}
-          />
-        </div>
-
-        {/* Heavy dark overlay — #032A33, 75% left fading to 60% right */}
+        {/* Subtle gradient within #08090D range */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to right, rgba(3,42,51,0.82) 0%, rgba(3,42,51,0.78) 40%, rgba(3,42,51,0.62) 100%)",
+            background: "radial-gradient(ellipse at 65% 45%, #0D0F16 0%, #08090D 50%, #05060A 100%)",
           }}
         />
 
         {/* Vignette */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at 60% 50%, transparent 40%, rgba(0,0,0,0.5) 100%)" }}
+          style={{ background: "radial-gradient(ellipse at 55% 50%, transparent 35%, rgba(0,0,0,0.55) 100%)" }}
         />
 
-        {/* Film grain */}
+        {/* Film grain — very subtle */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.03]"
+          className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
             backgroundRepeat: "repeat",
           }}
         />
+
+        {/* Ghost number — right side, huge, ultra-low opacity */}
+        <div
+          className="absolute pointer-events-none hidden lg:block select-none"
+          aria-hidden="true"
+          style={{
+            right: "-2%",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontFamily: "'Playfair Display', serif",
+            fontWeight: 700,
+            fontSize: "clamp(280px, 30vw, 420px)",
+            lineHeight: 1,
+            color: "rgba(237,230,219,0.035)",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          11
+        </div>
 
         {/* Gold spotlight behind headline */}
         <div
@@ -73,7 +80,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
             top: "22%",
             width: "500px",
             height: "380px",
-            background: "radial-gradient(ellipse at center, rgba(200,184,112,0.04) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at center, rgba(200,184,112,0.03) 0%, transparent 70%)",
           }}
         />
 
@@ -121,7 +128,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   fontSize: "clamp(40px, 7vw, 84px)",
                   lineHeight: 0.9,
                   letterSpacing: "0.04em",
-                  color: "#EDE6DA",
+                  color: "#EDE6DB",
                   textTransform: "uppercase",
                 }}
               >
@@ -156,7 +163,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   className="uppercase tracking-[0.2em] font-inter font-semibold w-full"
                   style={{
                     background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
-                    color: "#032A33",
+                    color: "#08090D",
                     borderRadius: "8px",
                     border: "1px solid rgba(200,184,112,0.45)",
                     boxShadow: "0 4px 20px -4px rgba(152,61,6,0.3)",
@@ -176,7 +183,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
               >
-                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(14.5px, 1.5vw, 16px)", color: "#CFC5B8" }}>
+                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(14.5px, 1.5vw, 16px)", color: "#CFC7BC" }}>
                   Você já entendeu coisas demais.
                 </p>
                 <p
@@ -184,13 +191,13 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   style={{
                     fontSize: "clamp(16px, 1.7vw, 19px)",
                     fontWeight: 600,
-                    color: "#EDE6DA",
+                    color: "#EDE6DB",
                     lineHeight: 1.6,
                   }}
                 >
                   O problema não é consciência. É execução sustentada.
                 </p>
-                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(14.5px, 1.5vw, 16px)", color: "#CFC5B8" }}>
+                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(14.5px, 1.5vw, 16px)", color: "#CFC7BC" }}>
                   Este mapa mostra onde você sustenta clareza — e onde começa a negociar com sua verdade.
                 </p>
               </motion.div>
@@ -198,7 +205,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               {/* "Em 3 minutos…" */}
               <motion.p
                 className="font-inter mt-5 lg:mt-6"
-                style={{ fontSize: "13px", lineHeight: 1.7, color: "#AFA79E", maxWidth: "460px" }}
+                style={{ fontSize: "13px", lineHeight: 1.7, color: "#A7A096", maxWidth: "460px" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
@@ -211,7 +218,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 className="mt-6 lg:mt-8"
                 style={{
                   maxWidth: "460px",
-                  background: "rgba(3,42,51,0.4)",
+                  background: "rgba(8,9,13,0.5)",
                   border: "1px solid rgba(200,184,112,0.1)",
                   borderRadius: "8px",
                   padding: "16px 20px",
@@ -233,7 +240,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "14px", color: "#C8B870" }}>
                         {item.num}
                       </span>
-                      <p className="font-inter" style={{ fontSize: "13px", lineHeight: 1.5, color: "#CFC5B8" }}>
+                      <p className="font-inter" style={{ fontSize: "13px", lineHeight: 1.5, color: "#CFC7BC" }}>
                         {item.text}
                       </p>
                     </div>
@@ -252,7 +259,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               <div
                 className="w-full max-w-md lg:ml-auto relative"
                 style={{
-                  background: "rgba(3,42,51,0.3)",
+                  background: "rgba(8,9,13,0.35)",
                   backdropFilter: "blur(20px)",
                   WebkitBackdropFilter: "blur(20px)",
                   border: "1px solid rgba(200,184,112,0.1)",
@@ -271,7 +278,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       fontFamily: "'Playfair Display', 'Georgia', serif",
                       fontStyle: "italic",
                       fontSize: "clamp(22px, 2.5vw, 30px)",
-                      color: "#EDE6DA",
+                      color: "#EDE6DB",
                       lineHeight: 1.35,
                     }}
                   >
@@ -311,7 +318,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                     className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 group w-full"
                     style={{
                       background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
-                      color: "#032A33",
+                      color: "#08090D",
                       borderRadius: "8px",
                       border: "1px solid rgba(200,184,112,0.45)",
                       boxShadow: "0 4px 20px -4px rgba(152,61,6,0.3), 0 2px 6px rgba(0,0,0,0.15)",
@@ -340,7 +347,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                     style={{
                       border: "1px solid rgba(200,184,112,0.35)",
                       borderRadius: "8px",
-                      color: "#EDE6DA",
+                      color: "#EDE6DB",
                       height: "48px",
                       fontSize: "11.5px",
                       background: "transparent",
@@ -351,7 +358,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.borderColor = "rgba(200,184,112,0.35)";
-                      e.currentTarget.style.color = "#EDE6DA";
+                      e.currentTarget.style.color = "#EDE6DB";
                     }}
                   >
                     Como funciona
@@ -369,7 +376,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
       {/* ════════ DOBRA 2 — RODAPÉ MÍNIMO DARK ════════ */}
       <footer
         className="relative"
-        style={{ background: "#032A33", borderTop: "1px solid rgba(200,184,112,0.08)" }}
+        style={{ background: "#08090D", borderTop: "1px solid rgba(200,184,112,0.08)" }}
       >
         <div className="max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="font-inter" style={{ fontSize: "11px", color: "rgba(207,197,184,0.5)" }}>
