@@ -166,9 +166,6 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 >
                   Abrir o Mapa
                 </button>
-                <p className="font-inter text-center" style={{ fontSize: "10px", color: "rgba(175,167,158,0.6)" }}>
-                  24 perguntas · escala 1 a 9 · resultado imediato
-                </p>
               </motion.div>
 
               {/* Body */}
@@ -361,24 +358,6 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   </button>
                 </div>
 
-                {/* Editorial seal + microcopy */}
-                <div className="flex items-center gap-3 mt-5">
-                  <div
-                    className="flex items-center justify-center shrink-0"
-                    style={{
-                      width: "28px",
-                      height: "28px",
-                      borderRadius: "50%",
-                      border: "1px solid rgba(200,184,112,0.4)",
-                      background: "rgba(200,184,112,0.06)",
-                    }}
-                  >
-                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "11px", color: "#C8B870", fontWeight: 700 }}>✦</span>
-                  </div>
-                  <p className="font-inter" style={{ fontSize: "10px", color: "rgba(175,167,158,0.7)", letterSpacing: "0.02em" }}>
-                    24 perguntas · escala 1 a 9 · resultado imediato
-                  </p>
-                </div>
 
               </div>
             </motion.div>
