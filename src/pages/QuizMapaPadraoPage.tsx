@@ -105,7 +105,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               {/* H1 — Georgia serif editorial, very large */}
               <h1
                 style={{
-                  fontFamily: "'Georgia', 'Playfair Display', serif",
+                  fontFamily: "'Playfair Display', 'Georgia', serif",
                   fontWeight: 700,
                   fontSize: "clamp(42px, 6.5vw, 76px)",
                   lineHeight: 0.92,
@@ -121,7 +121,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               <p
                 className="mt-6"
                 style={{
-                  fontFamily: "'Georgia', 'Playfair Display', serif",
+                  fontFamily: "'Playfair Display', 'Georgia', serif",
                   fontStyle: "italic",
                   fontSize: "clamp(15px, 1.7vw, 19px)",
                   color: "#D1C7BD",
@@ -159,7 +159,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 <p
                   className="absolute font-bold select-none pointer-events-none hidden lg:block"
                   style={{
-                    fontFamily: "'Georgia', serif",
+                    fontFamily: "'Playfair Display', 'Georgia', serif",
                     fontSize: "clamp(140px, 16vw, 260px)",
                     lineHeight: 1,
                     color: "rgba(200,184,112,0.05)",
@@ -262,9 +262,9 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       <div key={item.num} className="flex gap-5 items-baseline">
                         <span
                           style={{
-                            fontFamily: "'Georgia', serif",
-                            fontWeight: 700,
-                            fontSize: "20px",
+                      fontFamily: "'Playfair Display', 'Georgia', serif",
+                      fontWeight: 700,
+                      fontSize: "20px",
                             color: "#C8B870",
                             lineHeight: 1,
                             flexShrink: 0,
@@ -315,9 +315,9 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 <div key={item.num} className="flex gap-6 items-baseline">
                   <span
                     style={{
-                      fontFamily: "'Georgia', serif",
-                      fontWeight: 700,
-                      fontSize: "18px",
+                    fontFamily: "'Playfair Display', 'Georgia', serif",
+                    fontWeight: 700,
+                    fontSize: "18px",
                       color: "#983D06",
                     }}
                   >
