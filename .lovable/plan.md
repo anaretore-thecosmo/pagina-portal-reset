@@ -1,30 +1,59 @@
 
 
-# Plano: Restaurar layout do Hero ao design de referência
+# Plano: Redesign editorial de luxo — "Mapeie seu Padrao"
 
-## Problema
-A coluna direita do hero nao corresponde ao print de referencia. Tres elementos estao fora de posicao ou ausentes.
+## Resumo
+Ajustar layout, cores, tipografia e hierarquia da landing page em 2 dobras, sem alterar nenhum texto. Todas as mudancas acontecem em um unico arquivo: `src/pages/QuizMapaPadraoPage.tsx`.
 
-## Mudancas necessarias (arquivo: `src/pages/QuizMapaPadraoPage.tsx`)
+---
 
-### 1. Coluna direita - Reordenar elementos
-Substituir o conteudo da coluna direita (linhas ~156-290) para seguir esta ordem:
+## Mudancas detalhadas
 
-1. **Bloco "Sem julgamento. So direcao."** - com borda vertical dourada a esquerda (border-left 2px #C8B870), fonte Playfair Display italic, cor #F2EEE8, tamanho ~22-26px
-2. **Botoes** - "ABRIR O MAPA" (primario gradient) + "COMO FUNCIONA" (outline), lado a lado
-3. **Microtexto** - "24 perguntas · escala 1 a 9 · resultado imediato"
-4. **Watermark "111"** - manter como esta (absoluto, 5% opacidade)
+### 1. Cor de fundo principal
+- Trocar `#080E1A` por `#032A33` (indigo profundo) no wrapper e no overlay gradient.
+- Overlay gradient: `rgba(3,42,51,0.88)` esquerda ate `rgba(3,42,51,0.55)` direita.
 
-### 2. Coluna esquerda - Mover "Em 3 minutos..."
-Mover o paragrafo "Em 3 minutos, voce mapeia..." para o final da coluna esquerda (apos o bloco de corpo), com cor #BFB6AA, tamanho pequeno (~13px).
+### 2. Cores de texto no hero (mais quentes, nao cinza)
+- Headline: `#EDE6DA` (marfim elegante, ligeiramente mais quente).
+- Subtitulo italic: `#CFC6BA` (prata quente).
+- Corpo: `#CFC6BA` em vez de `#DAD3C9`.
+- Frase destaque ("O problema nao e consciencia..."): `#EDE6DA` com peso 600.
+- Microtexto: `#AFA79E`.
+- "Em 3 minutos...": `#AFA79E`.
 
-### 3. Remover card "Ao final, voce recebe" do hero
-O card translucido com os 3 itens (Mandala, Leitura, Plano de 7 dias) deve ser removido da dobra hero. Esse conteudo permanece na dobra 2 (secao clara editorial), onde ja existe uma versao dele.
+### 3. Botoes
+- Primario "Abrir o Mapa": manter gradiente ambar/terracota, trocar `color` para `#032A33`, borda `rgba(200,184,112,0.55)`.
+- Secundario "Como funciona": borda `#C8B870` (dourado, nao prata), texto `#EDE6DA`.
 
-### Resumo tecnico das edicoes
-- Linhas ~134-146: adicionar "Em 3 minutos..." no final do bloco esquerdo
-- Linhas ~173-184: remover "Em 3 minutos..." da coluna direita
-- Linhas ~156-170: inserir bloco "Sem julgamento. So direcao." com borda dourada antes dos botoes
-- Linhas ~241-290: remover o card "Ao final, voce recebe" do hero
+### 4. Selo editorial (microcopy)
+- "24 perguntas..." — aumentar opacidade de 0.5 para 0.7, cor `#AFA79E`, manter tamanho 10px. Se nao ficar elegante, sera removido.
 
-Nenhuma alteracao de copy. Apenas reposicionamento de elementos existentes.
+### 5. Bloco "Ao final, voce recebe" — adicionar na dobra 2
+- Inserir um card editorial na segunda dobra (fundo marfim) ABAIXO dos 3 passos "Como funciona".
+- Card com: `background: #FFFFFF`, `border: 1px solid rgba(3,42,51,0.08)`, sombra minima.
+- Numeros 1/2/3 em dourado `#C8B870`, texto em `#032A33`.
+- Itens: "Sua mandala de 6 eixos", "Uma leitura que traduz o mapa em decisao", "Um plano de 7 dias com foco real".
+
+### 6. Dobra 2 — fundo e detalhes
+- Fundo: `#F4EFE8` (marfim quente, como solicitado).
+- Label "Como funciona": cor `#983D06` (terracota) em vez de `#2A777C` (teal — proibido).
+- Numeros 01/02/03: manter `#983D06`.
+- Texto: `#032A33`.
+
+### 7. Rodape
+- Manter "Ana Retore" como esta, ajustar cor para `rgba(3,42,51,0.50)` para melhor legibilidade.
+
+### 8. Vinheta, grain e portal crack
+- Manter como estao, apenas ajustar a cor do portal crack line para usar `rgba(200,184,112,...)` (ja esta correto).
+
+---
+
+## Arquivos editados
+- `src/pages/QuizMapaPadraoPage.tsx` (unico arquivo)
+
+## O que NAO muda
+- Nenhum texto/copy.
+- Nenhuma nova pagina ou rota.
+- Fluxo do quiz (perguntas, respiros, resultado) intacto.
+- Fontes permanecem Playfair Display + Inter.
+
