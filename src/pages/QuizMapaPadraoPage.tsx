@@ -25,7 +25,7 @@ function generateId(): string {
 
 const IntroScreen = ({ onStart }: { onStart: () => void }) => {
   return (
-    <div className="relative" style={{ background: "#032A33" }}>
+    <div className="relative" style={{ background: "#080E1A" }}>
 
       {/* ════════ DOBRA 1 — HERO DARK, FULL-BLEED ════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -45,7 +45,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to right, rgba(3,42,51,0.85) 0%, rgba(3,42,51,0.85) 45%, rgba(3,42,51,0.60) 100%)",
+            background: "linear-gradient(to right, rgba(8,14,26,0.88) 0%, rgba(8,14,26,0.85) 45%, rgba(8,14,26,0.55) 100%)",
           }}
         />
 
