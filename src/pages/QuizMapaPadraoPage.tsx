@@ -30,14 +30,14 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
       {/* ════════ DOBRA 1 — HERO DARK, FULL-BLEED ════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* Background image — atmosphere */}
+        {/* Background image — ⬆ MELHORIA 1: opacity 0.24→0.38 */}
         <div className="absolute inset-0">
           <img
             src={quizIntroImage}
             alt="Portal de pedra com luz dourada"
             className="w-full h-full object-cover"
             loading="eager"
-            style={{ opacity: 0.24, filter: "blur(1px)" }}
+            style={{ opacity: 0.38, filter: "blur(0.5px)" }}
           />
         </div>
 
@@ -45,7 +45,19 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to right, rgba(3,42,51,0.88) 0%, rgba(3,42,51,0.85) 45%, rgba(3,42,51,0.55) 100%)",
+            background: "linear-gradient(to right, rgba(3,42,51,0.88) 0%, rgba(3,42,51,0.82) 45%, rgba(3,42,51,0.50) 100%)",
+          }}
+        />
+
+        {/* ⬆ MELHORIA 8: Hierarchy of light — gold spotlight behind headline */}
+        <div
+          className="absolute pointer-events-none hidden lg:block"
+          style={{
+            left: "12%",
+            top: "28%",
+            width: "420px",
+            height: "320px",
+            background: "radial-gradient(ellipse at center, rgba(200,184,112,0.045) 0%, transparent 70%)",
           }}
         />
 
@@ -85,25 +97,33 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center min-h-screen lg:min-h-screen">
 
             {/* ── LEFT: 6 cols — Title + text ── */}
-            <motion.div
-              className="lg:col-span-6 flex flex-col justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9 }}
-            >
+            {/* ⬆ MELHORIA 2: Staggered micro-animations */}
+            <div className="lg:col-span-6 flex flex-col justify-center">
               {/* Gold editorial line */}
-              <div className="w-10 h-[2px] mb-8" style={{ background: "#C8B870" }} />
+              <motion.div
+                className="w-10 h-[2px] mb-8"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                style={{ background: "#C8B870", transformOrigin: "left" }}
+              />
 
               {/* Kicker */}
-              <p
+              <motion.p
                 className="font-inter uppercase mb-8"
                 style={{ fontSize: "10px", letterSpacing: "0.4em", color: "#C8B870" }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
                 Portal Reset
-              </p>
+              </motion.p>
 
-              {/* H1 — Georgia serif editorial, very large */}
-              <h1
+              {/* H1 */}
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
                 style={{
                   fontFamily: "'Playfair Display', 'Georgia', serif",
                   fontWeight: 700,
@@ -115,11 +135,14 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 }}
               >
                 Mapeie seu<br />padrão
-              </h1>
+              </motion.h1>
 
               {/* Subtitle — italic ONLY here */}
-              <p
+              <motion.p
                 className="mt-6"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.45 }}
                 style={{
                   fontFamily: "'Playfair Display', 'Georgia', serif",
                   fontStyle: "italic",
@@ -129,10 +152,16 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 }}
               >
                 Um espelho do lugar de onde você está operando.
-              </p>
+              </motion.p>
 
-              {/* Body text — Open Sans, no italic */}
-              <div className="mt-10 space-y-3" style={{ maxWidth: "480px" }}>
+              {/* Body text */}
+              <motion.div
+                className="mt-10 space-y-3"
+                style={{ maxWidth: "480px" }}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.55 }}
+              >
                 <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#CFC6BA" }}>
                   Você já entendeu coisas demais.
                 </p>
@@ -143,25 +172,39 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#CFC6BA" }}>
                   Este mapa mostra onde você sustenta clareza — e onde começa a negociar com sua verdade.
                 </p>
-              </div>
+              </motion.div>
 
-              {/* "Em 3 minutos…" — bottom of left col */}
-              <p
+              {/* "Em 3 minutos…" */}
+              <motion.p
                 className="font-inter mt-8"
                 style={{ fontSize: "13px", lineHeight: 1.7, color: "#AFA79E", maxWidth: "420px" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
               >
                 Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
-              </p>
-            </motion.div>
+              </motion.p>
+            </div>
 
             {/* ── RIGHT: 6 cols — Decision panel ── */}
             <motion.div
               className="lg:col-span-6 flex flex-col items-start lg:items-end"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.12 }}
+              transition={{ duration: 0.9, delay: 0.35 }}
             >
-              <div className="w-full max-w-md lg:ml-auto relative">
+              {/* ⬆ MELHORIA 3: Glass card no painel de decisão */}
+              <div
+                className="w-full max-w-md lg:ml-auto relative"
+                style={{
+                  background: "rgba(3,42,51,0.35)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "1px solid rgba(200,184,112,0.12)",
+                  borderRadius: "14px",
+                  padding: "36px 32px 28px",
+                }}
+              >
 
                 {/* Watermark 111 — very subtle */}
                 <p
@@ -170,7 +213,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                     fontFamily: "'Playfair Display', 'Georgia', serif",
                     fontSize: "clamp(140px, 16vw, 260px)",
                     lineHeight: 1,
-                    color: "rgba(200,184,112,0.05)",
+                    color: "rgba(200,184,112,0.04)",
                     top: "-70px",
                     right: "-20px",
                   }}
@@ -201,10 +244,10 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
 
                 {/* CTAs — above the fold */}
                 <div className="flex flex-col sm:flex-row gap-4 w-full">
-                  {/* Primary — ABRIR O MAPA */}
+                  {/* ⬆ MELHORIA 7: Gold glow on hover for primary CTA */}
                   <button
                     onClick={onStart}
-                    className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5 flex-1 sm:flex-initial"
+                    className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 hover:-translate-y-0.5 flex-1 sm:flex-initial group"
                     style={{
                       background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                       color: "#032A33",
@@ -214,6 +257,14 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       minHeight: "56px",
                       fontSize: "13px",
                       padding: "0 40px",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = "0 6px 28px -6px rgba(152,61,6,0.35), 0 2px 8px rgba(0,0,0,0.2), 0 0 32px -4px rgba(200,184,112,0.35)";
+                      e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = "0 6px 28px -6px rgba(152,61,6,0.35), 0 2px 8px rgba(0,0,0,0.2)";
+                      e.currentTarget.style.transform = "translateY(0) scale(1)";
                     }}
                   >
                     Abrir o Mapa
@@ -249,10 +300,24 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   </a>
                 </div>
 
-                {/* Microcopy */}
-                <p className="mt-5 font-inter" style={{ fontSize: "10px", color: "#AFA79E", opacity: 0.7, letterSpacing: "0.03em" }}>
-                  24 perguntas · escala 1 a 9 · resultado imediato
-                </p>
+                {/* ⬆ MELHORIA 6: Selo editorial dourado perto do CTA */}
+                <div className="flex items-center gap-3 mt-6">
+                  <div
+                    className="flex items-center justify-center shrink-0"
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%",
+                      border: "1.5px solid rgba(200,184,112,0.5)",
+                      background: "rgba(200,184,112,0.08)",
+                    }}
+                  >
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "12px", color: "#C8B870", fontWeight: 700 }}>✦</span>
+                  </div>
+                  <p className="font-inter" style={{ fontSize: "10px", color: "#AFA79E", opacity: 0.7, letterSpacing: "0.03em" }}>
+                    24 perguntas · escala 1 a 9 · resultado imediato
+                  </p>
+                </div>
 
               </div>
             </motion.div>
@@ -261,12 +326,58 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         </div>
       </section>
 
-      {/* ════════ DOBRA 2 — LIGHT EDITORIAL ════════ */}
+      {/* ⬆ MELHORIA 4: Transição suave entre dobras — gradient bridge */}
+      <div
+        style={{
+          height: "80px",
+          background: "linear-gradient(to bottom, #032A33 0%, #F4EFE8 100%)",
+        }}
+      />
+
       {/* ════════ DOBRA 2 — LIGHT EDITORIAL ════════ */}
       <section
         id="como-funciona"
+        className="relative overflow-hidden"
         style={{ background: "#F4EFE8" }}
       >
+        {/* ⬆ MELHORIA 5: Decorative elements in Fold 2 */}
+        {/* Subtle gold circle ornament */}
+        <div
+          className="absolute pointer-events-none hidden lg:block"
+          style={{
+            right: "-60px",
+            top: "40px",
+            width: "200px",
+            height: "200px",
+            borderRadius: "50%",
+            border: "1px solid rgba(200,184,112,0.12)",
+          }}
+        />
+        <div
+          className="absolute pointer-events-none hidden lg:block"
+          style={{
+            right: "-30px",
+            top: "70px",
+            width: "140px",
+            height: "140px",
+            borderRadius: "50%",
+            border: "1px solid rgba(200,184,112,0.08)",
+          }}
+        />
+        {/* Subtle gold diagonal line */}
+        <div
+          className="absolute pointer-events-none hidden lg:block"
+          style={{
+            left: "0",
+            bottom: "0",
+            width: "1px",
+            height: "120px",
+            background: "linear-gradient(to top, rgba(200,184,112,0.15), transparent)",
+            transform: "rotate(-15deg)",
+            transformOrigin: "bottom left",
+          }}
+        />
+
         <div className="max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -287,8 +398,15 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 { num: "01", text: "Escala 1 a 9, pensando nos últimos 30 dias." },
                 { num: "02", text: "Pausas curtas a cada 6 etapas para recalibrar." },
                 { num: "03", text: "No final, o espelho vira guia." },
-              ].map((item) => (
-                <div key={item.num} className="flex gap-6 items-baseline">
+              ].map((item, i) => (
+                <motion.div
+                  key={item.num}
+                  className="flex gap-6 items-baseline"
+                  initial={{ opacity: 0, x: -12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.12 }}
+                >
                   <span
                     style={{
                       fontFamily: "'Playfair Display', 'Georgia', serif",
@@ -305,13 +423,17 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   >
                     {item.text}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
 
             {/* ── Card: Ao final, você recebe ── */}
-            <div
+            <motion.div
               className="mt-16 max-w-2xl"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               style={{
                 background: "#FFFFFF",
                 border: "1px solid rgba(3,42,51,0.08)",
@@ -351,7 +473,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* "Já tenho meu Espelho" — right-aligned, visible */}
             <div className="mt-16 flex justify-end">
