@@ -25,7 +25,7 @@ function generateId(): string {
 
 const IntroScreen = ({ onStart }: { onStart: () => void }) => {
   return (
-    <div className="relative" style={{ background: "#080E1A" }}>
+    <div className="relative" style={{ background: "#032A33" }}>
 
       {/* ════════ DOBRA 1 — HERO DARK, FULL-BLEED ════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -45,7 +45,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to right, rgba(8,14,26,0.88) 0%, rgba(8,14,26,0.85) 45%, rgba(8,14,26,0.55) 100%)",
+            background: "linear-gradient(to right, rgba(3,42,51,0.88) 0%, rgba(3,42,51,0.85) 45%, rgba(3,42,51,0.55) 100%)",
           }}
         />
 
@@ -110,7 +110,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   fontSize: "clamp(42px, 6.5vw, 76px)",
                   lineHeight: 0.92,
                   letterSpacing: "0.03em",
-                  color: "#F2EEE8",
+                  color: "#EDE6DA",
                   textTransform: "uppercase",
                 }}
               >
@@ -124,7 +124,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   fontFamily: "'Playfair Display', 'Georgia', serif",
                   fontStyle: "italic",
                   fontSize: "clamp(15px, 1.7vw, 19px)",
-                  color: "#D1C7BD",
+                  color: "#CFC6BA",
                   opacity: 0.7,
                 }}
               >
@@ -133,14 +133,14 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
 
               {/* Body text — Open Sans, no italic */}
               <div className="mt-10 space-y-3" style={{ maxWidth: "480px" }}>
-                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#DAD3C9" }}>
+                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#CFC6BA" }}>
                   Você já entendeu coisas demais.
                 </p>
-                <p style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "rgba(242,238,232,0.92)", fontFamily: "'Inter', sans-serif", fontWeight: 600, lineHeight: 1.85 }}>
+                <p style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#EDE6DA", fontFamily: "'Inter', sans-serif", fontWeight: 600, lineHeight: 1.85 }}>
                   O problema não é consciência. É execução sustentada.
                   <span className="block mt-0.5 h-px w-48" style={{ background: "linear-gradient(90deg, rgba(200,184,112,0.4), transparent)" }} />
                 </p>
-                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#DAD3C9" }}>
+                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#CFC6BA" }}>
                   Este mapa mostra onde você sustenta clareza — e onde começa a negociar com sua verdade.
                 </p>
               </div>
@@ -148,7 +148,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               {/* "Em 3 minutos…" — bottom of left col */}
               <p
                 className="font-inter mt-8"
-                style={{ fontSize: "13px", lineHeight: 1.7, color: "#BFB6AA", maxWidth: "420px" }}
+                style={{ fontSize: "13px", lineHeight: 1.7, color: "#AFA79E", maxWidth: "420px" }}
               >
                 Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
               </p>
@@ -191,7 +191,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       fontFamily: "'Playfair Display', 'Georgia', serif",
                       fontStyle: "italic",
                       fontSize: "clamp(20px, 2.2vw, 26px)",
-                      color: "#F2EEE8",
+                      color: "#EDE6DA",
                       lineHeight: 1.4,
                     }}
                   >
@@ -224,9 +224,9 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                     href="#como-funciona"
                     className="uppercase tracking-[0.2em] font-inter text-center transition-all duration-250 flex-1 sm:flex-initial"
                     style={{
-                      border: "1px solid rgba(209,199,189,0.35)",
+                      border: "1px solid #C8B870",
                       borderRadius: "10px",
-                      color: "#DAD3C9",
+                      color: "#EDE6DA",
                       minHeight: "56px",
                       fontSize: "12px",
                       display: "inline-flex",
@@ -235,14 +235,14 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                       padding: "0 32px",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(200,184,112,0.65)";
-                      e.currentTarget.style.boxShadow = "0 0 20px -4px rgba(200,184,112,0.12)";
+                      e.currentTarget.style.borderColor = "#C8B870";
+                      e.currentTarget.style.boxShadow = "0 0 20px -4px rgba(200,184,112,0.18)";
                       e.currentTarget.style.color = "#C8B870";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(209,199,189,0.35)";
+                      e.currentTarget.style.borderColor = "#C8B870";
                       e.currentTarget.style.boxShadow = "none";
-                      e.currentTarget.style.color = "#DAD3C9";
+                      e.currentTarget.style.color = "#EDE6DA";
                     }}
                   >
                     Como funciona
@@ -250,7 +250,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 </div>
 
                 {/* Microcopy */}
-                <p className="mt-5 font-inter" style={{ fontSize: "10px", color: "#BFB6AA", opacity: 0.5, letterSpacing: "0.03em" }}>
+                <p className="mt-5 font-inter" style={{ fontSize: "10px", color: "#AFA79E", opacity: 0.7, letterSpacing: "0.03em" }}>
                   24 perguntas · escala 1 a 9 · resultado imediato
                 </p>
 
@@ -262,9 +262,10 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
       </section>
 
       {/* ════════ DOBRA 2 — LIGHT EDITORIAL ════════ */}
+      {/* ════════ DOBRA 2 — LIGHT EDITORIAL ════════ */}
       <section
         id="como-funciona"
-        style={{ background: "#F2EEE8" }}
+        style={{ background: "#F4EFE8" }}
       >
         <div className="max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
           <motion.div
@@ -276,7 +277,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
             {/* Section label */}
             <p
               className="font-inter uppercase mb-12"
-              style={{ fontSize: "10px", letterSpacing: "0.35em", color: "#2A777C" }}
+              style={{ fontSize: "10px", letterSpacing: "0.35em", color: "#983D06" }}
             >
               Como funciona
             </p>
@@ -290,9 +291,9 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                 <div key={item.num} className="flex gap-6 items-baseline">
                   <span
                     style={{
-                    fontFamily: "'Playfair Display', 'Georgia', serif",
-                    fontWeight: 700,
-                    fontSize: "18px",
+                      fontFamily: "'Playfair Display', 'Georgia', serif",
+                      fontWeight: 700,
+                      fontSize: "18px",
                       color: "#983D06",
                     }}
                   >
@@ -308,6 +309,50 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               ))}
             </div>
 
+            {/* ── Card: Ao final, você recebe ── */}
+            <div
+              className="mt-16 max-w-2xl"
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid rgba(3,42,51,0.08)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                padding: "32px 36px",
+              }}
+            >
+              <p
+                className="font-inter uppercase mb-6"
+                style={{ fontSize: "10px", letterSpacing: "0.35em", color: "#983D06" }}
+              >
+                Ao final, você recebe
+              </p>
+              <div className="space-y-5">
+                {[
+                  { num: "1", text: "Sua mandala de 6 eixos" },
+                  { num: "2", text: "Uma leitura que traduz o mapa em decisão" },
+                  { num: "3", text: "Um plano de 7 dias com foco real" },
+                ].map((item) => (
+                  <div key={item.num} className="flex gap-5 items-baseline">
+                    <span
+                      style={{
+                        fontFamily: "'Playfair Display', 'Georgia', serif",
+                        fontWeight: 700,
+                        fontSize: "16px",
+                        color: "#C8B870",
+                      }}
+                    >
+                      {item.num}
+                    </span>
+                    <p
+                      className="font-inter"
+                      style={{ fontSize: "15px", lineHeight: 1.7, color: "#032A33" }}
+                    >
+                      {item.text}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* "Já tenho meu Espelho" — right-aligned, visible */}
             <div className="mt-16 flex justify-end">
               <a
@@ -321,7 +366,7 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
 
             {/* Footer credit */}
             <div className="mt-14 pt-6" style={{ borderTop: "1px solid rgba(3,42,51,0.06)" }}>
-              <p className="font-inter text-left" style={{ fontSize: "11px", color: "rgba(3,42,51,0.45)" }}>
+              <p className="font-inter text-left" style={{ fontSize: "11px", color: "rgba(3,42,51,0.50)" }}>
                 © Ana Retore. Todos os direitos de design e copy reservados.
               </p>
             </div>
