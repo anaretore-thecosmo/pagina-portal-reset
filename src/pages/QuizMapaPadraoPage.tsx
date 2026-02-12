@@ -144,6 +144,14 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   Este mapa mostra onde você sustenta clareza — e onde começa a negociar com sua verdade.
                 </p>
               </div>
+
+              {/* "Em 3 minutos…" — bottom of left col */}
+              <p
+                className="font-inter mt-8"
+                style={{ fontSize: "13px", lineHeight: 1.7, color: "#BFB6AA", maxWidth: "420px" }}
+              >
+                Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
+              </p>
             </motion.div>
 
             {/* ── RIGHT: 6 cols — Decision panel ── */}
@@ -170,18 +178,26 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   111
                 </p>
 
-                {/* "Em 3 minutos…" — decision reinforcer, right side */}
-                <p
-                  className="font-inter mb-10"
+                {/* "Sem julgamento. Só direção." — gold border left */}
+                <div
+                  className="mb-10"
                   style={{
-                    fontSize: "13px",
-                    lineHeight: 1.7,
-                    color: "#BFB6AA",
-                    maxWidth: "340px",
+                    borderLeft: "2px solid #C8B870",
+                    paddingLeft: "20px",
                   }}
                 >
-                  Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
-                </p>
+                  <p
+                    style={{
+                      fontFamily: "'Playfair Display', 'Georgia', serif",
+                      fontStyle: "italic",
+                      fontSize: "clamp(20px, 2.2vw, 26px)",
+                      color: "#F2EEE8",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    Sem julgamento. Só direção.
+                  </p>
+                </div>
 
                 {/* CTAs — above the fold */}
                 <div className="flex flex-col sm:flex-row gap-4 w-full">
@@ -238,47 +254,6 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   24 perguntas · escala 1 a 9 · resultado imediato
                 </p>
 
-                {/* ── "Ao final, você recebe" card — translucent ── */}
-                <div
-                  className="mt-12 px-7 py-8"
-                  style={{
-                    background: "rgba(3,42,51,0.35)",
-                    border: "1px solid rgba(209,199,189,0.15)",
-                    borderRadius: "4px",
-                  }}
-                >
-                  <p
-                    className="font-inter uppercase mb-7"
-                    style={{ fontSize: "9px", letterSpacing: "0.35em", color: "#BFB6AA" }}
-                  >
-                    Ao final, você recebe
-                  </p>
-                  <div className="space-y-5">
-                    {[
-                      { num: "1", text: "Mandala do seu padrão atual" },
-                      { num: "2", text: "Leitura personalizada do seu padrão em ação" },
-                      { num: "3", text: "Um plano de 7 dias para estabilizar o que está vazando" },
-                    ].map((item) => (
-                      <div key={item.num} className="flex gap-5 items-baseline">
-                        <span
-                          style={{
-                      fontFamily: "'Playfair Display', 'Georgia', serif",
-                      fontWeight: 700,
-                      fontSize: "20px",
-                            color: "#C8B870",
-                            lineHeight: 1,
-                            flexShrink: 0,
-                          }}
-                        >
-                          {item.num}
-                        </span>
-                        <p className="font-inter leading-relaxed" style={{ fontSize: "14px", color: "#DAD3C9" }}>
-                          {item.text}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </motion.div>
 
