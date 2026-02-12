@@ -27,81 +27,72 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
   return (
     <div className="relative" style={{ background: "#032A33" }}>
 
-      {/* ════════ DOBRA 1 — HERO DARK, FULL-BLEED ════════ */}
+      {/* ════════ DOBRA 1 — HERO PÔSTER FULL-SCREEN ════════ */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* Background image — ⬆ MELHORIA 1: opacity 0.24→0.38 */}
+        {/* Background image — full-bleed atmosphere */}
         <div className="absolute inset-0">
           <img
             src={quizIntroImage}
-            alt="Portal de pedra com luz dourada"
+            alt=""
+            aria-hidden="true"
             className="w-full h-full object-cover"
             loading="eager"
-            style={{ opacity: 0.38, filter: "blur(0.5px)" }}
+            style={{ opacity: 0.3, objectPosition: "65% center" }}
           />
         </div>
 
-        {/* Overlay: left opaque, right semi-transparent */}
+        {/* Heavy dark overlay — #032A33, 75% left fading to 60% right */}
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(to right, rgba(3,42,51,0.88) 0%, rgba(3,42,51,0.82) 45%, rgba(3,42,51,0.50) 100%)",
+            background: "linear-gradient(to right, rgba(3,42,51,0.82) 0%, rgba(3,42,51,0.78) 40%, rgba(3,42,51,0.62) 100%)",
           }}
         />
 
-        {/* ⬆ MELHORIA 8: Hierarchy of light — gold spotlight behind headline */}
-        <div
-          className="absolute pointer-events-none hidden lg:block"
-          style={{
-            left: "12%",
-            top: "28%",
-            width: "420px",
-            height: "320px",
-            background: "radial-gradient(ellipse at center, rgba(200,184,112,0.045) 0%, transparent 70%)",
-          }}
-        />
-
-        {/* Vertical light line — "portal crack" */}
-        <div
-          className="absolute top-0 bottom-0 hidden lg:block pointer-events-none"
-          style={{
-            left: "50%",
-            width: "1px",
-            background: "linear-gradient(to bottom, transparent 10%, rgba(200,184,112,0.12) 40%, rgba(200,184,112,0.18) 50%, rgba(200,184,112,0.12) 60%, transparent 90%)",
-          }}
-        />
-
-        {/* Black vignette */}
+        {/* Vignette */}
         <div
           className="absolute inset-0 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0,0,0,0.45) 100%)" }}
+          style={{ background: "radial-gradient(ellipse at 60% 50%, transparent 40%, rgba(0,0,0,0.5) 100%)" }}
         />
 
         {/* Film grain */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-[0.025]"
+          className="absolute inset-0 pointer-events-none opacity-[0.03]"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
             backgroundRepeat: "repeat",
           }}
         />
 
+        {/* Gold spotlight behind headline */}
+        <div
+          className="absolute pointer-events-none hidden lg:block"
+          style={{
+            left: "8%",
+            top: "22%",
+            width: "500px",
+            height: "380px",
+            background: "radial-gradient(ellipse at center, rgba(200,184,112,0.04) 0%, transparent 70%)",
+          }}
+        />
+
         {/* Gold top rule */}
         <div
           className="absolute top-0 left-0 right-0 h-px z-10"
-          style={{ background: "linear-gradient(90deg, transparent 8%, rgba(200,184,112,0.22) 35%, rgba(200,184,112,0.22) 65%, transparent 92%)" }}
+          style={{ background: "linear-gradient(90deg, transparent 5%, rgba(200,184,112,0.2) 30%, rgba(200,184,112,0.2) 70%, transparent 95%)" }}
         />
 
-        {/* ── Content: 12-col grid ── */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-16 md:py-0">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center min-h-screen lg:min-h-screen">
+        {/* ── Content: 2-column poster ── */}
+        <div className="relative z-10 w-full max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-0">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center lg:min-h-screen">
 
-            {/* ── LEFT: 6 cols — Title + text ── */}
-            {/* ⬆ MELHORIA 2: Staggered micro-animations */}
-            <div className="lg:col-span-6 flex flex-col justify-center">
+            {/* ── LEFT COLUMN: 7 cols ── */}
+            <div className="lg:col-span-7 flex flex-col justify-center pt-8 lg:pt-0">
+
               {/* Gold editorial line */}
               <motion.div
-                className="w-10 h-[2px] mb-8"
+                className="w-10 h-[2px] mb-4 lg:mb-6"
                 initial={{ opacity: 0, scaleX: 0 }}
                 animate={{ opacity: 1, scaleX: 1 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -110,211 +101,281 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
 
               {/* Kicker */}
               <motion.p
-                className="font-inter uppercase mb-8"
+                className="font-inter uppercase mb-3 lg:mb-5"
                 style={{ fontSize: "10px", letterSpacing: "0.4em", color: "#C8B870" }}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
               >
-                Portal Reset
+                Portal Reset · Diagnóstico
               </motion.p>
 
-              {/* H1 */}
+              {/* H1 — maximum impact */}
               <motion.h1
-                initial={{ opacity: 0, y: 18 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.25 }}
                 style={{
                   fontFamily: "'Playfair Display', 'Georgia', serif",
                   fontWeight: 700,
-                  fontSize: "clamp(42px, 6.5vw, 76px)",
-                  lineHeight: 0.92,
-                  letterSpacing: "0.03em",
+                  fontSize: "clamp(40px, 7vw, 84px)",
+                  lineHeight: 0.9,
+                  letterSpacing: "0.04em",
                   color: "#EDE6DA",
                   textTransform: "uppercase",
                 }}
               >
-                Mapeie seu<br />padrão
+                Mapeie<br />seu padrão
               </motion.h1>
 
-              {/* Subtitle — italic ONLY here */}
+              {/* Subtitle — italic, short */}
               <motion.p
-                className="mt-6"
-                initial={{ opacity: 0, y: 12 }}
+                className="mt-3 lg:mt-5"
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.45 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
                 style={{
                   fontFamily: "'Playfair Display', 'Georgia', serif",
                   fontStyle: "italic",
-                  fontSize: "clamp(15px, 1.7vw, 19px)",
-                  color: "#CFC6BA",
-                  opacity: 0.7,
+                  fontSize: "clamp(14px, 1.6vw, 19px)",
+                  color: "rgba(207,198,186,0.75)",
                 }}
               >
                 Um espelho do lugar de onde você está operando.
               </motion.p>
 
-              {/* Body text */}
+              {/* ── MOBILE-ONLY: CTA above fold ── */}
               <motion.div
-                className="mt-10 space-y-3"
-                style={{ maxWidth: "480px" }}
-                initial={{ opacity: 0, y: 12 }}
+                className="mt-6 flex flex-col gap-3 lg:hidden"
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.55 }}
+                transition={{ duration: 0.5, delay: 0.45 }}
               >
-                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#CFC6BA" }}>
+                <button
+                  onClick={onStart}
+                  className="uppercase tracking-[0.2em] font-inter font-semibold w-full"
+                  style={{
+                    background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+                    color: "#032A33",
+                    borderRadius: "8px",
+                    border: "1px solid rgba(200,184,112,0.45)",
+                    boxShadow: "0 4px 20px -4px rgba(152,61,6,0.3)",
+                    height: "52px",
+                    fontSize: "13px",
+                  }}
+                >
+                  Abrir o Mapa
+                </button>
+                <p className="font-inter text-center" style={{ fontSize: "10px", color: "rgba(175,167,158,0.6)" }}>
+                  24 perguntas · escala 1 a 9 · resultado imediato
+                </p>
+              </motion.div>
+
+              {/* Body */}
+              <motion.div
+                className="mt-6 lg:mt-8 space-y-2.5"
+                style={{ maxWidth: "520px" }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
+                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(14.5px, 1.5vw, 16px)", color: "#CFC5B8" }}>
                   Você já entendeu coisas demais.
                 </p>
-                <p style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#EDE6DA", fontFamily: "'Inter', sans-serif", fontWeight: 600, lineHeight: 1.85 }}>
+                <p
+                  className="font-inter"
+                  style={{
+                    fontSize: "clamp(16px, 1.7vw, 19px)",
+                    fontWeight: 600,
+                    color: "#EDE6DA",
+                    lineHeight: 1.6,
+                  }}
+                >
                   O problema não é consciência. É execução sustentada.
-                  <span className="block mt-0.5 h-px w-48" style={{ background: "linear-gradient(90deg, rgba(200,184,112,0.4), transparent)" }} />
                 </p>
-                <p className="font-inter leading-[1.85]" style={{ fontSize: "clamp(14px, 1.4vw, 15.5px)", color: "#CFC6BA" }}>
+                <p className="font-inter leading-[1.8]" style={{ fontSize: "clamp(14.5px, 1.5vw, 16px)", color: "#CFC5B8" }}>
                   Este mapa mostra onde você sustenta clareza — e onde começa a negociar com sua verdade.
                 </p>
               </motion.div>
 
               {/* "Em 3 minutos…" */}
               <motion.p
-                className="font-inter mt-8"
-                style={{ fontSize: "13px", lineHeight: 1.7, color: "#AFA79E", maxWidth: "420px" }}
+                className="font-inter mt-5 lg:mt-6"
+                style={{ fontSize: "13px", lineHeight: 1.7, color: "#AFA79E", maxWidth: "460px" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
               >
                 Em 3 minutos, você mapeia o que sustenta sua clareza e o que está drenando sua execução.
               </motion.p>
+
+              {/* "Ao final, você recebe" — slim card */}
+              <motion.div
+                className="mt-6 lg:mt-8"
+                style={{
+                  maxWidth: "460px",
+                  background: "rgba(3,42,51,0.4)",
+                  border: "1px solid rgba(200,184,112,0.1)",
+                  borderRadius: "8px",
+                  padding: "16px 20px",
+                }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+              >
+                <p className="font-inter uppercase mb-3" style={{ fontSize: "9px", letterSpacing: "0.3em", color: "#C8B870" }}>
+                  Ao final, você recebe
+                </p>
+                <div className="space-y-2">
+                  {[
+                    { num: "1", text: "Sua mandala de 6 eixos" },
+                    { num: "2", text: "Uma leitura que traduz o mapa em decisão" },
+                    { num: "3", text: "Um plano de 7 dias com foco real" },
+                  ].map((item) => (
+                    <div key={item.num} className="flex gap-4 items-baseline">
+                      <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "14px", color: "#C8B870" }}>
+                        {item.num}
+                      </span>
+                      <p className="font-inter" style={{ fontSize: "13px", lineHeight: 1.5, color: "#CFC5B8" }}>
+                        {item.text}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
             </div>
 
-            {/* ── RIGHT: 6 cols — Decision panel ── */}
+            {/* ── RIGHT COLUMN: 5 cols — Decision panel ── */}
             <motion.div
-              className="lg:col-span-6 flex flex-col items-start lg:items-end"
-              initial={{ opacity: 0, y: 20 }}
+              className="lg:col-span-5 hidden lg:flex flex-col items-end"
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.35 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
             >
-              {/* ⬆ MELHORIA 3: Glass card no painel de decisão */}
               <div
                 className="w-full max-w-md lg:ml-auto relative"
                 style={{
-                  background: "rgba(3,42,51,0.35)",
-                  backdropFilter: "blur(16px)",
-                  WebkitBackdropFilter: "blur(16px)",
-                  border: "1px solid rgba(200,184,112,0.12)",
-                  borderRadius: "14px",
-                  padding: "36px 32px 28px",
+                  background: "rgba(3,42,51,0.3)",
+                  backdropFilter: "blur(20px)",
+                  WebkitBackdropFilter: "blur(20px)",
+                  border: "1px solid rgba(200,184,112,0.1)",
+                  borderRadius: "12px",
+                  padding: "40px 32px 32px",
                 }}
               >
 
-                {/* Watermark 111 — very subtle */}
-                <p
-                  className="absolute font-bold select-none pointer-events-none hidden lg:block"
-                  style={{
-                    fontFamily: "'Playfair Display', 'Georgia', serif",
-                    fontSize: "clamp(140px, 16vw, 260px)",
-                    lineHeight: 1,
-                    color: "rgba(200,184,112,0.04)",
-                    top: "-70px",
-                    right: "-20px",
-                  }}
-                >
-                  111
-                </p>
-
-                {/* "Sem julgamento. Só direção." — gold border left */}
+                {/* Manifesto — poster-sized */}
                 <div
                   className="mb-10"
-                  style={{
-                    borderLeft: "2px solid #C8B870",
-                    paddingLeft: "20px",
-                  }}
+                  style={{ borderLeft: "2px solid rgba(200,184,112,0.5)", paddingLeft: "20px" }}
                 >
                   <p
                     style={{
                       fontFamily: "'Playfair Display', 'Georgia', serif",
                       fontStyle: "italic",
-                      fontSize: "clamp(20px, 2.2vw, 26px)",
+                      fontSize: "clamp(22px, 2.5vw, 30px)",
                       color: "#EDE6DA",
-                      lineHeight: 1.4,
+                      lineHeight: 1.35,
                     }}
                   >
-                    Sem julgamento. Só direção.
+                    Sem julgamento.<br />Só direção.
                   </p>
                 </div>
 
-                {/* CTAs — above the fold */}
-                <div className="flex flex-col sm:flex-row gap-4 w-full">
-                  {/* ⬆ MELHORIA 7: Gold glow on hover for primary CTA */}
+                {/* Como funciona — microblock */}
+                <div className="mb-8 space-y-2">
+                  <p className="font-inter uppercase" style={{ fontSize: "9px", letterSpacing: "0.3em", color: "#C8B870", marginBottom: "8px" }}>
+                    Como funciona
+                  </p>
+                  {[
+                    "Escala 1 a 9, pensando nos últimos 30 dias.",
+                    "Pausas curtas a cada 6 etapas para recalibrar.",
+                    "No final, o espelho vira guia.",
+                  ].map((t, i) => (
+                    <div key={i} className="flex gap-3 items-baseline">
+                      <span className="font-inter" style={{ fontSize: "10px", color: "#C8B870", fontWeight: 600 }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <p className="font-inter" style={{ fontSize: "12.5px", lineHeight: 1.6, color: "rgba(207,197,184,0.8)" }}>
+                        {t}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Gold divider */}
+                <div className="w-full h-px mb-8" style={{ background: "linear-gradient(90deg, rgba(200,184,112,0.2), transparent)" }} />
+
+                {/* CTAs — big, above fold */}
+                <div className="flex flex-col gap-3.5 w-full">
+                  {/* Primary CTA */}
                   <button
                     onClick={onStart}
-                    className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 hover:-translate-y-0.5 flex-1 sm:flex-initial group"
+                    className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 group w-full"
                     style={{
                       background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                       color: "#032A33",
-                      borderRadius: "10px",
-                      border: "1px solid rgba(200,184,112,0.55)",
-                      boxShadow: "0 6px 28px -6px rgba(152,61,6,0.35), 0 2px 8px rgba(0,0,0,0.2)",
-                      minHeight: "56px",
+                      borderRadius: "8px",
+                      border: "1px solid rgba(200,184,112,0.45)",
+                      boxShadow: "0 4px 20px -4px rgba(152,61,6,0.3), 0 2px 6px rgba(0,0,0,0.15)",
+                      height: "56px",
                       fontSize: "13px",
-                      padding: "0 40px",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "0 6px 28px -6px rgba(152,61,6,0.35), 0 2px 8px rgba(0,0,0,0.2), 0 0 32px -4px rgba(200,184,112,0.35)";
-                      e.currentTarget.style.transform = "translateY(-2px) scale(1.02)";
+                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.3), 0 0 28px -4px rgba(200,184,112,0.3)";
+                      e.currentTarget.style.transform = "translateY(-1px)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "0 6px 28px -6px rgba(152,61,6,0.35), 0 2px 8px rgba(0,0,0,0.2)";
-                      e.currentTarget.style.transform = "translateY(0) scale(1)";
+                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.3), 0 2px 6px rgba(0,0,0,0.15)";
+                      e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
                     Abrir o Mapa
                   </button>
 
-                  {/* Secondary — COMO FUNCIONA */}
-                  <a
-                    href="#como-funciona"
-                    className="uppercase tracking-[0.2em] font-inter text-center transition-all duration-250 flex-1 sm:flex-initial"
+                  {/* Secondary CTA */}
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("como-funciona-micro");
+                      el?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="uppercase tracking-[0.2em] font-inter transition-all duration-250 w-full"
                     style={{
-                      border: "1px solid #C8B870",
-                      borderRadius: "10px",
+                      border: "1px solid rgba(200,184,112,0.35)",
+                      borderRadius: "8px",
                       color: "#EDE6DA",
-                      minHeight: "56px",
-                      fontSize: "12px",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      padding: "0 32px",
+                      height: "48px",
+                      fontSize: "11.5px",
+                      background: "transparent",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "#C8B870";
-                      e.currentTarget.style.boxShadow = "0 0 20px -4px rgba(200,184,112,0.18)";
+                      e.currentTarget.style.borderColor = "rgba(200,184,112,0.6)";
                       e.currentTarget.style.color = "#C8B870";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "#C8B870";
-                      e.currentTarget.style.boxShadow = "none";
+                      e.currentTarget.style.borderColor = "rgba(200,184,112,0.35)";
                       e.currentTarget.style.color = "#EDE6DA";
                     }}
                   >
                     Como funciona
-                  </a>
+                  </button>
                 </div>
 
-                {/* ⬆ MELHORIA 6: Selo editorial dourado perto do CTA */}
-                <div className="flex items-center gap-3 mt-6">
+                {/* Editorial seal + microcopy */}
+                <div className="flex items-center gap-3 mt-5">
                   <div
                     className="flex items-center justify-center shrink-0"
                     style={{
-                      width: "32px",
-                      height: "32px",
+                      width: "28px",
+                      height: "28px",
                       borderRadius: "50%",
-                      border: "1.5px solid rgba(200,184,112,0.5)",
-                      background: "rgba(200,184,112,0.08)",
+                      border: "1px solid rgba(200,184,112,0.4)",
+                      background: "rgba(200,184,112,0.06)",
                     }}
                   >
-                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "12px", color: "#C8B870", fontWeight: 700 }}>✦</span>
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "11px", color: "#C8B870", fontWeight: 700 }}>✦</span>
                   </div>
-                  <p className="font-inter" style={{ fontSize: "10px", color: "#AFA79E", opacity: 0.7, letterSpacing: "0.03em" }}>
+                  <p className="font-inter" style={{ fontSize: "10px", color: "rgba(175,167,158,0.7)", letterSpacing: "0.02em" }}>
                     24 perguntas · escala 1 a 9 · resultado imediato
                   </p>
                 </div>
@@ -326,175 +387,24 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
         </div>
       </section>
 
-      {/* ⬆ MELHORIA 4: Transição suave entre dobras — gradient bridge */}
-      <div
-        style={{
-          height: "80px",
-          background: "linear-gradient(to bottom, #032A33 0%, #F4EFE8 100%)",
-        }}
-      />
-
-      {/* ════════ DOBRA 2 — LIGHT EDITORIAL ════════ */}
-      <section
-        id="como-funciona"
-        className="relative overflow-hidden"
-        style={{ background: "#F4EFE8" }}
+      {/* ════════ DOBRA 2 — RODAPÉ MÍNIMO DARK ════════ */}
+      <footer
+        className="relative"
+        style={{ background: "#032A33", borderTop: "1px solid rgba(200,184,112,0.08)" }}
       >
-        {/* ⬆ MELHORIA 5: Decorative elements in Fold 2 */}
-        {/* Subtle gold circle ornament */}
-        <div
-          className="absolute pointer-events-none hidden lg:block"
-          style={{
-            right: "-60px",
-            top: "40px",
-            width: "200px",
-            height: "200px",
-            borderRadius: "50%",
-            border: "1px solid rgba(200,184,112,0.12)",
-          }}
-        />
-        <div
-          className="absolute pointer-events-none hidden lg:block"
-          style={{
-            right: "-30px",
-            top: "70px",
-            width: "140px",
-            height: "140px",
-            borderRadius: "50%",
-            border: "1px solid rgba(200,184,112,0.08)",
-          }}
-        />
-        {/* Subtle gold diagonal line */}
-        <div
-          className="absolute pointer-events-none hidden lg:block"
-          style={{
-            left: "0",
-            bottom: "0",
-            width: "1px",
-            height: "120px",
-            background: "linear-gradient(to top, rgba(200,184,112,0.15), transparent)",
-            transform: "rotate(-15deg)",
-            transformOrigin: "bottom left",
-          }}
-        />
-
-        <div className="max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-20 md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+        <div className="max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p className="font-inter" style={{ fontSize: "11px", color: "rgba(207,197,184,0.5)" }}>
+            © Ana Retore. Todos os direitos de design e copy reservados.
+          </p>
+          <a
+            href="/espelho-da-clareza"
+            className="font-inter transition-colors duration-200 hover:opacity-80"
+            style={{ fontSize: "11.5px", color: "rgba(200,184,112,0.6)", letterSpacing: "0.03em" }}
           >
-            {/* Section label */}
-            <p
-              className="font-inter uppercase mb-12"
-              style={{ fontSize: "10px", letterSpacing: "0.35em", color: "#983D06" }}
-            >
-              Como funciona
-            </p>
-
-            <div className="max-w-2xl space-y-7">
-              {[
-                { num: "01", text: "Escala 1 a 9, pensando nos últimos 30 dias." },
-                { num: "02", text: "Pausas curtas a cada 6 etapas para recalibrar." },
-                { num: "03", text: "No final, o espelho vira guia." },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.num}
-                  className="flex gap-6 items-baseline"
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.12 }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "'Playfair Display', 'Georgia', serif",
-                      fontWeight: 700,
-                      fontSize: "18px",
-                      color: "#983D06",
-                    }}
-                  >
-                    {item.num}
-                  </span>
-                  <p
-                    className="font-inter leading-relaxed"
-                    style={{ fontSize: "16px", lineHeight: 1.75, color: "#032A33", maxWidth: "540px" }}
-                  >
-                    {item.text}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* ── Card: Ao final, você recebe ── */}
-            <motion.div
-              className="mt-16 max-w-2xl"
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              style={{
-                background: "#FFFFFF",
-                border: "1px solid rgba(3,42,51,0.08)",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                padding: "32px 36px",
-              }}
-            >
-              <p
-                className="font-inter uppercase mb-6"
-                style={{ fontSize: "10px", letterSpacing: "0.35em", color: "#983D06" }}
-              >
-                Ao final, você recebe
-              </p>
-              <div className="space-y-5">
-                {[
-                  { num: "1", text: "Sua mandala de 6 eixos" },
-                  { num: "2", text: "Uma leitura que traduz o mapa em decisão" },
-                  { num: "3", text: "Um plano de 7 dias com foco real" },
-                ].map((item) => (
-                  <div key={item.num} className="flex gap-5 items-baseline">
-                    <span
-                      style={{
-                        fontFamily: "'Playfair Display', 'Georgia', serif",
-                        fontWeight: 700,
-                        fontSize: "16px",
-                        color: "#C8B870",
-                      }}
-                    >
-                      {item.num}
-                    </span>
-                    <p
-                      className="font-inter"
-                      style={{ fontSize: "15px", lineHeight: 1.7, color: "#032A33" }}
-                    >
-                      {item.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* "Já tenho meu Espelho" — right-aligned, visible */}
-            <div className="mt-16 flex justify-end">
-              <a
-                href="/espelho-da-clareza"
-                className="font-inter transition-all duration-200 hover:opacity-70"
-                style={{ fontSize: "12px", color: "#983D06", letterSpacing: "0.04em" }}
-              >
-                Já tenho meu Espelho →
-              </a>
-            </div>
-
-            {/* Footer credit */}
-            <div className="mt-14 pt-6" style={{ borderTop: "1px solid rgba(3,42,51,0.06)" }}>
-              <p className="font-inter text-left" style={{ fontSize: "11px", color: "rgba(3,42,51,0.50)" }}>
-                © Ana Retore. Todos os direitos de design e copy reservados.
-              </p>
-            </div>
-          </motion.div>
+            Já tenho meu Espelho →
+          </a>
         </div>
-      </section>
+      </footer>
     </div>
   );
 };
