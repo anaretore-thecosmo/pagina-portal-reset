@@ -104,7 +104,7 @@ const DiagnosticoQuestionComponent = ({
 
           {/* Question text */}
           <p
-            className="font-playfair text-center leading-relaxed"
+            className="font-inter text-center leading-relaxed font-medium"
             style={{ fontSize: "clamp(18px, 3.2vw, 26px)" }}
           >
             {question.text}
