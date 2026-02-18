@@ -337,32 +337,6 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                     Abrir o Mapa
                   </button>
 
-                  {/* Secondary CTA */}
-                  <button
-                    onClick={() => {
-                      const el = document.getElementById("como-funciona-micro");
-                      el?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="uppercase tracking-[0.2em] font-inter transition-all duration-250 w-full"
-                    style={{
-                      border: "1px solid rgba(200,184,112,0.35)",
-                      borderRadius: "8px",
-                      color: "#EDE6DB",
-                      height: "48px",
-                      fontSize: "11.5px",
-                      background: "transparent",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(200,184,112,0.6)";
-                      e.currentTarget.style.color = "#C8B870";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "rgba(200,184,112,0.35)";
-                      e.currentTarget.style.color = "#EDE6DB";
-                    }}
-                  >
-                    Como funciona
-                  </button>
                 </div>
 
 
