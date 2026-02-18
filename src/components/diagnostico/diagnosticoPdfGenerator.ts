@@ -391,7 +391,7 @@ export async function generateDiagnosticoPDF(
 
   // Clickable link
   const ctaParams = buildCtaParams(data);
-  const checkoutUrl = `https://pay.kiwify.com.br/TNXfTZT${ctaParams}`;
+  const checkoutUrl = `https://pay.kiwify.com.br/ns0fjIx${ctaParams}`;
 
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(9);
