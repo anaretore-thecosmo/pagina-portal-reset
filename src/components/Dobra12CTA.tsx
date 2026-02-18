@@ -75,7 +75,7 @@ const Dobra12CTA = () => {
               variant="cta"
               size="xl"
               className="text-base px-12"
-              onClick={() => window.open('https://pay.kiwify.com.br/TNXfTZT', '_blank')}
+              onClick={() => window.open('https://pay.kiwify.com.br/ns0fjIx', '_blank')}
               aria-label="Entrar no Portal Reset - abre página de compra em nova aba"
             >
               ENTRAR NO PORTAL RESET
