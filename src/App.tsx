@@ -8,6 +8,7 @@ import DiagnosticoPage from "./pages/DiagnosticoPage";
 import EspelhoPage from "./pages/EspelhoPage";
 import QuizMapaPadraoPage from "./pages/QuizMapaPadraoPage";
 import EspelhoDaClarezaPage from "./pages/EspelhoDaClarezaPage";
+import CheckoutTestPage from "./pages/CheckoutTestPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/diagnostico" element={<DiagnosticoPage />} />
           <Route path="/espelho" element={<EspelhoPage />} />
           <Route path="/espelho-da-clareza" element={<EspelhoDaClarezaPage />} />
+          <Route path="/checkout-test" element={<CheckoutTestPage />} />
           {/* Redirects de segurança */}
           <Route path="/home" element={<Navigate to="/" replace />} />
           <Route path="/index" element={<Navigate to="/" replace />} />
