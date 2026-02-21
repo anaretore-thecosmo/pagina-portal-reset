@@ -21,15 +21,12 @@ const Footer = () => {
           </div>
 
           {/* Links */}
-          <div className="flex justify-center gap-8 mb-8 text-sm font-inter">
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Termos de Uso
-            </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 mb-8 text-sm font-inter">
+            <a href="https://oportalreset.com/politica-de-privacidade" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               Política de Privacidade
             </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Contato
+            <a href="https://oportalreset.com/exclusao-de-dados" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              Solicitação de Exclusão de Dados
             </a>
           </div>
 
