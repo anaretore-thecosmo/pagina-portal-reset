@@ -1,15 +1,17 @@
 
-# Plano: Remover o botao "Como Funciona"
+
+# Plano: Atualizar dominio dos links legais no rodape
 
 ## O que sera feito
 
-Remover o botao "COMO FUNCIONA" que aparece abaixo do botao "ABRIR O MAPA" no painel direito do hero (desktop) e na versao mobile.
+Substituir o dominio antigo (`oportalreset.com`) pelo novo dominio (`portalresetdigital.com`) nos dois links legais do rodape.
 
 ## Detalhes tecnicos
 
-**Arquivo:** `src/pages/QuizMapaPadraoPage.tsx`
+**Arquivo:** `src/components/Footer.tsx`
 
-**Acao:** Deletar o bloco do botao secundario "Como funciona" (linhas 340-365 aproximadamente), que e um `<button>` com scroll suave para a secao "como-funciona-micro".
+- Linha 24: `https://oportalreset.com/politica-de-privacidade` -> `https://portalresetdigital.com/politica-de-privacidade`
+- Linha 27: `https://oportalreset.com/exclusao-de-dados` -> `https://portalresetdigital.com/exclusao-de-dados`
 
-- O bloco "COMO FUNCIONA" interno do card (microblock com os 3 passos numerados 01, 02, 03) permanece intacto -- apenas o botao de acao e removido.
-- Nenhum outro elemento sera alterado.
+Nenhuma outra alteracao necessaria. Os atributos `target="_blank"` e `rel="noopener noreferrer"` ja estao configurados corretamente.
+
