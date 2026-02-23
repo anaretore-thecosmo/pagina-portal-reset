@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Download, ArrowRight } from "lucide-react";
 import DiagnosticoRadarChart from "./DiagnosticoRadarChart";
@@ -28,6 +29,7 @@ const fade = {
 };
 
 const DiagnosticoResult = ({ scores, userName, answers, sessionId }: DiagnosticoResultProps) => {
+  const nav = useNavigate();
   const data: EspelhoData = answers
     ? computeEspelho(answers)
     : computeEspelho(scores.flatMap((s) => [s, s]));
@@ -43,10 +45,7 @@ const DiagnosticoResult = ({ scores, userName, answers, sessionId }: Diagnostico
   };
 
   const handleCta = () => {
-    const t = data.top3.map((a) => a.axis).join(",");
-    const b = data.bottom3.map((a) => a.axis).join(",");
-    const params = sessionId ? `?sid=${sessionId}&t=${t}&b=${b}` : `?t=${t}&b=${b}`;
-    window.location.href = `/portal-reset${params}`;
+    nav("/portal-reset", { state: { scores, answers } });
   };
 
   return (

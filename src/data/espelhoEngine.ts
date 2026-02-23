@@ -235,6 +235,68 @@ export function generate7DayPlan(data: EspelhoData): string[] {
   ];
 }
 
+/* ── Profile name mapping ───────────────────────────── */
+
+export interface PerfilData {
+  nome: string;
+  dorRaiz: string;
+  recomendacao: string;
+}
+
+const perfilMap: Record<AxisType, PerfilData> = {
+  APAGAMENTO: {
+    nome: "Modo Sobrevivência Ativo",
+    dorRaiz: "Você está operando no limite — e o custo disso é invisível até que o corpo cobra.",
+    recomendacao: "Comece pelo Código de Retorno. Antes de agir, volte para si.",
+  },
+  EXECUTA_SEM_SI: {
+    nome: "Alta Performance sem Presença",
+    dorRaiz: "Você entrega, resolve, sustenta — mas se perde no processo. A ação virou automático.",
+    recomendacao: "Comece pelo Código de Pausa. Insira presença antes da próxima entrega.",
+  },
+  SENTE_SEM_ESTRUTURA: {
+    nome: "Consciência sem Chão",
+    dorRaiz: "Você percebe tudo, mas não consegue sustentar o que sente. Falta estrutura, não sensibilidade.",
+    recomendacao: "Comece pelo Código de Estrutura. Decisão mínima, ambiente facilitador.",
+  },
+  OSCILACAO: {
+    nome: "Ciclo de Picos e Quedas",
+    dorRaiz: "Você alterna entre clareza e dispersão. O padrão não estabiliza — oscila.",
+    recomendacao: "Comece pelo Código de Estabilização. Reduza o custo mental antes de buscar mais.",
+  },
+  BASE_ESTAVEL: {
+    nome: "Base Presente, Risco de Sobrecarga",
+    dorRaiz: "A estrutura existe — mas o risco agora é exigir demais do que já funciona.",
+    recomendacao: "Comece pelo Código de Proteção. Sustente sem forçar intensidade.",
+  },
+  EXCELENCIA: {
+    nome: "Acesso Pleno ao Padrão",
+    dorRaiz: "Você está acima do ruído. O desafio agora é manter sem criar um novo teto.",
+    recomendacao: "Comece pelo Código de Expansão. Proteja o que sustenta e explore o próximo nível.",
+  },
+};
+
+export function getPerfilName(data: EspelhoData): PerfilData {
+  // Count dominant types
+  const typeCounts: Record<AxisType, number> = {
+    EXCELENCIA: 0, BASE_ESTAVEL: 0, APAGAMENTO: 0,
+    EXECUTA_SEM_SI: 0, SENTE_SEM_ESTRUTURA: 0, OSCILACAO: 0,
+  };
+  data.axes.forEach((a) => typeCounts[a.type]++);
+
+  // Dominant = most frequent type; tiebreak: bottom3's dominant type
+  const bottom3Types = data.bottom3.map((a) => a.type);
+  const sorted = (Object.entries(typeCounts) as [AxisType, number][])
+    .sort((a, b) => {
+      if (b[1] !== a[1]) return b[1] - a[1];
+      const aInBottom = bottom3Types.filter((t) => t === a[0]).length;
+      const bInBottom = bottom3Types.filter((t) => t === b[0]).length;
+      return bInBottom - aInBottom;
+    });
+
+  return perfilMap[sorted[0][0]];
+}
+
 /* ── CTA params builder ─────────────────────────────── */
 
 export function buildCtaParams(data: EspelhoData): string {
