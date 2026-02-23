@@ -10,6 +10,7 @@ import QuizMapaPadraoPage from "./pages/QuizMapaPadraoPage";
 import EspelhoDaClarezaPage from "./pages/EspelhoDaClarezaPage";
 import CheckoutTestPage from "./pages/CheckoutTestPage";
 import PortalResetPage from "./pages/PortalResetPage";
+import VendasPage from "./pages/VendasPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/espelho" element={<EspelhoPage />} />
           <Route path="/espelho-da-clareza" element={<EspelhoDaClarezaPage />} />
           <Route path="/portal-reset" element={<PortalResetPage />} />
+          <Route path="/vendas" element={<VendasPage />} />
           <Route path="/checkout-test" element={<CheckoutTestPage />} />
           {/* Redirects de segurança */}
           <Route path="/home" element={<Navigate to="/" replace />} />

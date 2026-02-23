@@ -9,6 +9,7 @@ import {
   generateEditorialDiagnostic,
   generate7DayPlan,
   getAxisMicro,
+  buildPortalResetPayload,
   type EspelhoData,
 } from "@/data/espelhoEngine";
 
@@ -45,7 +46,9 @@ const DiagnosticoResult = ({ scores, userName, answers, sessionId }: Diagnostico
   };
 
   const handleCta = () => {
-    nav("/portal-reset", { state: { scores, answers } });
+    const payload = buildPortalResetPayload(data);
+    sessionStorage.setItem("portal_reset_payload", JSON.stringify(payload));
+    nav("/vendas");
   };
 
   return (
@@ -258,7 +261,7 @@ const DiagnosticoResult = ({ scores, userName, answers, sessionId }: Diagnostico
 
         <motion.div initial="hidden" animate="visible" custom={7} variants={fade} className="mt-10 text-center">
           <Button variant="cta" size="xl" onClick={handleCta} className="gap-2">
-            Entrar no Portal Reset
+            VER MEU PLANO NO APP
             <ArrowRight className="w-4 h-4" />
           </Button>
         </motion.div>
