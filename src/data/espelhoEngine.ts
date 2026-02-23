@@ -306,3 +306,101 @@ export function buildCtaParams(data: EspelhoData): string {
   const c = data.centralAxis.index;
   return `?m=${m}&t=${t}&b=${b}&c=${c}`;
 }
+
+/* ── Sales payload builder ──────────────────────────── */
+
+export interface PortalResetPayload {
+  diagnostic: {
+    perfil_nome: string;
+    dor_raiz: string;
+    sintomas: string[];
+    consequencia: string;
+    ciclo_recomendado: string;
+    codigo_recomendado: string;
+    primeiro_passo: string;
+  };
+  report_screen: {
+    headline: string;
+    paragrafo_interpretacao: string;
+    bullets_sintomas: string[];
+    frase_custo_real: string;
+    caminho_recomendado: string;
+    acao_imediata: string;
+    cta_text: string;
+    cta_microcopy: string;
+  };
+  sales_page: {
+    hero_headline: string;
+    hero_subheadline: string;
+    bloco_significado: string;
+    bloco_caminho_recomendado: string;
+    como_funciona_steps: string[];
+    o_que_recebe_bullets: string[];
+    cleo_bloco: string;
+    oferta_headline: string;
+    oferta_subheadline: string;
+    cta_text: string;
+    cta_microcopy: string;
+  };
+}
+
+export function buildPortalResetPayload(data: EspelhoData): PortalResetPayload {
+  const perfil = getPerfilName(data);
+  const centralMicro = getAxisMicro(data.centralAxis.type);
+  const editorial = generateEditorialDiagnostic(data);
+
+  const bottom1 = data.bottom3[0];
+  const bottom2 = data.bottom3[1];
+  const bottom3item = data.bottom3[2];
+
+  const sintomas = [
+    `${bottom1.label}: ${getAxisMicro(bottom1.type).micro}`,
+    `${bottom2.label}: ${getAxisMicro(bottom2.type).micro}`,
+    `${bottom3item.label}: ${getAxisMicro(bottom3item.type).micro}`,
+  ];
+
+  const codigoMap: Record<string, string> = {
+    "Comece pelo Código de Retorno. Antes de agir, volte para si.": "Código de Retorno",
+    "Comece pelo Código de Pausa. Insira presença antes da próxima entrega.": "Código de Pausa",
+    "Comece pelo Código de Estrutura. Decisão mínima, ambiente facilitador.": "Código de Estrutura",
+    "Comece pelo Código de Estabilização. Reduza o custo mental antes de buscar mais.": "Código de Estabilização",
+    "Comece pelo Código de Proteção. Sustente sem forçar intensidade.": "Código de Proteção",
+    "Comece pelo Código de Expansão. Proteja o que sustenta e explore o próximo nível.": "Código de Expansão",
+  };
+  const codigoRecomendado = codigoMap[perfil.recomendacao] ?? "Código de Retorno";
+
+  return {
+    diagnostic: {
+      perfil_nome: perfil.nome,
+      dor_raiz: perfil.dorRaiz,
+      sintomas,
+      consequencia: `Tensão central no Eixo ${data.centralAxis.axis} (${centralMicro.title.toLowerCase()}) — tensão ${data.centralAxis.tension.toFixed(0)}.`,
+      ciclo_recomendado: perfil.recomendacao,
+      codigo_recomendado: codigoRecomendado,
+      primeiro_passo: perfil.recomendacao.replace(/^Comece pelo /, ""),
+    },
+    report_screen: {
+      headline: `Seu padrão: ${perfil.nome}`,
+      paragrafo_interpretacao: editorial[0],
+      bullets_sintomas: sintomas,
+      frase_custo_real: editorial[3],
+      caminho_recomendado: perfil.recomendacao,
+      acao_imediata: `Estabilizar Eixo ${data.bottom3[0].axis} e reduzir tensão no Eixo ${data.centralAxis.axis}.`,
+      cta_text: "VER MEU PLANO NO APP",
+      cta_microcopy: "Isso é cíclico. Você pode repetir quando precisar.",
+    },
+    sales_page: {
+      hero_headline: `Seu diagnóstico mostrou: ${perfil.nome}`,
+      hero_subheadline: perfil.dorRaiz,
+      bloco_significado: `Isso não é diagnóstico clínico. É um mapa do seu padrão de operação mental — como você distribui energia, presença e ação nos últimos 30 dias. E esse mapa mostrou que o custo do automático está mais alto do que o retorno.`,
+      bloco_caminho_recomendado: perfil.recomendacao,
+      como_funciona_steps: ["Diagnóstico (2 min)", "Escolha do Código", "Ritual (10–20 min)", "Micro-ação", "Repetição em ciclos"],
+      o_que_recebe_bullets: ["10 Códigos (rituais repetíveis e cíclicos)", "Ayra — sua guia dentro do portal", "Cléo desbloqueável (prêmio por consistência)", "Upgrades contínuos do portal"],
+      cleo_bloco: "Cléo não é bônus. Cléo é consequência. Você desbloqueia após consistência. Base histórica. Magnetismo estratégico.",
+      oferta_headline: "Fundadoras: R$47/mês (primeiras 1000)",
+      oferta_subheadline: "Depois: R$147/mês com upgrades",
+      cta_text: "ATIVAR MEU PORTAL (R$47/mês)",
+      cta_microcopy: "Cancele quando quiser. Aqui é sobre autonomia.",
+    },
+  };
+}
