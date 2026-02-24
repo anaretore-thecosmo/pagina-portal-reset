@@ -174,7 +174,7 @@ const VendasPage = () => {
           </p>
 
           <div className="mt-8">
-            <Button variant="cta" size="xl" className="gap-2">
+            <Button variant="cta" size="xl" className="gap-2" onClick={() => window.open("https://pay.kiwify.com.br/ns0fjIx", "_blank")}>
               {sp.cta_text}
               <ArrowRight className="w-4 h-4" />
             </Button>
@@ -184,11 +184,24 @@ const VendasPage = () => {
           </div>
         </motion.div>
 
-        {/* Author credit */}
-        <div className="mt-16 pt-4" style={{ borderTop: "1px solid hsl(var(--matte-gold) / 0.15)" }}>
-          <p className="font-inter text-[11px] md:text-[12px] text-left" style={{ color: "hsl(var(--graphite) / 0.65)" }}>
-            © Ana Retore. Todos os direitos de design e copy reservados.
+        {/* Footer with legal links */}
+        <div className="mt-16 pt-6" style={{ borderTop: "1px solid hsl(var(--matte-gold) / 0.15)" }}>
+          <div className="flex flex-wrap gap-4 mb-4 text-sm font-inter">
+            <a href="https://portalresetdigital.com/politica-de-privacidade" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              Política de Privacidade
+            </a>
+            <a href="https://portalresetdigital.com/exclusao-de-dados" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+              Solicitação de Exclusão de Dados
+            </a>
+          </div>
+          <p className="font-inter text-muted-foreground/70 text-xs max-w-lg mb-4">
+            Este produto não garante a obtenção de resultados. Qualquer referência ao desempenho de uma estratégia não deve ser interpretada como uma garantia de resultados.
           </p>
+          <div className="pt-4" style={{ borderTop: "1px solid hsl(var(--matte-gold) / 0.1)" }}>
+            <p className="font-inter text-[11px] md:text-[12px] text-left" style={{ color: "hsl(var(--graphite) / 0.65)" }}>
+              © Ana Retore. Todos os direitos de design e copy reservados.
+            </p>
+          </div>
         </div>
 
         <div className="h-20" />
