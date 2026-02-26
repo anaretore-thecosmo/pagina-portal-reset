@@ -47,13 +47,13 @@ const VendasPage = () => {
           backgroundImage: `url(${beachSunset})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          opacity: 0.12,
+          opacity: 0.25,
         }}
       />
       {/* Safety overlay for text contrast */}
       <div
         className="absolute inset-0 z-[1]"
-        style={{ background: "hsl(var(--background) / 0.88)" }}
+        style={{ background: "hsl(var(--background) / 0.75)" }}
       />
       <div className="max-w-[720px] mx-auto px-6 py-16 relative z-10">
 
