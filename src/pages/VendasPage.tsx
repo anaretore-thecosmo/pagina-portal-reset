@@ -39,8 +39,23 @@ const VendasPage = () => {
   const { sales_page: sp, diagnostic: diag } = payload;
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="max-w-[720px] mx-auto px-6 py-16">
+    <main className="min-h-screen bg-background relative overflow-hidden">
+      {/* Background image layer */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${beachSunset})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.12,
+        }}
+      />
+      {/* Safety overlay for text contrast */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{ background: "hsl(var(--background) / 0.88)" }}
+      />
+      <div className="max-w-[720px] mx-auto px-6 py-16 relative z-10">
 
         {/* ===== HERO ===== */}
         <motion.div initial="hidden" animate="visible" custom={0} variants={fade}>
