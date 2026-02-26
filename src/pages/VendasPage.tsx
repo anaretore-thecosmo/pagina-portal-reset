@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, RotateCcw, Zap, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { PortalResetPayload } from "@/data/espelhoEngine";
+import beachSunset from "@/assets/vendas-beach-sunset.png";
 
 const fade = {
   hidden: { opacity: 0, y: 20 },
