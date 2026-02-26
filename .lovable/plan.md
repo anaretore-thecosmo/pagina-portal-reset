@@ -1,57 +1,37 @@
 
 
-# Analise Completa e Plano de Correcoes
+# Plano: Imagem de fundo editorial na pagina /vendas
 
-## Resultado do teste end-to-end
+## Etapa 1 — Gerar a imagem
 
-Testei o fluxo completo: Intro → 24 perguntas → Pausas (a cada 6) → Resultado (Espelho da Clareza) → CTA "VER MEU PLANO NO APP" → Pagina de vendas (/vendas).
+Usar a AI de geracao de imagem (Gemini Flash Image) para criar uma imagem editorial de uma mulher sentada na praia vendo o por do sol. Estilo matte, alto contraste, sem rosto visivel (costas/silhueta), tons quentes dourados e ambar — alinhado com a paleta editorial do projeto.
 
-### O que funciona corretamente
+Salvar como `src/assets/vendas-beach-sunset.png`.
 
-- Pagina inicial (/) carrega com layout editorial correto
-- Botao "ABRIR O MAPA" inicia o quiz
-- 24 perguntas carregam sequencialmente com escala 1-9
-- 3 telas de pausa/respiro aparecem a cada 6 perguntas (correto)
-- Tela final "VER MEU ESPELHO" exibe corretamente
-- Relatorio "Espelho da Clareza" renderiza com mandala radar, leitura editorial, triade de base/vazamento, conflito central e plano de 7 dias
-- Botao "BAIXAR PDF" visivel
-- CTA "VER MEU PLANO NO APP" navega para /vendas
-- Pagina de vendas carrega com perfil dinamico ("Ciclo de Picos e Quedas") preenchido corretamente
-- Blocos "O que isso significa", "Caminho recomendado", "Como funciona", "O que voce recebe", bloco Cleo e oferta R$47/mes todos renderizam
-- Zero erros no console (apenas warnings de postMessage do Lovable, normais)
+## Etapa 2 — Aplicar como fundo na VendasPage
 
-### Problemas encontrados
+**Arquivo:** `src/pages/VendasPage.tsx`
 
-**1. Pagina /vendas nao tem links legais (LGPD)**
+Alterar o `<main>` (linha 41) para incluir:
 
-O rodape da pagina de vendas tem apenas o credito "Ana Retore", mas nao inclui os links de Politica de Privacidade e Exclusao de Dados. O componente `Footer.tsx` existe com esses links, porem nao e usado na VendasPage — ela tem um rodape inline proprio.
+1. `position: relative` e `overflow: hidden` no main
+2. Um `<div>` absoluto como camada de imagem com:
+   - `background-image` apontando para o asset
+   - `background-size: cover`, `background-position: center`
+   - `opacity: 0.12` (transparencia alta para nao competir com texto)
+3. Um overlay escuro semi-transparente (`background: hsl(var(--background) / 0.88)`) sobre a imagem para garantir contraste total do texto
+4. O conteudo (`max-w-[720px]`) recebe `position: relative` e `z-index: 10` para ficar acima das camadas
 
-**2. Botao CTA da oferta nao tem acao**
+### Estrutura visual (camadas):
 
-O botao "ATIVAR MEU PORTAL (R$47/MES)" na pagina /vendas nao tem `onClick`. Deveria redirecionar para o link de checkout Kiwify: `https://pay.kiwify.com.br/ns0fjIx`
+```text
+┌─────────────────────────────┐
+│  Camada 3: Conteudo (z-10)  │  ← texto nitido
+│  Camada 2: Overlay escuro   │  ← protege legibilidade
+│  Camada 1: Imagem (12%)     │  ← atmosfera sutil
+│  Camada 0: bg-background    │  ← cor base
+└─────────────────────────────┘
+```
 
-## Plano de correcoes
-
-### Correcao 1: Adicionar links legais na VendasPage
-
-**Arquivo:** `src/pages/VendasPage.tsx` (linhas 187-192)
-
-Substituir o bloco de "Author credit" por um rodape completo que inclua:
-- Link "Politica de Privacidade" → `https://portalresetdigital.com/politica-de-privacidade`
-- Link "Solicitacao de Exclusao de Dados" → `https://portalresetdigital.com/exclusao-de-dados`
-- Ambos com `target="_blank"` e `rel="noopener noreferrer"`
-- Credito Ana Retore mantido abaixo
-
-### Correcao 2: Conectar CTA ao checkout Kiwify
-
-**Arquivo:** `src/pages/VendasPage.tsx` (linha 177)
-
-Adicionar `onClick` ao botao CTA que redirecione para `https://pay.kiwify.com.br/ns0fjIx` (abrindo em nova aba ou redirecionando).
-
-## Detalhes tecnicos
-
-Ambas as correcoes sao no mesmo arquivo `src/pages/VendasPage.tsx`:
-
-1. Linha 177: adicionar `onClick={() => window.open("https://pay.kiwify.com.br/ns0fjIx", "_blank")}`
-2. Linhas 187-192: expandir rodape com links legais + copyright + disclaimer, seguindo o mesmo padrao visual do `Footer.tsx`
+Isso garante que a imagem adiciona atmosfera sem comprometer a nitidez do texto.
 
