@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Download, ArrowRight } from "lucide-react";
 import DiagnosticoRadarChart from "./DiagnosticoRadarChart";
@@ -9,7 +8,7 @@ import {
   generateEditorialDiagnostic,
   generate7DayPlan,
   getAxisMicro,
-  buildPortalResetPayload,
+  getArquetipo,
   type EspelhoData,
 } from "@/data/espelhoEngine";
 
@@ -29,26 +28,55 @@ const fade = {
   }),
 };
 
-const DiagnosticoResult = ({ scores, userName, answers, sessionId }: DiagnosticoResultProps) => {
-  const nav = useNavigate();
+const ARQUETIPO_THEME: Record<string, {
+  accent: string;
+  accentLight: string;
+  accentBorder: string;
+  fase: string;
+}> = {
+  Curiosa: {
+    accent: "hsl(150 28% 38%)",
+    accentLight: "hsl(150 28% 38% / 0.08)",
+    accentBorder: "hsl(150 28% 38% / 0.22)",
+    fase: "Fase 1 — Curiosa",
+  },
+  Buscadora: {
+    accent: "hsl(28 58% 44%)",
+    accentLight: "hsl(28 58% 44% / 0.08)",
+    accentBorder: "hsl(28 58% 44% / 0.22)",
+    fase: "Fase 2 — Buscadora",
+  },
+  Estrategista: {
+    accent: "hsl(215 38% 42%)",
+    accentLight: "hsl(215 38% 42% / 0.08)",
+    accentBorder: "hsl(215 38% 42% / 0.22)",
+    fase: "Fase 3 — Estrategista",
+  },
+  Soberana: {
+    accent: "hsl(var(--matte-gold))",
+    accentLight: "hsl(var(--matte-gold) / 0.08)",
+    accentBorder: "hsl(var(--matte-gold) / 0.22)",
+    fase: "Fase 4 — Soberana",
+  },
+};
+
+const KIWIFY_URL = "https://pay.kiwify.com.br/ns0fjIx";
+
+const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps) => {
   const data: EspelhoData = answers
     ? computeEspelho(answers)
     : computeEspelho(scores.flatMap((s) => [s, s]));
 
   const editorial = generateEditorialDiagnostic(data);
   const plan = generate7DayPlan(data);
+  const arquetipo = getArquetipo(data);
+  const theme = ARQUETIPO_THEME[arquetipo.nome];
 
   const top3Indices = data.top3.map((a) => a.index);
   const bottom3Indices = data.bottom3.map((a) => a.index);
 
   const handleDownloadPDF = async () => {
     await generateDiagnosticoPDF(data, userName, "radar-chart-pdf");
-  };
-
-  const handleCta = () => {
-    const payload = buildPortalResetPayload(data);
-    sessionStorage.setItem("portal_reset_payload", JSON.stringify(payload));
-    nav("/vendas");
   };
 
   return (
@@ -246,24 +274,176 @@ const DiagnosticoResult = ({ scores, userName, answers, sessionId }: Diagnostico
           </p>
         </motion.div>
 
-        {/* ===== FECHAMENTO + CTA ===== */}
-        <div className="editorial-divider mt-16 mb-12" />
+        {/* ===== BLOCO 6: ARQUÉTIPO ===== */}
+        <motion.div initial="hidden" animate="visible" custom={6} variants={fade} className="mt-16">
+          <div className="editorial-divider mb-12" />
 
-        <motion.div initial="hidden" animate="visible" custom={6} variants={fade}>
+          {/* Fase label */}
           <p
-            className="font-playfair font-semibold text-center text-lg"
-            style={{ color: "hsl(var(--graphite) / 0.7)" }}
+            className="kicker mb-2"
+            style={{ color: theme.accent }}
           >
-            Você não precisa de mais consciência.<br />
-            Precisa de sustentação aplicada.
+            {theme.fase}
+          </p>
+
+          {/* Nome do arquétipo */}
+          <h2
+            className="font-playfair font-bold"
+            style={{
+              fontSize: "clamp(28px, 3.5vw, 44px)",
+              lineHeight: 1.1,
+              letterSpacing: "0.06em",
+              color: theme.accent,
+            }}
+          >
+            {arquetipo.nome}
+          </h2>
+
+          {/* Abertura */}
+          <p
+            className="mt-4 text-[16px] leading-relaxed font-medium"
+            style={{ color: "hsl(var(--graphite) / 0.82)" }}
+          >
+            {arquetipo.abertura}
+          </p>
+
+          {/* Dor raiz */}
+          <p
+            className="mt-3 text-[15px] leading-relaxed"
+            style={{ color: "hsl(var(--graphite) / 0.68)" }}
+          >
+            {arquetipo.dorRaiz}
+          </p>
+
+          {/* Sinais */}
+          <div className="mt-8">
+            <p className="kicker mb-4" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
+              Onde isso aparece em você
+            </p>
+            <div className="space-y-3">
+              {(arquetipo.sinais as unknown as string[]).map((sinal: string, i: number) => (
+                <div
+                  key={i}
+                  className="flex gap-3 items-start p-4 rounded-xl text-sm"
+                  style={{
+                    background: theme.accentLight,
+                    border: `1px solid ${theme.accentBorder}`,
+                    color: "hsl(var(--graphite) / 0.75)",
+                  }}
+                >
+                  <span
+                    className="font-playfair font-bold shrink-0 mt-0.5"
+                    style={{ color: theme.accent }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{sinal}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Ciclo recomendado + códigos */}
+          <div
+            className="mt-8 p-5 rounded-2xl"
+            style={{
+              background: theme.accentLight,
+              border: `1px solid ${theme.accentBorder}`,
+            }}
+          >
+            <p className="kicker mb-2" style={{ color: theme.accent }}>
+              Seu ciclo no Portal Reset
+            </p>
+            <p className="font-playfair font-semibold text-base" style={{ color: "hsl(var(--foreground))" }}>
+              {arquetipo.cicloRecomendado}
+            </p>
+            <div className="flex flex-wrap gap-2 mt-3">
+              {arquetipo.codigosRecomendados.map((codigo: string) => (
+                <span
+                  key={codigo}
+                  className="text-xs px-3 py-1 rounded-full font-medium"
+                  style={{
+                    background: theme.accentBorder,
+                    color: theme.accent,
+                  }}
+                >
+                  {codigo}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Ferramentas do app */}
+          <div className="mt-8">
+            <p className="kicker mb-4" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
+              O que o Portal Reset entrega para você
+            </p>
+            <div className="space-y-2">
+              {[
+                "Jornada de 10 dias com rituais diários guiados",
+                "Ayra — mentora de consciência com IA (chat livre)",
+                "Cléo — mentora de poder e magnetismo (10 lições)",
+                "Círculo — diário de frequência com tags de energia",
+                "Galeria Alquímica — geração de imagem com IA",
+                "Sistema de pontos, níveis e conquistas",
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex gap-3 items-center text-sm py-2 border-b"
+                  style={{
+                    borderColor: "hsl(var(--graphite) / 0.06)",
+                    color: "hsl(var(--graphite) / 0.7)",
+                  }}
+                >
+                  <span style={{ color: theme.accent }}>—</span>
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Cléo bloco */}
+          <div
+            className="mt-8 p-5 rounded-2xl"
+            style={{
+              background: "hsl(var(--matte-gold) / 0.06)",
+              border: "1px solid hsl(var(--matte-gold) / 0.2)",
+            }}
+          >
+            <p className="kicker mb-2" style={{ color: "hsl(var(--matte-gold))" }}>
+              Sobre Cléo
+            </p>
+            <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--graphite) / 0.72)" }}>
+              {arquetipo.cleoBloco}
+            </p>
+          </div>
+
+          {/* Primeiro passo */}
+          <p
+            className="mt-8 text-[15px] leading-relaxed font-medium text-center"
+            style={{ color: "hsl(var(--graphite) / 0.78)" }}
+          >
+            {arquetipo.primeiroPassoTexto}
           </p>
         </motion.div>
 
-        <motion.div initial="hidden" animate="visible" custom={7} variants={fade} className="mt-10 text-center">
-          <Button variant="cta" size="xl" onClick={handleCta} className="gap-2">
-            VER MEU PLANO NO APP
-            <ArrowRight className="w-4 h-4" />
-          </Button>
+        {/* ===== CTA FINAL ===== */}
+        <motion.div initial="hidden" animate="visible" custom={7} variants={fade} className="mt-12 text-center">
+          <p
+            className="font-playfair font-semibold text-lg mb-2"
+            style={{ color: "hsl(var(--graphite) / 0.7)" }}
+          >
+            Sua jornada começa agora.
+          </p>
+          <p className="text-sm mb-6" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
+            Portal Reset · R$47/mês · Cancele quando quiser.
+          </p>
+          <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer">
+            <Button variant="cta" size="xl" className="gap-2">
+              ENTRAR NO PORTAL RESET
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </a>
         </motion.div>
 
         {/* Author credit */}
