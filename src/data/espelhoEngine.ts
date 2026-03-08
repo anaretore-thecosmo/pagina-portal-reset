@@ -297,6 +297,91 @@ export function getPerfilName(data: EspelhoData): PerfilData {
   return perfilMap[sorted[0][0]];
 }
 
+/* ── Arquétipo (4 níveis) ───────────────────────────── */
+
+export interface ArquetipoData {
+  nome: 'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana';
+  abertura: string;
+  dorRaiz: string;
+  cicloRecomendado: string;
+  codigosRecomendados: string[];
+  sinais: (data: EspelhoData) => string[];
+  primeiroPassoTexto: string;
+  cleoBloco: string;
+}
+
+const arquetipos: Record<'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana', Omit<ArquetipoData, 'sinais'> & { sinaisFactory: (data: EspelhoData) => string[] }> = {
+  Curiosa: {
+    nome: 'Curiosa',
+    abertura: 'Você já sentiu o incômodo. Mas ainda não tem um mapa claro.',
+    dorRaiz: 'O ruído está ocupando o espaço da escolha. Não é falta de força — é falta de código. O padrão ainda não tem forma, mas já tem custo.',
+    cicloRecomendado: 'Ciclo Destrava — Códigos 01, 03 e 09',
+    codigosRecomendados: ['Código 01', 'Código 03', 'Código 09'],
+    sinaisFactory: (data) => [
+      `Em ${data.bottom3[0].label}: o ruído ocupa mais espaço do que a escolha.`,
+      `Em ${data.bottom3[1].label}: o automático ganhou do intencional.`,
+      `Em ${data.bottom3[2].label}: a energia sai sem retorno proporcional.`,
+    ],
+    primeiroPassoTexto: 'Nomeie o padrão. Antes de mudar qualquer coisa, você precisa ver onde o custo está.',
+    cleoBloco: 'Cléo não é bônus. É o próximo nível — e você chega lá pelo caminho, não pelo atalho.',
+  },
+  Buscadora: {
+    nome: 'Buscadora',
+    abertura: 'Você já entende que precisa mudar. Mas ainda perde consistência.',
+    dorRaiz: 'Você já tentou. Já sabe o que precisa. O problema não é conhecimento — é sustentar o que você começa sem se punir quando oscila.',
+    cicloRecomendado: 'Ciclo Recomeço — Códigos 04, 05 e 07',
+    codigosRecomendados: ['Código 04', 'Código 05', 'Código 07'],
+    sinaisFactory: (data) => [
+      `Em ${data.bottom3[0].label}: a consistência quebra antes de virar hábito.`,
+      `Em ${data.bottom3[1].label}: você recomeça, mas o ponto de partida muda a cada vez.`,
+      `Em ${data.centralAxis.label}: aqui está a oscilação central — sentir e agir ainda não sincronizaram.`,
+    ],
+    primeiroPassoTexto: 'Estabilize antes de expandir. Uma ação pequena sustentada vale mais que dez picos.',
+    cleoBloco: 'Cléo é o prêmio da consistência. Você desbloqueia quando o padrão se sustenta — não antes.',
+  },
+  Estrategista: {
+    nome: 'Estrategista',
+    abertura: 'Você já tem clareza e ação. O que falta é sustentação e padrão.',
+    dorRaiz: 'Você funciona. Resolve. Entrega. Mas em algum ponto, você se trai — e isso aparece no corpo, no dinheiro ou nas emoções. O código existe. Falta pacto.',
+    cicloRecomendado: 'Ciclo Direção — Códigos 06, 08 e 10',
+    codigosRecomendados: ['Código 06', 'Código 08', 'Código 10'],
+    sinaisFactory: (data) => [
+      `Em ${data.bottom3[0].label}: a base está lá, mas o padrão ainda oscila.`,
+      `Em ${data.bottom3[1].label}: você consegue — mas o custo é mais alto do que deveria.`,
+      `Em ${data.centralAxis.label}: aqui está a tensão entre o que você sente e o que sustenta.`,
+    ],
+    primeiroPassoTexto: 'Feche o pacto. Transforme o que já funciona em ritual repetível — e sustente.',
+    cleoBloco: 'Cléo é magnetismo estratégico. Para quem já tem base e quer precisão. Está próxima para você.',
+  },
+  Soberana: {
+    nome: 'Soberana',
+    abertura: 'Você já voltou pro comando. Agora é precisão, presença e influência.',
+    dorRaiz: 'Você já tem base. O desafio agora é não transformar excelência em sobrecarga — e usar o que construiu para expandir com precisão, não com mais esforço.',
+    cicloRecomendado: 'Código 10 (Pacto) + Cléo desbloqueada como prioridade',
+    codigosRecomendados: ['Código 10', 'Cléo (prioridade)'],
+    sinaisFactory: (data) => [
+      `Em ${data.top3[0].label}: você está acima do ruído — isso precisa ser protegido, não expandido à força.`,
+      `Em ${data.bottom3[0].label}: mesmo com base sólida, esse ponto ainda consome energia silenciosamente.`,
+      `Em ${data.centralAxis.label}: a tensão aqui é de refinamento, não de reconstrução.`,
+    ],
+    primeiroPassoTexto: 'Eleve o padrão. Cléo é o próximo nível — e está disponível para você agora.',
+    cleoBloco: 'Cléo é sua por direito. Você já tem a base. Agora é magnetismo, reputação e legado.',
+  },
+};
+
+export function getArquetipo(data: EspelhoData): ArquetipoData {
+  const score = data.overallMean;
+  let nomeArquetipo: 'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana';
+
+  if (score <= 3) nomeArquetipo = 'Curiosa';
+  else if (score <= 5) nomeArquetipo = 'Buscadora';
+  else if (score <= 7) nomeArquetipo = 'Estrategista';
+  else nomeArquetipo = 'Soberana';
+
+  const { sinaisFactory, ...rest } = arquetipos[nomeArquetipo];
+  return { ...rest, sinais: sinaisFactory(data) };
+}
+
 /* ── CTA params builder ─────────────────────────────── */
 
 export function buildCtaParams(data: EspelhoData): string {
