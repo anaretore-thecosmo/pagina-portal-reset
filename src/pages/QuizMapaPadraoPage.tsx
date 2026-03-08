@@ -21,6 +21,43 @@ function generateId(): string {
   return crypto.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 }
 
+/* ── Floating particles ────────────────────────────── */
+
+const PARTICLES = Array.from({ length: 16 }, (_, i) => ({
+  id: i,
+  left: `${(i * 6.25 + 3) % 100}%`,
+  delay: i * 0.55,
+  duration: 9 + (i % 5) * 1.8,
+  size: 1 + (i % 3) * 0.8,
+  drift: (i % 7 - 3) * 18,
+}));
+
+const FloatingParticles = () => (
+  <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+    {PARTICLES.map((p) => (
+      <motion.span
+        key={p.id}
+        className="absolute rounded-full"
+        style={{
+          left: p.left,
+          bottom: "-8px",
+          width: `${p.size}px`,
+          height: `${p.size}px`,
+          background: `rgba(200,184,112,${0.3 + (p.id % 3) * 0.15})`,
+        }}
+        animate={{ y: [0, -820], x: [0, p.drift], opacity: [0, 0.7, 0.7, 0] }}
+        transition={{
+          duration: p.duration,
+          delay: p.delay,
+          repeat: Infinity,
+          ease: "linear",
+          times: [0, 0.15, 0.85, 1],
+        }}
+      />
+    ))}
+  </div>
+);
+
 /* ── Intro Screen ──────────────────────────────────── */
 
 const IntroScreen = ({ onStart }: { onStart: () => void }) => {
@@ -52,6 +89,9 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
             backgroundRepeat: "repeat",
           }}
         />
+
+        {/* Floating gold particles */}
+        <FloatingParticles />
 
         {/* Ghost number — right side, huge, ultra-low opacity */}
         <div
@@ -92,10 +132,10 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
 
         {/* ── Content: 2-column poster ── */}
         <div className="relative z-10 w-full max-w-[1320px] mx-auto px-6 md:px-12 lg:px-16 py-12 md:py-0">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center lg:min-h-screen">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-stretch lg:min-h-screen">
 
             {/* ── LEFT COLUMN: 7 cols ── */}
-            <div className="lg:col-span-7 flex flex-col justify-center pt-8 lg:pt-0">
+            <div className="lg:col-span-7 flex flex-col justify-center pt-8 lg:pt-0 lg:py-16">
 
               {/* Gold editorial line */}
               <motion.div
@@ -249,88 +289,95 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
               </motion.div>
             </div>
 
-            {/* ── RIGHT COLUMN: 5 cols — Decision panel ── */}
+            {/* ── RIGHT COLUMN: 5 cols — Editorial image panel ── */}
             <motion.div
-              className="lg:col-span-5 hidden lg:flex flex-col items-end"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              className="lg:col-span-5 hidden lg:flex flex-col py-10"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.35 }}
             >
-              <div
-                className="w-full max-w-md lg:ml-auto relative"
-                style={{
-                  background: "rgba(8,9,13,0.35)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                  border: "1px solid rgba(200,184,112,0.1)",
-                  borderRadius: "12px",
-                  padding: "40px 32px 32px",
-                }}
-              >
+              <div className="relative flex-1 rounded-2xl overflow-hidden" style={{ minHeight: "520px" }}>
 
-                {/* Manifesto — poster-sized */}
+                {/* Editorial image */}
+                <motion.img
+                  src={quizIntroImage}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ opacity: 0.88 }}
+                  initial={{ scale: 1.06 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 1.6, ease: "easeOut" }}
+                />
+
+                {/* Gradient overlay — dark at top and bottom, clear in middle */}
                 <div
-                  className="mb-10"
-                  style={{ borderLeft: "2px solid rgba(200,184,112,0.5)", paddingLeft: "20px" }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "'Playfair Display', 'Georgia', serif",
-                      fontStyle: "italic",
-                      fontSize: "clamp(22px, 2.5vw, 30px)",
-                      color: "#EDE6DB",
-                      lineHeight: 1.35,
-                    }}
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(to bottom, rgba(8,9,13,0.55) 0%, rgba(8,9,13,0.05) 38%, rgba(8,9,13,0.08) 60%, rgba(8,9,13,0.82) 100%)",
+                  }}
+                />
+
+                {/* Gold shimmer at top edge */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-px"
+                  style={{ background: "linear-gradient(90deg, transparent, rgba(200,184,112,0.4), transparent)" }}
+                />
+
+                {/* Kicker top-left */}
+                <div className="absolute top-6 left-6">
+                  <p className="font-inter uppercase" style={{ fontSize: "9px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.7)" }}>
+                    Portal Reset
+                  </p>
+                </div>
+
+                {/* Bottom content overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+
+                  {/* Manifesto */}
+                  <div
+                    className="mb-7"
+                    style={{ borderLeft: "2px solid rgba(200,184,112,0.55)", paddingLeft: "16px" }}
                   >
-                    Sem julgamento.<br />Só direção.
-                  </p>
-                </div>
+                    <p
+                      style={{
+                        fontFamily: "'Playfair Display', 'Georgia', serif",
+                        fontStyle: "italic",
+                        fontSize: "clamp(20px, 2.2vw, 28px)",
+                        color: "#EDE6DB",
+                        lineHeight: 1.3,
+                        textShadow: "0 1px 8px rgba(0,0,0,0.5)",
+                      }}
+                    >
+                      Sem julgamento.<br />Só direção.
+                    </p>
+                  </div>
 
-                {/* Como funciona — microblock */}
-                <div className="mb-8 space-y-2">
-                  <p className="font-inter uppercase" style={{ fontSize: "9px", letterSpacing: "0.3em", color: "#C8B870", marginBottom: "8px" }}>
-                    Como funciona
-                  </p>
-                  {[
-                    "Escala 1 a 9, pensando nos últimos 30 dias.",
-                    "Pausas curtas a cada 6 etapas para recalibrar.",
-                    "No final, o espelho vira guia.",
-                  ].map((t, i) => (
-                    <div key={i} className="flex gap-3 items-baseline">
-                      <span className="font-inter" style={{ fontSize: "10px", color: "#C8B870", fontWeight: 600 }}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <p className="font-inter" style={{ fontSize: "12.5px", lineHeight: 1.6, color: "rgba(207,197,184,0.8)" }}>
-                        {t}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                  {/* Gold divider */}
+                  <div
+                    className="mb-7 h-px w-10"
+                    style={{ background: "rgba(200,184,112,0.45)" }}
+                  />
 
-                {/* Gold divider */}
-                <div className="w-full h-px mb-8" style={{ background: "linear-gradient(90deg, rgba(200,184,112,0.2), transparent)" }} />
-
-                {/* CTAs — big, above fold */}
-                <div className="flex flex-col gap-3.5 w-full">
-                  {/* Primary CTA */}
+                  {/* CTA button */}
                   <button
                     onClick={onStart}
-                    className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 group w-full"
+                    className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 w-full"
                     style={{
                       background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                       color: "#08090D",
                       borderRadius: "8px",
                       border: "1px solid rgba(200,184,112,0.45)",
-                      boxShadow: "0 4px 20px -4px rgba(152,61,6,0.3), 0 2px 6px rgba(0,0,0,0.15)",
+                      boxShadow: "0 4px 20px -4px rgba(152,61,6,0.4), 0 2px 6px rgba(0,0,0,0.2)",
                       height: "56px",
                       fontSize: "13px",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.3), 0 0 28px -4px rgba(200,184,112,0.3)";
+                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.4), 0 0 30px -4px rgba(200,184,112,0.35)";
                       e.currentTarget.style.transform = "translateY(-1px)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.3), 0 2px 6px rgba(0,0,0,0.15)";
+                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.4), 0 2px 6px rgba(0,0,0,0.2)";
                       e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
@@ -338,8 +385,6 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   </button>
 
                 </div>
-
-
               </div>
             </motion.div>
 

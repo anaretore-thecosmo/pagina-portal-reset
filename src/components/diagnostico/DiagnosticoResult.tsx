@@ -428,22 +428,61 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
         </motion.div>
 
         {/* ===== CTA FINAL ===== */}
-        <motion.div initial="hidden" animate="visible" custom={7} variants={fade} className="mt-12 text-center">
-          <p
-            className="font-playfair font-semibold text-lg mb-2"
-            style={{ color: "hsl(var(--graphite) / 0.7)" }}
+        <motion.div initial="hidden" animate="visible" custom={7} variants={fade} className="mt-12">
+          <div
+            className="rounded-2xl p-8 text-center"
+            style={{
+              background: "hsl(var(--matte-gold) / 0.05)",
+              border: "1px solid hsl(var(--matte-gold) / 0.18)",
+            }}
           >
-            Sua jornada começa agora.
-          </p>
-          <p className="text-sm mb-6" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
-            Portal Reset · R$47/mês · Cancele quando quiser.
-          </p>
-          <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer">
-            <Button variant="cta" size="xl" className="gap-2">
-              ENTRAR NO PORTAL RESET
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </a>
+            <p className="kicker mb-4" style={{ color: "hsl(var(--matte-gold))" }}>
+              Portal Reset
+            </p>
+            <p
+              className="font-playfair font-bold mb-2"
+              style={{
+                fontSize: "clamp(22px, 3vw, 32px)",
+                lineHeight: 1.15,
+                color: "hsl(var(--foreground))",
+              }}
+            >
+              Sua jornada<br />começa agora.
+            </p>
+            <p
+              className="text-sm mt-3 mb-8 max-w-sm mx-auto leading-relaxed"
+              style={{ color: "hsl(var(--graphite) / 0.6)" }}
+            >
+              Jornada de 10 dias com rituais diários, 3 mentoras de IA e um sistema de sustentação real — para quem já sabe que entender não é suficiente.
+            </p>
+
+            {/* Price block */}
+            <div className="mb-6">
+              <span
+                className="font-playfair font-bold"
+                style={{ fontSize: "clamp(32px, 4vw, 44px)", color: "hsl(var(--foreground))" }}
+              >
+                R$47
+              </span>
+              <span className="text-sm ml-1" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
+                /mês
+              </span>
+              <p className="text-xs mt-1" style={{ color: "hsl(var(--graphite) / 0.45)" }}>
+                Cancele quando quiser. Sem fidelidade.
+              </p>
+            </div>
+
+            <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="block">
+              <Button variant="cta" size="xl" className="gap-2 w-full max-w-xs mx-auto">
+                ENTRAR NO PORTAL RESET
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </a>
+
+            <p className="text-xs mt-4" style={{ color: "hsl(var(--graphite) / 0.38)" }}>
+              Acesso imediato após confirmação do pagamento.
+            </p>
+          </div>
         </motion.div>
 
         {/* Author credit */}
