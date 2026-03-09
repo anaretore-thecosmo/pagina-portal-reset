@@ -1,13 +1,70 @@
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
+const BG_IMAGES = [
+  "https://res.cloudinary.com/dnd2s2dv4/image/upload/f_auto,q_auto,w_1600/v1770421209/erlYw0HUWPflK_zMTmFiM_ijbdeo.avif",
+  "https://res.cloudinary.com/dnd2s2dv4/image/upload/f_auto,q_auto,w_1600/v1770420982/AaBCh0x73PbOjcEnfQDXy_ila51x.avif",
+];
+
+function HeroBg() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setIndex((i) => (i + 1) % BG_IMAGES.length), 6000);
+    return () => clearInterval(t);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <AnimatePresence>
+        <motion.div
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 2.2, ease: "easeInOut" }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("${BG_IMAGES[index]}")`,
+            backgroundSize: "cover",
+            // Desktop: mulher à direita, texto à esquerda
+            backgroundPosition: "65% center",
+          }}
+        />
+      </AnimatePresence>
+
+      {/* Overlay esquerda→direita: texto legível + imagem respira à direita */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(105deg, rgba(8,9,13,0.96) 0%, rgba(8,9,13,0.90) 30%, rgba(8,9,13,0.72) 48%, rgba(8,9,13,0.28) 65%, rgba(8,9,13,0.06) 80%, transparent 100%)",
+        }}
+      />
+      {/* Vinheta inferior → transição suave para próxima seção */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
+        style={{ background: "linear-gradient(to top, #08090D 0%, transparent 100%)" }}
+      />
+      {/* Vinheta superior */}
+      <div
+        className="absolute top-0 left-0 right-0 h-28 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, rgba(8,9,13,0.65) 0%, transparent 100%)" }}
+      />
+    </div>
+  );
+}
+
+// Neuromarketing timing: imagem carrega primeiro (priming emocional),
+// texto entra depois — cérebro límbico processa a imagem antes da razão ler
 const fade = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" },
+    transition: { delay: 0.55 + i * 0.13, duration: 0.65, ease: "easeOut" },
   }),
 };
 
@@ -57,127 +114,114 @@ const LandingPage = () => {
 
       {/* ═══════════════════════════════════════════
           SEÇÃO 1 — HERO
+          Neuromarketing:
+          · Imagem entra primeiro (priming emocional ~100ms)
+          · Texto começa a 550ms (cérebro límbico já processou)
+          · F-pattern: kicker → linha → headline → subhead → CTA (esquerda→baixo)
+          · Mulher à direita respira sem overlay — neurônios-espelho ativam
+          · Crossfade 2.2s entre imagens — movimento periférico inconsciente
       ═══════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden px-6 md:px-12 lg:px-20">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
 
-        {/* Background gradient */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse at 40% 50%, #0D0F18 0%, #08090D 55%, #050608 100%)" }}
-        />
+        {/* Imagens em crossfade no fundo */}
+        <HeroBg />
 
-        {/* Film grain */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-[0.022]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          }}
-        />
+        {/* Conteúdo — coluna esquerda (F-pattern) */}
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-28">
+          <div style={{ maxWidth: "520px" }}>
 
-        {/* Gold ambient glow */}
-        <div
-          className="absolute pointer-events-none"
-          style={{
-            left: "15%",
-            top: "30%",
-            width: "600px",
-            height: "400px",
-            background: "radial-gradient(ellipse at center, rgba(200,184,112,0.04) 0%, transparent 70%)",
-          }}
-        />
+            {/* Kicker */}
+            <motion.p
+              initial="hidden" animate="visible" custom={0} variants={fade}
+              className="font-inter uppercase mb-5"
+              style={{ fontSize: "10px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.75)" }}
+            >
+              Portal Reset · Diagnóstico Gratuito
+            </motion.p>
 
-        <div className="relative z-10 w-full max-w-[820px] mx-auto py-24">
+            {/* Gold line — ancora atenção no eixo X antes da headline */}
+            <motion.div
+              className="h-px mb-7 w-10"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              style={{ background: "#C8B870", transformOrigin: "left" }}
+            />
 
-          {/* Kicker */}
-          <motion.p
-            initial="hidden" animate="visible" custom={0} variants={fade}
-            className="font-inter uppercase mb-6"
-            style={{ fontSize: "10px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.75)" }}
-          >
-            Portal Reset · Diagnóstico Gratuito
-          </motion.p>
-
-          {/* Gold line */}
-          <motion.div
-            className="h-px mb-8 w-12"
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-            style={{ background: "#C8B870", transformOrigin: "left" }}
-          />
-
-          {/* H1 */}
-          <motion.h1
-            initial="hidden" animate="visible" custom={1} variants={fade}
-            style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontWeight: 700,
-              fontSize: "clamp(36px, 6vw, 76px)",
-              lineHeight: 1.0,
-              letterSpacing: "0.02em",
-              textTransform: "uppercase",
-              color: "#EDE6DB",
-            }}
-          >
-            Por que você<br />sabe o que fazer<br />
-            <span style={{ color: "#C8B870" }}>e ainda assim<br />não faz?</span>
-          </motion.h1>
-
-          {/* Subhead */}
-          <motion.p
-            initial="hidden" animate="visible" custom={2} variants={fade}
-            className="mt-8 font-inter leading-[1.8]"
-            style={{ fontSize: "clamp(15px, 1.6vw, 18px)", color: "rgba(207,197,184,0.78)", maxWidth: "560px" }}
-          >
-            Não é falta de força. Não é falta de informação.<br />
-            É que ninguém ainda mostrou <em>onde exatamente</em> o seu automático está ganhando da sua escolha.
-          </motion.p>
-
-          <motion.p
-            initial="hidden" animate="visible" custom={3} variants={fade}
-            className="mt-4 font-inter leading-[1.8]"
-            style={{ fontSize: "clamp(14px, 1.4vw, 16px)", color: "rgba(207,197,184,0.55)", maxWidth: "520px" }}
-          >
-            Este diagnóstico mapeia os 6 eixos do seu padrão interno e revela o arquétipo que define onde você está operando agora.
-          </motion.p>
-
-          {/* CTA */}
-          <motion.div
-            initial="hidden" animate="visible" custom={4} variants={fade}
-            className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-5"
-          >
-            <button
-              onClick={goToQuiz}
-              className="relative font-inter font-semibold uppercase tracking-[0.2em] transition-all duration-300 flex items-center gap-3"
+            {/* H1 — tamanho máximo que cabe no grid de 520px sem quebrar para o lado da imagem */}
+            <motion.h1
+              initial="hidden" animate="visible" custom={1} variants={fade}
               style={{
-                background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
-                color: "#08090D",
-                borderRadius: "8px",
-                border: "1px solid rgba(200,184,112,0.45)",
-                boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
-                height: "56px",
-                paddingLeft: "28px",
-                paddingRight: "28px",
-                fontSize: "13px",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(152,61,6,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
+                fontFamily: "'Playfair Display', Georgia, serif",
+                fontWeight: 700,
+                fontSize: "clamp(34px, 5vw, 64px)",
+                lineHeight: 1.05,
+                letterSpacing: "0.01em",
+                textTransform: "uppercase",
+                color: "#EDE6DB",
               }}
             >
-              Descobrir meu arquétipo
-              <ArrowRight size={15} />
-            </button>
+              Por que você<br />sabe o que fazer<br />
+              <span style={{ color: "#C8B870" }}>e ainda assim<br />não faz?</span>
+            </motion.h1>
 
-            <p className="font-inter" style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.04em" }}>
-              3 minutos · Gratuito · Resultado imediato
-            </p>
-          </motion.div>
+            {/* Subhead 1 */}
+            <motion.p
+              initial="hidden" animate="visible" custom={2} variants={fade}
+              className="mt-7 font-inter leading-[1.85]"
+              style={{ fontSize: "clamp(14px, 1.5vw, 17px)", color: "rgba(207,197,184,0.78)" }}
+            >
+              Não é falta de força. Não é falta de informação.<br />
+              É que ninguém ainda mostrou <em>onde exatamente</em> o seu automático está ganhando da sua escolha.
+            </motion.p>
 
+            {/* Subhead 2 */}
+            <motion.p
+              initial="hidden" animate="visible" custom={3} variants={fade}
+              className="mt-3 font-inter leading-[1.85]"
+              style={{ fontSize: "clamp(13px, 1.3vw, 15px)", color: "rgba(207,197,184,0.50)" }}
+            >
+              Este diagnóstico mapeia os 6 eixos do seu padrão interno e revela o arquétipo que define onde você está operando agora.
+            </motion.p>
+
+            {/* CTA — âncora final do F-pattern */}
+            <motion.div
+              initial="hidden" animate="visible" custom={4} variants={fade}
+              className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+            >
+              <button
+                onClick={goToQuiz}
+                className="relative font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300 flex items-center gap-3"
+                style={{
+                  background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+                  color: "#08090D",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(200,184,112,0.45)",
+                  boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
+                  height: "56px",
+                  paddingLeft: "28px",
+                  paddingRight: "28px",
+                  fontSize: "13px",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(152,61,6,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
+                }}
+              >
+                Descobrir meu arquétipo
+                <ArrowRight size={15} />
+              </button>
+
+              <p className="font-inter" style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.04em" }}>
+                3 minutos · Gratuito · Resultado imediato
+              </p>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
