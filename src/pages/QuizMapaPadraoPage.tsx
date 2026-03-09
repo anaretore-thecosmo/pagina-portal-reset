@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -633,6 +633,8 @@ const RespiroScreen = ({
 
 const QuizMapaPadraoPage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const startDirect = searchParams.get("start") === "1";
 
   const restored = useMemo(() => {
     try {
@@ -652,6 +654,7 @@ const QuizMapaPadraoPage = () => {
 
   const [step, setStep] = useState<Step>(() => {
     if (restored && restored.answers.some((a) => a !== null && a !== 0)) return "question";
+    if (startDirect) return "question"; // vindo da LandingPage, pula intro
     return "intro";
   });
   const [currentQuestion, setCurrentQuestion] = useState(() => restored?.resumeAt ?? 0);

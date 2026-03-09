@@ -101,7 +101,7 @@ const ENTREGAS = [
 
 const LandingPage = () => {
   const nav = useNavigate();
-  const goToQuiz = () => nav("/quiz-mapa-do-padrao");
+  const goToQuiz = () => nav("/quiz-mapa-do-padrao?start=1");
 
   return (
     <div style={{ background: "#08090D", color: "#EDE6DB", minHeight: "100vh" }}>
