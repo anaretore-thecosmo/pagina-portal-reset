@@ -231,7 +231,112 @@ const LandingPage = () => {
       </section>
 
       {/* ═══════════════════════════════════════════
-          SEÇÃO 2 — IDENTIFICAÇÃO (dores)
+          SEÇÃO 2 — O QUE VOCÊ RECEBE + COMO FUNCIONA
+          (conteúdo da IntroScreen — para quem não clicou ainda)
+      ═══════════════════════════════════════════ */}
+      <section
+        className="px-6 md:px-12 lg:px-20 py-20 md:py-28"
+        style={{ borderTop: "1px solid rgba(200,184,112,0.07)" }}
+      >
+        <div className="max-w-[820px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20">
+
+          {/* Coluna 1 — Ao final, você recebe */}
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
+            variants={inView}
+          >
+            <p className="font-inter uppercase mb-4" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
+              Ao final, você recebe
+            </p>
+            <div className="w-8 h-px mb-8" style={{ background: "rgba(200,184,112,0.3)" }} />
+
+            <div className="space-y-6">
+              {[
+                { n: "1", t: "Sua mandala de 6 eixos" },
+                { n: "2", t: "Uma leitura que traduz o mapa em decisão" },
+                { n: "3", t: "Um plano de 7 dias com foco real" },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial="hidden" whileInView="visible"
+                  viewport={{ once: true, margin: "-40px" }}
+                  custom={i}
+                  variants={fade}
+                  className="flex gap-4 items-start"
+                >
+                  <span
+                    className="font-playfair font-bold shrink-0"
+                    style={{ fontSize: "20px", color: "#C8B870", lineHeight: 1, marginTop: "2px" }}
+                  >
+                    {item.n}
+                  </span>
+                  <p
+                    className="font-inter leading-relaxed"
+                    style={{ fontSize: "clamp(14px, 1.4vw, 16px)", color: "rgba(207,197,184,0.82)" }}
+                  >
+                    {item.t}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Coluna 2 — Como funciona */}
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
+            variants={inView}
+          >
+            <p className="font-inter uppercase mb-4" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
+              Como funciona
+            </p>
+            <div className="w-8 h-px mb-8" style={{ background: "rgba(200,184,112,0.3)" }} />
+
+            <div className="space-y-6">
+              {[
+                { n: "01", t: "Escala de 1 a 9, pensando nos últimos 30 dias." },
+                { n: "02", t: "Pausas curtas a cada 6 etapas para recalibrar." },
+                { n: "03", t: "No final, o espelho vira guia." },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial="hidden" whileInView="visible"
+                  viewport={{ once: true, margin: "-40px" }}
+                  custom={i}
+                  variants={fade}
+                  className="flex gap-4 items-start"
+                >
+                  <span
+                    className="font-playfair font-bold shrink-0"
+                    style={{ fontSize: "20px", color: "rgba(200,184,112,0.4)", lineHeight: 1, marginTop: "2px" }}
+                  >
+                    {item.n}
+                  </span>
+                  <p
+                    className="font-inter leading-relaxed"
+                    style={{ fontSize: "clamp(14px, 1.4vw, 16px)", color: "rgba(207,197,184,0.65)" }}
+                  >
+                    {item.t}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Manifesto */}
+            <motion.p
+              initial="hidden" whileInView="visible" viewport={{ once: true }}
+              variants={inView}
+              className="mt-10 font-playfair"
+              style={{ fontSize: "clamp(13px, 1.3vw, 15px)", color: "rgba(200,184,112,0.5)", fontStyle: "italic" }}
+            >
+              Sem julgamento. Só direção.
+            </motion.p>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          SEÇÃO 3 — IDENTIFICAÇÃO (dores)
       ═══════════════════════════════════════════ */}
       <section className="px-6 md:px-12 lg:px-20 py-20 md:py-28">
         <div className="max-w-[820px] mx-auto">
