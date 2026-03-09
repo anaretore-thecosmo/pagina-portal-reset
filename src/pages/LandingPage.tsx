@@ -127,67 +127,58 @@ const LandingPage = () => {
         <HeroBg />
 
         {/* Conteúdo — coluna esquerda (F-pattern) */}
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-28">
-          <div style={{ maxWidth: "520px" }}>
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-16">
+          <div style={{ maxWidth: "500px" }}>
 
             {/* Kicker */}
             <motion.p
               initial="hidden" animate="visible" custom={0} variants={fade}
-              className="font-inter uppercase mb-5"
+              className="font-inter uppercase mb-4"
               style={{ fontSize: "10px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.75)" }}
             >
               Portal Reset · Diagnóstico Gratuito
             </motion.p>
 
-            {/* Gold line — ancora atenção no eixo X antes da headline */}
+            {/* Gold line */}
             <motion.div
-              className="h-px mb-7 w-10"
+              className="h-px mb-5 w-10"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               style={{ background: "#C8B870", transformOrigin: "left" }}
             />
 
-            {/* H1 — tamanho máximo que cabe no grid de 520px sem quebrar para o lado da imagem */}
+            {/* H1 — fonte reduzida, cabe na primeira dobra */}
             <motion.h1
               initial="hidden" animate="visible" custom={1} variants={fade}
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontWeight: 700,
-                fontSize: "clamp(34px, 5vw, 64px)",
-                lineHeight: 1.05,
+                fontSize: "clamp(26px, 3.8vw, 50px)",
+                lineHeight: 1.08,
                 letterSpacing: "0.01em",
                 textTransform: "uppercase",
                 color: "#EDE6DB",
               }}
             >
-              Por que você<br />sabe o que fazer<br />
-              <span style={{ color: "#C8B870" }}>e ainda assim<br />não faz?</span>
+              Por que você sabe o que fazer<br />
+              <span style={{ color: "#C8B870" }}>e ainda assim não faz?</span>
             </motion.h1>
 
-            {/* Subhead 1 */}
+            {/* Subhead — dor nomeada */}
             <motion.p
               initial="hidden" animate="visible" custom={2} variants={fade}
-              className="mt-7 font-inter leading-[1.85]"
-              style={{ fontSize: "clamp(14px, 1.5vw, 17px)", color: "rgba(207,197,184,0.78)" }}
+              className="mt-5 font-inter leading-[1.85]"
+              style={{ fontSize: "clamp(13px, 1.4vw, 16px)", color: "rgba(207,197,184,0.78)" }}
             >
               Não é falta de força. Não é falta de informação.<br />
               É que ninguém ainda mostrou <em>onde exatamente</em> o seu automático está ganhando da sua escolha.
             </motion.p>
 
-            {/* Subhead 2 */}
-            <motion.p
-              initial="hidden" animate="visible" custom={3} variants={fade}
-              className="mt-3 font-inter leading-[1.85]"
-              style={{ fontSize: "clamp(13px, 1.3vw, 15px)", color: "rgba(207,197,184,0.50)" }}
-            >
-              Este diagnóstico mapeia os 6 eixos do seu padrão interno e revela o arquétipo que define onde você está operando agora.
-            </motion.p>
-
-            {/* CTA — âncora final do F-pattern */}
+            {/* CTA — logo após a dor (pico emocional) */}
             <motion.div
-              initial="hidden" animate="visible" custom={4} variants={fade}
-              className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+              initial="hidden" animate="visible" custom={3} variants={fade}
+              className="mt-7 flex items-center gap-4 flex-wrap"
             >
               <button
                 onClick={goToQuiz}
@@ -198,10 +189,10 @@ const LandingPage = () => {
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
                   boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
-                  height: "56px",
-                  paddingLeft: "28px",
-                  paddingRight: "28px",
-                  fontSize: "13px",
+                  height: "52px",
+                  paddingLeft: "26px",
+                  paddingRight: "26px",
+                  fontSize: "12px",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
@@ -213,13 +204,27 @@ const LandingPage = () => {
                 }}
               >
                 Descobrir meu arquétipo
-                <ArrowRight size={15} />
+                <ArrowRight size={14} />
               </button>
-
-              <p className="font-inter" style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.04em" }}>
-                3 minutos · Gratuito · Resultado imediato
-              </p>
             </motion.div>
+
+            {/* Texto descritivo — confirmação racional pós-CTA */}
+            <motion.p
+              initial="hidden" animate="visible" custom={4} variants={fade}
+              className="mt-5 font-inter leading-[1.8]"
+              style={{ fontSize: "clamp(12px, 1.2vw, 14px)", color: "rgba(207,197,184,0.45)" }}
+            >
+              Este diagnóstico mapeia os 6 eixos do seu padrão interno e revela o arquétipo que define onde você está operando agora.
+            </motion.p>
+
+            {/* Microcopy */}
+            <motion.p
+              initial="hidden" animate="visible" custom={5} variants={fade}
+              className="mt-2 font-inter"
+              style={{ fontSize: "11px", color: "rgba(200,184,112,0.4)", letterSpacing: "0.04em" }}
+            >
+              3 minutos · Gratuito · Resultado imediato
+            </motion.p>
 
           </div>
         </div>
