@@ -444,8 +444,9 @@ const QuestionScreen = ({
   const isDark = currentIndex % 2 !== 0;
   const bg = isDark ? "hsl(215 25% 10%)" : "hsl(var(--off-white))";
   const fg = isDark ? "hsl(var(--off-white))" : "hsl(var(--graphite))";
-  const fgMuted = isDark ? "hsl(var(--off-white) / 0.4)" : "hsl(var(--graphite) / 0.4)";
-  const borderSubtle = isDark ? "hsl(0 0% 100% / 0.12)" : "hsl(var(--graphite) / 0.12)";
+  // Fundo claro: cor sólida (~7:1 contraste) em vez de opacidade (~2.8:1)
+  const fgMuted = isDark ? "hsl(var(--off-white) / 0.45)" : "hsl(60 4% 32%)";
+  const borderSubtle = isDark ? "hsl(0 0% 100% / 0.14)" : "hsl(60 4% 38% / 0.3)";
   const goldAccent = "hsl(var(--matte-gold))";
 
   return (
