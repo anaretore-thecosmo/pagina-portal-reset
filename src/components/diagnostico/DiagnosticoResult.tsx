@@ -13,7 +13,7 @@ import {
 } from "@/data/espelhoEngine";
 
 interface DiagnosticoResultProps {
-  scores: number[];
+  scores?: number[];
   userName: string;
   answers?: (number | null)[];
   sessionId?: string;
@@ -62,10 +62,8 @@ const ARQUETIPO_THEME: Record<string, {
 
 const KIWIFY_URL = "https://pay.kiwify.com.br/ns0fjIx";
 
-const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps) => {
-  const data: EspelhoData = answers
-    ? computeEspelho(answers)
-    : computeEspelho(scores.flatMap((s) => [s, s]));
+const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
+  const data: EspelhoData = computeEspelho(answers ?? []);
 
   const editorial = generateEditorialDiagnostic(data);
   const plan = generate7DayPlan(data);
@@ -85,7 +83,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
 
         {/* ===== HEADER ===== */}
         <motion.div initial="hidden" animate="visible" custom={0} variants={fade}>
-          <div className="flex items-start justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <p className="kicker mb-4">Resultado</p>
               <h1
@@ -106,7 +104,7 @@ const DiagnosticoResult = ({ scores, userName, answers }: DiagnosticoResultProps
                 </p>
               )}
             </div>
-            <Button variant="editorialOutline" size="sm" onClick={handleDownloadPDF} className="gap-2 shrink-0 mt-2">
+            <Button variant="editorialOutline" size="sm" onClick={handleDownloadPDF} className="gap-2 shrink-0 self-start sm:mt-2">
               <Download className="w-4 h-4" />
               Baixar PDF
             </Button>

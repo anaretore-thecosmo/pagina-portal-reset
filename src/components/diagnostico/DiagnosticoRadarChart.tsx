@@ -6,7 +6,7 @@ import {
   Radar,
   ResponsiveContainer,
 } from "recharts";
-import { dimensionLabels } from "@/data/diagnosticoQuestions";
+import { dimensionLabels } from "@/data/quizMapaPadrao";
 
 interface DiagnosticoRadarChartProps {
   scores: number[];

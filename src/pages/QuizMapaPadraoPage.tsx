@@ -457,7 +457,7 @@ const QuestionScreen = ({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="min-h-screen flex flex-col items-center justify-center px-6"
+        className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6"
         style={{ background: bg, color: fg }}
       >
         <div className="w-full max-w-lg">
@@ -522,7 +522,7 @@ const QuestionScreen = ({
               <span>1 — quase nunca</span>
               <span>9 — quase sempre</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-0.5">
               {SCALE.map((val) => {
                 const isSelected = selected === val;
                 return (
@@ -531,7 +531,8 @@ const QuestionScreen = ({
                     onClick={() => setSelected(val)}
                     className="relative flex items-center justify-center transition-all duration-200"
                     style={{
-                      width: "36px",
+                      flex: "1 1 0",
+                      minWidth: 0,
                       height: "48px",
                       borderTop: `1.5px solid ${isSelected ? goldAccent : borderSubtle}`,
                       borderBottom: `1.5px solid ${isSelected ? goldAccent : borderSubtle}`,

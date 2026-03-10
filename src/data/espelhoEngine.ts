@@ -1,4 +1,4 @@
-import { dimensionLabels, diagnosticoQuestions } from "@/data/diagnosticoQuestions";
+import { dimensionLabels, quizQuestions as diagnosticoQuestions } from "@/data/quizMapaPadrao";
 
 /* ── Types ──────────────────────────────────────────── */
 

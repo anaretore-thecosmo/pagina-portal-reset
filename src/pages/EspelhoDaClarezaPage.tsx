@@ -17,12 +17,7 @@ const EspelhoDaClarezaPage = () => {
     // Try navigation state first
     if (state?.session?.answers?.length === 24) {
       const answers = state.session.answers.map((a) => a.value);
-      const scores = Array.from({ length: 12 }, (_, i) => {
-        const q1 = 10 - (answers[i * 2] ?? 5);
-        const q2 = 10 - (answers[i * 2 + 1] ?? 5);
-        return (q1 + q2) / 2;
-      });
-      return { scores, answers: answers as (number | null)[], sessionId: state.session.sessionId };
+      return { answers: answers as (number | null)[], sessionId: state.session.sessionId };
     }
 
     // Fallback: localStorage
@@ -33,12 +28,7 @@ const EspelhoDaClarezaPage = () => {
         if (sid && session.sessionId !== sid) return null;
         if (session.answers.length === 24) {
           const answers = session.answers.map((a) => a.value);
-          const scores = Array.from({ length: 12 }, (_, i) => {
-            const q1 = 10 - (answers[i * 2] ?? 5);
-            const q2 = 10 - (answers[i * 2 + 1] ?? 5);
-            return (q1 + q2) / 2;
-          });
-          return { scores, answers: answers as (number | null)[], sessionId: session.sessionId };
+          return { answers: answers as (number | null)[], sessionId: session.sessionId };
         }
       }
     } catch {}
@@ -54,7 +44,7 @@ const EspelhoDaClarezaPage = () => {
 
   return (
     <main className="min-h-screen bg-background">
-      <DiagnosticoResult scores={resolved.scores} userName="" answers={resolved.answers} sessionId={resolved.sessionId} />
+      <DiagnosticoResult userName="" answers={resolved.answers} sessionId={resolved.sessionId} />
     </main>
   );
 };

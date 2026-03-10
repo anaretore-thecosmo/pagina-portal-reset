@@ -42,6 +42,11 @@ export const quizRespiros: QuizRespiro[] = [
   { text: "Fechou. Agora a gente transforma isso em direção.", buttonLabel: "Ver meu Espelho" },
 ];
 
+export const dimensionLabels: string[] = [
+  "Eixo 1", "Eixo 2", "Eixo 3", "Eixo 4", "Eixo 5", "Eixo 6",
+  "Eixo 7", "Eixo 8", "Eixo 9", "Eixo 10", "Eixo 11", "Eixo 12",
+];
+
 export interface QuizAnswer {
   id: string;
   value: number;
