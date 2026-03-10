@@ -180,7 +180,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                     style={{ borderColor: "hsl(var(--graphite) / 0.08)" }}
                   >
                     <div className="flex items-baseline justify-between">
-                      <span className="text-sm font-medium">Eixo {axis.axis}</span>
+                      <span className="text-sm font-medium">{axis.label}</span>
                       <span className="font-playfair font-bold text-lg" style={{ color: "hsl(30 55% 48%)" }}>
                         {axis.mean.toFixed(1)}
                       </span>
@@ -205,7 +205,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                     style={{ borderColor: "hsl(var(--graphite) / 0.08)" }}
                   >
                     <div className="flex items-baseline justify-between">
-                      <span className="text-sm font-medium">Eixo {axis.axis}</span>
+                      <span className="text-sm font-medium">{axis.label}</span>
                       <span className="font-playfair font-bold text-lg" style={{ color: "hsl(215 12% 32%)" }}>
                         {axis.mean.toFixed(1)}
                       </span>
@@ -231,17 +231,17 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             }}
           >
             <p className="font-playfair font-semibold text-lg" style={{ color: "hsl(var(--foreground))" }}>
-              Eixo {data.centralAxis.axis}
+              {data.centralAxis.label}
               <span className="text-sm font-inter font-normal ml-2" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
                 tensão {data.centralAxis.tension.toFixed(0)}
               </span>
             </p>
             <p className="text-sm mt-2" style={{ color: "hsl(var(--graphite) / 0.68)" }}>
               {data.centralAxis.clinical > data.centralAxis.symbolic
-                ? `No Eixo ${data.centralAxis.axis}, você executa mais do que sente. A ação corre na frente da presença.`
+                ? `Em ${data.centralAxis.label}, você executa mais do que sente. A ação corre na frente da presença.`
                 : data.centralAxis.clinical < data.centralAxis.symbolic
-                  ? `No Eixo ${data.centralAxis.axis}, você sente mais do que consegue sustentar. A percepção existe, mas falta chão.`
-                  : `No Eixo ${data.centralAxis.axis}, existe uma oscilação entre sentir e agir. O ponto de equilíbrio ainda não estabilizou.`}
+                  ? `Em ${data.centralAxis.label}, você sente mais do que consegue sustentar. A percepção existe, mas falta chão.`
+                  : `Em ${data.centralAxis.label}, existe uma oscilação entre sentir e agir. O ponto de equilíbrio ainda não estabilizou.`}
             </p>
           </div>
         </motion.div>
@@ -266,7 +266,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             ].map(({ axis, tag }) => (
               <div key={axis.index} className="flex items-baseline gap-1.5">
                 <span className="font-playfair font-bold text-sm" style={{ color: "hsl(var(--matte-gold))" }}>
-                  Eixo {axis.axis}
+                  {axis.label}
                 </span>
                 <span className="text-xs" style={{ color: "hsl(var(--graphite) / 0.55)" }}>
                   {getAxisMicro(axis.type).title}
@@ -296,8 +296,8 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             ))}
           </div>
           <p className="text-xs mt-4 italic" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
-            Seu foco esta semana é estabilizar Eixo {data.bottom3[0].axis} e Eixo {data.bottom3[1].axis}, e reduzir a tensão no Eixo{" "}
-            {data.centralAxis.axis}. Proteja Eixo {data.top3[0].axis} para não virar sobrecarga.
+            Seu foco esta semana é estabilizar {data.bottom3[0].label} e {data.bottom3[1].label}, e reduzir a tensão em{" "}
+            {data.centralAxis.label}. Proteja {data.top3[0].label} para não virar sobrecarga.
           </p>
         </motion.div>
 

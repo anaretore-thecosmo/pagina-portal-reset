@@ -43,8 +43,8 @@ export const quizRespiros: QuizRespiro[] = [
 ];
 
 export const dimensionLabels: string[] = [
-  "Eixo 1", "Eixo 2", "Eixo 3", "Eixo 4", "Eixo 5", "Eixo 6",
-  "Eixo 7", "Eixo 8", "Eixo 9", "Eixo 10", "Eixo 11", "Eixo 12",
+  "Presença", "Valor", "Mente", "Raízes", "Essência", "Prática",
+  "Espelho", "Transformação", "Expansão", "Missão", "Visão", "Sombra",
 ];
 
 export interface QuizAnswer {
