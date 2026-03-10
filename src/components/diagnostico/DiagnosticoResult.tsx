@@ -61,6 +61,56 @@ const ARQUETIPO_THEME: Record<string, {
 };
 
 const KIWIFY_URL = "https://pay.kiwify.com.br/ns0fjIx";
+const PLANO_A_URL = "mailto:ana.retore@gmail.com?subject=Quero%20saber%20mais%20sobre%20o%20Plano%20A";
+
+const ARQUETIPO_OFFER: Record<string, {
+  aberturaCopy: string;
+  destaques: { nome: string; desc: string }[];
+  ctaLabel: string;
+  planoA?: boolean;
+}> = {
+  Curiosa: {
+    aberturaCopy: "Você sentiu o incômodo. Agora ele tem nome. O Portal Reset foi criado para o momento em que você ainda não sabe exatamente o que precisa mudar — mas já sabe que algo precisa mudar.",
+    destaques: [
+      { nome: "10 Portais", desc: "uma jornada de autoconhecimento com rituais guiados, passo a passo" },
+      { nome: "Ayra", desc: "mentora de consciência com IA — disponível para conversar a qualquer momento" },
+      { nome: "Círculo", desc: "diário de frequência para registrar o que está vivo em você" },
+      { nome: "Sistema", desc: "pontos, níveis e conquistas que sustentam o caminho" },
+    ],
+    ctaLabel: "COMEÇAR MINHA JORNADA",
+  },
+  Buscadora: {
+    aberturaCopy: "Você já tentou. Já sabe o que precisa. O que escapa não é intenção — é sustentação. O Portal Reset não é mais um conteúdo para consumir. É um sistema para sustentar o que você já sabe.",
+    destaques: [
+      { nome: "Rituais guiados", desc: "10 portais com práticas curtas e repetíveis — sem depender de motivação" },
+      { nome: "Círculo", desc: "diário de frequência que acompanha sua consistência sem julgamento" },
+      { nome: "Ayra", desc: "mentora de consciência — para quando a mente acelera e você precisa de âncora" },
+      { nome: "Sistema de progresso", desc: "estrutura visível que mostra que você está sustentando" },
+    ],
+    ctaLabel: "ENTRAR NO SISTEMA",
+  },
+  Estrategista: {
+    aberturaCopy: "Você funciona. Entrega. Mas em algum ponto cobra um preço de si mesma que ninguém vê. O Portal Reset não é sobre começar — é sobre fechar o pacto com o que você já construiu.",
+    destaques: [
+      { nome: "Portal 10", desc: "Selando o Pacto com o Propósito — o ponto de chegada da jornada" },
+      { nome: "Cléo", desc: "mentora de poder e magnetismo — 10 lições para quem já tem base e quer precisão" },
+      { nome: "Galeria Alquímica", desc: "geração de imagem com IA para ancorar sua visão no campo simbólico" },
+      { nome: "Ayra", desc: "mentora de consciência para refinar, não para explicar o básico" },
+    ],
+    ctaLabel: "FECHAR O PACTO",
+  },
+  Soberana: {
+    aberturaCopy: "Você já tem base. O Portal Reset é o lugar de ancorar o que você já é — e sustentar a expansão sem sacrifício. Entre. E quando sentir que está pronta para um passo maior, o Plano A é a próxima conversa.",
+    destaques: [
+      { nome: "Cléo", desc: "mentora de poder pessoal — desbloqueada para você desde o início" },
+      { nome: "Portal 10", desc: "Selando o Pacto com o Propósito — seu ponto de partida, não de chegada" },
+      { nome: "Galeria Alquímica", desc: "geração de imagem com IA para materializar a frequência do que você está criando" },
+      { nome: "Ayra", desc: "mentora de consciência disponível para conversas de refinamento" },
+    ],
+    ctaLabel: "ENTRAR NO PORTAL RESET",
+    planoA: true,
+  },
+};
 
 const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
   const data: EspelhoData = computeEspelho(answers ?? []);
@@ -400,62 +450,49 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             </div>
           </div>
 
-          {/* ── Virada: seção de oferta com fundo escuro ── */}
-          <div
-            className="mt-10 -mx-6 px-6 pt-10 pb-2 sm:-mx-0 sm:rounded-2xl"
-            style={{ background: "#08090D" }}
-          >
-            {/* O que o Portal Reset entrega */}
-            <p className="font-inter uppercase mb-5" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
-              O que o Portal Reset entrega
-            </p>
-            <div className="space-y-3">
-              {[
-                { nome: "Jornada", desc: "10 dias com rituais diários guiados" },
-                { nome: "Ayra", desc: "mentora de consciência com IA (chat livre)" },
-                { nome: "Cléo", desc: "mentora de poder e magnetismo (10 lições)" },
-                { nome: "Círculo", desc: "diário de frequência com tags de energia" },
-                { nome: "Galeria Alquímica", desc: "geração de imagem com IA" },
-                { nome: "Sistema", desc: "pontos, níveis e conquistas" },
-              ].map((item, i) => (
-                <div key={i} className="flex gap-3 items-baseline">
-                  <span
-                    className="font-inter font-semibold text-sm shrink-0"
-                    style={{ color: "#C8B870" }}
-                  >
-                    {item.nome}
-                  </span>
-                  <span className="text-sm leading-relaxed" style={{ color: "rgba(207,197,184,0.6)" }}>
-                    {item.desc}
-                  </span>
+          {/* ── Oferta: variação por arquétipo ── */}
+          {(() => {
+            const offer = ARQUETIPO_OFFER[arquetipo.nome];
+            return (
+              <div
+                className="mt-10 -mx-6 px-6 pt-10 pb-2 sm:-mx-0 sm:rounded-2xl"
+                style={{ background: "#08090D" }}
+              >
+                {/* Abertura copy */}
+                <p
+                  className="text-[15px] leading-[1.85] mb-8"
+                  style={{ color: "rgba(207,197,184,0.72)" }}
+                >
+                  {offer.aberturaCopy}
+                </p>
+
+                {/* Destaques */}
+                <p className="font-inter uppercase mb-4" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
+                  O que você acessa
+                </p>
+                <div className="space-y-3 mb-8">
+                  {offer.destaques.map((item, i) => (
+                    <div key={i} className="flex gap-3 items-baseline">
+                      <span className="font-inter font-semibold text-sm shrink-0" style={{ color: "#C8B870" }}>
+                        {item.nome}
+                      </span>
+                      <span className="text-sm leading-relaxed" style={{ color: "rgba(207,197,184,0.6)" }}>
+                        {item.desc}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
-            {/* Cléo bloco */}
-            <div
-              className="mt-8 p-5 rounded-xl"
-              style={{
-                background: "rgba(200,184,112,0.06)",
-                border: "1px solid rgba(200,184,112,0.18)",
-              }}
-            >
-              <p className="font-inter uppercase mb-2" style={{ fontSize: "9px", letterSpacing: "0.35em", color: "#C8B870" }}>
-                Sobre Cléo
-              </p>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(207,197,184,0.65)" }}>
-                {arquetipo.cleoBloco}
-              </p>
-            </div>
-
-            {/* Primeiro passo */}
-            <p
-              className="mt-8 text-[15px] leading-relaxed font-medium text-center"
-              style={{ color: "rgba(237,230,219,0.75)" }}
-            >
-              {arquetipo.primeiroPassoTexto}
-            </p>
-          </div>
+                {/* Primeiro passo */}
+                <p
+                  className="text-[14px] leading-relaxed font-medium text-center mb-2"
+                  style={{ color: "rgba(237,230,219,0.65)" }}
+                >
+                  {arquetipo.primeiroPassoTexto}
+                </p>
+              </div>
+            );
+          })()}
         </motion.div>
 
         {/* ===== CTA FINAL ===== */}
@@ -505,7 +542,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
 
             <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="block">
               <Button variant="cta" size="xl" className="gap-2 w-full max-w-xs mx-auto">
-                ENTRAR NO PORTAL RESET
+                {ARQUETIPO_OFFER[arquetipo.nome].ctaLabel}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
@@ -513,6 +550,22 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             <p className="text-xs mt-4" style={{ color: "rgba(207,197,184,0.35)" }}>
               Acesso imediato após confirmação do pagamento.
             </p>
+
+            {/* Plano A — apenas para Soberana */}
+            {ARQUETIPO_OFFER[arquetipo.nome].planoA && (
+              <div className="mt-8 pt-6" style={{ borderTop: "1px solid rgba(200,184,112,0.08)" }}>
+                <p className="text-xs mb-3" style={{ color: "rgba(207,197,184,0.4)" }}>
+                  Se sentir que está pronta para um passo maior —
+                </p>
+                <a
+                  href={PLANO_A_URL}
+                  className="font-inter text-sm transition-opacity hover:opacity-80"
+                  style={{ color: "rgba(200,184,112,0.6)", textDecoration: "underline", textUnderlineOffset: "3px" }}
+                >
+                  Quero saber sobre o Plano A →
+                </a>
+              </div>
+            )}
 
             {/* Author credit dentro do bloco escuro */}
             <div className="mt-12 pt-4" style={{ borderTop: '1px solid rgba(200,184,112,0.1)' }}>
