@@ -308,6 +308,7 @@ export interface ArquetipoData {
   sinais: string[];
   primeiroPassoTexto: string;
   cleoBloco: string;
+  convocacao: string;
 }
 
 const arquetipos: Record<'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana', Omit<ArquetipoData, 'sinais'> & { sinaisFactory: (data: EspelhoData) => string[] }> = {
@@ -315,8 +316,12 @@ const arquetipos: Record<'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana', 
     nome: 'Curiosa',
     abertura: 'Você já sentiu o incômodo. Mas ainda não tem um mapa claro.',
     dorRaiz: 'O ruído está ocupando o espaço da escolha. Não é falta de força — é falta de código. O padrão ainda não tem forma, mas já tem custo.',
-    cicloRecomendado: 'Ciclo Destrava — Códigos 01, 03 e 09',
-    codigosRecomendados: ['Código 01', 'Código 03', 'Código 09'],
+    cicloRecomendado: 'Ciclo Destrava — Portais 01, 03 e 09',
+    codigosRecomendados: [
+      'Portal 01 · Revelando as correntes invisíveis',
+      'Portal 03 · Transformando Crenças em Poder',
+      'Portal 09 · Rito de Liberação: Despedindo-se dos Medos',
+    ],
     sinaisFactory: (data) => [
       `Em ${data.bottom3[0].label}: o ruído ocupa mais espaço do que a escolha.`,
       `Em ${data.bottom3[1].label}: o automático ganhou do intencional.`,
@@ -324,13 +329,18 @@ const arquetipos: Record<'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana', 
     ],
     primeiroPassoTexto: 'Nomeie o padrão. Antes de mudar qualquer coisa, você precisa ver onde o custo está.',
     cleoBloco: 'Cléo não é bônus. É o próximo nível — e você chega lá pelo caminho, não pelo atalho.',
+    convocacao: 'O que você está sentindo não é confusão — é o início do reconhecimento. O Portal 01 foi criado exatamente para o momento em que o incômodo ainda não tem nome. Você não precisa de mais força de vontade. Você precisa de um mapa. E ele começa aqui.',
   },
   Buscadora: {
     nome: 'Buscadora',
     abertura: 'Você já entende que precisa mudar. Mas ainda perde consistência.',
     dorRaiz: 'Você já tentou. Já sabe o que precisa. O problema não é conhecimento — é sustentar o que você começa sem se punir quando oscila.',
-    cicloRecomendado: 'Ciclo Recomeço — Códigos 04, 05 e 07',
-    codigosRecomendados: ['Código 04', 'Código 05', 'Código 07'],
+    cicloRecomendado: 'Ciclo Recomeço — Portais 04, 05 e 07',
+    codigosRecomendados: [
+      'Portal 04 · Cartas de Cura e Recomeço',
+      'Portal 05 · Ouvindo com o Coração',
+      'Portal 07 · Diário de Encantamento e Gratidão',
+    ],
     sinaisFactory: (data) => [
       `Em ${data.bottom3[0].label}: a consistência quebra antes de virar hábito.`,
       `Em ${data.bottom3[1].label}: você recomeça, mas o ponto de partida muda a cada vez.`,
@@ -338,13 +348,18 @@ const arquetipos: Record<'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana', 
     ],
     primeiroPassoTexto: 'Estabilize antes de expandir. Uma ação pequena sustentada vale mais que dez picos.',
     cleoBloco: 'Cléo é o prêmio da consistência. Você desbloqueia quando o padrão se sustenta — não antes.',
+    convocacao: 'Você já sabe que precisa mudar — e isso é mais do que a maioria. O que escapa não é a intenção. É o fio. O Portal 04 começa pelo que ficou para trás: as coisas não ditas, as tentativas não reconhecidas. Você merece recomeçar com raízes, não com culpa.',
   },
   Estrategista: {
     nome: 'Estrategista',
     abertura: 'Você já tem clareza e ação. O que falta é sustentação e padrão.',
     dorRaiz: 'Você funciona. Resolve. Entrega. Mas em algum ponto, você se trai — e isso aparece no corpo, no dinheiro ou nas emoções. O código existe. Falta pacto.',
-    cicloRecomendado: 'Ciclo Direção — Códigos 06, 08 e 10',
-    codigosRecomendados: ['Código 06', 'Código 08', 'Código 10'],
+    cicloRecomendado: 'Ciclo Direção — Portais 06, 08 e 10',
+    codigosRecomendados: [
+      'Portal 06 · Abrindo a Caixa de Pandora do Propósito',
+      'Portal 08 · Alinhando Sonhos com Ação',
+      'Portal 10 · Selando o Pacto com o Propósito',
+    ],
     sinaisFactory: (data) => [
       `Em ${data.bottom3[0].label}: a base está lá, mas o padrão ainda oscila.`,
       `Em ${data.bottom3[1].label}: você consegue — mas o custo é mais alto do que deveria.`,
@@ -352,13 +367,17 @@ const arquetipos: Record<'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana', 
     ],
     primeiroPassoTexto: 'Feche o pacto. Transforme o que já funciona em ritual repetível — e sustente.',
     cleoBloco: 'Cléo é magnetismo estratégico. Para quem já tem base e quer precisão. Está próxima para você.',
+    convocacao: 'Você já chegou longe. Funciona. Entrega. Mas em algum ponto, o custo ficou invisível — e o padrão cobra a conta no corpo, nas relações ou nos resultados. O Portal 06 não é sobre começar do zero. É sobre parar de carregar o que já não cabe no propósito que você construiu.',
   },
   Soberana: {
     nome: 'Soberana',
     abertura: 'Você já voltou pro comando. Agora é precisão, presença e influência.',
     dorRaiz: 'Você já tem base. O desafio agora é não transformar excelência em sobrecarga — e usar o que construiu para expandir com precisão, não com mais esforço.',
-    cicloRecomendado: 'Código 10 (Pacto) + Cléo desbloqueada como prioridade',
-    codigosRecomendados: ['Código 10', 'Cléo (prioridade)'],
+    cicloRecomendado: 'Portal 10 + Cléo desbloqueada como prioridade',
+    codigosRecomendados: [
+      'Portal 10 · Selando o Pacto com o Propósito',
+      'Cléo · Mentora de Poder Pessoal — desbloqueada',
+    ],
     sinaisFactory: (data) => [
       `Em ${data.top3[0].label}: você está acima do ruído — isso precisa ser protegido, não expandido à força.`,
       `Em ${data.bottom3[0].label}: mesmo com base sólida, esse ponto ainda consome energia silenciosamente.`,
@@ -366,6 +385,7 @@ const arquetipos: Record<'Curiosa' | 'Buscadora' | 'Estrategista' | 'Soberana', 
     ],
     primeiroPassoTexto: 'Eleve o padrão. Cléo é o próximo nível — e está disponível para você agora.',
     cleoBloco: 'Cléo é sua por direito. Você já tem a base. Agora é magnetismo, reputação e legado.',
+    convocacao: 'Você já voltou para o comando — e o diagnóstico confirma isso. O Portal 10 não é um fim. É um pacto: entre o que você construiu e o que você ainda vai criar. Cléo está aqui para refinar, não para ensinar o básico. Você já passou disso.',
   },
 };
 

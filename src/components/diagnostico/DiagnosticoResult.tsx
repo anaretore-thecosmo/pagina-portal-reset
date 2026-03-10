@@ -400,6 +400,19 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             </div>
           </div>
 
+          {/* ── Convocação da mentora ── */}
+          <div className="mt-10">
+            <p className="font-inter uppercase mb-3" style={{ fontSize: "9px", letterSpacing: "0.35em", color: theme.accent, opacity: 0.7 }}>
+              Uma palavra
+            </p>
+            <p
+              className="text-[15px] leading-[1.85] italic"
+              style={{ color: "hsl(var(--graphite) / 0.72)" }}
+            >
+              {arquetipo.convocacao}
+            </p>
+          </div>
+
           {/* ── Virada: seção de oferta com fundo escuro ── */}
           <div
             className="mt-10 -mx-6 px-6 pt-10 pb-2 sm:-mx-0 sm:rounded-2xl"
@@ -411,7 +424,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             </p>
             <div className="space-y-3">
               {[
-                { nome: "Jornada", desc: "10 dias com rituais diários guiados" },
+                { nome: "Jornada", desc: "10 portais com rituais guiados" },
                 { nome: "Ayra", desc: "mentora de consciência com IA (chat livre)" },
                 { nome: "Cléo", desc: "mentora de poder e magnetismo (10 lições)" },
                 { nome: "Círculo", desc: "diário de frequência com tags de energia" },
@@ -484,7 +497,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               className="text-sm mt-3 mb-10 max-w-sm mx-auto leading-relaxed"
               style={{ color: "rgba(207,197,184,0.55)" }}
             >
-              Jornada de 10 dias com rituais diários, 3 mentoras de IA e um sistema de sustentação real — para quem já sabe que entender não é suficiente.
+              Jornada de 10 portais com rituais, 3 mentoras de IA e um sistema de sustentação real — para quem já sabe que entender não é suficiente.
             </p>
 
             {/* Price block */}
@@ -502,6 +515,14 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                 Cancele quando quiser. Sem fidelidade.
               </p>
             </div>
+
+            {/* Ana's phrase */}
+            <p
+              className="font-playfair italic mb-8 max-w-md mx-auto leading-relaxed"
+              style={{ fontSize: "clamp(13px, 1.8vw, 15px)", color: "rgba(207,197,184,0.55)" }}
+            >
+              "Você é capaz de transformar a maneira como pensa, sente e enriquece para se tornar líder da sua própria vida, manifestando a realidade que deseja."
+            </p>
 
             <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="block">
               <Button variant="cta" size="xl" className="gap-2 w-full max-w-xs mx-auto">
