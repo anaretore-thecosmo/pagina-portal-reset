@@ -305,7 +305,7 @@ export interface ArquetipoData {
   dorRaiz: string;
   cicloRecomendado: string;
   codigosRecomendados: string[];
-  sinais: (data: EspelhoData) => string[];
+  sinais: string[];
   primeiroPassoTexto: string;
   cleoBloco: string;
 }
