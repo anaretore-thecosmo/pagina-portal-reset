@@ -1,7 +1,7 @@
 const SECTIONS = [
   {
     title: "1. Quem somos",
-    content: `Esta Política de Privacidade se aplica ao Portal Reset Digital, operado por Ana Retore, inscrita sob o CPF nº [PREENCHER], com sede em Indaiatuba, SP, Brasil ("nós", "nosso" ou "Portal Reset").
+    content: `Esta Política de Privacidade se aplica ao Portal Reset Digital, operado por Ana Retore, inscrita sob o CPF nº 024.607.659-32, com sede em Indaiatuba, SP, Brasil ("nós", "nosso" ou "Portal Reset").
 
 Para dúvidas sobre esta política, entre em contato pelo e-mail: ana.retore@gmail.com.`,
   },
