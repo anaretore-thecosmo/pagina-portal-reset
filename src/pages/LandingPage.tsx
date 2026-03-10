@@ -531,13 +531,21 @@ const LandingPage = () => {
           <p className="font-inter" style={{ fontSize: "11px", color: "rgba(207,197,184,0.35)" }}>
             © Ana Retore. Todos os direitos reservados.
           </p>
-          <button
-            onClick={goToQuiz}
-            className="font-inter transition-opacity hover:opacity-80"
-            style={{ fontSize: "11.5px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.03em" }}
-          >
-            Fazer o diagnóstico →
-          </button>
+          <div className="flex items-center gap-4 flex-wrap">
+            <a href="/politica-de-privacidade" className="font-inter transition-opacity hover:opacity-80" style={{ fontSize: "11px", color: "rgba(207,197,184,0.35)" }}>
+              Política de Privacidade
+            </a>
+            <a href="/termos-de-uso" className="font-inter transition-opacity hover:opacity-80" style={{ fontSize: "11px", color: "rgba(207,197,184,0.35)" }}>
+              Termos de Uso
+            </a>
+            <button
+              onClick={goToQuiz}
+              className="font-inter transition-opacity hover:opacity-80"
+              style={{ fontSize: "11.5px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.03em" }}
+            >
+              Fazer o diagnóstico →
+            </button>
+          </div>
         </div>
       </footer>
 

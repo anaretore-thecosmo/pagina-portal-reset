@@ -400,101 +400,105 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             </div>
           </div>
 
-          {/* Ferramentas do app */}
-          <div className="mt-8">
-            <p className="kicker mb-4" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
-              O que o Portal Reset entrega para você
+          {/* ── Virada: seção de oferta com fundo escuro ── */}
+          <div
+            className="mt-10 -mx-6 px-6 pt-10 pb-2 sm:-mx-0 sm:rounded-2xl"
+            style={{ background: "#08090D" }}
+          >
+            {/* O que o Portal Reset entrega */}
+            <p className="font-inter uppercase mb-5" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
+              O que o Portal Reset entrega
             </p>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {[
-                "Jornada de 10 dias com rituais diários guiados",
-                "Ayra — mentora de consciência com IA (chat livre)",
-                "Cléo — mentora de poder e magnetismo (10 lições)",
-                "Círculo — diário de frequência com tags de energia",
-                "Galeria Alquímica — geração de imagem com IA",
-                "Sistema de pontos, níveis e conquistas",
+                { nome: "Jornada", desc: "10 dias com rituais diários guiados" },
+                { nome: "Ayra", desc: "mentora de consciência com IA (chat livre)" },
+                { nome: "Cléo", desc: "mentora de poder e magnetismo (10 lições)" },
+                { nome: "Círculo", desc: "diário de frequência com tags de energia" },
+                { nome: "Galeria Alquímica", desc: "geração de imagem com IA" },
+                { nome: "Sistema", desc: "pontos, níveis e conquistas" },
               ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex gap-3 items-center text-sm py-2 border-b"
-                  style={{
-                    borderColor: "hsl(var(--graphite) / 0.06)",
-                    color: "hsl(var(--graphite) / 0.7)",
-                  }}
-                >
-                  <span style={{ color: theme.accent }}>—</span>
-                  {item}
+                <div key={i} className="flex gap-3 items-baseline">
+                  <span
+                    className="font-inter font-semibold text-sm shrink-0"
+                    style={{ color: "#C8B870" }}
+                  >
+                    {item.nome}
+                  </span>
+                  <span className="text-sm leading-relaxed" style={{ color: "rgba(207,197,184,0.6)" }}>
+                    {item.desc}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Cléo bloco */}
-          <div
-            className="mt-8 p-5 rounded-2xl"
-            style={{
-              background: "hsl(var(--matte-gold) / 0.06)",
-              border: "1px solid hsl(var(--matte-gold) / 0.2)",
-            }}
-          >
-            <p className="kicker mb-2" style={{ color: "hsl(var(--matte-gold))" }}>
-              Sobre Cléo
-            </p>
-            <p className="text-sm leading-relaxed" style={{ color: "hsl(var(--graphite) / 0.72)" }}>
-              {arquetipo.cleoBloco}
+            {/* Cléo bloco */}
+            <div
+              className="mt-8 p-5 rounded-xl"
+              style={{
+                background: "rgba(200,184,112,0.06)",
+                border: "1px solid rgba(200,184,112,0.18)",
+              }}
+            >
+              <p className="font-inter uppercase mb-2" style={{ fontSize: "9px", letterSpacing: "0.35em", color: "#C8B870" }}>
+                Sobre Cléo
+              </p>
+              <p className="text-sm leading-relaxed" style={{ color: "rgba(207,197,184,0.65)" }}>
+                {arquetipo.cleoBloco}
+              </p>
+            </div>
+
+            {/* Primeiro passo */}
+            <p
+              className="mt-8 text-[15px] leading-relaxed font-medium text-center"
+              style={{ color: "rgba(237,230,219,0.75)" }}
+            >
+              {arquetipo.primeiroPassoTexto}
             </p>
           </div>
-
-          {/* Primeiro passo */}
-          <p
-            className="mt-8 text-[15px] leading-relaxed font-medium text-center"
-            style={{ color: "hsl(var(--graphite) / 0.78)" }}
-          >
-            {arquetipo.primeiroPassoTexto}
-          </p>
         </motion.div>
 
         {/* ===== CTA FINAL ===== */}
-        <motion.div initial="hidden" animate="visible" custom={7} variants={fade} className="mt-12">
+        <motion.div initial="hidden" animate="visible" custom={7} variants={fade}>
           <div
-            className="rounded-2xl p-8 text-center"
-            style={{
-              background: "hsl(var(--matte-gold) / 0.05)",
-              border: "1px solid hsl(var(--matte-gold) / 0.18)",
-            }}
+            className="-mx-6 px-6 pt-10 pb-10 sm:-mx-0 sm:rounded-b-2xl text-center"
+            style={{ background: "#08090D" }}
           >
-            <p className="kicker mb-4" style={{ color: "hsl(var(--matte-gold))" }}>
+            {/* Gold rule */}
+            <div className="w-10 h-px mx-auto mb-8" style={{ background: "rgba(200,184,112,0.3)" }} />
+
+            <p className="font-inter uppercase mb-3" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
               Portal Reset
             </p>
             <p
-              className="font-playfair font-bold mb-2"
+              className="font-playfair font-bold mb-3"
               style={{
-                fontSize: "clamp(22px, 3vw, 32px)",
-                lineHeight: 1.15,
-                color: "hsl(var(--foreground))",
+                fontSize: "clamp(24px, 3vw, 34px)",
+                lineHeight: 1.1,
+                color: "#EDE6DB",
               }}
             >
               Sua jornada<br />começa agora.
             </p>
             <p
-              className="text-sm mt-3 mb-8 max-w-sm mx-auto leading-relaxed"
-              style={{ color: "hsl(var(--graphite) / 0.6)" }}
+              className="text-sm mt-3 mb-10 max-w-sm mx-auto leading-relaxed"
+              style={{ color: "rgba(207,197,184,0.55)" }}
             >
               Jornada de 10 dias com rituais diários, 3 mentoras de IA e um sistema de sustentação real — para quem já sabe que entender não é suficiente.
             </p>
 
             {/* Price block */}
-            <div className="mb-6">
+            <div className="mb-8">
               <span
                 className="font-playfair font-bold"
-                style={{ fontSize: "clamp(32px, 4vw, 44px)", color: "hsl(var(--foreground))" }}
+                style={{ fontSize: "clamp(48px, 6vw, 64px)", color: "#EDE6DB", lineHeight: 1 }}
               >
                 R$47
               </span>
-              <span className="text-sm ml-1" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
+              <span className="text-base ml-1.5" style={{ color: "rgba(207,197,184,0.5)" }}>
                 /mês
               </span>
-              <p className="text-xs mt-1" style={{ color: "hsl(var(--graphite) / 0.45)" }}>
+              <p className="text-xs mt-2" style={{ color: "rgba(200,184,112,0.45)" }}>
                 Cancele quando quiser. Sem fidelidade.
               </p>
             </div>
@@ -506,20 +510,19 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               </Button>
             </a>
 
-            <p className="text-xs mt-4" style={{ color: "hsl(var(--graphite) / 0.38)" }}>
+            <p className="text-xs mt-4" style={{ color: "rgba(207,197,184,0.35)" }}>
               Acesso imediato após confirmação do pagamento.
             </p>
+
+            {/* Author credit dentro do bloco escuro */}
+            <div className="mt-12 pt-4" style={{ borderTop: '1px solid rgba(200,184,112,0.1)' }}>
+              <p className="font-inter text-[11px] text-center" style={{ color: 'rgba(207,197,184,0.3)' }}>
+                © Ana Retore. Todos os direitos de design e copy reservados.
+              </p>
+            </div>
           </div>
         </motion.div>
 
-        {/* Author credit */}
-        <div className="mt-16 pt-4" style={{ borderTop: '1px solid hsl(var(--matte-gold) / 0.15)' }}>
-          <p className="font-inter text-[11px] md:text-[12px] text-left" style={{ color: 'hsl(var(--graphite) / 0.65)' }}>
-            © Ana Retore. Todos os direitos de design e copy reservados.
-          </p>
-        </div>
-
-        <div className="h-20" />
       </div>
     </div>
   );
