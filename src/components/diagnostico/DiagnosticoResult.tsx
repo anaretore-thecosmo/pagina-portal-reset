@@ -252,6 +252,35 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
           <p className="text-xs mb-4" style={{ color: "hsl(var(--graphite) / 0.5)" }}>
             3 minutos por dia. Sem teatro. Sem pico.
           </p>
+
+          {/* Mini legenda — referência rápida dos eixos citados no plano */}
+          <div
+            className="mb-5 p-4 rounded-xl flex flex-wrap gap-x-6 gap-y-2"
+            style={{ background: "hsl(var(--graphite) / 0.04)", border: "1px solid hsl(var(--graphite) / 0.07)" }}
+          >
+            {[
+              { axis: data.bottom3[0], tag: "vazamento" },
+              { axis: data.bottom3[1], tag: "vazamento" },
+              { axis: data.centralAxis, tag: "conflito central" },
+              { axis: data.top3[0], tag: "base" },
+            ].map(({ axis, tag }) => (
+              <div key={axis.index} className="flex items-baseline gap-1.5">
+                <span className="font-playfair font-bold text-sm" style={{ color: "hsl(var(--matte-gold))" }}>
+                  Eixo {axis.axis}
+                </span>
+                <span className="text-xs" style={{ color: "hsl(var(--graphite) / 0.55)" }}>
+                  {getAxisMicro(axis.type).title}
+                </span>
+                <span
+                  className="text-[10px] uppercase tracking-[0.12em] px-1.5 py-0.5 rounded-full"
+                  style={{ background: "hsl(var(--graphite) / 0.06)", color: "hsl(var(--graphite) / 0.4)" }}
+                >
+                  {tag}
+                </span>
+              </div>
+            ))}
+          </div>
+
           <div className="space-y-2">
             {plan.map((day, i) => (
               <div

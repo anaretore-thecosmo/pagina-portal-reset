@@ -37,7 +37,7 @@ export const quizQuestions: QuizQuestion[] = [
 
 export const quizRespiros: QuizRespiro[] = [
   { text: "Pausa. Não responda 'bonito'. Responda verdadeiro.", buttonLabel: "Continuar" },
-  { text: "Volta. Seu padrão não te acusa. Ele te informa.", buttonLabel: "Continuar" },
+  { text: "Retorna. Seu padrão não te acusa. Ele te informa.", buttonLabel: "Continuar" },
   { text: "Respira. Clareza não exige força. Exige retorno.", buttonLabel: "Continuar" },
   { text: "Fechou. Agora a gente transforma isso em direção.", buttonLabel: "Ver meu Espelho" },
 ];
