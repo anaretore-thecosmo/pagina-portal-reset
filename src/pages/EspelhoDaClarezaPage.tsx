@@ -43,7 +43,7 @@ const EspelhoDaClarezaPage = () => {
   if (!resolved) return null;
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen" style={{ background: "#08090D" }}>
       <DiagnosticoResult userName="" answers={resolved.answers} sessionId={resolved.sessionId} />
     </main>
   );
