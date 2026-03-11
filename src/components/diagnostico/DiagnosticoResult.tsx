@@ -84,20 +84,20 @@ const ARQUETIPO_OFFER: Record<string, {
     ctaLabel: "ENTRAR NO SISTEMA",
   },
   Estrategista: {
-    aberturaCopy: "Você funciona. Entrega. Mas em algum ponto cobra um preço de si mesma que ninguém vê. O Portal Reset não é sobre começar — é sobre fechar o pacto com o que você já construiu.",
+    aberturaCopy: "Você funciona. Entrega. Mas em algum ponto cobra um preço de si mesma que ninguém vê. O Portal Reset não é sobre começar — é sobre honrar o chamado do que você já construiu.",
     destaques: [
-      { nome: "Portal 10", desc: "Selando o Pacto com o Propósito — o ponto de chegada" },
+      { nome: "Portal 10", desc: "Portal da Virada e do Propósito — o ponto de chegada" },
       { nome: "Cléo", desc: "mentora de poder e magnetismo — para quem tem base e quer precisão" },
       { nome: "Galeria Alquímica", desc: "geração de imagem com IA para ancorar sua visão" },
       { nome: "Ayra", desc: "mentora de consciência para refinar, não para explicar o básico" },
     ],
-    ctaLabel: "FECHAR O PACTO",
+    ctaLabel: "RESPONDER O CHAMADO",
   },
   Soberana: {
     aberturaCopy: "Você já tem base. O Portal Reset é o lugar de ancorar o que você já é — e sustentar a expansão sem sacrifício. Entre. E quando sentir que está pronta para um passo maior, o Plano A é a próxima conversa.",
     destaques: [
       { nome: "Cléo", desc: "mentora de poder pessoal — desbloqueada para você desde o início" },
-      { nome: "Portal 10", desc: "Selando o Pacto com o Propósito — seu ponto de partida" },
+      { nome: "Portal 10", desc: "Portal da Virada e do Propósito — seu ponto de partida" },
       { nome: "Galeria Alquímica", desc: "geração de imagem com IA para materializar sua frequência" },
       { nome: "Ayra", desc: "mentora de consciência para conversas de refinamento" },
     ],

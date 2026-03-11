@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import LandingMapaPage from "./pages/LandingMapaPage";
 import QuizMapaPadraoPage from "./pages/QuizMapaPadraoPage";
 import EspelhoDaClarezaPage from "./pages/EspelhoDaClarezaPage";
 import PoliticaDePrivacidadePage from "./pages/PoliticaDePrivacidadePage";
@@ -21,6 +22,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/mapa" element={<LandingMapaPage />} />
           <Route path="/quiz-mapa-do-padrao" element={<QuizMapaPadraoPage />} />
           <Route path="/espelho-da-clareza" element={<EspelhoDaClarezaPage />} />
           <Route path="/preview-resultado" element={<PreviewResultadoPage />} />
