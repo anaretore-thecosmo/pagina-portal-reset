@@ -131,8 +131,8 @@ const LandingPage = () => {
                 color: "#EDE6DB",
               }}
             >
-              Por que você sabe o que fazer<br />
-              <span style={{ color: "#C8B870" }}>e ainda assim não faz?</span>
+              Você não fracassa por falta<br />
+              <span style={{ color: "#C8B870" }}>de esforço. Fracassa porque ninguém mostrou onde seu automático ganha.</span>
             </motion.h1>
 
             {/* Subhead — dor nomeada */}
@@ -173,7 +173,7 @@ const LandingPage = () => {
                   e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
                 }}
               >
-                Descobrir meu arquétipo
+                Ver meu mapa grátis
                 <ArrowRight size={14} />
               </button>
             </motion.div>
@@ -184,7 +184,7 @@ const LandingPage = () => {
               className="mt-5 font-inter leading-[1.8]"
               style={{ fontSize: "clamp(12px, 1.2vw, 14px)", color: "rgba(207,197,184,0.45)" }}
             >
-              Este diagnóstico mapeia os 6 eixos do seu padrão interno e revela o arquétipo que define onde você está operando agora.
+              12 perguntas rápidas revelam seu arquétipo. Depois, 4 mentoras IA exploram profundidade 24/7.
             </motion.p>
 
             {/* Microcopy */}
@@ -193,7 +193,7 @@ const LandingPage = () => {
               className="mt-2 font-inter"
               style={{ fontSize: "11px", color: "rgba(200,184,112,0.4)", letterSpacing: "0.04em" }}
             >
-              3 minutos · Gratuito · Resultado imediato
+              3 minutos · Gratuito · 4 mentoras
             </motion.p>
 
           </div>
