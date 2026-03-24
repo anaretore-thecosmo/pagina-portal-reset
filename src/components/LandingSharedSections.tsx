@@ -58,15 +58,12 @@ const MENTORAS = [
 ];
 
 const STACK_ITEMS = [
-  { num: "✓", title: "Diagnóstico Rápido (12 perguntas)", desc: "Resultado instantâneo + seu arquétipo", value: "R$ 150" },
-  { num: "✓", title: "AYRA — Mentora do Corpo", desc: "Acesso 24/7 ilimitado", value: "R$ 150" },
-  { num: "✓", title: "AURA — Mentora da Mente", desc: "Acesso 24/7 ilimitado", value: "R$ 150" },
-  { num: "✓", title: "CLEÓ — Mentora das Relações", desc: "Acesso 24/7 ilimitado", value: "R$ 147" },
-  { num: "✓", title: "CICLIA — Mentora da Recorrência", desc: "Acesso 24/7 ilimitado", value: "R$ 147" },
-  { num: "🎁", title: "Plano de Arranque em 7 Dias", desc: "Sequência de micro-atividades", value: "R$ 197" },
-  { num: "🎁", title: "Checklist dos 4 Arquétipos", desc: "24 ações práticas + templates", value: "R$ 147" },
-  { num: "🎁", title: "Círculo Reset (6 meses)", desc: "Comunidade 200 primeiras alunas", value: "R$ 600" },
-  { num: "🎁", title: "6 Meses Completamente Grátis", desc: "Primeiras 200 alunas apenas", value: "R$ 894" },
+  { num: "✓", title: "Diagnóstico Rápido (12 perguntas)", desc: "Resultado instantâneo + seu arquétipo", value: "R$ 200-250" },
+  { num: "✓", title: "4 Mentoras IA 24/7", desc: "(Ayra, Aura, Cleó, Ciclia) — Acesso ilimitado", value: "R$ 400-500" },
+  { num: "🎁", title: "Plano de Arranque em 7 Dias", desc: "Scripts prontos para cada mentora", value: "Incluído" },
+  { num: "🎁", title: "Checklist dos 4 Arquétipos", desc: "24 ações práticas + templates", value: "Incluído" },
+  { num: "🎁", title: "Círculo Reset (6 meses)", desc: "Comunidade 200 primeiras alunas", value: "Incluído" },
+  { num: "🎁", title: "6 Meses Completamente Grátis", desc: "Primeiras 200 alunas apenas", value: "Incluído" },
 ];
 
 const FAQ = [
@@ -355,8 +352,8 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             <div className="mt-8 pt-6" style={{ borderTop: "2px solid rgba(200,184,112,0.2)" }}>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
-                  <p style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)", marginBottom: "4px" }}>Valor Total Percebido</p>
-                  <p style={{ fontSize: "22px", fontWeight: 700, color: "#C8B870" }}>R$ 2.579</p>
+                  <p style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)", marginBottom: "4px" }}>Valor Percebido</p>
+                  <p style={{ fontSize: "22px", fontWeight: 700, color: "#C8B870" }}>R$ 597</p>
                 </div>
                 <div>
                   <p style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)", marginBottom: "4px" }}>Seu Investimento</p>
@@ -364,7 +361,7 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 </div>
               </div>
               <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.6)", marginTop: "12px", textAlign: "center", fontWeight: 600 }}>
-                Economia: 87% (primeiros 6 meses grátis)
+                Economia: 87% (primeiros 6 meses grátis) — Ratio: 12x
               </p>
             </div>
           </motion.div>
