@@ -97,58 +97,58 @@ const LandingPage = () => {
         <HeroBg />
 
         {/* Conteúdo — coluna esquerda (F-pattern) */}
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-16">
-          <div style={{ maxWidth: "500px" }}>
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-20">
+          <div style={{ maxWidth: "420px" }}>
 
             {/* Kicker */}
             <motion.p
               initial="hidden" animate="visible" custom={0} variants={fade}
               className="font-inter uppercase mb-4"
-              style={{ fontSize: "10px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.75)" }}
+              style={{ fontSize: "9px", letterSpacing: "0.5em", color: "rgba(200,184,112,0.65)" }}
             >
               Portal Reset · Diagnóstico Gratuito
             </motion.p>
 
             {/* Gold line */}
             <motion.div
-              className="h-px mb-5 w-10"
+              className="h-px mb-6 w-8"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               style={{ background: "#C8B870", transformOrigin: "left" }}
             />
 
-            {/* H1 — fonte reduzida, cabe na primeira dobra */}
+            {/* H1 */}
             <motion.h1
               initial="hidden" animate="visible" custom={1} variants={fade}
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontWeight: 700,
-                fontSize: "clamp(22px, 6.5vw, 50px)",
-                lineHeight: 1.08,
-                letterSpacing: "0.01em",
+                fontSize: "clamp(16px, 2.4vw, 30px)",
+                lineHeight: 1.18,
+                letterSpacing: "0.02em",
                 textTransform: "uppercase",
                 color: "#EDE6DB",
               }}
             >
-              Você não fracassa por falta<br />
-              <span style={{ color: "#C8B870" }}>de esforço. Fracassa porque ninguém mostrou onde seu automático ganha.</span>
+              Você não fracassa por falta de esforço.<br />
+              <span style={{ color: "#C8B870" }}>Fracassa porque ninguém mostrou onde seu automático ganha.</span>
             </motion.h1>
 
-            {/* Subhead — dor nomeada */}
+            {/* Subhead */}
             <motion.p
               initial="hidden" animate="visible" custom={2} variants={fade}
-              className="mt-5 font-inter leading-[1.85]"
-              style={{ fontSize: "clamp(13px, 1.4vw, 16px)", color: "rgba(207,197,184,0.78)" }}
+              className="mt-6 font-inter leading-[1.9]"
+              style={{ fontSize: "clamp(12px, 1.1vw, 14px)", color: "rgba(207,197,184,0.7)" }}
             >
               Não é falta de força. Não é falta de informação.<br />
               É que ninguém ainda mostrou <em>onde exatamente</em> o seu automático está ganhando da sua escolha.
             </motion.p>
 
-            {/* CTA — logo após a dor (pico emocional) */}
+            {/* CTA */}
             <motion.div
               initial="hidden" animate="visible" custom={3} variants={fade}
-              className="mt-7 flex items-center gap-4 flex-wrap"
+              className="mt-8 flex items-center gap-4 flex-wrap"
             >
               <button
                 onClick={goToQuiz}
@@ -159,10 +159,10 @@ const LandingPage = () => {
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
                   boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
-                  height: "52px",
-                  paddingLeft: "26px",
-                  paddingRight: "26px",
-                  fontSize: "12px",
+                  height: "48px",
+                  paddingLeft: "24px",
+                  paddingRight: "24px",
+                  fontSize: "11px",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
@@ -174,35 +174,26 @@ const LandingPage = () => {
                 }}
               >
                 Ver meu mapa grátis
-                <ArrowRight size={14} />
+                <ArrowRight size={13} />
               </button>
             </motion.div>
 
-            {/* Garantia ancorada na dobra */}
+            {/* Microcopy abaixo do CTA */}
             <motion.p
               initial="hidden" animate="visible" custom={4} variants={fade}
               className="mt-3 font-inter"
-              style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.03em" }}
+              style={{ fontSize: "11px", color: "rgba(200,184,112,0.45)", letterSpacing: "0.04em" }}
             >
-              30 dias de garantia · Cancele quando quiser
+              3 minutos · Gratuito · 30 dias de garantia
             </motion.p>
 
-            {/* Texto descritivo — confirmação racional pós-CTA */}
+            {/* Descritivo */}
             <motion.p
               initial="hidden" animate="visible" custom={5} variants={fade}
-              className="mt-5 font-inter leading-[1.8]"
-              style={{ fontSize: "clamp(12px, 1.2vw, 14px)", color: "rgba(207,197,184,0.45)" }}
+              className="mt-6 font-inter leading-[1.8]"
+              style={{ fontSize: "clamp(11px, 1vw, 13px)", color: "rgba(207,197,184,0.38)" }}
             >
-              12 perguntas rápidas revelam seu arquétipo. Depois, 4 mentoras IA exploram profundidade 24/7.
-            </motion.p>
-
-            {/* Microcopy */}
-            <motion.p
-              initial="hidden" animate="visible" custom={5} variants={fade}
-              className="mt-2 font-inter"
-              style={{ fontSize: "11px", color: "rgba(200,184,112,0.4)", letterSpacing: "0.04em" }}
-            >
-              3 minutos · Gratuito · 4 mentoras
+              12 perguntas revelam seu arquétipo. Depois, 4 mentoras IA exploram profundidade 24/7.
             </motion.p>
 
           </div>
