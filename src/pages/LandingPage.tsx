@@ -98,7 +98,7 @@ const LandingPage = () => {
 
         {/* Conteúdo — coluna esquerda (F-pattern) */}
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-20">
-          <div style={{ maxWidth: "420px" }}>
+          <div style={{ maxWidth: "440px" }}>
 
             {/* Kicker */}
             <motion.p
@@ -111,44 +111,46 @@ const LandingPage = () => {
 
             {/* Gold line */}
             <motion.div
-              className="h-px mb-6 w-8"
+              className="h-px mb-7"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              style={{ background: "#C8B870", transformOrigin: "left" }}
+              transition={{ duration: 0.9, delay: 0.6 }}
+              style={{ background: "#C8B870", transformOrigin: "left", width: "48px" }}
             />
 
-            {/* H1 */}
+            {/* H1 — espelho primeiro, problema depois */}
             <motion.h1
               initial="hidden" animate="visible" custom={1} variants={fade}
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontWeight: 700,
-                fontSize: "clamp(16px, 2.4vw, 30px)",
-                lineHeight: 1.18,
+                fontSize: "clamp(20px, 3vw, 34px)",
+                lineHeight: 1.2,
                 letterSpacing: "0.02em",
                 textTransform: "uppercase",
                 color: "#EDE6DB",
               }}
             >
-              Você não fracassa por falta de esforço.<br />
-              <span style={{ color: "#C8B870" }}>Fracassa porque ninguém mostrou onde seu automático ganha.</span>
+              Você sabe o que precisa fazer.<br />
+              <span style={{ color: "#C8B870" }}>E mesmo assim não faz.</span>
             </motion.h1>
 
-            {/* Subhead */}
+            {/* Subhead — nomeia a dor com precisão, abre curiosidade */}
             <motion.p
               initial="hidden" animate="visible" custom={2} variants={fade}
-              className="mt-6 font-inter leading-[1.9]"
-              style={{ fontSize: "clamp(12px, 1.1vw, 14px)", color: "rgba(207,197,184,0.7)" }}
+              className="mt-6 font-inter leading-[1.85]"
+              style={{ fontSize: "clamp(13px, 1.15vw, 15px)", color: "rgba(207,197,184,0.75)" }}
             >
-              Não é falta de força. Não é falta de informação.<br />
-              É que ninguém ainda mostrou <em>onde exatamente</em> o seu automático está ganhando da sua escolha.
+              Não é falta de disciplina. Não é falta de método.<br />
+              É um padrão que ninguém ainda mapeou para você —<br />
+              e que opera em corpo, dinheiro e relações<br />
+              ao mesmo tempo.
             </motion.p>
 
             {/* CTA */}
             <motion.div
               initial="hidden" animate="visible" custom={3} variants={fade}
-              className="mt-8 flex items-center gap-4 flex-wrap"
+              className="mt-9 flex items-center gap-4 flex-wrap"
             >
               <button
                 onClick={goToQuiz}
@@ -173,28 +175,53 @@ const LandingPage = () => {
                   e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
                 }}
               >
-                Ver meu mapa grátis
+                Mapear meu padrão
                 <ArrowRight size={13} />
               </button>
             </motion.div>
 
-            {/* Microcopy abaixo do CTA */}
+            {/* Microcopy — sem garantia fora de contexto */}
             <motion.p
               initial="hidden" animate="visible" custom={4} variants={fade}
               className="mt-3 font-inter"
               style={{ fontSize: "11px", color: "rgba(200,184,112,0.45)", letterSpacing: "0.04em" }}
             >
-              3 minutos · Gratuito · 30 dias de garantia
+              3 minutos · Gratuito · Sem cadastro
             </motion.p>
 
-            {/* Descritivo */}
+            {/* Descritivo — legível, cria curiosidade */}
             <motion.p
               initial="hidden" animate="visible" custom={5} variants={fade}
-              className="mt-6 font-inter leading-[1.8]"
-              style={{ fontSize: "clamp(11px, 1vw, 13px)", color: "rgba(207,197,184,0.38)" }}
+              className="mt-7 font-inter leading-[1.8]"
+              style={{ fontSize: "clamp(11px, 1vw, 13px)", color: "rgba(207,197,184,0.55)" }}
             >
-              12 perguntas revelam seu arquétipo. Depois, 4 mentoras IA exploram profundidade 24/7.
+              12 perguntas. Depois, 4 perspectivas distintas —<br />
+              cada uma aprofunda o que as outras não alcançam.
             </motion.p>
+
+            {/* Cliff effect — scroll indicator */}
+            <motion.div
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2.4, duration: 0.8, ease: "easeOut" }}
+              className="mt-12 flex flex-col items-start gap-2"
+            >
+              <span
+                className="font-inter uppercase"
+                style={{ fontSize: "8px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.3)" }}
+              >
+                Continue
+              </span>
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+              >
+                <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
+                  <line x1="7" y1="0" x2="7" y2="13" stroke="rgba(200,184,112,0.3)" strokeWidth="1"/>
+                  <polyline points="3,10 7,15 11,10" fill="none" stroke="rgba(200,184,112,0.3)" strokeWidth="1"/>
+                </svg>
+              </motion.div>
+            </motion.div>
 
           </div>
         </div>
