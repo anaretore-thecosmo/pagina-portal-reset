@@ -8,6 +8,7 @@ import LandingMapaPage from "./pages/LandingMapaPage";
 import QuizMapaPadraoPage from "./pages/QuizMapaPadraoPage";
 import EspelhoDaClarezaPage from "./pages/EspelhoDaClarezaPage";
 import PoliticaDePrivacidadePage from "./pages/PoliticaDePrivacidadePage";
+import ExclusaoDeDadosPage from "./pages/ExclusaoDeDadosPage";
 import TermosDeUsoPage from "./pages/TermosDeUsoPage";
 import PreviewResultadoPage from "./pages/PreviewResultadoPage";
 import NotFound from "./pages/NotFound";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/espelho-da-clareza" element={<EspelhoDaClarezaPage />} />
           <Route path="/preview-resultado" element={<PreviewResultadoPage />} />
           <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidadePage />} />
+          <Route path="/exclusao-de-dados" element={<ExclusaoDeDadosPage />} />
           <Route path="/termos-de-uso" element={<TermosDeUsoPage />} />
           {/* Redirects de segurança */}
           <Route path="/home" element={<Navigate to="/" replace />} />
