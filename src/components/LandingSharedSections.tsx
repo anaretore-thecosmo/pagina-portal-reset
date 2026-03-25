@@ -270,6 +270,85 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
         </div>
       </section>
 
+      {/* ════════ SEÇÃO 4B — CÓDIGO ZERO / MANIFESTO FUNDADORA ════════ */}
+      <section
+        className="px-6 md:px-12 lg:px-20 py-24 md:py-32"
+        style={{ borderTop: "1px solid rgba(200,184,112,0.08)", background: "rgba(200,184,112,0.02)" }}
+      >
+        <div className="max-w-[700px] mx-auto text-center">
+          <motion.div
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={inView}
+          >
+            <p className="font-inter uppercase mb-4" style={{ fontSize: "10px", letterSpacing: "0.5em", color: "rgba(200,184,112,0.5)" }}>
+              Acesso fundadora · Código Zero
+            </p>
+
+            <div className="w-6 h-px mx-auto mb-10" style={{ background: "rgba(200,184,112,0.3)" }} />
+
+            <h2
+              className="font-playfair font-bold mb-8"
+              style={{
+                fontSize: "clamp(26px, 3.5vw, 44px)",
+                lineHeight: 1.12,
+                letterSpacing: "0.02em",
+                color: "#EDE6DB",
+              }}
+            >
+              Você está aqui<br />
+              <span style={{ color: "#C8B870" }}>antes do mundo saber.</span>
+            </h2>
+
+            <p
+              className="font-inter leading-[2] mb-10"
+              style={{ fontSize: "clamp(14px, 1.5vw, 17px)", color: "rgba(207,197,184,0.72)" }}
+            >
+              Esta ferramenta ainda não foi testada por centenas de pessoas.<br />
+              Não tem depoimentos. Não tem provas sociais acumuladas.<br />
+              Tem algo mais raro: você é a geração que escreve o primeiro capítulo.
+            </p>
+
+            <div
+              className="p-8 rounded-xl mb-10 text-left"
+              style={{ background: "rgba(200,184,112,0.05)", border: "1px solid rgba(200,184,112,0.15)" }}
+            >
+              <p
+                className="font-playfair font-medium leading-[1.9]"
+                style={{ fontSize: "clamp(15px, 1.6vw, 18px)", color: "rgba(237,230,219,0.85)", fontStyle: "italic", textAlign: "center" }}
+              >
+                "Não temos depoimentos.<br />
+                Porque quem está aqui<br />
+                ainda está escrevendo o primeiro."
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+              {[
+                { num: "01", titulo: "Descoberta", texto: "Você acessou uma frequência que a maioria nunca vai conhecer — porque não buscou." },
+                { num: "02", titulo: "Escolha", texto: "Ser fundadora não é uma oferta. É uma posição. As primeiras 200 moldam o que vem depois." },
+                { num: "03", titulo: "Identidade", texto: "Daqui a seis meses, haverá quem diga que deveria ter entrado antes. Você não vai ser essa pessoa." },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial="hidden" whileInView="visible"
+                  viewport={{ once: true, margin: "-40px" }}
+                  custom={i}
+                  variants={fade}
+                  className="p-6 rounded-xl"
+                  style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(200,184,112,0.1)" }}
+                >
+                  <p style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "11px", color: "rgba(200,184,112,0.4)", letterSpacing: "0.25em", marginBottom: "10px" }}>
+                    {item.num}
+                  </p>
+                  <p style={{ fontSize: "13px", fontWeight: 600, color: "#C8B870", marginBottom: "8px" }}>{item.titulo}</p>
+                  <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.7)", lineHeight: 1.65 }}>{item.texto}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ════════ SEÇÃO 5 — MANDALA ════════ */}
       <section className="px-6 md:px-12 lg:px-20 py-20 md:py-28" style={{ borderTop: "1px solid rgba(200,184,112,0.08)" }}>
         <div className="max-w-[820px] mx-auto">
@@ -393,10 +472,10 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             className="mb-12"
           >
             <p className="font-inter uppercase mb-3" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
-              Acesso fundadora
+              Código Zero · Acesso Fundadora
             </p>
             <h2
-              className="font-playfair font-bold mb-4"
+              className="font-playfair font-bold mb-2"
               style={{
                 fontSize: "clamp(28px, 3.5vw, 44px)",
                 lineHeight: 1.1,
@@ -405,17 +484,24 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             >
               Primeiras 200
             </h2>
-            <div className="p-6 rounded-xl" style={{ background: "rgba(200,184,112,0.06)", border: "1px solid rgba(200,184,112,0.15)" }}>
-              <p style={{ fontSize: "32px", fontWeight: 700, color: "#C8B870", marginBottom: "8px" }}>R$ 47/mês</p>
-              <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.8)" }}>
-                Acesso de fundadora — condições exclusivas para as primeiras 200.
+            <p
+              className="font-inter mb-8"
+              style={{ fontSize: "clamp(13px, 1.3vw, 15px)", color: "rgba(207,197,184,0.55)", fontStyle: "italic" }}
+            >
+              A frequência desta ferramenta ainda está sendo descoberta.<br />
+              Quem entra agora define o que ela se torna.
+            </p>
+            <div className="p-8 rounded-xl" style={{ background: "rgba(200,184,112,0.06)", border: "1px solid rgba(200,184,112,0.2)" }}>
+              <p style={{ fontSize: "11px", fontFamily: "'Playfair Display', serif", fontWeight: 700, letterSpacing: "0.3em", color: "rgba(200,184,112,0.5)", marginBottom: "12px" }}>INVESTIMENTO FUNDADORA</p>
+              <p style={{ fontSize: "36px", fontWeight: 700, color: "#C8B870", marginBottom: "4px", fontFamily: "'Playfair Display', serif" }}>R$ 47/mês</p>
+              <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.75)", marginBottom: "16px" }}>
+                6 meses completamente incluídos no primeiro acesso.
               </p>
-              <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)", marginTop: "8px" }}>
-                + 6 meses incluídos para fundadoras
-              </p>
-              <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", marginTop: "6px", fontStyle: "italic" }}>
-                Depois: R$ 147/mês
-              </p>
+              <div style={{ borderTop: "1px solid rgba(200,184,112,0.12)", paddingTop: "16px" }}>
+                <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", fontStyle: "italic" }}>
+                  Condição exclusiva para as primeiras 200 · Depois: R$ 147/mês
+                </p>
+              </div>
             </div>
           </motion.div>
 
@@ -423,15 +509,15 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             variants={inView}
           >
-            <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#EDE6DB", marginBottom: "12px" }}>
-              Pacotes (a partir do 2º mês)
-            </h3>
+            <p className="font-inter mb-6" style={{ fontSize: "12px", letterSpacing: "0.06em", color: "rgba(200,184,112,0.45)", textTransform: "uppercase" }}>
+              Planos a partir do 2º mês
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 { label: "Mensal", price: "R$ 47/mês", desc: "Sem comprometimento" },
                 { label: "Trimestral", price: "3x de R$ 42 = R$ 126", desc: "Desconto 10%" },
                 { label: "Semestral", price: "6x de R$ 38 = R$ 228", desc: "Economia 19%" },
-                { label: "Anual", price: "12x de R$ 35 = R$ 420", desc: "Economia 25% (Melhor custo)" },
+                { label: "Anual", price: "12x de R$ 35 = R$ 420", desc: "Economia 25% — Melhor custo" },
               ].map((pkg, i) => (
                 <motion.div
                   key={i}
@@ -440,11 +526,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                   custom={i}
                   variants={fade}
                   className="p-6 rounded-xl"
-                  style={{ background: "rgba(200,184,112,0.05)", border: "1px solid rgba(200,184,112,0.15)" }}
+                  style={{ background: "rgba(200,184,112,0.05)", border: "1px solid rgba(200,184,112,0.12)" }}
                 >
                   <p style={{ fontSize: "14px", fontWeight: 600, color: "#EDE6DB" }}>{pkg.label}</p>
                   <p style={{ fontSize: "18px", fontWeight: 700, color: "#C8B870", marginTop: "8px" }}>{pkg.price}</p>
-                  <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)", marginTop: "4px" }}>{pkg.desc}</p>
+                  <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.55)", marginTop: "4px" }}>{pkg.desc}</p>
                 </motion.div>
               ))}
             </div>
