@@ -131,8 +131,8 @@ const LandingPage = () => {
                 color: "#EDE6DB",
               }}
             >
-              Você sabe o que precisa fazer.<br />
-              <span style={{ color: "#C8B870" }}>E mesmo assim não faz.</span>
+              Você não fracassa por falta de potência.<br />
+              <span style={{ color: "#C8B870" }}>Fracassa porque ainda não percebeu onde o seu automático decide por você.</span>
             </motion.h1>
 
             {/* Subhead — nomeia a dor com precisão, abre curiosidade */}
