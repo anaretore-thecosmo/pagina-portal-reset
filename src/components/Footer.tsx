@@ -22,10 +22,10 @@ const Footer = () => {
 
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-6 sm:gap-8 mb-8 text-sm font-inter">
-            <a href="https://portalresetdigital.com/politica-de-privacidade" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="https://oportalreset.com/politica-de-privacidade" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               Política de Privacidade
             </a>
-            <a href="https://portalresetdigital.com/exclusao-de-dados" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="https://oportalreset.com/exclusao-de-dados" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
               Solicitação de Exclusão de Dados
             </a>
           </div>

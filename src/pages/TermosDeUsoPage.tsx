@@ -82,7 +82,7 @@ Nossa responsabilidade total, em qualquer hipótese, limita-se ao valor pago pel
     title: "9. Modificações no Serviço e nos Termos",
     content: `Reservamo-nos o direito de modificar, suspender ou encerrar o serviço ou qualquer funcionalidade, a qualquer momento, com aviso prévio de 30 dias em casos de alterações substanciais.
 
-Estes Termos de Uso podem ser atualizados periodicamente. A versão vigente estará sempre disponível em portalresetdigital.com/termos-de-uso. O uso continuado do serviço após modificações implica aceitação dos novos termos.`,
+Estes Termos de Uso podem ser atualizados periodicamente. A versão vigente estará sempre disponível em oportalreset.com/termos-de-uso. O uso continuado do serviço após modificações implica aceitação dos novos termos.`,
   },
   {
     title: "10. Lei Aplicável e Foro",

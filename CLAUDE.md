@@ -9,7 +9,7 @@
 
 Página de vendas + funil completo do **Portal Reset** — app de recorrência feminina para transformação de corpo, dinheiro e relações.
 
-- **Site ao vivo:** https://portalresetdigital.com
+- **Site ao vivo:** https://oportalreset.com
 - **GitHub:** https://github.com/anaretore-thecosmo/pagina-portal-reset
 - **Hospedagem:** Lovable (sincroniza automaticamente com push no GitHub)
 - **App do produto:** https://portal-reset.web.app
