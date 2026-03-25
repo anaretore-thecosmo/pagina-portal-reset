@@ -441,12 +441,13 @@ const QuestionScreen = ({
     setSelected(initialValue);
   }, [currentIndex, initialValue]);
 
-  const isDark = currentIndex % 2 !== 0;
-  const bg = isDark ? "hsl(215 25% 10%)" : "hsl(var(--off-white))";
-  const fg = isDark ? "hsl(var(--off-white))" : "hsl(var(--graphite))";
-  // Fundo claro: cor sólida (~7:1 contraste) em vez de opacidade (~2.8:1)
-  const fgMuted = isDark ? "hsl(var(--off-white) / 0.45)" : "hsl(60 4% 32%)";
-  const borderSubtle = isDark ? "hsl(0 0% 100% / 0.14)" : "hsl(60 4% 38% / 0.3)";
+  const isEven = currentIndex % 2 === 0;
+  const bg = isEven
+    ? "radial-gradient(ellipse at 50% 45%, rgba(200,184,112,0.03) 0%, #08090D 65%)"
+    : "#08090D";
+  const fg = "hsl(var(--off-white))";
+  const fgMuted = "hsl(var(--off-white) / 0.45)";
+  const borderSubtle = "hsl(0 0% 100% / 0.14)";
   const goldAccent = "hsl(var(--matte-gold))";
 
   return (
@@ -600,32 +601,67 @@ const RespiroScreen = ({
   onContinue: () => void;
 }) => (
   <div
-    className="min-h-screen flex flex-col items-center justify-center px-6 text-center"
-    style={{ background: "hsl(80 20% 14%)", color: "hsl(var(--off-white))" }}
+    className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center overflow-hidden"
+    style={{ background: "#08090D", color: "hsl(var(--off-white))" }}
   >
+    <FloatingParticles />
     <motion.div
       initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6 }}
-      className="max-w-md"
+      transition={{ duration: 0.7 }}
+      className="relative z-10 max-w-md"
     >
+      {/* Gold line top */}
+      <motion.div
+        className="mx-auto mb-10 h-px"
+        style={{ width: "40px", background: "#C8B870" }}
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      />
+
       <p
         className="font-playfair italic leading-snug"
-        style={{ fontSize: "clamp(22px, 4vw, 32px)", color: "hsl(var(--off-white) / 0.85)" }}
+        style={{ fontSize: "clamp(26px, 5vw, 38px)", color: "rgba(237,230,219,0.9)" }}
       >
         {text}
       </p>
-      <Button
+
+      {/* Gold line bottom */}
+      <motion.div
+        className="mx-auto mt-10 mb-12 h-px"
+        style={{ width: "40px", background: "rgba(200,184,112,0.4)" }}
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+      />
+
+      <button
         onClick={onContinue}
-        className="mt-12 px-10 py-3 uppercase tracking-[0.15em] text-sm font-medium rounded-none border"
+        className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300"
         style={{
-          background: "transparent",
-          borderColor: "hsl(var(--matte-gold))",
-          color: "hsl(var(--matte-gold))",
+          background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+          color: "#08090D",
+          borderRadius: "8px",
+          border: "1px solid rgba(200,184,112,0.45)",
+          boxShadow: "0 4px 20px -4px rgba(152,61,6,0.35)",
+          height: "52px",
+          paddingLeft: "32px",
+          paddingRight: "32px",
+          fontSize: "12px",
+          cursor: "pointer",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-1px)";
+          e.currentTarget.style.boxShadow = "0 6px 24px -4px rgba(152,61,6,0.4), 0 0 28px -6px rgba(200,184,112,0.3)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.35)";
         }}
       >
         {buttonLabel}
-      </Button>
+      </button>
     </motion.div>
   </div>
 );

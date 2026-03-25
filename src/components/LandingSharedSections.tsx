@@ -58,12 +58,12 @@ const MENTORAS = [
 ];
 
 const STACK_ITEMS = [
-  { num: "✓", title: "Diagnóstico Rápido (12 perguntas)", desc: "Resultado instantâneo + seu arquétipo", value: "R$ 200-250" },
-  { num: "✓", title: "4 Mentoras IA 24/7", desc: "(Ayra, Aura, Cleó, Ciclia) — Acesso ilimitado", value: "R$ 400-500" },
-  { num: "🎁", title: "Plano de Arranque em 7 Dias", desc: "Scripts prontos para cada mentora", value: "Incluído" },
-  { num: "🎁", title: "Checklist dos 4 Arquétipos", desc: "24 ações práticas + templates", value: "Incluído" },
-  { num: "🎁", title: "Círculo Reset (6 meses)", desc: "Comunidade 200 primeiras alunas", value: "Incluído" },
-  { num: "🎁", title: "6 Meses Completamente Grátis", desc: "Primeiras 200 alunas apenas", value: "Incluído" },
+  { num: "01", title: "Diagnóstico Rápido (12 perguntas)", desc: "Resultado instantâneo + seu arquétipo", value: "R$ 200-250" },
+  { num: "02", title: "4 Mentoras IA 24/7", desc: "(Ayra, Aura, Cleó, Ciclia) — Acesso ilimitado", value: "R$ 400-500" },
+  { num: "03", title: "Plano de Arranque em 7 Dias", desc: "Scripts prontos para cada mentora", value: "Incluído" },
+  { num: "04", title: "Checklist dos 4 Arquétipos", desc: "24 ações práticas + templates", value: "Incluído" },
+  { num: "05", title: "Círculo Reset (6 meses)", desc: "Comunidade 200 primeiras fundadoras", value: "Incluído" },
+  { num: "06", title: "6 Meses Completamente Incluídos", desc: "Primeiras 200 fundadoras apenas", value: "Incluído" },
 ];
 
 const FAQ = [
@@ -76,12 +76,12 @@ const FAQ = [
     a: "Cada uma trabalha uma dimensão: Ayra = Corpo, Aura = Mente, Cleó = Relações, Ciclia = Ciclos. Você escolhe qual precisa agora."
   },
   {
-    q: "É realmente 6 meses grátis?",
-    a: "Sim. As primeiras 200 alunas pagam R$ 47 em [DATA]. Recorrência começa mês 7. Depois: R$ 147/mês."
+    q: "É realmente 6 meses incluídos?",
+    a: "Sim. As primeiras 200 fundadoras têm 6 meses incluídos no investimento inicial. A recorrência começa no mês 7. Depois: R$ 147/mês."
   },
   {
     q: "Posso cancelar quando quiser?",
-    a: "Sim. Sem penalidade. Seu acesso cai no mês seguinte."
+    a: "Sim. Sem penalidade. Seu acesso permanece até o fim do período pago."
   },
   {
     q: "As mentoras são IA?",
@@ -125,10 +125,10 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { emoji: "🔍", nome: "CURIOSA", desc: "Você estuda antes de agir. Enxerga nuances que ninguém mais vê.", desafio: "Sair da observação pra ação" },
-              { emoji: "🌀", nome: "BUSCADORA", desc: "Você testa, aprende, recomeça. Se reinventa constantemente.", desafio: "Construir algo que dure" },
-              { emoji: "🎯", nome: "ESTRATEGISTA", desc: "Você planeja, executa, entrega. Constrói estruturas que funcionam.", desafio: "Permitir flexibilidade" },
-              { emoji: "👑", nome: "SOBERANA", desc: "Você já sabe. Você já é. Sua presença transforma espaços.", desafio: "Agir sem esperar perfeição" },
+              { nome: "CURIOSA", desc: "Você estuda antes de agir. Enxerga nuances que ninguém mais vê.", desafio: "Sair da observação pra ação" },
+              { nome: "BUSCADORA", desc: "Você testa, aprende, recomeça. Se reinventa constantemente.", desafio: "Construir algo que dure" },
+              { nome: "ESTRATEGISTA", desc: "Você planeja, executa, entrega. Constrói estruturas que funcionam.", desafio: "Permitir flexibilidade" },
+              { nome: "SOBERANA", desc: "Você já sabe. Você já é. Sua presença transforma espaços.", desafio: "Agir sem esperar perfeição" },
             ].map((arq, i) => (
               <motion.div
                 key={i}
@@ -139,7 +139,18 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 className="p-8 rounded-xl"
                 style={{ background: "rgba(200,184,112,0.05)", border: "1px solid rgba(200,184,112,0.15)" }}
               >
-                <p style={{ fontSize: "32px", marginBottom: "12px" }}>{arq.emoji}</p>
+                <p
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontWeight: 700,
+                    fontSize: "11px",
+                    letterSpacing: "0.3em",
+                    color: "rgba(200,184,112,0.4)",
+                    marginBottom: "12px",
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </p>
                 <h3 style={{ fontSize: "18px", fontWeight: 600, color: "#C8B870", marginBottom: "8px", fontFamily: "'Playfair Display', serif" }}>
                   {arq.nome}
                 </h3>
@@ -292,7 +303,7 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             style={{ background: "rgba(200,184,112,0.05)", border: "1px solid rgba(200,184,112,0.15)", padding: "32px 24px" }}
           >
             <p style={{ fontSize: "13px", color: "rgba(200,184,112,0.7)", marginBottom: "24px", textAlign: "center" }}>
-              Exemplo de resultado — Sua mandala dos 12 eixos
+              Exemplo de resultado — Sua mandala dos 6 eixos
             </p>
             <div style={{ maxWidth: "400px", width: "100%" }}>
               <DiagnosticoRadarChart
@@ -317,7 +328,7 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             className="mb-16 text-center"
           >
             <p className="font-inter uppercase mb-3" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
-              Sua oferta completa
+              O que você acessa
             </p>
             <h2
               className="font-playfair font-bold"
@@ -327,7 +338,7 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 color: "#EDE6DB",
               }}
             >
-              Veja o Valor
+              Tudo incluído
             </h2>
           </motion.div>
 
@@ -335,33 +346,38 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             variants={inView}
             className="mb-12 p-8 rounded-xl"
-            style={{ background: "rgba(200,184,112,0.08)", border: "2px solid rgba(200,184,112,0.2)" }}
+            style={{ background: "rgba(200,184,112,0.06)", border: "1px solid rgba(200,184,112,0.15)" }}
           >
             <div className="space-y-4">
               {STACK_ITEMS.map((item, i) => (
-                <div key={i} className="flex justify-between items-start gap-4 pb-4" style={{ borderBottom: i < STACK_ITEMS.length - 1 ? "1px solid rgba(200,184,112,0.1)" : "none" }}>
-                  <div className="flex-1">
-                    <p style={{ fontSize: "14px", fontWeight: 600, color: "#EDE6DB" }}>{item.num} {item.title}</p>
-                    <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)" }}>{item.desc}</p>
+                <div key={i} className="flex justify-between items-start gap-4 pb-4" style={{ borderBottom: i < STACK_ITEMS.length - 1 ? "1px solid rgba(200,184,112,0.08)" : "none" }}>
+                  <div className="flex gap-4 flex-1">
+                    <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "13px", color: "rgba(200,184,112,0.4)", flexShrink: 0, paddingTop: "1px" }}>
+                      {item.num}
+                    </span>
+                    <div>
+                      <p style={{ fontSize: "14px", fontWeight: 600, color: "#EDE6DB" }}>{item.title}</p>
+                      <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)" }}>{item.desc}</p>
+                    </div>
                   </div>
                   <p style={{ fontSize: "13px", fontWeight: 600, color: "#C8B870", whiteSpace: "nowrap" }}>{item.value}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 pt-6" style={{ borderTop: "2px solid rgba(200,184,112,0.2)" }}>
+            <div className="mt-8 pt-6" style={{ borderTop: "1px solid rgba(200,184,112,0.15)" }}>
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
-                  <p style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)", marginBottom: "4px" }}>Valor Percebido</p>
+                  <p style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)", marginBottom: "4px" }}>Valor percebido</p>
                   <p style={{ fontSize: "22px", fontWeight: 700, color: "#C8B870" }}>R$ 597</p>
                 </div>
                 <div>
-                  <p style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)", marginBottom: "4px" }}>Seu Investimento</p>
+                  <p style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)", marginBottom: "4px" }}>Seu investimento</p>
                   <p style={{ fontSize: "22px", fontWeight: 700, color: "#C8B870" }}>R$ 47/mês</p>
                 </div>
               </div>
-              <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.6)", marginTop: "12px", textAlign: "center", fontWeight: 600 }}>
-                Economia: 87% (primeiros 6 meses grátis) — Ratio: 12x
+              <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.5)", marginTop: "12px", textAlign: "center", fontStyle: "italic" }}>
+                O valor percebido é R$ 597. O investimento é R$ 47.
               </p>
             </div>
           </motion.div>
@@ -377,7 +393,7 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
             className="mb-12"
           >
             <p className="font-inter uppercase mb-3" style={{ fontSize: "10px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.6)" }}>
-              Oferta especial
+              Acesso fundadora
             </p>
             <h2
               className="font-playfair font-bold mb-4"
@@ -387,15 +403,15 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 color: "#EDE6DB",
               }}
             >
-              Primeiras 200 Alunas
+              Primeiras 200
             </h2>
-            <div className="p-6 rounded-xl" style={{ background: "rgba(200,184,112,0.1)", border: "2px solid rgba(200,184,112,0.3)" }}>
-              <p style={{ fontSize: "42px", fontWeight: 700, color: "#C8B870", marginBottom: "8px" }}>R$ 47/mês</p>
+            <div className="p-6 rounded-xl" style={{ background: "rgba(200,184,112,0.06)", border: "1px solid rgba(200,184,112,0.15)" }}>
+              <p style={{ fontSize: "32px", fontWeight: 700, color: "#C8B870", marginBottom: "8px" }}>R$ 47/mês</p>
               <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.8)" }}>
-                Válido por 30 dias OU até 200 spots (o que vier primeiro)
+                Acesso de fundadora — condições exclusivas para as primeiras 200.
               </p>
               <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)", marginTop: "8px" }}>
-                🎁 + 6 meses completamente grátis
+                + 6 meses incluídos para fundadoras
               </p>
               <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", marginTop: "6px", fontStyle: "italic" }}>
                 Depois: R$ 147/mês
@@ -454,15 +470,15 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               Você Entra Sem Risco
             </h2>
             <p style={{ fontSize: "14px", color: "rgba(207,197,184,0.8)", marginBottom: "16px", fontStyle: "italic" }}>
-              "Experimente por 30 dias. Se não achar valor, devolvemos 100% sem fazer perguntas."
+              "Trinta dias para explorar. Se não fizer sentido, devolvemos tudo — sem perguntas."
             </p>
-            <div className="p-6 rounded-xl" style={{ background: "rgba(200,184,112,0.08)", border: "1px solid rgba(200,184,112,0.15)" }}>
-              <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.8)", lineHeight: 1.8 }}>
-                ✓ 30 dias pra fazer diagnóstico e explorar<br/>
-                ✓ Acessar todas as 4 mentoras<br/>
-                ✓ Decidir se continua<br/>
-                <br/>
-                Se não for pra você: Full refund. Done.
+            <div className="p-6 rounded-xl" style={{ background: "rgba(200,184,112,0.06)", border: "1px solid rgba(200,184,112,0.12)" }}>
+              <p style={{ fontSize: "13px", color: "rgba(207,197,184,0.8)", lineHeight: 2 }}>
+                30 dias para fazer o diagnóstico e explorar as mentoras.<br />
+                Acesso completo às 4 dimensões.<br />
+                Decida com clareza se continua.<br />
+                <br />
+                <span style={{ color: "#C8B870" }}>Reembolso integral. Sem burocracia.</span>
               </p>
             </div>
           </motion.div>
@@ -575,17 +591,17 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               <ArrowRight size={15} />
             </button>
 
-            <div className="mt-6 flex items-center justify-center gap-6 flex-wrap text-center">
-              <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)" }}>🔒 Privado</p>
-              <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)" }}>✓ Resultado imediato</p>
-              <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.6)" }}>⚡ Sem cadastro</p>
+            <div className="mt-5">
+              <p style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.06em" }}>
+                3 minutos · Gratuito · 30 dias de garantia
+              </p>
             </div>
 
             <p
-              className="mt-4 font-inter"
-              style={{ fontSize: "11px", color: "rgba(200,184,112,0.4)", letterSpacing: "0.06em" }}
+              className="mt-3 font-inter"
+              style={{ fontSize: "11px", color: "rgba(200,184,112,0.35)", letterSpacing: "0.06em" }}
             >
-              3 MINUTOS · GRATUITO · 4 MENTORAS
+              SEM CADASTRO · RESULTADO IMEDIATO · PRIVADO
             </p>
           </motion.div>
         </div>
@@ -604,6 +620,13 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               style={{ fontSize: "11px", color: "rgba(207,197,184,0.35)" }}
             >
               Política de Privacidade
+            </a>
+            <a
+              href="/exclusao-de-dados"
+              className="font-inter transition-opacity hover:opacity-80"
+              style={{ fontSize: "11px", color: "rgba(207,197,184,0.35)" }}
+            >
+              Exclusão de Dados
             </a>
           </div>
         </div>

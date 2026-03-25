@@ -124,7 +124,7 @@ const LandingPage = () => {
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontWeight: 700,
-                fontSize: "clamp(26px, 3.8vw, 50px)",
+                fontSize: "clamp(22px, 6.5vw, 50px)",
                 lineHeight: 1.08,
                 letterSpacing: "0.01em",
                 textTransform: "uppercase",
@@ -178,9 +178,18 @@ const LandingPage = () => {
               </button>
             </motion.div>
 
-            {/* Texto descritivo — confirmação racional pós-CTA */}
+            {/* Garantia ancorada na dobra */}
             <motion.p
               initial="hidden" animate="visible" custom={4} variants={fade}
+              className="mt-3 font-inter"
+              style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)", letterSpacing: "0.03em" }}
+            >
+              30 dias de garantia · Cancele quando quiser
+            </motion.p>
+
+            {/* Texto descritivo — confirmação racional pós-CTA */}
+            <motion.p
+              initial="hidden" animate="visible" custom={5} variants={fade}
               className="mt-5 font-inter leading-[1.8]"
               style={{ fontSize: "clamp(12px, 1.2vw, 14px)", color: "rgba(207,197,184,0.45)" }}
             >
