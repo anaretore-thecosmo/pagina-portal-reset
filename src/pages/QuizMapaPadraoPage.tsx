@@ -12,7 +12,7 @@ import {
 import quizIntroImage from "@/assets/quiz-intro-editorial.jpg";
 
 const STORAGE_KEY = "quiz-mapa-padrao-session";
-const RESPIRO_AFTER = [6, 12, 18, 24]; // 1-based question numbers
+const RESPIRO_AFTER = [4, 8, 12]; // 1-based question numbers
 const SCALE = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 type Step = "intro" | "question" | "respiro";
@@ -642,7 +642,7 @@ const QuizMapaPadraoPage = () => {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const session: QuizSession = JSON.parse(saved);
-        if (session.quizId === "mapa-do-padrao" && session.answers.length === 24) {
+        if (session.quizId === "mapa-do-padrao" && session.answers.length === 12) {
           const vals = session.answers.map((a) => a.value);
           // Find first unanswered to resume
           const firstNull = vals.findIndex((v) => v === 0 || v === null);
@@ -661,7 +661,7 @@ const QuizMapaPadraoPage = () => {
   const [currentQuestion, setCurrentQuestion] = useState(() => restored?.resumeAt ?? 0);
   const [respiroIndex, setRespiroIndex] = useState(0);
   const [sessionId] = useState(() => restored?.sid ?? generateId());
-  const [answers, setAnswers] = useState<(number | null)[]>(() => restored?.answers ?? Array(24).fill(null));
+  const [answers, setAnswers] = useState<(number | null)[]>(() => restored?.answers ?? Array(12).fill(null));
 
   // Persist to localStorage
   const persistSession = useCallback(
@@ -686,7 +686,7 @@ const QuizMapaPadraoPage = () => {
   }, [answers, persistSession]);
 
   const handleStart = useCallback(() => {
-    const fresh: (number | null)[] = Array(24).fill(null);
+    const fresh: (number | null)[] = Array(12).fill(null);
     setAnswers(fresh);
     setCurrentQuestion(0);
     setRespiroIndex(0);
@@ -707,7 +707,7 @@ const QuizMapaPadraoPage = () => {
       if (rIdx !== -1) {
         setRespiroIndex(rIdx);
         setStep("respiro");
-      } else if (currentQuestion < 23) {
+      } else if (currentQuestion < 11) {
         setCurrentQuestion((prev) => prev + 1);
       }
     },
@@ -723,7 +723,7 @@ const QuizMapaPadraoPage = () => {
   }, [currentQuestion]);
 
   const handleRespiroContinue = useCallback(() => {
-    if (respiroIndex === 3) {
+    if (respiroIndex === 2) {
       // Validate no nulls
       const hasNull = answers.some((a) => a === null);
       if (hasNull) {
@@ -763,7 +763,7 @@ const QuizMapaPadraoPage = () => {
           questionId={quizQuestions[currentQuestion].id}
           questionText={quizQuestions[currentQuestion].text}
           currentIndex={currentQuestion}
-          total={24}
+          total={12}
           initialValue={answers[currentQuestion]}
           onNext={handleAnswer}
           onBack={handleBack}
