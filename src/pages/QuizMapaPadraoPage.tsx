@@ -500,7 +500,7 @@ const QuestionScreen = ({
             style={{
               fontSize: "48px",
               lineHeight: 1,
-              color: isDark ? "hsl(var(--off-white) / 0.06)" : "hsl(var(--clay) / 0.10)",
+              color: "hsl(var(--off-white) / 0.06)",
             }}
           >
             {String(currentIndex + 1).padStart(2, "0")}
