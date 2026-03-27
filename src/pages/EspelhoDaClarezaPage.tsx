@@ -26,7 +26,7 @@ const EspelhoDaClarezaPage = () => {
       if (raw) {
         const session: QuizSession = JSON.parse(raw);
         if (sid && session.sessionId !== sid) return null;
-        if (session.answers.length === 24) {
+        if (session.answers.length === 12) {
           const answers = session.answers.map((a) => a.value);
           return { answers: answers as (number | null)[], sessionId: session.sessionId };
         }
