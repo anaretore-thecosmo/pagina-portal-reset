@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
+import { dimensionLabels } from "@/data/quizMapaPadrao";
 
 interface DiagnosticoRadarChartProps {
   scores: number[];
@@ -10,14 +11,14 @@ interface DiagnosticoRadarChartProps {
 }
 
 /* ── Geometria ──────────────────────────────────────── */
-const N        = 12;
+const N        = 6;
 const OUTER_R  = 128;
-const SVG_SIZE = 340;
+const SVG_SIZE = 360;
 const CX       = SVG_SIZE / 2;
 const CY       = SVG_SIZE / 2;
-const LABEL_R  = OUTER_R + 20;
+const LABEL_R  = OUTER_R + 26;
 const MAX_VAL  = 9;
-const RINGS    = 6;
+const RINGS    = 4;
 
 /* ── Palette ────────────────────────────────────────── */
 const GOLD     = "#C8B870";
@@ -25,7 +26,7 @@ const TOP_CLR  = "#C8A050";
 const BOT_CLR  = "#6B8BA4";
 const CTR_CLR  = "#7A9B6E";
 const GRID_CLR = "rgba(237,230,219,0.06)";
-const TEXT_DIM = "rgba(237,230,219,0.28)";
+const TEXT_DIM = "rgba(237,230,219,0.38)";
 
 /* ── Helpers ────────────────────────────────────────── */
 function axisAngle(i: number) {
@@ -75,8 +76,8 @@ const DiagnosticoRadarChart = ({
   );
 
   const dataPath = useMemo(() => {
-    const pts = scores.map((s, i) => {
-      const v = Math.max(0, Math.min(MAX_VAL, s ?? 0));
+    const pts = Array.from({ length: N }, (_, i) => {
+      const v = Math.max(0, Math.min(MAX_VAL, scores[i] ?? 0));
       return polarPt(i, (v / MAX_VAL) * OUTER_R);
     }) as [number, number][];
     return buildPath(pts);
@@ -84,15 +85,15 @@ const DiagnosticoRadarChart = ({
 
   const dots = useMemo(
     () =>
-      scores.map((s, i) => {
-        const v      = Math.max(0, Math.min(MAX_VAL, s ?? 0));
+      Array.from({ length: N }, (_, i) => {
+        const v      = Math.max(0, Math.min(MAX_VAL, scores[i] ?? 0));
         const [x, y] = polarPt(i, (v / MAX_VAL) * OUTER_R);
         let color    = "rgba(200,184,112,0.45)";
-        let r        = 2.8;
+        let r        = 3.5;
         let ring     = false;
-        if (top3Set.has(i))     { color = TOP_CLR; r = 4.5; ring = true; }
-        if (bottom3Set.has(i))  { color = BOT_CLR; r = 4.5; ring = true; }
-        if (i === centralIndex) { color = CTR_CLR; r = 5.5; ring = true; }
+        if (top3Set.has(i))     { color = TOP_CLR; r = 5; ring = true; }
+        if (bottom3Set.has(i))  { color = BOT_CLR; r = 5; ring = true; }
+        if (i === centralIndex) { color = CTR_CLR; r = 6; ring = true; }
         return { x, y, r, color, ring };
       }),
     [scores, top3Set, bottom3Set, centralIndex]
@@ -107,7 +108,7 @@ const DiagnosticoRadarChart = ({
         if (top3Set.has(i))     { color = TOP_CLR; bold = true; }
         if (bottom3Set.has(i))  { color = BOT_CLR; bold = true; }
         if (i === centralIndex) { color = CTR_CLR; bold = true; }
-        return { x, y, n: i + 1, color, bold };
+        return { x, y, label: dimensionLabels[i] ?? `${i + 1}`, color, bold };
       }),
     [top3Set, bottom3Set, centralIndex]
   );
@@ -117,7 +118,7 @@ const DiagnosticoRadarChart = ({
       <svg
         viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
         width="100%"
-        style={{ maxWidth: 380, display: "block" }}
+        style={{ maxWidth: 400, display: "block" }}
         aria-hidden="true"
       >
         <defs>
@@ -173,8 +174,8 @@ const DiagnosticoRadarChart = ({
           d={dataPath}
           fill="none"
           stroke={GOLD}
-          strokeWidth={1.4}
-          strokeOpacity={0.7}
+          strokeWidth={1.6}
+          strokeOpacity={0.75}
           filter="url(#f-glow)"
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 1 }}
@@ -184,7 +185,7 @@ const DiagnosticoRadarChart = ({
         {/* Vertex dots */}
         {dots.map((d, i) => (
           <g key={i}>
-            {d.ring && <circle cx={d.x} cy={d.y} r={d.r + 5} fill={d.color} opacity={0.12} />}
+            {d.ring && <circle cx={d.x} cy={d.y} r={d.r + 6} fill={d.color} opacity={0.12} />}
             <circle cx={d.x} cy={d.y} r={d.r} fill={d.color} />
           </g>
         ))}
@@ -192,20 +193,21 @@ const DiagnosticoRadarChart = ({
         {/* Center */}
         <circle cx={CX} cy={CY} r={2} fill="rgba(200,184,112,0.3)" />
 
-        {/* Axis labels */}
-        {labelItems.map((l) => (
+        {/* Axis labels — dimension names */}
+        {labelItems.map((l, i) => (
           <text
-            key={l.n}
+            key={i}
             x={l.x}
             y={l.y}
             textAnchor="middle"
             dominantBaseline="middle"
             fill={l.color}
-            fontSize={11}
-            fontFamily="'Playfair Display', Georgia, serif"
-            fontWeight={l.bold ? 700 : 400}
+            fontSize={10}
+            fontFamily="'Inter', sans-serif"
+            fontWeight={l.bold ? 600 : 400}
+            letterSpacing="0.04em"
           >
-            {l.n}
+            {l.label}
           </text>
         ))}
       </svg>

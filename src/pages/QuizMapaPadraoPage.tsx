@@ -441,10 +441,7 @@ const QuestionScreen = ({
     setSelected(initialValue);
   }, [currentIndex, initialValue]);
 
-  const isEven = currentIndex % 2 === 0;
-  const bg = isEven
-    ? "radial-gradient(ellipse at 50% 45%, rgba(200,184,112,0.03) 0%, #08090D 65%)"
-    : "#08090D";
+  const bg = "#08090D";
   const fg = "hsl(var(--off-white))";
   const fgMuted = "hsl(var(--off-white) / 0.45)";
   const borderSubtle = "hsl(0 0% 100% / 0.14)";
