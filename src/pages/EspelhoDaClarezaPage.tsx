@@ -15,7 +15,7 @@ const EspelhoDaClarezaPage = () => {
 
   const resolved = useMemo(() => {
     // Try navigation state first
-    if (state?.session?.answers?.length === 24) {
+    if (state?.session?.answers?.length === 12) {
       const answers = state.session.answers.map((a) => a.value);
       return { answers: answers as (number | null)[], sessionId: state.session.sessionId };
     }
