@@ -538,9 +538,7 @@ const QuestionScreen = ({
                       borderTop: `1.5px solid ${isSelected ? goldAccent : borderSubtle}`,
                       borderBottom: `1.5px solid ${isSelected ? goldAccent : borderSubtle}`,
                       background: isSelected
-                        ? isDark
-                          ? "hsl(var(--matte-gold) / 0.12)"
-                          : "hsl(var(--matte-gold) / 0.08)"
+                        ? "hsl(var(--matte-gold) / 0.12)"
                         : "transparent",
                       color: isSelected ? goldAccent : fg,
                       fontFamily: "'Playfair Display', serif",
