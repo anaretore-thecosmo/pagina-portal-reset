@@ -48,8 +48,8 @@ const CTR_CLR  = "#7A9B6E";
 /* ── Design tokens — LIGHT ─────────────────────────── */
 const BG_LIGHT       = "#EDE6DB";
 const TEXT_DARK      = "#1A1A18";
-const TEXT_MUTED_L   = "rgba(26,26,24,0.62)";
-const TEXT_DIM_L     = "rgba(26,26,24,0.42)";
+const TEXT_MUTED_L   = "rgba(26,26,24,0.78)";
+const TEXT_DIM_L     = "rgba(26,26,24,0.56)";
 const BORDER_LIGHT   = "rgba(26,26,24,0.08)";
 const GOLD_DARK      = "#8B7A3A";
 
