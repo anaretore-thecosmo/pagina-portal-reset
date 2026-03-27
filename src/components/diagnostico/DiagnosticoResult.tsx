@@ -328,7 +328,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                         {axis.mean.toFixed(1)}
                       </span>
                     </div>
-                    <p className="font-inter" style={{ fontSize: "11px", color: TEXT_DIM_L }}>
+                    <p className="font-inter" style={{ fontSize: "12.5px", color: TEXT_DIM_L }}>
                       {getAxisMicro(axis.type).micro}
                     </p>
                   </div>
