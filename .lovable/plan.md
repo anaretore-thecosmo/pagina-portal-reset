@@ -97,13 +97,13 @@ A curadoria identificou melhorias em 5 frentes: UX/Design, Arquitetura, Internac
 
 ## Fase 5 — Backend e Persistencia
 
-### 5.1 Ativar Lovable Cloud
+### 5.1 Supabase (projeto ja configurado)
 - Configurar autenticacao (email + Google)
 - Criar tabela `diagnostico_results` para salvar resultados
 - Criar tabela `user_profiles` para dados do usuario
 - Migrar de localStorage para banco de dados
 
-### 5.2 Analytics e tracking
+### 5.2 Analytics e tracking — IMPLEMENTAR JUNTO DA FASE 1
 - Registrar cada diagnostico completado
 - Registrar cliques no CTA de compra
 - Registrar taxa de abandono por pergunta do quiz
@@ -113,14 +113,14 @@ A curadoria identificou melhorias em 5 frentes: UX/Design, Arquitetura, Internac
 ## Ordem de Execucao Recomendada
 
 ```text
-Prioridade    Fase     Impacto          Esforco
+Prioridade    Fase       Impacto          Esforco
 ─────────────────────────────────────────────────
-1 (agora)     1.1      Conversao +15%   30 min
-2 (agora)     1.2-1.3  Conversao +10%   1h
-3 (proximo)   2.1      Viralidade       1.5h
-4 (proximo)   3.1-3.2  Manutencao       2h
-5 (depois)    4.1-4.2  Alcance global   3h
-6 (depois)    5.1-5.2  Retencao         2h+
+1 (agora)     1.1+5.2    Conversao+Dados  1h
+2 (agora)     1.2-1.3    Conversao +10%   1h
+3 (proximo)   2.1        Viralidade       1.5h
+4 (proximo)   3.1-3.2    Manutencao       2h
+5 (depois)    4.1-4.2    Alcance global   3h
+6 (depois)    5.1        Retencao         2h+
 ```
 
 ## Detalhes Tecnicos
@@ -128,5 +128,8 @@ Prioridade    Fase     Impacto          Esforco
 - **Dependencias novas:** `html2canvas` (share card), `react-i18next` + `i18next` (i18n)
 - **Sem breaking changes:** todas as fases sao aditivas
 - **Mobile-first:** CTA sticky e card compartilhavel priorizados para tela 375px
+- **Gradiente dos botoes:** `linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)`
+- **Backend:** Supabase (projeto existente), NAO Lovable Cloud
+
 - **Gradiente dos botoes mantido:** `linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)`
 
