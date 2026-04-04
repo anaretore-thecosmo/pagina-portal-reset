@@ -192,6 +192,17 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  /* ── Share modal state ─────────────────────────────── */
+  const [showShareModal, setShowShareModal] = useState(false);
+  const shareCardRef = useRef<HTMLDivElement>(null);
+
+  const handleShare = async () => {
+    if (shareCardRef.current) {
+      await generateShareImage(shareCardRef.current);
+    }
+    setShowShareModal(false);
+  };
+
   return (
     <div style={{ minHeight: "100vh" }}>
 
