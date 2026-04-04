@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Download, Sparkles, Shield, Brain, Target } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Download, Sparkles, Shield, Brain, Target, Share2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import DiagnosticoRadarChart from "./DiagnosticoRadarChart";
 import { generateDiagnosticoPDF } from "@/components/diagnostico/diagnosticoPdfGenerator";
 import {
