@@ -663,7 +663,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               ))}
             </div>
 
-            {/* Ancoragem de preço */}
+            {/* Ancoragem de preço — comparação visual */}
             <div className="text-center mb-10">
               <p
                 className="font-playfair italic mb-8"
@@ -671,6 +671,28 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               >
                 {arquetipo.primeiroPassoTexto}
               </p>
+
+              {/* Comparação: mercado vs Portal Reset */}
+              <div
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+              >
+                <div className="p-5 rounded-xl text-center" style={{ background: "rgba(255,255,255,0.025)", border: `1px solid ${BORDER}` }}>
+                  <p className="font-inter uppercase mb-2" style={{ fontSize: "9px", letterSpacing: "0.3em", color: DIM }}>Mercado</p>
+                  <p className="font-playfair font-bold line-through" style={{ fontSize: "28px", color: "rgba(237,230,219,0.3)" }}>R$500</p>
+                  <p className="font-inter" style={{ fontSize: "11px", color: DIM }}>/sessão individual</p>
+                </div>
+                <div className="p-5 rounded-xl text-center" style={{ background: "rgba(200,184,112,0.06)", border: `1px solid rgba(200,184,112,0.25)` }}>
+                  <p className="font-inter uppercase mb-2" style={{ fontSize: "9px", letterSpacing: "0.3em", color: GOLD }}>Portal Reset</p>
+                  <p className="font-playfair font-bold" style={{ fontSize: "28px", color: CREAM }}>R$47</p>
+                  <p className="font-inter" style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)" }}>/mês · acesso completo</p>
+                </div>
+              </div>
+
+              {/* Selo Fundadora */}
+              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full" style={{ background: "rgba(200,184,112,0.08)", border: `1px solid rgba(200,184,112,0.2)` }}>
+                <Sparkles size={13} color={GOLD} />
+                <span className="font-inter uppercase" style={{ fontSize: "9.5px", letterSpacing: "0.25em", color: GOLD }}>Acesso Fundadora · 200 vagas</span>
+              </div>
 
               <p
                 className="font-inter uppercase mb-2"
@@ -686,17 +708,22 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                 <span style={{ color: GOLD }}>começa agora.</span>
               </h3>
 
-              {/* Ancoragem: valor real vs preço */}
+              {/* Value stack */}
               <div
-                className="inline-block px-6 py-4 rounded-xl mb-6"
+                className="inline-block px-6 py-4 rounded-xl mb-6 text-left"
                 style={{ background: "rgba(200,184,112,0.04)", border: `1px solid ${BORDER}` }}
               >
-                <p className="font-inter mb-1" style={{ fontSize: "11px", color: DIM }}>
-                  3 mentoras de IA + 10 portais + diário de frequência + sistema de progresso
-                </p>
-                <p className="font-inter" style={{ fontSize: "11px", color: "rgba(200,184,112,0.5)" }}>
-                  Valor de mercado: sessões individuais + apps + mentoria = R$500+/mês
-                </p>
+                {[
+                  "3 mentoras de IA · acesso 24/7",
+                  "10 portais com rituais guiados",
+                  "Diário de frequência + progresso",
+                  "Diagnóstico personalizado incluso",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 py-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: GOLD, opacity: 0.5 }} />
+                    <p className="font-inter" style={{ fontSize: "11.5px", color: MUTED }}>{item}</p>
+                  </div>
+                ))}
               </div>
 
               {/* Preço */}
@@ -712,6 +739,9 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                     /mês
                   </span>
                 </div>
+                <p className="font-inter mt-2" style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)" }}>
+                  Economia de até 92% comparado a sessões individuais
+                </p>
                 <p className="font-inter mt-1" style={{ fontSize: "11px", color: "rgba(200,184,112,0.38)" }}>
                   Cancele quando quiser. Sem fidelidade. Sem contrato.
                 </p>
