@@ -579,7 +579,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
           BLOCO 5: OFERTA PORTAL RESET — FUNDO ESCURO
           Ancoragem forte + apresentação premium do app
           ═══════════════════════════════════════════════ */}
-      <div style={{ background: BG_DARK, color: CREAM }}>
+      <div ref={ofertaRef} style={{ background: BG_DARK, color: CREAM }}>
         <div className="max-w-[700px] mx-auto px-6 md:px-10 py-16 md:py-24">
 
           <motion.section
