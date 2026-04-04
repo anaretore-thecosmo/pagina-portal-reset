@@ -319,11 +319,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               onClick={onCTA}
               className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300 inline-flex items-center gap-3"
               style={{
-                background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                 color: "#08090D",
                 borderRadius: "8px",
                 border: "1px solid rgba(200,184,112,0.45)",
-                boxShadow: "0 4px 24px -4px rgba(46,139,87,0.4)",
+                boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
                 height: "52px",
                 paddingLeft: "28px",
                 paddingRight: "28px",
@@ -332,11 +332,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(46,139,87,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
+                e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(152,61,6,0.45), 0 0 32px -6px rgba(200,184,112,0.25)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(46,139,87,0.4)";
+                e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
               }}
             >
               Descobrir meu padrão
@@ -540,8 +540,8 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 </div>
               </div>
               <div className="mt-4 flex justify-center">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full" style={{ background: "rgba(46,139,87,0.1)", border: "1px solid rgba(46,139,87,0.2)" }}>
-                  <span style={{ fontSize: "12px", fontWeight: 700, color: "#2E8B57" }}>92% de economia</span>
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full" style={{ background: "rgba(152,61,6,0.1)", border: "1px solid rgba(152,61,6,0.2)" }}>
+                  <span style={{ fontSize: "12px", fontWeight: 700, color: "#983D06" }}>92% de economia</span>
                 </span>
               </div>
               <p style={{ fontSize: "13px", color: D.muted, marginTop: "12px", textAlign: "center", fontStyle: "italic" }}>
@@ -555,11 +555,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 onClick={onCTA}
                 className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300 inline-flex items-center gap-3"
                 style={{
-                  background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                  background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                   color: "#08090D",
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
-                  boxShadow: "0 4px 24px -4px rgba(46,139,87,0.4)",
+                  boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
                   height: "56px",
                   paddingLeft: "32px",
                   paddingRight: "32px",
@@ -568,11 +568,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(46,139,87,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
+                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(152,61,6,0.45), 0 0 32px -6px rgba(200,184,112,0.25)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(46,139,87,0.4)";
+                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
                 }}
               >
                 Começar meu diagnóstico grátis
@@ -667,11 +667,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 onClick={onCTA}
                 className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300 inline-flex items-center gap-3"
                 style={{
-                  background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                  background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                   color: "#08090D",
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
-                  boxShadow: "0 4px 24px -4px rgba(46,139,87,0.4)",
+                  boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
                   height: "56px",
                   paddingLeft: "32px",
                   paddingRight: "32px",
@@ -680,11 +680,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(46,139,87,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
+                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(152,61,6,0.45), 0 0 32px -6px rgba(200,184,112,0.25)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(46,139,87,0.4)";
+                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
                 }}
               >
                 Fazer meu diagnóstico grátis
@@ -819,11 +819,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               onClick={onCTA}
               className="font-inter font-semibold uppercase tracking-[0.2em] transition-all duration-300 inline-flex items-center gap-3"
               style={{
-                background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                 color: "#08090D",
                 borderRadius: "8px",
                 border: "1px solid rgba(200,184,112,0.45)",
-                boxShadow: "0 4px 24px -4px rgba(46,139,87,0.4)",
+                boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
                 height: "56px",
                 paddingLeft: "32px",
                 paddingRight: "32px",
@@ -832,11 +832,11 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(46,139,87,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
+                e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(152,61,6,0.45), 0 0 32px -6px rgba(200,184,112,0.25)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(46,139,87,0.4)";
+                e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
               }}
             >
               Ver meu mapa grátis

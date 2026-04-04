@@ -898,7 +898,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                   onClick={handleShare}
                   className="font-inter font-semibold uppercase tracking-[0.15em] flex items-center gap-2 px-6 py-3 rounded-lg transition-all"
                   style={{
-                    background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                    background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                     color: BG_DARK,
                     fontSize: "11px",
                     border: "1px solid rgba(200,184,112,0.45)",
@@ -934,7 +934,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               <button
                 className="font-inter font-semibold uppercase tracking-[0.18em] w-full flex items-center justify-center gap-2.5"
                 style={{
-                  background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                  background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                   color: BG_DARK,
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
