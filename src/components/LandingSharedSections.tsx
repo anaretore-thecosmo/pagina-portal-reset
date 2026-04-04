@@ -494,15 +494,20 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
                   <p style={{ fontSize: "11px", color: D.accentDim, marginBottom: "4px" }}>Valor percebido</p>
-                  <p style={{ fontSize: "22px", fontWeight: 700, color: D.accent }}>R$ 597</p>
+                  <p className="line-through" style={{ fontSize: "26px", fontWeight: 700, color: "rgba(200,184,112,0.35)", fontFamily: "'Playfair Display', serif" }}>R$ 597</p>
                 </div>
                 <div>
                   <p style={{ fontSize: "11px", color: D.accentDim, marginBottom: "4px" }}>Seu investimento</p>
-                  <p style={{ fontSize: "22px", fontWeight: 700, color: D.accent }}>R$ 47/mês</p>
+                  <p style={{ fontSize: "26px", fontWeight: 700, color: D.accent, fontFamily: "'Playfair Display', serif" }}>R$ 47<span style={{ fontSize: "14px", fontWeight: 400 }}>/mês</span></p>
                 </div>
               </div>
+              <div className="mt-4 flex justify-center">
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full" style={{ background: "rgba(46,139,87,0.1)", border: "1px solid rgba(46,139,87,0.2)" }}>
+                  <span style={{ fontSize: "12px", fontWeight: 700, color: "#2E8B57" }}>92% de economia</span>
+                </span>
+              </div>
               <p style={{ fontSize: "13px", color: D.muted, marginTop: "12px", textAlign: "center", fontStyle: "italic" }}>
-                O valor percebido é R$ 597. O investimento é R$ 47.
+                Acesso completo por menos que uma sessão individual.
               </p>
             </div>
           </motion.div>
