@@ -176,11 +176,11 @@ const LandingPage = () => {
                 onClick={goToQuiz}
                 className="relative font-inter font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
                 style={{
-                  background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                  background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                   color: "#08090D",
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
-                  boxShadow: "0 4px 28px -4px rgba(46,139,87,0.45)",
+                  boxShadow: "0 4px 28px -4px rgba(152,61,6,0.45)",
                   height: "56px",
                   paddingLeft: "32px",
                   paddingRight: "32px",
@@ -188,11 +188,11 @@ const LandingPage = () => {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 8px 36px -4px rgba(46,139,87,0.5), 0 0 40px -8px rgba(200,184,112,0.3)";
+                  e.currentTarget.style.boxShadow = "0 8px 36px -4px rgba(152,61,6,0.5), 0 0 40px -8px rgba(200,184,112,0.25)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 28px -4px rgba(46,139,87,0.45)";
+                  e.currentTarget.style.boxShadow = "0 4px 28px -4px rgba(152,61,6,0.45)";
                 }}
               >
                 MAPEAR MEU PADRÃO AGORA
@@ -225,7 +225,7 @@ const LandingPage = () => {
             >
               <span
                 className="font-inter uppercase"
-                style={{ fontSize: "8px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.3)" }}
+                style={{ fontSize: "8px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.25)" }}
               >
                 Continue
               </span>
@@ -234,8 +234,8 @@ const LandingPage = () => {
                 transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
               >
                 <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
-                  <line x1="7" y1="0" x2="7" y2="13" stroke="rgba(200,184,112,0.3)" strokeWidth="1"/>
-                  <polyline points="3,10 7,15 11,10" fill="none" stroke="rgba(200,184,112,0.3)" strokeWidth="1"/>
+                  <line x1="7" y1="0" x2="7" y2="13" stroke="rgba(200,184,112,0.25)" strokeWidth="1"/>
+                  <polyline points="3,10 7,15 11,10" fill="none" stroke="rgba(200,184,112,0.25)" strokeWidth="1"/>
                 </svg>
               </motion.div>
             </motion.div>

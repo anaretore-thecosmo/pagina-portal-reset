@@ -194,7 +194,7 @@ const LandingMapaPage = () => {
                   onClick={goToQuiz}
                   className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300 flex items-center gap-3"
                   style={{
-                    background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                    background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                     color: "#08090D",
                     borderRadius: "8px",
                     border: "1px solid rgba(200,184,112,0.45)",
