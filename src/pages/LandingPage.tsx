@@ -160,7 +160,7 @@ const LandingPage = () => {
                   color: "#08090D",
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
-                  boxShadow: "0 4px 24px -4px rgba(152,61,6,0.4)",
+                  boxShadow: "0 4px 24px -4px rgba(46,139,87,0.4)",
                   height: "48px",
                   paddingLeft: "24px",
                   paddingRight: "24px",
@@ -168,11 +168,11 @@ const LandingPage = () => {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(152,61,6,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
+                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(46,139,87,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(152,61,6,0.4)";
+                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(46,139,87,0.4)";
                 }}
               >
                 Mapear meu padrão

@@ -708,7 +708,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                     color: BG_DARK,
                     borderRadius: "8px",
                     border: `1px solid rgba(200,184,112,0.45)`,
-                    boxShadow: "0 4px 28px -4px rgba(152,61,6,0.45)",
+                    boxShadow: "0 4px 28px -4px rgba(46,139,87,0.45)",
                     height: "58px",
                     paddingLeft: "32px",
                     paddingRight: "32px",
@@ -716,11 +716,11 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "0 8px 32px -4px rgba(152,61,6,0.5), 0 0 40px -8px rgba(200,184,112,0.3)";
+                    e.currentTarget.style.boxShadow = "0 8px 32px -4px rgba(46,139,87,0.5), 0 0 40px -8px rgba(200,184,112,0.3)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "0 4px 28px -4px rgba(152,61,6,0.45)";
+                    e.currentTarget.style.boxShadow = "0 4px 28px -4px rgba(46,139,87,0.45)";
                   }}
                 >
                   {offer.ctaLabel}
