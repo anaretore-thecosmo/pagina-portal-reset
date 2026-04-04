@@ -548,6 +548,40 @@ const LandingSharedSections = ({ onCTA }: LandingSharedSectionsProps) => {
                 Acesso completo por menos que uma sessão individual.
               </p>
             </div>
+
+            {/* CTA no value stack */}
+            <div className="text-center mt-10">
+              <button
+                onClick={onCTA}
+                className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300 inline-flex items-center gap-3"
+                style={{
+                  background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                  color: "#08090D",
+                  borderRadius: "8px",
+                  border: "1px solid rgba(200,184,112,0.45)",
+                  boxShadow: "0 4px 24px -4px rgba(46,139,87,0.4)",
+                  height: "56px",
+                  paddingLeft: "32px",
+                  paddingRight: "32px",
+                  fontSize: "12px",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.boxShadow = "0 6px 28px -4px rgba(46,139,87,0.45), 0 0 32px -6px rgba(200,184,112,0.3)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "0 4px 24px -4px rgba(46,139,87,0.4)";
+                }}
+              >
+                Começar meu diagnóstico grátis
+                <ArrowRight size={14} />
+              </button>
+              <p className="font-inter mt-3" style={{ fontSize: "11px", color: D.muted }}>
+                Resultado em 3 minutos · Sem cadastro
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
