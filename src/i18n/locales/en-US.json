@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "home": "Home",
+    "quiz": "Diagnosis",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "dataExclusion": "Data Deletion"
+  },
+  "landing": {
+    "hero": {
+      "kicker": "Portal Reset Mental®",
+      "title1": "The pattern has a name.",
+      "title2": "What's yours?",
+      "subtitle": "3-minute diagnosis. Instant results. 4 mentors to explore depth.",
+      "cta": "See my map for free",
+      "noCadastro": "NO SIGNUP · INSTANT RESULTS · PRIVATE",
+      "time": "3 minutes · Free · 30-day guarantee"
+    },
+    "archetypes": {
+      "kicker": "Which one are you?",
+      "title": "The 4 Archetypes",
+      "curiosa": "THE CURIOUS",
+      "curiosaDesc": "You study before you act. You see nuances no one else does.",
+      "curiosaDesafio": "Moving from observation to action",
+      "buscadora": "THE SEEKER",
+      "buscadoraDesc": "You test, learn, restart. You constantly reinvent yourself.",
+      "buscadoraDesafio": "Building something that lasts",
+      "estrategista": "THE STRATEGIST",
+      "estrategistaDesc": "You plan, execute, deliver. You build structures that work.",
+      "estrategistaDesafio": "Allowing flexibility",
+      "soberana": "THE SOVEREIGN",
+      "soberanaDesc": "You already know. You already are. Your presence transforms spaces.",
+      "soberanaDesafio": "Acting without waiting for perfection",
+      "desafio": "Challenge"
+    },
+    "mentoras": {
+      "kicker": "After the diagnosis",
+      "title": "4 Mentors Explore Depth",
+      "equivalente": "Equivalent"
+    },
+    "dores": {
+      "kicker": "Do you see yourself here?",
+      "dor1": "You start, stop, restart — and you still don't know exactly why.",
+      "dor2": "You function, deliver, solve — but the internal cost is way too high.",
+      "dor3": "You feel there's more, but something always blocks before it becomes action.",
+      "dor4": "You already have clarity. What's missing is sustaining without sacrificing yourself.",
+      "cta": "If any of these phrases stopped you — the pattern has a name. And a solution."
+    },
+    "codigoZero": {
+      "kicker": "Founder access · Code Zero",
+      "title1": "You're here",
+      "title2": "before the world knows.",
+      "desc": "This tool hasn't been tested by hundreds of people yet. There are no testimonials. No accumulated social proof. There's something rarer: you are the generation writing the first chapter.",
+      "quote": "\"We have no testimonials. Because those who are here are still writing the first one.\""
+    },
+    "mandala": {
+      "kicker": "In 3 minutes, you discover",
+      "title1": "Your map.",
+      "title2": "Your pattern.",
+      "title3": "Your direction.",
+      "example": "Example result — Your 6-axis mandala",
+      "caption": "Visualize where you sustain energy and where it leaks"
+    },
+    "valueStack": {
+      "kicker": "What you get access to",
+      "title": "Everything included",
+      "valorPercebido": "Perceived value",
+      "seuInvestimento": "Your investment",
+      "economia": "92% savings",
+      "subtitle": "Full access for less than a single individual session."
+    },
+    "pricing": {
+      "kicker": "Code Zero · Founder Access",
+      "title": "First 200",
+      "subtitle1": "The frequency of this tool is still being discovered.",
+      "subtitle2": "Those who enter now define what it becomes.",
+      "investimento": "FOUNDER INVESTMENT",
+      "price": "R$ 47/mo",
+      "incluido": "6 months fully included on first access.",
+      "condicao": "Exclusive for the first 200 · After: R$ 147/mo",
+      "planos": "Plans from the 2nd month",
+      "mensal": "Monthly",
+      "trimestral": "Quarterly",
+      "semestral": "Biannual",
+      "anual": "Annual"
+    },
+    "garantia": {
+      "title": "You Enter Risk-Free",
+      "quote": "\"Thirty days to explore. If it doesn't make sense, we refund everything — no questions asked.\"",
+      "desc1": "30 days to take the diagnosis and explore the mentors.",
+      "desc2": "Full access to all 4 dimensions.",
+      "desc3": "Decide with clarity whether to continue.",
+      "reembolso": "Full refund. No bureaucracy."
+    },
+    "faq": {
+      "kicker": "Common Questions",
+      "title": "FAQ"
+    },
+    "ctaFinal": {
+      "title1": "The pattern has a name.",
+      "title2": "What's yours?",
+      "desc": "3-minute diagnosis. Instant results. 4 mentors to explore depth.",
+      "cta": "See my map for free",
+      "time": "3 minutes · Free · 30-day guarantee",
+      "noCadastro": "NO SIGNUP · INSTANT RESULTS · PRIVATE"
+    },
+    "footer": {
+      "copyright": "© Ana Retore. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "dataExclusion": "Data Deletion"
+    }
+  },
+  "quiz": {
+    "intro": {
+      "title": "Pattern Map",
+      "subtitle": "12 questions. 3 minutes. Instant results.",
+      "cta": "OPEN THE MAP",
+      "disclaimer": "No signup. Private. Free."
+    },
+    "progress": "Question",
+    "respiro": {
+      "title": "Breathe",
+      "continue": "Continue"
+    },
+    "result": {
+      "cta": "SEE MY MIRROR"
+    }
+  },
+  "diagnostico": {
+    "header": {
+      "kicker": "Mirror of Clarity",
+      "title1": "Your map.",
+      "title2": "Your direction.",
+      "pdf": "PDF"
+    },
+    "mandala": {
+      "kicker": "Pattern Mandala",
+      "desc": "The more expanded the slice, the more stable your access to that axis."
+    },
+    "editorial": {
+      "kicker": "Your pattern"
+    },
+    "triades": {
+      "base": "Foundation triad",
+      "vazamento": "Leakage triad",
+      "conflito": "Central conflict"
+    },
+    "plan7": {
+      "kicker": "Sustainability plan · 7 days",
+      "desc": "3 minutes per day. No drama. No peaks."
+    },
+    "oferta": {
+      "kicker": "Portal Reset Mental®",
+      "title1": "The system that transforms awareness",
+      "title2": "into real sustainability.",
+      "dentro": "What's inside",
+      "mercado": "Market",
+      "portalReset": "Portal Reset",
+      "sessaoIndividual": "/individual session",
+      "acessoCompleto": "/mo · full access",
+      "seloFundadora": "Founder Access · 200 spots",
+      "suaJornada1": "Your journey",
+      "suaJornada2": "starts now.",
+      "economia": "Save up to 92% compared to individual sessions",
+      "cancele": "Cancel anytime. No commitment. No contract.",
+      "acessoImediato": "Immediate access after payment confirmation.",
+      "garantiaTitle": "30-day full guarantee",
+      "garantiaDesc": "Explore the diagnosis, mentors, and portals. If it doesn't work for you, we'll refund everything — no questions, no hassle.",
+      "planoA": "I want to know about Plan A →",
+      "planoASub": "If you feel ready for a bigger step —"
+    },
+    "share": {
+      "salvar": "Save as image",
+      "fechar": "Close"
+    },
+    "sticky": {
+      "garantia": "R$47/mo · 30-day guarantee"
+    }
+  },
+  "common": {
+    "copyright": "© Ana Retore. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
+  }
+}

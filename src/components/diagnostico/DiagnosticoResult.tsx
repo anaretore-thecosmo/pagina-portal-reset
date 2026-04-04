@@ -1,6 +1,9 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Download, Sparkles, Shield, Brain, Target } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Download, Sparkles, Shield, Brain, Target, Share2 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import DiagnosticoRadarChart from "./DiagnosticoRadarChart";
+import ShareCard from "./ShareCard";
+import { generateShareImage } from "./shareCardGenerator";
 import { generateDiagnosticoPDF } from "@/components/diagnostico/diagnosticoPdfGenerator";
 import {
   computeEspelho,
@@ -173,6 +176,33 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
     await generateDiagnosticoPDF(data, userName, "radar-chart-pdf");
   };
 
+  /* ── Sticky CTA state ──────────────────────────────── */
+  const [showStickyCta, setShowStickyCta] = useState(false);
+  const mandalaRef = useRef<HTMLDivElement>(null);
+  const ofertaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const mandalaBottom = mandalaRef.current?.getBoundingClientRect().bottom ?? 0;
+      const ofertaTop = ofertaRef.current?.getBoundingClientRect().top ?? Infinity;
+      const viewportHeight = window.innerHeight;
+      setShowStickyCta(mandalaBottom < 0 && ofertaTop > viewportHeight);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* ── Share modal state ─────────────────────────────── */
+  const [showShareModal, setShowShareModal] = useState(false);
+  const shareCardRef = useRef<HTMLDivElement>(null);
+
+  const handleShare = async () => {
+    if (shareCardRef.current) {
+      await generateShareImage(shareCardRef.current);
+    }
+    setShowShareModal(false);
+  };
+
   return (
     <div style={{ minHeight: "100vh" }}>
 
@@ -209,28 +239,45 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                 )}
               </div>
 
-              <button
-                onClick={handleDownloadPDF}
-                className="font-inter flex items-center gap-2 shrink-0 transition-opacity hover:opacity-70"
-                style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.18em",
-                  color: "rgba(200,184,112,0.45)",
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: "6px",
-                  padding: "8px 14px",
-                  marginTop: "4px",
-                  background: "transparent",
-                }}
-              >
-                <Download size={11} />
-                PDF
-              </button>
+              <div className="flex items-center gap-2 shrink-0" style={{ marginTop: "4px" }}>
+                <button
+                  onClick={() => setShowShareModal(true)}
+                  className="font-inter flex items-center gap-2 transition-opacity hover:opacity-70"
+                  style={{
+                    fontSize: "10px",
+                    letterSpacing: "0.18em",
+                    color: "rgba(200,184,112,0.45)",
+                    border: `1px solid ${BORDER}`,
+                    borderRadius: "6px",
+                    padding: "8px 14px",
+                    background: "transparent",
+                  }}
+                >
+                  <Share2 size={11} />
+                </button>
+                <button
+                  onClick={handleDownloadPDF}
+                  className="font-inter flex items-center gap-2 transition-opacity hover:opacity-70"
+                  style={{
+                    fontSize: "10px",
+                    letterSpacing: "0.18em",
+                    color: "rgba(200,184,112,0.45)",
+                    border: `1px solid ${BORDER}`,
+                    borderRadius: "6px",
+                    padding: "8px 14px",
+                    background: "transparent",
+                  }}
+                >
+                  <Download size={11} />
+                  PDF
+                </button>
+              </div>
             </div>
           </motion.div>
 
           {/* ════════════════ MANDALA ════════════════ */}
           <motion.section
+            ref={mandalaRef}
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             variants={inView}
             className="mb-16"
@@ -561,7 +608,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
           BLOCO 5: OFERTA PORTAL RESET — FUNDO ESCURO
           Ancoragem forte + apresentação premium do app
           ═══════════════════════════════════════════════ */}
-      <div style={{ background: BG_DARK, color: CREAM }}>
+      <div ref={ofertaRef} style={{ background: BG_DARK, color: CREAM }}>
         <div className="max-w-[700px] mx-auto px-6 md:px-10 py-16 md:py-24">
 
           <motion.section
@@ -645,7 +692,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               ))}
             </div>
 
-            {/* Ancoragem de preço */}
+            {/* Ancoragem de preço — comparação visual */}
             <div className="text-center mb-10">
               <p
                 className="font-playfair italic mb-8"
@@ -653,6 +700,28 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               >
                 {arquetipo.primeiroPassoTexto}
               </p>
+
+              {/* Comparação: mercado vs Portal Reset */}
+              <div
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+              >
+                <div className="p-5 rounded-xl text-center" style={{ background: "rgba(255,255,255,0.025)", border: `1px solid ${BORDER}` }}>
+                  <p className="font-inter uppercase mb-2" style={{ fontSize: "9px", letterSpacing: "0.3em", color: DIM }}>Mercado</p>
+                  <p className="font-playfair font-bold line-through" style={{ fontSize: "28px", color: "rgba(237,230,219,0.3)" }}>R$500</p>
+                  <p className="font-inter" style={{ fontSize: "11px", color: DIM }}>/sessão individual</p>
+                </div>
+                <div className="p-5 rounded-xl text-center" style={{ background: "rgba(200,184,112,0.06)", border: `1px solid rgba(200,184,112,0.25)` }}>
+                  <p className="font-inter uppercase mb-2" style={{ fontSize: "9px", letterSpacing: "0.3em", color: GOLD }}>Portal Reset</p>
+                  <p className="font-playfair font-bold" style={{ fontSize: "28px", color: CREAM }}>R$47</p>
+                  <p className="font-inter" style={{ fontSize: "11px", color: "rgba(200,184,112,0.6)" }}>/mês · acesso completo</p>
+                </div>
+              </div>
+
+              {/* Selo Fundadora */}
+              <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full" style={{ background: "rgba(200,184,112,0.08)", border: `1px solid rgba(200,184,112,0.2)` }}>
+                <Sparkles size={13} color={GOLD} />
+                <span className="font-inter uppercase" style={{ fontSize: "9.5px", letterSpacing: "0.25em", color: GOLD }}>Acesso Fundadora · 200 vagas</span>
+              </div>
 
               <p
                 className="font-inter uppercase mb-2"
@@ -668,17 +737,22 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                 <span style={{ color: GOLD }}>começa agora.</span>
               </h3>
 
-              {/* Ancoragem: valor real vs preço */}
+              {/* Value stack */}
               <div
-                className="inline-block px-6 py-4 rounded-xl mb-6"
+                className="inline-block px-6 py-4 rounded-xl mb-6 text-left"
                 style={{ background: "rgba(200,184,112,0.04)", border: `1px solid ${BORDER}` }}
               >
-                <p className="font-inter mb-1" style={{ fontSize: "11px", color: DIM }}>
-                  3 mentoras de IA + 10 portais + diário de frequência + sistema de progresso
-                </p>
-                <p className="font-inter" style={{ fontSize: "11px", color: "rgba(200,184,112,0.5)" }}>
-                  Valor de mercado: sessões individuais + apps + mentoria = R$500+/mês
-                </p>
+                {[
+                  "3 mentoras de IA · acesso 24/7",
+                  "10 portais com rituais guiados",
+                  "Diário de frequência + progresso",
+                  "Diagnóstico personalizado incluso",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 py-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: GOLD, opacity: 0.5 }} />
+                    <p className="font-inter" style={{ fontSize: "11.5px", color: MUTED }}>{item}</p>
+                  </div>
+                ))}
               </div>
 
               {/* Preço */}
@@ -694,6 +768,9 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                     /mês
                   </span>
                 </div>
+                <p className="font-inter mt-2" style={{ fontSize: "12px", color: "rgba(200,184,112,0.5)" }}>
+                  Economia de até 92% comparado a sessões individuais
+                </p>
                 <p className="font-inter mt-1" style={{ fontSize: "11px", color: "rgba(200,184,112,0.38)" }}>
                   Cancele quando quiser. Sem fidelidade. Sem contrato.
                 </p>
@@ -732,15 +809,22 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                 Acesso imediato após confirmação do pagamento.
               </p>
 
-              {/* Garantia / confiança */}
+              {/* Garantia / confiança — melhorada */}
               <div
-                className="mt-8 p-4 rounded-xl inline-flex items-center gap-3"
-                style={{ background: "rgba(255,255,255,0.018)", border: `1px solid ${BORDER}` }}
+                className="mt-8 p-5 rounded-xl flex items-start gap-4"
+                style={{ background: "rgba(200,184,112,0.04)", border: `1px solid rgba(200,184,112,0.15)` }}
               >
-                <Shield size={16} color={GOLD} style={{ opacity: 0.5 }} />
-                <p className="font-inter text-left" style={{ fontSize: "11px", color: DIM }}>
-                  Ambiente seguro. Dados protegidos. Cancelamento sem burocracia.
-                </p>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(200,184,112,0.1)", border: `1px solid rgba(200,184,112,0.2)` }}>
+                  <Shield size={18} color={GOLD} />
+                </div>
+                <div>
+                  <p className="font-inter font-semibold mb-1" style={{ fontSize: "12px", color: CREAM }}>
+                    30 dias de garantia integral
+                  </p>
+                  <p className="font-inter text-left" style={{ fontSize: "11px", color: DIM, lineHeight: 1.7 }}>
+                    Explore o diagnóstico, as mentoras e os portais. Se não fizer sentido, devolvemos tudo — sem perguntas, sem burocracia.
+                  </p>
+                </div>
               </div>
 
               {/* Plano A — só Soberana */}
@@ -787,6 +871,88 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
           </div>
         </div>
       </div>
+
+      {/* ═══ Share Modal ═══ */}
+      <AnimatePresence>
+        {showShareModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center"
+            style={{ background: "rgba(0,0,0,0.85)" }}
+            onClick={() => setShowShareModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative flex flex-col items-center gap-4 p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="rounded-xl overflow-hidden shadow-2xl" style={{ border: `1px solid ${BORDER}` }}>
+                <ShareCard ref={shareCardRef} data={data} userName={userName} />
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleShare}
+                  className="font-inter font-semibold uppercase tracking-[0.15em] flex items-center gap-2 px-6 py-3 rounded-lg transition-all"
+                  style={{
+                    background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                    color: BG_DARK,
+                    fontSize: "11px",
+                    border: "1px solid rgba(200,184,112,0.45)",
+                  }}
+                >
+                  <Download size={13} />
+                  Salvar como imagem
+                </button>
+                <button
+                  onClick={() => setShowShareModal(false)}
+                  className="font-inter uppercase tracking-[0.15em] px-5 py-3 rounded-lg transition-opacity hover:opacity-70"
+                  style={{ fontSize: "11px", color: DIM, border: `1px solid ${BORDER}`, background: "transparent" }}
+                >
+                  Fechar
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showStickyCta && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+            style={{ background: `linear-gradient(to top, ${BG_DARK} 70%, transparent)`, padding: "24px 16px 16px" }}
+          >
+            <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="block">
+              <button
+                className="font-inter font-semibold uppercase tracking-[0.18em] w-full flex items-center justify-center gap-2.5"
+                style={{
+                  background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                  color: BG_DARK,
+                  borderRadius: "8px",
+                  border: "1px solid rgba(200,184,112,0.45)",
+                  boxShadow: "0 4px 24px -4px rgba(46,139,87,0.5)",
+                  height: "52px",
+                  fontSize: "11.5px",
+                }}
+              >
+                {offer.ctaLabel}
+                <ArrowRight size={14} />
+              </button>
+            </a>
+            <p className="font-inter text-center mt-2" style={{ fontSize: "9.5px", color: "rgba(200,184,112,0.4)" }}>
+              R$47/mês · 30 dias de garantia
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

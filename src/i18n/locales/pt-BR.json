@@ -1,0 +1,185 @@
+{
+  "nav": {
+    "home": "Início",
+    "quiz": "Diagnóstico",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Uso",
+    "dataExclusion": "Exclusão de Dados"
+  },
+  "landing": {
+    "hero": {
+      "kicker": "Portal Reset Mental®",
+      "title1": "O padrão tem nome.",
+      "title2": "Qual é o seu?",
+      "subtitle": "Diagnóstico de 3 minutos. Resultado imediato. 4 mentoras para explorar profundidade.",
+      "cta": "Ver meu mapa grátis",
+      "noCadastro": "SEM CADASTRO · RESULTADO IMEDIATO · PRIVADO",
+      "time": "3 minutos · Gratuito · 30 dias de garantia"
+    },
+    "archetypes": {
+      "kicker": "Qual você é?",
+      "title": "Os 4 Arquétipos",
+      "curiosa": "CURIOSA",
+      "curiosaDesc": "Você estuda antes de agir. Enxerga nuances que ninguém mais vê.",
+      "curiosaDesafio": "Sair da observação pra ação",
+      "buscadora": "BUSCADORA",
+      "buscadoraDesc": "Você testa, aprende, recomeça. Se reinventa constantemente.",
+      "buscadoraDesafio": "Construir algo que dure",
+      "estrategista": "ESTRATEGISTA",
+      "estrategistaDesc": "Você planeja, executa, entrega. Constrói estruturas que funcionam.",
+      "estrategistaDesafio": "Permitir flexibilidade",
+      "soberana": "SOBERANA",
+      "soberanaDesc": "Você já sabe. Você já é. Sua presença transforma espaços.",
+      "soberanaDesafio": "Agir sem esperar perfeição",
+      "desafio": "Desafio"
+    },
+    "mentoras": {
+      "kicker": "Depois do diagnóstico",
+      "title": "4 Mentoras Exploram Profundidade",
+      "equivalente": "Equivalente"
+    },
+    "dores": {
+      "kicker": "Você se reconhece aqui?",
+      "dor1": "Você começa, para, recomeça — e ainda não sabe exatamente por quê.",
+      "dor2": "Você funciona, entrega, resolve — mas o custo interno está alto demais.",
+      "dor3": "Você sente que tem mais, mas algo sempre trava antes de virar ação.",
+      "dor4": "Você já tem clareza. O que falta é sustentar sem abrir mão de si.",
+      "cta": "Se alguma dessas frases parou você — o padrão tem nome. E tem solução."
+    },
+    "codigoZero": {
+      "kicker": "Acesso fundadora · Código Zero",
+      "title1": "Você está aqui",
+      "title2": "antes do mundo saber.",
+      "desc": "Esta ferramenta ainda não foi testada por centenas de pessoas. Não tem depoimentos. Não tem provas sociais acumuladas. Tem algo mais raro: você é a geração que escreve o primeiro capítulo.",
+      "quote": "\"Não temos depoimentos. Porque quem está aqui ainda está escrevendo o primeiro.\""
+    },
+    "mandala": {
+      "kicker": "Em 3 minutos, você descobre",
+      "title1": "Seu mapa.",
+      "title2": "Seu padrão.",
+      "title3": "Sua direção.",
+      "example": "Exemplo de resultado — Sua mandala dos 6 eixos",
+      "caption": "Visualize onde você sustenta energia e onde vaza"
+    },
+    "valueStack": {
+      "kicker": "O que você acessa",
+      "title": "Tudo incluído",
+      "valorPercebido": "Valor percebido",
+      "seuInvestimento": "Seu investimento",
+      "economia": "92% de economia",
+      "subtitle": "Acesso completo por menos que uma sessão individual."
+    },
+    "pricing": {
+      "kicker": "Código Zero · Acesso Fundadora",
+      "title": "Primeiras 200",
+      "subtitle1": "A frequência desta ferramenta ainda está sendo descoberta.",
+      "subtitle2": "Quem entra agora define o que ela se torna.",
+      "investimento": "INVESTIMENTO FUNDADORA",
+      "price": "R$ 47/mês",
+      "incluido": "6 meses completamente incluídos no primeiro acesso.",
+      "condicao": "Condição exclusiva para as primeiras 200 · Depois: R$ 147/mês",
+      "planos": "Planos a partir do 2º mês",
+      "mensal": "Mensal",
+      "trimestral": "Trimestral",
+      "semestral": "Semestral",
+      "anual": "Anual"
+    },
+    "garantia": {
+      "title": "Você Entra Sem Risco",
+      "quote": "\"Trinta dias para explorar. Se não fizer sentido, devolvemos tudo — sem perguntas.\"",
+      "desc1": "30 dias para fazer o diagnóstico e explorar as mentoras.",
+      "desc2": "Acesso completo às 4 dimensões.",
+      "desc3": "Decida com clareza se continua.",
+      "reembolso": "Reembolso integral. Sem burocracia."
+    },
+    "faq": {
+      "kicker": "Dúvidas Comuns",
+      "title": "FAQ"
+    },
+    "ctaFinal": {
+      "title1": "O padrão tem nome.",
+      "title2": "Qual é o seu?",
+      "desc": "Diagnóstico de 3 minutos. Resultado imediato. 4 mentoras para explorar profundidade.",
+      "cta": "Ver meu mapa grátis",
+      "time": "3 minutos · Gratuito · 30 dias de garantia",
+      "noCadastro": "SEM CADASTRO · RESULTADO IMEDIATO · PRIVADO"
+    },
+    "footer": {
+      "copyright": "© Ana Retore. Todos os direitos reservados.",
+      "privacy": "Política de Privacidade",
+      "dataExclusion": "Exclusão de Dados"
+    }
+  },
+  "quiz": {
+    "intro": {
+      "title": "Mapa do Padrão",
+      "subtitle": "12 perguntas. 3 minutos. Resultado imediato.",
+      "cta": "ABRIR O MAPA",
+      "disclaimer": "Sem cadastro. Privado. Gratuito."
+    },
+    "progress": "Pergunta",
+    "respiro": {
+      "title": "Respiro",
+      "continue": "Continuar"
+    },
+    "result": {
+      "cta": "VER MEU ESPELHO"
+    }
+  },
+  "diagnostico": {
+    "header": {
+      "kicker": "Espelho da Clareza",
+      "title1": "Seu mapa.",
+      "title2": "Sua direção.",
+      "pdf": "PDF"
+    },
+    "mandala": {
+      "kicker": "Mandala do padrão",
+      "desc": "Quanto mais expandida a fatia, mais estável está seu acesso naquele eixo."
+    },
+    "editorial": {
+      "kicker": "Seu padrão"
+    },
+    "triades": {
+      "base": "Tríade de base",
+      "vazamento": "Tríade de vazamento",
+      "conflito": "Conflito central"
+    },
+    "plan7": {
+      "kicker": "Plano de sustentação · 7 dias",
+      "desc": "3 minutos por dia. Sem teatro. Sem pico."
+    },
+    "oferta": {
+      "kicker": "Portal Reset Mental®",
+      "title1": "O sistema que transforma consciência",
+      "title2": "em sustentação real.",
+      "dentro": "O que está dentro",
+      "mercado": "Mercado",
+      "portalReset": "Portal Reset",
+      "sessaoIndividual": "/sessão individual",
+      "acessoCompleto": "/mês · acesso completo",
+      "seloFundadora": "Acesso Fundadora · 200 vagas",
+      "suaJornada1": "Sua jornada",
+      "suaJornada2": "começa agora.",
+      "economia": "Economia de até 92% comparado a sessões individuais",
+      "cancele": "Cancele quando quiser. Sem fidelidade. Sem contrato.",
+      "acessoImediato": "Acesso imediato após confirmação do pagamento.",
+      "garantiaTitle": "30 dias de garantia integral",
+      "garantiaDesc": "Explore o diagnóstico, as mentoras e os portais. Se não fizer sentido, devolvemos tudo — sem perguntas, sem burocracia.",
+      "planoA": "Quero saber sobre o Plano A →",
+      "planoASub": "Se sentir que está pronta para um passo maior —"
+    },
+    "share": {
+      "salvar": "Salvar como imagem",
+      "fechar": "Fechar"
+    },
+    "sticky": {
+      "garantia": "R$47/mês · 30 dias de garantia"
+    }
+  },
+  "common": {
+    "copyright": "© Ana Retore. Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Uso"
+  }
+}
