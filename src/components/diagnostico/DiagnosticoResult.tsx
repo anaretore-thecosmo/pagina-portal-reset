@@ -174,6 +174,22 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
     await generateDiagnosticoPDF(data, userName, "radar-chart-pdf");
   };
 
+  /* ── Sticky CTA state ──────────────────────────────── */
+  const [showStickyCta, setShowStickyCta] = useState(false);
+  const mandalaRef = useRef<HTMLDivElement>(null);
+  const ofertaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const mandalaBottom = mandalaRef.current?.getBoundingClientRect().bottom ?? 0;
+      const ofertaTop = ofertaRef.current?.getBoundingClientRect().top ?? Infinity;
+      const viewportHeight = window.innerHeight;
+      setShowStickyCta(mandalaBottom < 0 && ofertaTop > viewportHeight);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div style={{ minHeight: "100vh" }}>
 
