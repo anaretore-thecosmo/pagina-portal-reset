@@ -202,11 +202,11 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                   onClick={onStart}
                   className="uppercase tracking-[0.2em] font-inter font-semibold w-full"
                   style={{
-                    background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+                    background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
                     color: "#08090D",
                     borderRadius: "8px",
                     border: "1px solid rgba(200,184,112,0.45)",
-                    boxShadow: "0 4px 20px -4px rgba(152,61,6,0.3)",
+                    boxShadow: "0 4px 20px -4px rgba(46,139,87,0.3)",
                     height: "52px",
                     fontSize: "13px",
                   }}
@@ -364,20 +364,20 @@ const IntroScreen = ({ onStart }: { onStart: () => void }) => {
                     onClick={onStart}
                     className="relative uppercase tracking-[0.2em] font-inter font-semibold transition-all duration-300 w-full"
                     style={{
-                      background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+                      background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
                       color: "#08090D",
                       borderRadius: "8px",
                       border: "1px solid rgba(200,184,112,0.45)",
-                      boxShadow: "0 4px 20px -4px rgba(152,61,6,0.4), 0 2px 6px rgba(0,0,0,0.2)",
+                      boxShadow: "0 4px 20px -4px rgba(46,139,87,0.4), 0 2px 6px rgba(0,0,0,0.2)",
                       height: "56px",
                       fontSize: "13px",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.4), 0 0 30px -4px rgba(200,184,112,0.35)";
+                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(46,139,87,0.4), 0 0 30px -4px rgba(200,184,112,0.35)";
                       e.currentTarget.style.transform = "translateY(-1px)";
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.4), 0 2px 6px rgba(0,0,0,0.2)";
+                      e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(46,139,87,0.4), 0 2px 6px rgba(0,0,0,0.2)";
                       e.currentTarget.style.transform = "translateY(0)";
                     }}
                   >
@@ -635,11 +635,11 @@ const RespiroScreen = ({
         onClick={onContinue}
         className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300"
         style={{
-          background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+          background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
           color: "#08090D",
           borderRadius: "8px",
           border: "1px solid rgba(200,184,112,0.45)",
-          boxShadow: "0 4px 20px -4px rgba(152,61,6,0.35)",
+          boxShadow: "0 4px 20px -4px rgba(46,139,87,0.35)",
           height: "52px",
           paddingLeft: "32px",
           paddingRight: "32px",
@@ -648,11 +648,11 @@ const RespiroScreen = ({
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 6px 24px -4px rgba(152,61,6,0.4), 0 0 28px -6px rgba(200,184,112,0.3)";
+          e.currentTarget.style.boxShadow = "0 6px 24px -4px rgba(46,139,87,0.4), 0 0 28px -6px rgba(200,184,112,0.3)";
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(152,61,6,0.35)";
+          e.currentTarget.style.boxShadow = "0 4px 20px -4px rgba(46,139,87,0.35)";
         }}
       >
         {buttonLabel}
