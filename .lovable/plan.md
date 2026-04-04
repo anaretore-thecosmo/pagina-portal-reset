@@ -128,5 +128,5 @@ Prioridade    Fase     Impacto          Esforco
 - **Dependencias novas:** `html2canvas` (share card), `react-i18next` + `i18next` (i18n)
 - **Sem breaking changes:** todas as fases sao aditivas
 - **Mobile-first:** CTA sticky e card compartilhavel priorizados para tela 375px
-- **Gradiente dos botoes mantido:** `linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)`
+- **Gradiente dos botoes mantido:** `linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)`
 
