@@ -239,23 +239,39 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                 )}
               </div>
 
-              <button
-                onClick={handleDownloadPDF}
-                className="font-inter flex items-center gap-2 shrink-0 transition-opacity hover:opacity-70"
-                style={{
-                  fontSize: "10px",
-                  letterSpacing: "0.18em",
-                  color: "rgba(200,184,112,0.45)",
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: "6px",
-                  padding: "8px 14px",
-                  marginTop: "4px",
-                  background: "transparent",
-                }}
-              >
-                <Download size={11} />
-                PDF
-              </button>
+              <div className="flex items-center gap-2 shrink-0" style={{ marginTop: "4px" }}>
+                <button
+                  onClick={() => setShowShareModal(true)}
+                  className="font-inter flex items-center gap-2 transition-opacity hover:opacity-70"
+                  style={{
+                    fontSize: "10px",
+                    letterSpacing: "0.18em",
+                    color: "rgba(200,184,112,0.45)",
+                    border: `1px solid ${BORDER}`,
+                    borderRadius: "6px",
+                    padding: "8px 14px",
+                    background: "transparent",
+                  }}
+                >
+                  <Share2 size={11} />
+                </button>
+                <button
+                  onClick={handleDownloadPDF}
+                  className="font-inter flex items-center gap-2 transition-opacity hover:opacity-70"
+                  style={{
+                    fontSize: "10px",
+                    letterSpacing: "0.18em",
+                    color: "rgba(200,184,112,0.45)",
+                    border: `1px solid ${BORDER}`,
+                    borderRadius: "6px",
+                    padding: "8px 14px",
+                    background: "transparent",
+                  }}
+                >
+                  <Download size={11} />
+                  PDF
+                </button>
+              </div>
             </div>
           </motion.div>
 
