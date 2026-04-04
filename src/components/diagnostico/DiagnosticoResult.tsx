@@ -2,6 +2,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Download, Sparkles, Shield, Brain, Target, Share2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import DiagnosticoRadarChart from "./DiagnosticoRadarChart";
+import ShareCard from "./ShareCard";
+import { generateShareImage } from "./shareCardGenerator";
 import { generateDiagnosticoPDF } from "@/components/diagnostico/diagnosticoPdfGenerator";
 import {
   computeEspelho,
