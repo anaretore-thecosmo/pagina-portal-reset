@@ -872,7 +872,54 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
         </div>
       </div>
 
-      {/* ═══ Sticky CTA — mobile only ═══ */}
+      {/* ═══ Share Modal ═══ */}
+      <AnimatePresence>
+        {showShareModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[60] flex items-center justify-center"
+            style={{ background: "rgba(0,0,0,0.85)" }}
+            onClick={() => setShowShareModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative flex flex-col items-center gap-4 p-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="rounded-xl overflow-hidden shadow-2xl" style={{ border: `1px solid ${BORDER}` }}>
+                <ShareCard ref={shareCardRef} data={data} userName={userName} />
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={handleShare}
+                  className="font-inter font-semibold uppercase tracking-[0.15em] flex items-center gap-2 px-6 py-3 rounded-lg transition-all"
+                  style={{
+                    background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                    color: BG_DARK,
+                    fontSize: "11px",
+                    border: "1px solid rgba(200,184,112,0.45)",
+                  }}
+                >
+                  <Download size={13} />
+                  Salvar como imagem
+                </button>
+                <button
+                  onClick={() => setShowShareModal(false)}
+                  className="font-inter uppercase tracking-[0.15em] px-5 py-3 rounded-lg transition-opacity hover:opacity-70"
+                  style={{ fontSize: "11px", color: DIM, border: `1px solid ${BORDER}`, background: "transparent" }}
+                >
+                  Fechar
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <AnimatePresence>
         {showStickyCta && (
           <motion.div
