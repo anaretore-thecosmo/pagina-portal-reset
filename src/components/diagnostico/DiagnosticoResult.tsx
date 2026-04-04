@@ -842,6 +842,41 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
           </div>
         </div>
       </div>
+
+      {/* ═══ Sticky CTA — mobile only ═══ */}
+      <AnimatePresence>
+        {showStickyCta && (
+          <motion.div
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+            style={{ background: `linear-gradient(to top, ${BG_DARK} 70%, transparent)`, padding: "24px 16px 16px" }}
+          >
+            <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="block">
+              <button
+                className="font-inter font-semibold uppercase tracking-[0.18em] w-full flex items-center justify-center gap-2.5"
+                style={{
+                  background: "linear-gradient(135deg, #C8B870 0%, #D4A017 35%, #F5A623 60%, #2E8B57 100%)",
+                  color: BG_DARK,
+                  borderRadius: "8px",
+                  border: "1px solid rgba(200,184,112,0.45)",
+                  boxShadow: "0 4px 24px -4px rgba(46,139,87,0.5)",
+                  height: "52px",
+                  fontSize: "11.5px",
+                }}
+              >
+                {offer.ctaLabel}
+                <ArrowRight size={14} />
+              </button>
+            </a>
+            <p className="font-inter text-center mt-2" style={{ fontSize: "9.5px", color: "rgba(200,184,112,0.4)" }}>
+              R$47/mês · 30 dias de garantia
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
