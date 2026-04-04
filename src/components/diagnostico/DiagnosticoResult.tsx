@@ -248,6 +248,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
 
           {/* ════════════════ MANDALA ════════════════ */}
           <motion.section
+            ref={mandalaRef}
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }}
             variants={inView}
             className="mb-16"
