@@ -780,15 +780,22 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
                 Acesso imediato após confirmação do pagamento.
               </p>
 
-              {/* Garantia / confiança */}
+              {/* Garantia / confiança — melhorada */}
               <div
-                className="mt-8 p-4 rounded-xl inline-flex items-center gap-3"
-                style={{ background: "rgba(255,255,255,0.018)", border: `1px solid ${BORDER}` }}
+                className="mt-8 p-5 rounded-xl flex items-start gap-4"
+                style={{ background: "rgba(200,184,112,0.04)", border: `1px solid rgba(200,184,112,0.15)` }}
               >
-                <Shield size={16} color={GOLD} style={{ opacity: 0.5 }} />
-                <p className="font-inter text-left" style={{ fontSize: "11px", color: DIM }}>
-                  Ambiente seguro. Dados protegidos. Cancelamento sem burocracia.
-                </p>
+                <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(200,184,112,0.1)", border: `1px solid rgba(200,184,112,0.2)` }}>
+                  <Shield size={18} color={GOLD} />
+                </div>
+                <div>
+                  <p className="font-inter font-semibold mb-1" style={{ fontSize: "12px", color: CREAM }}>
+                    30 dias de garantia integral
+                  </p>
+                  <p className="font-inter text-left" style={{ fontSize: "11px", color: DIM, lineHeight: 1.7 }}>
+                    Explore o diagnóstico, as mentoras e os portais. Se não fizer sentido, devolvemos tudo — sem perguntas, sem burocracia.
+                  </p>
+                </div>
               </div>
 
               {/* Plano A — só Soberana */}
