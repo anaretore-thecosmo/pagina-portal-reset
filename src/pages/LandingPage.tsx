@@ -90,7 +90,7 @@ const LandingPage = () => {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <HeroBg />
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-20">
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-20 flex justify-end">
           <div style={{ maxWidth: "480px" }}>
 
             {/* Kicker */}
