@@ -222,7 +222,7 @@ const LandingPage = () => {
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.4, duration: 0.8, ease: "easeOut" }}
-              className="mt-14 flex flex-col items-start gap-2"
+              className="mt-14 flex flex-col items-end gap-2"
             >
               <span
                 className="font-inter uppercase"
