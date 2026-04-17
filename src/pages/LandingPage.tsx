@@ -31,7 +31,8 @@ function HeroBg() {
           style={{
             backgroundImage: `url("${BG_IMAGES[index]}")`,
             backgroundSize: "cover",
-            backgroundPosition: "65% center",
+            backgroundPosition: "35% center",
+            transform: "scaleX(-1)",
           }}
         />
       </AnimatePresence>
@@ -40,7 +41,7 @@ function HeroBg() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(105deg, rgba(8,9,13,0.96) 0%, rgba(8,9,13,0.90) 30%, rgba(8,9,13,0.72) 48%, rgba(8,9,13,0.28) 65%, rgba(8,9,13,0.06) 80%, transparent 100%)",
+            "linear-gradient(255deg, rgba(8,9,13,0.96) 0%, rgba(8,9,13,0.90) 30%, rgba(8,9,13,0.72) 48%, rgba(8,9,13,0.28) 65%, rgba(8,9,13,0.06) 80%, transparent 100%)",
         }}
       />
       <div
@@ -89,7 +90,7 @@ const LandingPage = () => {
       <section className="relative min-h-screen flex items-center overflow-hidden">
         <HeroBg />
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-20">
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-20 flex justify-end">
           <div style={{ maxWidth: "480px" }}>
 
             {/* Kicker */}
@@ -221,7 +222,7 @@ const LandingPage = () => {
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.4, duration: 0.8, ease: "easeOut" }}
-              className="mt-14 flex flex-col items-start gap-2"
+              className="mt-14 flex flex-col items-end gap-2"
             >
               <span
                 className="font-inter uppercase"
