@@ -31,7 +31,8 @@ function HeroBg() {
           style={{
             backgroundImage: `url("${BG_IMAGES[index]}")`,
             backgroundSize: "cover",
-            backgroundPosition: "65% center",
+            backgroundPosition: "35% center",
+            transform: "scaleX(-1)",
           }}
         />
       </AnimatePresence>
@@ -40,7 +41,7 @@ function HeroBg() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(105deg, rgba(8,9,13,0.96) 0%, rgba(8,9,13,0.90) 30%, rgba(8,9,13,0.72) 48%, rgba(8,9,13,0.28) 65%, rgba(8,9,13,0.06) 80%, transparent 100%)",
+            "linear-gradient(255deg, rgba(8,9,13,0.96) 0%, rgba(8,9,13,0.90) 30%, rgba(8,9,13,0.72) 48%, rgba(8,9,13,0.28) 65%, rgba(8,9,13,0.06) 80%, transparent 100%)",
         }}
       />
       <div
