@@ -1,135 +1,51 @@
 
+## Plano: Espelhar a Primeira Dobra do Hero
 
-# Plano de Acao: Implementar Curadoria Estrategica do Portal Reset
+### Objetivo
+Inverter a composição visual do hero da landing page (`src/pages/LandingPage.tsx`):
+- **Imagem da mulher**: posicionada do lado **esquerdo**, olhando para a **direita** (em direção ao texto).
+- **Bloco de texto + CTA**: alinhado à **direita**.
 
-## Visao Geral
-
-A curadoria identificou melhorias em 5 frentes: UX/Design, Arquitetura, Internacionalizacao, Shareability e Ancoragem de vendas. Este plano prioriza as implementacoes por impacto imediato no funil de conversao, organizadas em fases.
-
----
-
-## Fase 1 — UX e Conversao (impacto direto em vendas)
-
-### 1.1 CTA Sticky no mobile durante resultado do diagnostico
-**Arquivo:** `src/components/diagnostico/DiagnosticoResult.tsx`
-- Adicionar um botao CTA fixo no bottom do viewport (position: fixed) que aparece apos o usuario scrollar alem do bloco 1 (mandala)
-- Botao com o gradiente dourado-ambar-verde ja implementado
-- Texto dinamico baseado no arquetipo (ex: "COMECAR MINHA JORNADA")
-- Visivel apenas em mobile (max-width 768px)
-- Desaparece quando o usuario chega na secao de oferta (bloco 5) para nao duplicar
-
-### 1.2 Melhorar ancoragem de preco no DiagnosticoResult
-**Arquivo:** `src/components/diagnostico/DiagnosticoResult.tsx` (bloco 5, linhas 560-760)
-- Adicionar comparacao visual clara: "Mentoria individual: R$500/sessao" riscado vs "Portal Reset: R$47/mês"
-- Adicionar contador visual de valor empilhado (stack de valor) antes do preco
-- Adicionar selo "Fundadora" com badge dourado ao lado do preco
-- Reforcar a frase de garantia com icone de escudo mais proeminente
-
-### 1.3 Melhorar ancoragem na Landing (LandingSharedSections)
-**Arquivo:** `src/components/LandingSharedSections.tsx` (secao 6 — Value Stack, linhas 444-510)
-- Tornar o stack de valor mais visual com barras de progresso ou icones
-- Adicionar animacao de "risco" no valor de R$597 (line-through animado)
-- Destacar o desconto percentual (92% de economia)
+Isso aproveita o princípio de neuromarketing dos **neurônios-espelho**: o olhar da mulher na imagem direciona naturalmente o olhar da leitora para a copy e o CTA.
 
 ---
 
-## Fase 2 — Card Compartilhavel (Shareability)
+### Mudanças em `src/pages/LandingPage.tsx`
 
-### 2.1 Gerar card de resultado para Instagram Stories
-**Novos arquivos:**
-- `src/components/diagnostico/ShareCard.tsx` — componente visual 9:16 com mandala mini + arquetipo + nome
-- `src/components/diagnostico/shareCardGenerator.ts` — usa html2canvas para capturar o card como imagem
+**1. Componente `HeroBg` — inverter a posição da imagem**
+- Trocar `backgroundPosition: "65% center"` → `"35% center"` (move o foco da imagem para a esquerda).
+- Inverter o gradiente de overlay para escurecer o lado **direito** (onde ficará o texto), deixando a imagem da mulher visível à esquerda:
+  - De: `linear-gradient(105deg, rgba(8,9,13,0.96) 0%, ... transparent 100%)`
+  - Para: `linear-gradient(255deg, rgba(8,9,13,0.96) 0%, rgba(8,9,13,0.90) 30%, rgba(8,9,13,0.72) 48%, rgba(8,9,13,0.28) 65%, rgba(8,9,13,0.06) 80%, transparent 100%)`
+  - (Inverte o ângulo de 105deg para 255deg = espelha o gradiente.)
 
-**Alteracao:** `src/components/diagnostico/DiagnosticoResult.tsx`
-- Adicionar botao "Compartilhar meu resultado" ao lado do botao PDF no header
-- Abre modal com preview do card + botao "Salvar como imagem"
-- Card com fundo escuro, mandala simplificada, nome do arquetipo e QR code/link para o quiz
+**2. Container do conteúdo do hero — alinhar à direita**
+- Wrapper externo: adicionar `flex justify-end` para empurrar o bloco para a direita.
+- Bloco interno (`maxWidth: "480px"`): mantém a largura, agora ancorado à direita.
 
----
+**3. Verificar imagens do Cloudinary**
+- As duas imagens atuais já têm rostos/corpos voltados para a direita ou centro. Se após inversão a mulher ficar olhando "para fora" (esquerda), avaliar:
+  - **Opção A**: Aplicar `transform: scaleX(-1)` no div da imagem para espelhar (rosto passa a olhar para a direita, em direção ao texto).
+  - **Opção B**: Manter sem espelhar se a composição já funcionar.
+- Recomendo **Opção A** (espelhar via CSS) — garante o efeito desejado dos neurônios-espelho sem trocar assets.
 
-## Fase 3 — Refatoracao de Componentes
+**4. Mobile (responsivo)**
+- No mobile (< 768px), o texto ocupa a largura total e a imagem fica ao fundo. O `justify-end` no flex se mantém, mas o `maxWidth: 480px` em viewport pequena ocupa quase tudo — funciona naturalmente.
+- Ajustar gradiente mobile se necessário para garantir legibilidade do texto sobre o fundo.
 
-### 3.1 Quebrar DiagnosticoResult.tsx (794 linhas)
-**Novos arquivos:**
-- `src/components/diagnostico/DiagnosticoHeader.tsx` — header + botoes PDF/share
-- `src/components/diagnostico/DiagnosticoMandala.tsx` — secao da mandala
-- `src/components/diagnostico/DiagnosticoEditorial.tsx` — leitura editorial
-- `src/components/diagnostico/DiagnosticoTriades.tsx` — triades + conflito central
-- `src/components/diagnostico/DiagnosticoPlan7Days.tsx` — plano 7 dias
-- `src/components/diagnostico/DiagnosticoArquetipo.tsx` — bloco do arquetipo
-- `src/components/diagnostico/DiagnosticoOferta.tsx` — bloco de oferta/CTA
-- `src/components/diagnostico/diagnosticoTokens.ts` — design tokens (cores, animacoes)
-
-### 3.2 Quebrar LandingSharedSections.tsx (779 linhas)
-**Novos arquivos:**
-- `src/components/landing/ArquetiposSection.tsx`
-- `src/components/landing/MentorasSection.tsx`
-- `src/components/landing/DoresSection.tsx`
-- `src/components/landing/CodigoZeroSection.tsx`
-- `src/components/landing/MandalaPreviewSection.tsx`
-- `src/components/landing/ValueStackSection.tsx`
-- `src/components/landing/PricingSection.tsx`
-- `src/components/landing/GarantiaSection.tsx`
-- `src/components/landing/FAQSection.tsx`
-- `src/components/landing/CTAFinalSection.tsx`
-- `src/components/landing/landingTokens.ts`
+**5. Cliff effect (seta de scroll)**
+- Atualmente alinhada à esquerda (`items-start`). Trocar para `items-end` para alinhar com o novo bloco de texto à direita.
 
 ---
 
-## Fase 4 — Internacionalizacao (i18n)
+### Arquivos editados
+- `src/pages/LandingPage.tsx` (apenas)
 
-### 4.1 Setup do react-i18next
-**Novos arquivos:**
-- `src/i18n/index.ts` — configuracao do i18next
-- `src/i18n/locales/pt-BR.json` — ~230 strings extraidas
-- `src/i18n/locales/en-US.json` — traducao inglês
-- `src/i18n/locales/es-ES.json` — traducao espanhol
+### Considerações
+- **Sem breaking changes** — apenas reposicionamento visual.
+- **Mantém todas as animações**, copy, CTA e trust signals já implementados.
+- **Mantém o gradiente oficial** dos botões (ouro-âmbar-terracota).
+- **Coerente com The Cosmo**: inversão é estética/estratégica, não muda tom nem mensagem.
 
-**Alteracao:** `src/main.tsx` — importar e inicializar i18n
-**Alteracao:** Todos os componentes — substituir strings hardcoded por `t('key')`
-
-### 4.2 Seletor de idioma
-**Novo arquivo:** `src/components/LanguageSelector.tsx`
-- Dropdown discreto no header com bandeiras/siglas (PT / EN / ES)
-- Persiste escolha no localStorage
-
----
-
-## Fase 5 — Backend e Persistencia
-
-### 5.1 Supabase (projeto ja configurado)
-- Configurar autenticacao (email + Google)
-- Criar tabela `diagnostico_results` para salvar resultados
-- Criar tabela `user_profiles` para dados do usuario
-- Migrar de localStorage para banco de dados
-
-### 5.2 Analytics e tracking — IMPLEMENTAR JUNTO DA FASE 1
-- Registrar cada diagnostico completado
-- Registrar cliques no CTA de compra
-- Registrar taxa de abandono por pergunta do quiz
-
----
-
-## Ordem de Execucao Recomendada
-
-```text
-Prioridade    Fase       Impacto          Esforco
-─────────────────────────────────────────────────
-1 (agora)     1.1+5.2    Conversao+Dados  1h
-2 (agora)     1.2-1.3    Conversao +10%   1h
-3 (proximo)   2.1        Viralidade       1.5h
-4 (proximo)   3.1-3.2    Manutencao       2h
-5 (depois)    4.1-4.2    Alcance global   3h
-6 (depois)    5.1        Retencao         2h+
-```
-
-## Detalhes Tecnicos
-
-- **Dependencias novas:** `html2canvas` (share card), `react-i18next` + `i18next` (i18n)
-- **Sem breaking changes:** todas as fases sao aditivas
-- **Mobile-first:** CTA sticky e card compartilhavel priorizados para tela 375px
-- **Gradiente dos botoes:** `linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)`
-- **Backend:** Supabase (projeto existente), NAO Lovable Cloud
-
-- **Gradiente dos botoes mantido:** `linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)`
-
+### Observação sobre a Fase 1 do plano original
+O usuário mencionou "Implemente a Fase 1 do plano" junto desta solicitação. Como a mensagem principal pede um **plano de ação** para espelhar a dobra (read-only), vou focar nesse plano. A implementação da Fase 1 (CTA sticky + analytics) já estava parcialmente coberta em iterações anteriores e pode ser revisitada após esta mudança visual ser aprovada e aplicada.
