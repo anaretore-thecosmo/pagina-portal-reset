@@ -13,11 +13,13 @@ import {
   getArquetipo,
   type EspelhoData,
 } from "@/data/espelhoEngine";
+import { track } from "@/lib/analytics";
 
 /* ── Props ──────────────────────────────────────────── */
 interface DiagnosticoResultProps {
   scores?: number[];
   userName: string;
+  userEmail?: string;
   answers?: (number | null)[];
   sessionId?: string;
 }
@@ -161,13 +163,29 @@ const IconMap = ({ icon, color }: { icon: string; color: string }) => {
 };
 
 /* ── Main component ─────────────────────────────────── */
-const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
+const DiagnosticoResult = ({ userName, userEmail, answers }: DiagnosticoResultProps) => {
   const data: EspelhoData = computeEspelho(answers ?? []);
   const editorial  = generateEditorialDiagnostic(data);
   const plan       = generate7DayPlan(data);
   const arquetipo  = getArquetipo(data);
   const theme      = ARQUETIPO_THEME[arquetipo.nome];
   const offer      = ARQUETIPO_OFFER[arquetipo.nome];
+
+  // Checkout URL pré-preenchido (Kiwify aceita name + email via query)
+  const checkoutUrl = (() => {
+    const url = new URL(KIWIFY_URL);
+    if (userName) url.searchParams.set("name", userName);
+    if (userEmail) url.searchParams.set("email", userEmail);
+    return url.toString();
+  })();
+
+  // Analytics — view do resultado, uma única vez
+  useEffect(() => {
+    track("result_view", { arquetipo: arquetipo.nome });
+  }, [arquetipo.nome]);
+
+  const onCheckoutClick = (origin: "primary" | "sticky") =>
+    track("checkout_click", { arquetipo: arquetipo.nome, origin });
 
   const top3Indices    = data.top3.map((a) => a.index);
   const bottom3Indices = data.bottom3.map((a) => a.index);
@@ -777,7 +795,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
               </div>
 
               {/* CTA button */}
-              <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-sm">
+              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" onClick={() => onCheckoutClick("primary")} className="inline-block w-full max-w-sm">
                 <button
                   className="font-inter font-semibold uppercase tracking-[0.2em] inline-flex items-center justify-center gap-3 transition-all duration-300 w-full"
                   style={{
@@ -930,7 +948,7 @@ const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
             className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
             style={{ background: `linear-gradient(to top, ${BG_DARK} 70%, transparent)`, padding: "24px 16px 16px" }}
           >
-            <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="block">
+            <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" onClick={() => onCheckoutClick("sticky")} className="block">
               <button
                 className="font-inter font-semibold uppercase tracking-[0.18em] w-full flex items-center justify-center gap-2.5"
                 style={{

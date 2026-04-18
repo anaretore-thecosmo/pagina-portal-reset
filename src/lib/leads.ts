@@ -69,18 +69,15 @@ export async function saveLead(payload: Omit<LeadPayload, "capturedAt">): Promis
   // }
 }
 
-/** Analytics — best-effort, falha silenciosa */
+/** Analytics — best-effort, falha silenciosa. Reusa o tracker central. */
 export function trackLeadEvent(
   event: "lead_gate_view" | "lead_gate_submit" | "lead_gate_skip" | "lead_gate_error",
   data?: Record<string, unknown>,
 ): void {
-  try {
-    // dataLayer (GTM/GA4)
-    const w = window as unknown as { dataLayer?: unknown[] };
-    if (w.dataLayer) w.dataLayer.push({ event, ...data });
-    // fallback console (dev visibility)
-    if (import.meta.env.DEV) console.info(`[analytics] ${event}`, data ?? {});
-  } catch {
-    /* noop */
-  }
+  // Importação dinâmica para evitar ciclo se algum dia leads importar de analytics
+  import("./analytics")
+    .then(({ track }) => track(event, data))
+    .catch(() => {
+      /* noop */
+    });
 }

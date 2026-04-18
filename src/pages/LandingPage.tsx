@@ -4,29 +4,38 @@ import { ArrowRight, Shield } from "lucide-react";
 import { useEffect, useState } from "react";
 import LandingSharedSections from "@/components/LandingSharedSections";
 import LanguageSelector from "@/components/LanguageSelector";
+import MiniMandala from "@/components/MiniMandala";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { track } from "@/lib/analytics";
 
 const BG_IMAGES = [
   "https://res.cloudinary.com/dnd2s2dv4/image/upload/f_auto,q_auto,w_1600/v1770421209/erlYw0HUWPflK_zMTmFiM_ijbdeo.avif",
   "https://res.cloudinary.com/dnd2s2dv4/image/upload/f_auto,q_auto,w_1600/v1770420982/AaBCh0x73PbOjcEnfQDXy_ila51x.avif",
 ];
 
+const GOLD = "#C8B870";
+const DIM = "rgba(207,197,184,0.38)";
+
+/* ── Hero background — crossfade editorial 60/40 ───────────────── */
 function HeroBg() {
   const [index, setIndex] = useState(0);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % BG_IMAGES.length), 6000);
+    if (reduced) return;
+    const t = setInterval(() => setIndex((i) => (i + 1) % BG_IMAGES.length), 7000);
     return () => clearInterval(t);
-  }, []);
+  }, [reduced]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
       <AnimatePresence>
         <motion.div
           key={index}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 2.2, ease: "easeInOut" }}
+          transition={{ duration: reduced ? 0 : 2.4, ease: "easeInOut" }}
           className="absolute inset-0"
           style={{
             backgroundImage: `url("${BG_IMAGES[index]}")`,
@@ -37,48 +46,63 @@ function HeroBg() {
         />
       </AnimatePresence>
 
+      {/*
+        Gradient editorial 60/40 (Peirce: o signo precisa ser lido).
+        Lado esquerdo (60%) consumido pela copy → escuro denso.
+        Lado direito (40%) preserva o rosto da mulher → sombra mínima.
+      */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(255deg, rgba(8,9,13,0.96) 0%, rgba(8,9,13,0.90) 30%, rgba(8,9,13,0.72) 48%, rgba(8,9,13,0.28) 65%, rgba(8,9,13,0.06) 80%, transparent 100%)",
+            "linear-gradient(95deg, rgba(8,9,13,0.97) 0%, rgba(8,9,13,0.93) 35%, rgba(8,9,13,0.62) 55%, rgba(8,9,13,0.18) 72%, rgba(8,9,13,0.04) 100%)",
         }}
       />
+      {/* Vinheta inferior + topo */}
       <div
         className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
         style={{ background: "linear-gradient(to top, #08090D 0%, transparent 100%)" }}
       />
       <div
         className="absolute top-0 left-0 right-0 h-28 pointer-events-none"
-        style={{ background: "linear-gradient(to bottom, rgba(8,9,13,0.65) 0%, transparent 100%)" }}
+        style={{ background: "linear-gradient(to bottom, rgba(8,9,13,0.55) 0%, transparent 100%)" }}
       />
     </div>
   );
 }
 
 const fade = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 18 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.55 + i * 0.13, duration: 0.65, ease: "easeOut" as const },
+    transition: { delay: 0.45 + i * 0.14, duration: 0.65, ease: "easeOut" as const },
   }),
 };
 
-const GOLD = "#C8B870";
-const DIM = "rgba(207,197,184,0.38)";
-
 const LandingPage = () => {
   const nav = useNavigate();
-  const goToQuiz = () => nav("/quiz-mapa-do-padrao?start=1");
+  const reduced = useReducedMotion();
+
+  // Analytics — landing view (uma única vez por sessão de página)
+  useEffect(() => {
+    track("landing_view");
+  }, []);
+
+  const goToQuiz = (origin: "hero" | "midpage") => {
+    track(origin === "hero" ? "cta_click_hero" : "cta_click_midpage");
+    nav("/quiz-mapa-do-padrao?start=1");
+  };
 
   return (
     <div style={{ background: "#08090D", color: "#EDE6DB", minHeight: "100vh" }}>
-
       {/* Gold top rule */}
       <div
-        className="fixed top-0 left-0 right-0 h-px z-50"
-        style={{ background: "linear-gradient(90deg, transparent 5%, rgba(200,184,112,0.25) 30%, rgba(200,184,112,0.25) 70%, transparent 95%)" }}
+        className="fixed top-0 left-0 right-0 h-px z-50 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 5%, rgba(200,184,112,0.25) 30%, rgba(200,184,112,0.25) 70%, transparent 95%)",
+        }}
       />
 
       {/* Language selector — top right */}
@@ -86,216 +110,315 @@ const LandingPage = () => {
         <LanguageSelector />
       </div>
 
-      {/* ═══════════ HERO ═══════════ */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* ═══════════════════════ HERO CIRÚRGICO ═══════════════════════
+          5 elementos · 1 promessa · 1 botão · 1 prova
+          (Jobs · Ogilvy · Schwartz · Bridger · Peirce)
+      ────────────────────────────────────────────────────────────── */}
+      <section
+        className="relative min-h-screen flex items-center overflow-hidden"
+        aria-label="Diagnóstico Mapa do Padrão — Portal Reset"
+      >
         <HeroBg />
 
         <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20 py-20 flex justify-end">
-          <div style={{ maxWidth: "480px" }}>
-
-            {/* Kicker */}
-            <motion.p
-              initial="hidden" animate="visible" custom={0} variants={fade}
-              className="font-inter uppercase mb-4"
-              style={{ fontSize: "9px", letterSpacing: "0.5em", color: "rgba(200,184,112,0.65)" }}
-            >
-              Portal Reset · Diagnóstico Gratuito
-            </motion.p>
-
-            {/* Gold line */}
+          <div style={{ maxWidth: "520px" }}>
+            {/* 1 · KICKER + mini-mandala viva (gesto memorável — Veiga) */}
             <motion.div
-              className="h-px mb-7"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.6 }}
-              style={{ background: GOLD, transformOrigin: "left", width: "48px" }}
-            />
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              variants={fade}
+              className="flex items-center gap-4 mb-6"
+            >
+              <MiniMandala size={40} />
+              <div>
+                <p
+                  className="font-inter uppercase"
+                  style={{
+                    fontSize: "9px",
+                    letterSpacing: "0.5em",
+                    color: "rgba(200,184,112,0.65)",
+                    marginBottom: "4px",
+                  }}
+                >
+                  Portal Reset · Diagnóstico Gratuito
+                </p>
+                <motion.div
+                  className="h-px"
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  transition={{ duration: reduced ? 0 : 0.9, delay: reduced ? 0 : 0.55 }}
+                  style={{ background: GOLD, transformOrigin: "left", width: "44px" }}
+                />
+              </div>
+            </motion.div>
 
-            {/* H1 */}
+            {/* 2 · H1 — uma frase, fluência cognitiva alta (Bridger + Ogilvy)
+                 Versão sintoma-aware (Schwartz nível 2-3): nomeia o sintoma
+                 que a leitora reconhece antes de oferecer diagnóstico. */}
             <motion.h1
-              initial="hidden" animate="visible" custom={1} variants={fade}
+              initial="hidden"
+              animate="visible"
+              custom={1}
+              variants={fade}
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontWeight: 700,
-                fontSize: "clamp(22px, 3.2vw, 36px)",
-                lineHeight: 1.18,
-                letterSpacing: "0.02em",
+                fontSize: "clamp(28px, 4.2vw, 46px)",
+                lineHeight: 1.08,
+                letterSpacing: "0.015em",
                 textTransform: "uppercase",
                 color: "#EDE6DB",
               }}
             >
-              Você não fracassa por falta de potência.<br />
-              <span style={{ color: GOLD }}>Fracassa porque ainda não percebeu onde o seu automático decide por você.</span>
+              Você começa, para,<br />
+              recomeça.{" "}
+              <span style={{ color: GOLD, fontStyle: "italic", textTransform: "none" }}>
+                E ainda não sabe por quê.
+              </span>
             </motion.h1>
 
-            {/* Subhead */}
+            {/* 3 · SUBHEAD — uma frase, promessa específica e mensurável */}
             <motion.p
-              initial="hidden" animate="visible" custom={2} variants={fade}
-              className="mt-6 font-inter leading-[1.85]"
-              style={{ fontSize: "clamp(13px, 1.15vw, 15px)", color: "rgba(207,197,184,0.75)" }}
-            >
-              Não é falta de disciplina. Não é falta de método.<br />
-              É um padrão que ninguém ainda mapeou para você —<br />
-              e que opera em corpo, dinheiro e relações ao mesmo tempo.
-            </motion.p>
-
-            {/* Card: O que você recebe */}
-            <motion.div
-              initial="hidden" animate="visible" custom={3} variants={fade}
-              className="mt-8 p-5 rounded-xl"
+              initial="hidden"
+              animate="visible"
+              custom={2}
+              variants={fade}
+              className="mt-5 font-inter leading-[1.7]"
               style={{
-                background: "rgba(200,184,112,0.04)",
-                border: "1px solid rgba(200,184,112,0.12)",
-                backdropFilter: "blur(8px)",
+                fontSize: "clamp(14px, 1.2vw, 16px)",
+                color: "rgba(207,197,184,0.78)",
+                maxWidth: "440px",
               }}
             >
-              <p className="font-inter uppercase mb-3" style={{ fontSize: "8px", letterSpacing: "0.4em", color: "rgba(200,184,112,0.55)" }}>
-                Ao final, você recebe
-              </p>
-              {[
-                { num: "01", text: "Mandala dos 6 eixos — onde sustenta e onde vaza" },
-                { num: "02", text: "Seu arquétipo com leitura editorial personalizada" },
-                { num: "03", text: "Plano de sustentação de 7 dias" },
-              ].map((item) => (
-                <div key={item.num} className="flex gap-3 items-start py-1.5">
-                  <span className="font-playfair font-bold shrink-0" style={{ fontSize: "11px", color: GOLD, opacity: 0.6 }}>
-                    {item.num}
-                  </span>
-                  <p className="font-inter" style={{ fontSize: "12px", color: "rgba(207,197,184,0.6)", lineHeight: 1.5 }}>
-                    {item.text}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
+              Em 3 minutos, o nome do padrão que decide por você — em corpo,
+              dinheiro e relações.
+            </motion.p>
 
-            {/* CTA principal */}
+            {/* 4 · CTA — gradiente oficial */}
             <motion.div
-              initial="hidden" animate="visible" custom={4} variants={fade}
-              className="mt-8"
+              initial="hidden"
+              animate="visible"
+              custom={3}
+              variants={fade}
+              className="mt-9"
             >
               <button
-                onClick={goToQuiz}
+                onClick={() => goToQuiz("hero")}
+                aria-label="Iniciar diagnóstico Mapa do Padrão — leva 3 minutos, gratuito"
                 className="relative font-inter font-bold uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
                 style={{
-                  background: "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
+                  background:
+                    "linear-gradient(135deg, #C8B870 0%, #b88a3a 50%, #983D06 100%)",
                   color: "#08090D",
                   borderRadius: "8px",
                   border: "1px solid rgba(200,184,112,0.45)",
                   boxShadow: "0 4px 28px -4px rgba(152,61,6,0.45)",
-                  height: "56px",
-                  paddingLeft: "32px",
-                  paddingRight: "32px",
+                  height: "58px",
+                  paddingLeft: "34px",
+                  paddingRight: "34px",
                   fontSize: "12px",
                 }}
                 onMouseEnter={(e) => {
+                  if (reduced) return;
                   e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 8px 36px -4px rgba(152,61,6,0.5), 0 0 40px -8px rgba(200,184,112,0.25)";
+                  e.currentTarget.style.boxShadow =
+                    "0 8px 36px -4px rgba(152,61,6,0.5), 0 0 40px -8px rgba(200,184,112,0.25)";
                 }}
                 onMouseLeave={(e) => {
+                  if (reduced) return;
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 28px -4px rgba(152,61,6,0.45)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 28px -4px rgba(152,61,6,0.45)";
                 }}
               >
-                MAPEAR MEU PADRÃO AGORA
-                <ArrowRight size={14} />
+                Mapear meu padrão
+                <ArrowRight size={14} aria-hidden="true" />
               </button>
             </motion.div>
 
-            {/* Trust signals */}
+            {/* 5 · TRUST LINE — uma linha, sem ruído */}
             <motion.div
-              initial="hidden" animate="visible" custom={5} variants={fade}
-              className="mt-4 flex items-center gap-4 flex-wrap"
+              initial="hidden"
+              animate="visible"
+              custom={4}
+              variants={fade}
+              className="mt-5 flex items-center gap-4 flex-wrap"
             >
-              <p className="font-inter" style={{ fontSize: "10.5px", color: "rgba(200,184,112,0.4)", letterSpacing: "0.06em" }}>
-                3 min · Gratuito · Sem cadastro
+              <p
+                className="font-inter"
+                style={{
+                  fontSize: "10.5px",
+                  color: "rgba(200,184,112,0.45)",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                3 min · Gratuito · Sem cadastro para começar
               </p>
               <div className="flex items-center gap-1.5">
-                <Shield size={10} color={GOLD} style={{ opacity: 0.3 }} />
-                <p className="font-inter" style={{ fontSize: "10px", color: DIM }}>
-                  Dados privados
+                <Shield
+                  size={10}
+                  color={GOLD}
+                  style={{ opacity: 0.32 }}
+                  aria-hidden="true"
+                />
+                <p
+                  className="font-inter"
+                  style={{ fontSize: "10px", color: DIM }}
+                >
+                  Dados privados · LGPD
                 </p>
               </div>
             </motion.div>
 
-            {/* Cliff effect */}
+            {/* Cliff effect — discreto, força scroll */}
             <motion.div
               initial={{ opacity: 0, y: -6 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.4, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: reduced ? 0 : 2.2, duration: 0.8, ease: "easeOut" }}
               className="mt-14 flex flex-col items-end gap-2"
+              aria-hidden="true"
             >
               <span
                 className="font-inter uppercase"
-                style={{ fontSize: "8px", letterSpacing: "0.45em", color: "rgba(200,184,112,0.25)" }}
+                style={{
+                  fontSize: "8px",
+                  letterSpacing: "0.45em",
+                  color: "rgba(200,184,112,0.25)",
+                }}
               >
                 Continue
               </span>
               <motion.div
-                animate={{ y: [0, 5, 0] }}
+                animate={reduced ? undefined : { y: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
               >
                 <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
-                  <line x1="7" y1="0" x2="7" y2="13" stroke="rgba(200,184,112,0.25)" strokeWidth="1"/>
-                  <polyline points="3,10 7,15 11,10" fill="none" stroke="rgba(200,184,112,0.25)" strokeWidth="1"/>
+                  <line
+                    x1="7"
+                    y1="0"
+                    x2="7"
+                    y2="13"
+                    stroke="rgba(200,184,112,0.25)"
+                    strokeWidth="1"
+                  />
+                  <polyline
+                    points="3,10 7,15 11,10"
+                    fill="none"
+                    stroke="rgba(200,184,112,0.25)"
+                    strokeWidth="1"
+                  />
                 </svg>
               </motion.div>
             </motion.div>
-
           </div>
         </div>
+
+        {/* Fallback acessível para crawlers sem JS / leitores de tela */}
+        <noscript>
+          <div className="sr-only">
+            <h1>Portal Reset — Diagnóstico Mapa do Padrão</h1>
+            <p>
+              Você começa, para, recomeça. Em 3 minutos, descubra o nome do
+              padrão que decide por você em corpo, dinheiro e relações.
+            </p>
+            <a href="/quiz-mapa-do-padrao?start=1">Iniciar diagnóstico</a>
+          </div>
+        </noscript>
       </section>
 
-      {/* ═══════════ MIDPAGE CTA — Ponte narrativa antes das seções ═══════════ */}
+      {/* ═══════════════ MIDPAGE — BLOCO AUTORAL (substitui CTA genérico)
+          Prova social autoral: Ana + The Cosmo. Espaço de ouro usado para
+          autoridade narrativa antes de jogar a leitora nas seções longas.
+      ═════════════════════════════════════════════════════════════════ */}
       <section
-        className="px-6 md:px-12 lg:px-20 py-16 md:py-20 text-center"
+        className="px-6 md:px-12 lg:px-20 py-20 md:py-24"
         style={{ background: "#08090D", borderTop: "1px solid rgba(200,184,112,0.06)" }}
+        aria-label="Sobre Ana Retore e The Cosmo"
       >
-        <div className="max-w-[560px] mx-auto">
+        <div className="max-w-[680px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
+            className="text-center"
           >
             <p
-              className="font-playfair italic mb-4"
-              style={{ fontSize: "clamp(18px, 2.2vw, 24px)", color: "rgba(237,230,219,0.65)", lineHeight: 1.45 }}
+              className="font-inter uppercase mb-4"
+              style={{
+                fontSize: "9px",
+                letterSpacing: "0.5em",
+                color: "rgba(200,184,112,0.55)",
+              }}
             >
-              "Não é mais informação que resolve.<br />
-              É ver onde o automático ainda decide por você."
+              Quem desenhou este mapa
             </p>
-            <div className="w-8 h-px mx-auto mb-6" style={{ background: "rgba(200,184,112,0.2)" }} />
+            <div
+              className="w-8 h-px mx-auto mb-7"
+              style={{ background: "rgba(200,184,112,0.25)" }}
+            />
+
+            <p
+              className="font-playfair italic mb-6"
+              style={{
+                fontSize: "clamp(18px, 2.1vw, 23px)",
+                color: "rgba(237,230,219,0.82)",
+                lineHeight: 1.5,
+              }}
+            >
+              "Não construí este diagnóstico para descrever você.
+              <br />
+              Construí para você se reconhecer."
+            </p>
+
+            <p
+              className="font-inter"
+              style={{
+                fontSize: "12px",
+                color: "rgba(200,184,112,0.7)",
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                marginBottom: "32px",
+              }}
+            >
+              Ana Retore · The Cosmo
+            </p>
+
             <button
-              onClick={goToQuiz}
+              onClick={() => goToQuiz("midpage")}
+              aria-label="Iniciar diagnóstico Mapa do Padrão"
               className="font-inter font-semibold uppercase tracking-[0.18em] transition-all duration-300 inline-flex items-center gap-3"
               style={{
                 background: "transparent",
                 color: GOLD,
                 borderRadius: "8px",
-                border: "1px solid rgba(200,184,112,0.25)",
-                height: "44px",
-                paddingLeft: "24px",
-                paddingRight: "24px",
+                border: "1px solid rgba(200,184,112,0.3)",
+                height: "46px",
+                paddingLeft: "26px",
+                paddingRight: "26px",
                 fontSize: "11px",
+                cursor: "pointer",
               }}
               onMouseEnter={(e) => {
+                if (reduced) return;
                 e.currentTarget.style.background = "rgba(200,184,112,0.06)";
-                e.currentTarget.style.borderColor = "rgba(200,184,112,0.4)";
+                e.currentTarget.style.borderColor = "rgba(200,184,112,0.45)";
               }}
               onMouseLeave={(e) => {
+                if (reduced) return;
                 e.currentTarget.style.background = "transparent";
-                e.currentTarget.style.borderColor = "rgba(200,184,112,0.25)";
+                e.currentTarget.style.borderColor = "rgba(200,184,112,0.3)";
               }}
             >
               Fazer meu diagnóstico
-              <ArrowRight size={13} />
+              <ArrowRight size={13} aria-hidden="true" />
             </button>
           </motion.div>
         </div>
       </section>
 
-      <LandingSharedSections onCTA={goToQuiz} />
-
+      <LandingSharedSections onCTA={() => goToQuiz("midpage")} />
     </div>
   );
 };

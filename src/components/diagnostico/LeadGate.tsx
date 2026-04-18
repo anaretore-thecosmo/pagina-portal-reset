@@ -38,6 +38,8 @@ export type LeadFormData = z.infer<typeof leadSchema>;
 interface LeadGateProps {
   onSubmit: (data: { nome: string; email: string; whatsapp?: string }) => void | Promise<void>;
   onSkip: () => void;
+  /** Nome do arquétipo já calculado — exibido borrado como pré-revelação (Onda 3). */
+  arquetipoPreview?: string;
 }
 
 /* ── Animations ──────────────────────────────────────── */
@@ -50,7 +52,7 @@ const fadeUp = {
   }),
 };
 
-const LeadGate = ({ onSubmit, onSkip }: LeadGateProps) => {
+const LeadGate = ({ onSubmit, onSkip, arquetipoPreview }: LeadGateProps) => {
   const [form, setForm] = useState<LeadFormData>({ nome: "", email: "", whatsapp: "" });
   const [errors, setErrors] = useState<Partial<Record<keyof LeadFormData, string>>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -162,11 +164,49 @@ const LeadGate = ({ onSubmit, onSkip }: LeadGateProps) => {
           initial="hidden"
           animate="visible"
           custom={2}
-          className="text-center font-inter mb-10"
+          className="text-center font-inter mb-8"
           style={{ color: MUTED, fontSize: "15px", lineHeight: 1.6 }}
         >
           Para onde enviamos uma cópia da sua leitura?
         </motion.p>
+
+        {/* Pré-revelação do arquétipo (Onda 3 — Bridger: motivação para completar) */}
+        {arquetipoPreview && (
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={2.4}
+            className="text-center mb-10"
+          >
+            <p
+              className="font-inter uppercase mb-2"
+              style={{ color: DIM, fontSize: "9px", letterSpacing: "0.4em" }}
+            >
+              Seu arquétipo é
+            </p>
+            <p
+              aria-label="Arquétipo a revelar após cadastro"
+              className="font-playfair font-bold uppercase select-none"
+              style={{
+                fontSize: "clamp(26px, 4.4vw, 34px)",
+                letterSpacing: "0.12em",
+                color: GOLD,
+                filter: "blur(9px)",
+                opacity: 0.85,
+                userSelect: "none",
+              }}
+            >
+              {arquetipoPreview}
+            </p>
+            <p
+              className="font-inter italic mt-3"
+              style={{ color: MUTED, fontSize: "12px" }}
+            >
+              Deixe seu nome para revelar.
+            </p>
+          </motion.div>
+        )}
 
         {/* Form */}
         <motion.form

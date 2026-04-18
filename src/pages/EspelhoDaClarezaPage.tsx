@@ -76,14 +76,24 @@ const EspelhoDaClarezaPage = () => {
     setLeadCaptured(true);
   };
 
+  // Calcula arquétipo agora para pré-revelar (borrado) no LeadGate
+  const previewCtx = enrichLeadContext();
+
   if (!leadCaptured) {
-    return <LeadGate onSubmit={handleLeadSubmit} onSkip={handleSkip} />;
+    return (
+      <LeadGate
+        onSubmit={handleLeadSubmit}
+        onSkip={handleSkip}
+        arquetipoPreview={previewCtx.arquetipo}
+      />
+    );
   }
 
   return (
     <main className="min-h-screen" style={{ background: "#08090D" }}>
       <DiagnosticoResult
         userName={leadData?.nome ?? ""}
+        userEmail={leadData?.email}
         answers={resolved.answers}
         sessionId={resolved.sessionId}
       />
