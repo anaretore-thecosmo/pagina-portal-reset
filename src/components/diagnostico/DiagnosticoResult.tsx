@@ -795,7 +795,7 @@ const DiagnosticoResult = ({ userName, userEmail, answers }: DiagnosticoResultPr
               </div>
 
               {/* CTA button */}
-              <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="inline-block w-full max-w-sm">
+              <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" onClick={() => onCheckoutClick("primary")} className="inline-block w-full max-w-sm">
                 <button
                   className="font-inter font-semibold uppercase tracking-[0.2em] inline-flex items-center justify-center gap-3 transition-all duration-300 w-full"
                   style={{
@@ -948,7 +948,7 @@ const DiagnosticoResult = ({ userName, userEmail, answers }: DiagnosticoResultPr
             className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
             style={{ background: `linear-gradient(to top, ${BG_DARK} 70%, transparent)`, padding: "24px 16px 16px" }}
           >
-            <a href={KIWIFY_URL} target="_blank" rel="noopener noreferrer" className="block">
+            <a href={checkoutUrl} target="_blank" rel="noopener noreferrer" onClick={() => onCheckoutClick("sticky")} className="block">
               <button
                 className="font-inter font-semibold uppercase tracking-[0.18em] w-full flex items-center justify-center gap-2.5"
                 style={{

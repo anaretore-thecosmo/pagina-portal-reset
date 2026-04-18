@@ -93,6 +93,7 @@ const EspelhoDaClarezaPage = () => {
     <main className="min-h-screen" style={{ background: "#08090D" }}>
       <DiagnosticoResult
         userName={leadData?.nome ?? ""}
+        userEmail={leadData?.email}
         answers={resolved.answers}
         sessionId={resolved.sessionId}
       />
