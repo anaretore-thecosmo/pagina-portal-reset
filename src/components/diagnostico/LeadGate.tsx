@@ -38,6 +38,8 @@ export type LeadFormData = z.infer<typeof leadSchema>;
 interface LeadGateProps {
   onSubmit: (data: { nome: string; email: string; whatsapp?: string }) => void | Promise<void>;
   onSkip: () => void;
+  /** Nome do arquétipo já calculado — exibido borrado como pré-revelação (Onda 3). */
+  arquetipoPreview?: string;
 }
 
 /* ── Animations ──────────────────────────────────────── */
@@ -50,7 +52,7 @@ const fadeUp = {
   }),
 };
 
-const LeadGate = ({ onSubmit, onSkip }: LeadGateProps) => {
+const LeadGate = ({ onSubmit, onSkip, arquetipoPreview }: LeadGateProps) => {
   const [form, setForm] = useState<LeadFormData>({ nome: "", email: "", whatsapp: "" });
   const [errors, setErrors] = useState<Partial<Record<keyof LeadFormData, string>>>({});
   const [submitting, setSubmitting] = useState(false);
