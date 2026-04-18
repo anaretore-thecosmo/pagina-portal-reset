@@ -215,6 +215,7 @@ const LandingPage = () => {
                  Versão sintoma-aware (Schwartz nível 2-3): nomeia o sintoma
                  que a leitora reconhece antes de oferecer diagnóstico. */}
             <motion.h1
+              key={`h1-${heroVariant}`}
               initial="hidden"
               animate="visible"
               custom={1}
@@ -228,16 +229,14 @@ const LandingPage = () => {
                 textTransform: "uppercase",
                 color: "#EDE6DB",
               }}
+              data-ab-variant={heroVariant}
             >
-              Você começa, para,<br />
-              recomeça.{" "}
-              <span style={{ color: GOLD, fontStyle: "italic", textTransform: "none" }}>
-                E ainda não sabe por quê.
-              </span>
+              {copy.headline}
             </motion.h1>
 
             {/* 3 · SUBHEAD — uma frase, promessa específica e mensurável */}
             <motion.p
+              key={`sub-${heroVariant}`}
               initial="hidden"
               animate="visible"
               custom={2}
@@ -249,8 +248,7 @@ const LandingPage = () => {
                 maxWidth: "440px",
               }}
             >
-              Em 3 minutos, o nome do padrão que decide por você — em corpo,
-              dinheiro e relações.
+              {copy.subhead}
             </motion.p>
 
             {/* 4 · CTA — gradiente oficial */}
