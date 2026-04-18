@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Shield } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import LandingSharedSections from "@/components/LandingSharedSections";
 import LanguageSelector from "@/components/LanguageSelector";
 import MiniMandala from "@/components/MiniMandala";
@@ -15,7 +15,7 @@ import { getOrAssignHeroVariant, type HeroVariant } from "@/lib/abTest";
    C · Resultado-aware → leitora quer o entregável final
 ─────────────────────────────────────────────────────────────── */
 type HeroCopy = {
-  headline: React.ReactNode;
+  headline: ReactNode;
   subhead: string;
 };
 
