@@ -9,6 +9,7 @@ import {
   quizRespiros,
   type QuizSession,
 } from "@/data/quizMapaPadrao";
+import { track } from "@/lib/analytics";
 import quizIntroImage from "@/assets/quiz-intro-editorial.jpg";
 
 const STORAGE_KEY = "quiz-mapa-padrao-session";
