@@ -10,6 +10,7 @@ import {
   type QuizSession,
 } from "@/data/quizMapaPadrao";
 import { track } from "@/lib/analytics";
+import { getHeroVariant } from "@/lib/abTest";
 import quizIntroImage from "@/assets/quiz-intro-editorial.jpg";
 
 const STORAGE_KEY = "quiz-mapa-padrao-session";
