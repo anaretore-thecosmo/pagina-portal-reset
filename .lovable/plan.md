@@ -1,107 +1,103 @@
 
 
-## Plano: Captação de Lead antes do Resultado do Mapa
+## Curadoria Estratégica — Conselho de Mestres para o Portal Reset
 
-### Objetivo
-Inserir um gate de captação (nome + email + WhatsApp opcional) entre o último passo do quiz e a revelação do diagnóstico, sem quebrar o fluxo narrativo nem a arquitetura atual do funil.
-
-### Princípio estratégico (The Cosmo)
-- **Não é paywall, é portal**: a leitora termina as 24 perguntas, vê uma tela que diz "seu mapa está pronto" e é convidada a deixar o nome para receber a leitura editorial.
-- **Honestidade vibracional**: deixar claro que receberá o resultado na tela agora E uma cópia por email/WhatsApp.
-- **Sem urgência artificial**: nada de "última chance", "vagas limitadas".
-- **Skip opcional invisível**: o link "ver sem cadastrar" fica discreto (cinza, fonte pequena) — preserva confiança sem matar conversão.
+Reuni um painel imaginário de 8 referências, cada uma olhando uma camada específica da página. Antes do plano, mapeei o que cada um veria, depois consolidei em ações concretas e priorizadas.
 
 ---
 
-### Onde encaixa no fluxo
+### O que cada mestre observou
+
+**Bill Gates — eficiência sistêmica e dados**
+- Não há instrumentação de funil. Hoje você não sabe onde a leitora desiste: hero, quiz, lead gate ou checkout.
+- Falta um dashboard mínimo de métricas (view → start → complete → lead → checkout).
+
+**Steve Jobs — redução radical e foco**
+- O hero tem 8 elementos competindo: kicker, linha ouro, H1 (duas frases longas), subhead de 3 linhas, card de 3 entregas, CTA, trust line, cliff effect. Excessivo.
+- A promessa precisa caber em uma respiração: uma frase, um botão, uma prova.
+
+**Tim Brown (IDEO) — design thinking e jornada**
+- A jornada emocional não tem mapa explícito: dor → reconhecimento → esperança → ação. O hero pula direto para "diagnóstico" sem ancorar a dor primeiro.
+- Falta um momento de empatia visível antes do CTA.
+
+**Charles Sanders Peirce — semiótica (signo, objeto, interpretante)**
+- A imagem da mulher (signo) precisa ser lida instantaneamente como "essa sou eu" (interpretante). Hoje o gradient escuro consome o rosto e quebra a identificação.
+- O ouro (#C8B870) está usado em excesso → vira ruído, deixa de ser símbolo de raridade.
+
+**Darren Bridger — neuromarketing aplicado**
+- Princípio da fluência cognitiva: quanto mais fácil de processar, mais verdadeiro parece. As frases do H1 têm 18+ palavras — alta carga.
+- Falta ancoragem de preço/valor visível antes do quiz (a leitora não sabe o que está sendo oferecido depois).
+
+**David Ogilvy — copywriting clássico**
+- Headline atual descreve um problema interno em terceira pessoa filosófica. Ogilvy diria: prometa um benefício específico e mensurável OU faça uma pergunta que a leitora só pode responder fazendo o quiz.
+- A subhead repete a headline em vez de adicionar prova/specificity.
+
+**Eugene Schwartz — níveis de consciência (Breakthrough Advertising)**
+- A copy atual presume nível 4-5 (sabe que tem um padrão e que existe diagnóstico). Tráfego frio do Instagram chega em nível 2-3 (sente o sintoma, não nomeia a causa).
+- Falta uma versão da headline para "problema-aware" que descreva o sintoma em vez do diagnóstico.
+
+**Hugo Veiga (AKQA) — direção criativa contemporânea**
+- A página é bonita mas estática. Falta um gesto criativo memorável — algo que vire screenshot/conversa (ex: um momento interativo de respiração, uma frase que reage ao scroll, uma transição inesquecível).
+- O midpage CTA é genérico — desperdício de um espaço de ouro.
+
+---
+
+### Plano de Ação — 4 Ondas Priorizadas
+
+**ONDA 1 — Fundação invisível (faça primeiro, baixo risco)**
+1. Instrumentar analytics em todo o funil: `landing_view`, `cta_click_hero`, `cta_click_midpage`, `quiz_start`, `quiz_q{n}_answered`, `quiz_complete`, `lead_gate_view/submit/skip`, `result_view`, `checkout_click`. Persistir em `dataLayer` + endpoint Supabase simples.
+2. Adicionar `aria-labels` e `<noscript>` fallback no hero para SEO/acessibilidade real.
+3. Implementar `prefers-reduced-motion` nos crossfades e parallax.
+
+**ONDA 2 — Hero cirúrgico (Jobs + Ogilvy + Schwartz)**
+4. Reescrever o hero em 3 versões A/B/C de copy para níveis de consciência diferentes:
+   - A (atual, problema-solução-aware)
+   - B (sintoma-aware): "Você começa, para, recomeça. E ainda não sabe por quê."
+   - C (resultado-aware): "Em 3 minutos, o nome do padrão que decide por você."
+5. Reduzir hero a 5 elementos: kicker · H1 (1 frase, ≤12 palavras) · subhead (1 frase) · CTA · trust line. Remover o card de 3 entregas do hero — mover para uma seção dedicada logo abaixo.
+6. Aumentar contraste do gradient sobre a imagem em até 60% da largura, deixando o rosto da mulher visível e iluminado nos 40% restantes (Peirce: o signo precisa ser lido).
+7. Trocar o midpage CTA genérico por um **bloco de prova social/autoral** (Ana + linha sobre The Cosmo) ou um trecho real do diagnóstico anonimizado.
+
+**ONDA 3 — Jornada emocional (Brown + Bridger)**
+8. Inserir uma seção curta logo após o hero ancorando a dor em 3 frases curtas estilo "você se reconhece?" — antes de oferecer a solução. Essa seção já existe parcialmente em `LandingSharedSections` (dores) — promover para mais cedo no scroll.
+9. Adicionar uma "barra de progresso emocional" sutil no quiz (não percentual frio, mas marcadores poéticos: "respira... metade do mapa... quase lá").
+10. Pré-revelação no lead gate: mostrar o nome do arquétipo borrado/parcial ANTES do form ("Seu padrão é ▓▓▓▓▓▓▓▓ — para revelar, deixe seu nome"). Aumenta motivação para completar.
+
+**ONDA 4 — Gesto memorável (Veiga)**
+11. Criar UM momento interativo único — escolha entre:
+    - **Respiração guiada** de 4 segundos antes de iniciar o quiz (círculo que expande/contrai com áudio opcional). Sinaliza "isso não é mais um quiz de Instagram".
+    - **Mandala viva no hero**: mini-mandala animada que pulsa suavemente, prévia visual do que ela vai receber.
+    - **Frase que se completa no scroll**: H1 começa "Você não fracassa por falta de potência." e ao rolar, a segunda linha se monta letra por letra.
+12. Compartilhamento do resultado refinado: card de IG já existe, mas adicionar variação "story 9:16" com mandala animada exportável como vídeo curto (3s loop).
+
+---
+
+### Priorização recomendada (ordem de execução)
 
 ```text
-Quiz (24 perguntas) 
-  → EspelhoDaClarezaPage (transição "respira, seu mapa está sendo desenhado")
-    → [NOVO] LeadGate (nome + email + whatsapp opcional)   ← inserido aqui
-      → DiagnosticoResult (mandala + arquétipo + CTA Kiwify)
+Semana 1: Onda 1 (analytics + acessibilidade)        ← invisível, destrava tudo
+Semana 2: Onda 2 itens 4-6 (hero cirúrgico)          ← maior impacto em conversão
+Semana 3: Onda 3 itens 8-10 (jornada + lead gate)    ← reduz drop-off
+Semana 4: Onda 4 (gesto memorável)                   ← diferenciação de marca
 ```
 
-A inserção é **dentro de `EspelhoDaClarezaPage`**, como um estado intermediário antes de renderizar `DiagnosticoResult`. Não cria nova rota — preserva o state com os scores que já trafega via `location.state`.
+### Métricas de sucesso
 
----
+- **Hero → Quiz start**: hoje desconhecido → meta ≥35%
+- **Quiz start → complete**: meta ≥70%
+- **Lead gate submit (não skip)**: meta ≥55%
+- **Result → Checkout click**: meta ≥18%
+- **Tempo médio na landing antes do CTA**: 25-45s (sweet spot de leitura sem fadiga)
 
-### Mudanças
+### O que NÃO mudar (preservação coerente com The Cosmo)
 
-**1. Novo componente: `src/components/diagnostico/LeadGate.tsx`**
-- Card editorial centralizado, mesmo padrão visual do quiz (fundo `#08090D`, ouro `#C8B870`, Playfair + Inter).
-- Headline: "Seu mapa está pronto."
-- Sub: "Para onde enviamos uma cópia da sua leitura?"
-- Campos:
-  - Nome (obrigatório, max 60)
-  - Email (obrigatório, validação zod)
-  - WhatsApp (opcional, max 20, só dígitos/+/espaço)
-- Validação com **zod** (schema client-side, mensagens em PT).
-- Botão primário com gradiente oficial: "Revelar meu mapa".
-- Link discreto abaixo: "Prefiro ver sem cadastrar" (cinza 35% opacity, 11px).
-- Trust line: "Seus dados são privados. Sem spam. LGPD."
-- Animações Framer Motion coerentes com o resto (fade + stagger 130ms).
+- Paleta, tipografia, gradient oficial, dark theme fixo.
+- Tom austero, ausência de emojis/exclamações.
+- Ausência de urgência artificial e contadores.
+- Estrutura de 12 perguntas + 3 respiros do quiz.
+- Link Kiwify e preço R$47/mês.
 
-**2. Edição: `src/pages/EspelhoDaClarezaPage.tsx`**
-- Adicionar estado `leadCaptured: boolean` (default false).
-- Ler `localStorage.portalreset_lead` no mount: se já existe, pula o gate.
-- Renderização condicional:
-  - Se `!leadCaptured` → `<LeadGate onSubmit={...} onSkip={...} />`
-  - Se `leadCaptured` → `<DiagnosticoResult ... />` (atual)
-- `onSubmit`: salva lead em localStorage + dispara persistência (ver item 3) + seta `leadCaptured = true`.
-- `onSkip`: apenas seta `leadCaptured = true` (sem persistir).
+### Próximo passo sugerido
 
-**3. Persistência do lead — Supabase**
-- Conforme regra do projeto (stack Supabase, NÃO Lovable Cloud).
-- Tabela nova: `leads_mapa_padrao`
-  ```
-  id uuid pk default gen_random_uuid()
-  nome text not null
-  email text not null
-  whatsapp text
-  arquetipo text          -- preenchido após cálculo (Curiosa/Buscadora/Estrategista/Soberana)
-  scores jsonb            -- 6 eixos
-  utm jsonb               -- captura utm_source/medium/campaign se houver
-  created_at timestamptz default now()
-  ```
-- RLS: insert público (anon), select restrito a service_role.
-- Função `saveLead(payload)` em `src/lib/leads.ts` chamando `supabase.from('leads_mapa_padrao').insert(...)`.
-- Falha silenciosa: se Supabase falhar, log no console e segue o fluxo (NUNCA bloqueia o resultado).
-
-**4. Analytics (alinhado ao plano da Fase 1)**
-Eventos novos no funil:
-- `lead_gate_view` — quando o gate é exibido
-- `lead_gate_submit` — submit válido
-- `lead_gate_skip` — clique em "ver sem cadastrar"
-- `lead_gate_error` — falha de validação ou Supabase
-
-Permite medir: taxa de captação real, % skip, drop-off no gate.
-
-**5. Pré-preenchimento no checkout Kiwify**
-- Quando lead já capturado, passar nome/email como query params para a URL Kiwify no `DiagnosticoResult`:
-  - `https://pay.kiwify.com.br/ns0fjIx?name={nome}&email={email}`
-- Reduz fricção no checkout → conversão maior sem mudar produto.
-
----
-
-### Arquivos editados/criados
-
-| Arquivo | Tipo | Motivo |
-|---|---|---|
-| `src/components/diagnostico/LeadGate.tsx` | NOVO | Componente do gate editorial |
-| `src/lib/leads.ts` | NOVO | `saveLead()` + tipo `LeadPayload` |
-| `src/pages/EspelhoDaClarezaPage.tsx` | EDIT | Renderização condicional do gate antes do resultado |
-| `src/components/diagnostico/DiagnosticoResult.tsx` | EDIT | Append de nome/email à URL Kiwify se disponível |
-| Supabase migration | NOVO | Tabela `leads_mapa_padrao` + RLS |
-
----
-
-### Considerações estratégicas
-
-- **Não interfere no funil**: o quiz continua igual, o resultado continua igual. Apenas adiciona um passo de respiração entre a transição e a revelação.
-- **Reversível**: se a taxa de skip for alta demais ou a conversão cair, basta remover o estado condicional em `EspelhoDaClarezaPage` (1 linha) e o gate desaparece.
-- **A/B-ready**: estrutura já permite testar gate com/sem skip, ou copy diferente, no futuro.
-- **LGPD**: link de privacidade visível no gate; consentimento implícito ao submeter (campo de aceite explícito não é necessário aqui pois o uso é declarado em texto curto, mas pode ser adicionado se Simone solicitar).
-- **Mantém gradiente oficial** ouro→âmbar→terracota no botão primário.
-- **Coerente com The Cosmo**: linguagem direta, sem manipulação, opção de pular preserva a soberania da leitora.
+Aprovar este plano e escolher por **qual onda começar** — recomendo Onda 1 (analytics) imediatamente porque ela destrava decisões baseadas em dado real para todas as ondas seguintes. Se preferir impacto visual rápido, começar pela Onda 2.
 
