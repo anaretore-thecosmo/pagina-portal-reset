@@ -13,11 +13,13 @@ import {
   getArquetipo,
   type EspelhoData,
 } from "@/data/espelhoEngine";
+import { track } from "@/lib/analytics";
 
 /* ── Props ──────────────────────────────────────────── */
 interface DiagnosticoResultProps {
   scores?: number[];
   userName: string;
+  userEmail?: string;
   answers?: (number | null)[];
   sessionId?: string;
 }
@@ -161,13 +163,29 @@ const IconMap = ({ icon, color }: { icon: string; color: string }) => {
 };
 
 /* ── Main component ─────────────────────────────────── */
-const DiagnosticoResult = ({ userName, answers }: DiagnosticoResultProps) => {
+const DiagnosticoResult = ({ userName, userEmail, answers }: DiagnosticoResultProps) => {
   const data: EspelhoData = computeEspelho(answers ?? []);
   const editorial  = generateEditorialDiagnostic(data);
   const plan       = generate7DayPlan(data);
   const arquetipo  = getArquetipo(data);
   const theme      = ARQUETIPO_THEME[arquetipo.nome];
   const offer      = ARQUETIPO_OFFER[arquetipo.nome];
+
+  // Checkout URL pré-preenchido (Kiwify aceita name + email via query)
+  const checkoutUrl = (() => {
+    const url = new URL(KIWIFY_URL);
+    if (userName) url.searchParams.set("name", userName);
+    if (userEmail) url.searchParams.set("email", userEmail);
+    return url.toString();
+  })();
+
+  // Analytics — view do resultado, uma única vez
+  useEffect(() => {
+    track("result_view", { arquetipo: arquetipo.nome });
+  }, [arquetipo.nome]);
+
+  const onCheckoutClick = (origin: "primary" | "sticky") =>
+    track("checkout_click", { arquetipo: arquetipo.nome, origin });
 
   const top3Indices    = data.top3.map((a) => a.index);
   const bottom3Indices = data.bottom3.map((a) => a.index);
