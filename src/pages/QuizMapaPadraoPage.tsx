@@ -722,7 +722,8 @@ const QuizMapaPadraoPage = () => {
     setCurrentQuestion(0);
     setRespiroIndex(0);
     setStep("question");
-  }, []);
+    track("quiz_start", { sessionId });
+  }, [sessionId]);
 
   const handleAnswer = useCallback(
     (value: number) => {
@@ -733,6 +734,7 @@ const QuizMapaPadraoPage = () => {
       });
 
       const questionNumber = currentQuestion + 1;
+      track("quiz_question_answered", { question: questionNumber, value });
       const rIdx = RESPIRO_AFTER.indexOf(questionNumber);
 
       if (rIdx !== -1) {
@@ -777,6 +779,7 @@ const QuizMapaPadraoPage = () => {
         })),
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(finalSession));
+      track("quiz_complete", { sessionId });
       navigate(`/espelho-da-clareza?sid=${sessionId}`, {
         state: { session: finalSession },
       });
