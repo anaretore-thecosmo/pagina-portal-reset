@@ -76,8 +76,17 @@ const EspelhoDaClarezaPage = () => {
     setLeadCaptured(true);
   };
 
+  // Calcula arquétipo agora para pré-revelar (borrado) no LeadGate
+  const previewCtx = enrichLeadContext();
+
   if (!leadCaptured) {
-    return <LeadGate onSubmit={handleLeadSubmit} onSkip={handleSkip} />;
+    return (
+      <LeadGate
+        onSubmit={handleLeadSubmit}
+        onSkip={handleSkip}
+        arquetipoPreview={previewCtx.arquetipo}
+      />
+    );
   }
 
   return (
