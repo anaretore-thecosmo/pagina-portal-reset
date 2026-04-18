@@ -7,6 +7,57 @@ import LanguageSelector from "@/components/LanguageSelector";
 import MiniMandala from "@/components/MiniMandala";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { track } from "@/lib/analytics";
+import { getOrAssignHeroVariant, type HeroVariant } from "@/lib/abTest";
+
+/* ── A/B/C copy variants — only H1 + subhead change ─────────────
+   A · Solução-aware  → leitora já sabe que tem padrão
+   B · Sintoma-aware  → leitora reconhece o ciclo (controle atual)
+   C · Resultado-aware → leitora quer o entregável final
+─────────────────────────────────────────────────────────────── */
+type HeroCopy = {
+  headline: React.ReactNode;
+  subhead: string;
+};
+
+const HERO_COPY: Record<HeroVariant, HeroCopy> = {
+  A: {
+    headline: (
+      <>
+        Você sabe que tem um padrão.{" "}
+        <span style={{ color: "#C8B870", fontStyle: "italic", textTransform: "none" }}>
+          Agora veja qual é.
+        </span>
+      </>
+    ),
+    subhead:
+      "Em 3 minutos, o mapa de 6 eixos do que sustenta — e do que drena.",
+  },
+  B: {
+    headline: (
+      <>
+        Você começa, para,<br />
+        recomeça.{" "}
+        <span style={{ color: "#C8B870", fontStyle: "italic", textTransform: "none" }}>
+          E ainda não sabe por quê.
+        </span>
+      </>
+    ),
+    subhead:
+      "Em 3 minutos, o nome do padrão que decide por você — em corpo, dinheiro e relações.",
+  },
+  C: {
+    headline: (
+      <>
+        O nome do padrão{" "}
+        <span style={{ color: "#C8B870", fontStyle: "italic", textTransform: "none" }}>
+          que decide por você.
+        </span>
+      </>
+    ),
+    subhead:
+      "Em 3 minutos, o mapa que separa o que é seu do que é repetição.",
+  },
+};
 
 const BG_IMAGES = [
   "https://res.cloudinary.com/dnd2s2dv4/image/upload/f_auto,q_auto,w_1600/v1770421209/erlYw0HUWPflK_zMTmFiM_ijbdeo.avif",
