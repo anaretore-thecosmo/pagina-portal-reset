@@ -134,16 +134,23 @@ const fade = {
 const LandingPage = () => {
   const nav = useNavigate();
   const reduced = useReducedMotion();
+  const [heroVariant, setHeroVariant] = useState<HeroVariant>("B");
 
-  // Analytics — landing view (uma única vez por sessão de página)
+  // Assign A/B/C variant on mount and fire landing_view with it
   useEffect(() => {
-    track("landing_view");
+    const v = getOrAssignHeroVariant();
+    setHeroVariant(v);
+    track("landing_view", { hero_variant: v });
   }, []);
 
   const goToQuiz = (origin: "hero" | "midpage") => {
-    track(origin === "hero" ? "cta_click_hero" : "cta_click_midpage");
+    track(origin === "hero" ? "cta_click_hero" : "cta_click_midpage", {
+      hero_variant: heroVariant,
+    });
     nav("/quiz-mapa-do-padrao?start=1");
   };
+
+  const copy = HERO_COPY[heroVariant];
 
   return (
     <div style={{ background: "#08090D", color: "#EDE6DB", minHeight: "100vh" }}>
