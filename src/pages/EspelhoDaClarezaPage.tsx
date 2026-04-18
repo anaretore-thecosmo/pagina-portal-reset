@@ -49,9 +49,8 @@ const EspelhoDaClarezaPage = () => {
   const enrichLeadContext = () => {
     try {
       const espelho = computeEspelho(resolved.answers);
-      const scores = espelho.eixos.map((e) => e.score);
-      const avg = scores.reduce((a, b) => a + b, 0) / scores.length;
-      const arquetipo = getArquetipo(avg);
+      const scores = espelho.axes.map((a) => a.score);
+      const arquetipo = getArquetipo(espelho);
       return { scores, arquetipo: arquetipo.nome };
     } catch {
       return { scores: undefined, arquetipo: undefined };
