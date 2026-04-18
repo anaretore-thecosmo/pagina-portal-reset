@@ -724,7 +724,7 @@ const QuizMapaPadraoPage = () => {
     setCurrentQuestion(0);
     setRespiroIndex(0);
     setStep("question");
-    track("quiz_start", { sessionId });
+    track("quiz_start", { sessionId, hero_variant: getHeroVariant() });
   }, [sessionId]);
 
   const handleAnswer = useCallback(
