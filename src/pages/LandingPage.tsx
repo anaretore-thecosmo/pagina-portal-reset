@@ -1,12 +1,63 @@
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Shield } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import LandingSharedSections from "@/components/LandingSharedSections";
 import LanguageSelector from "@/components/LanguageSelector";
 import MiniMandala from "@/components/MiniMandala";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { track } from "@/lib/analytics";
+import { getOrAssignHeroVariant, type HeroVariant } from "@/lib/abTest";
+
+/* ── A/B/C copy variants — only H1 + subhead change ─────────────
+   A · Solução-aware  → leitora já sabe que tem padrão
+   B · Sintoma-aware  → leitora reconhece o ciclo (controle atual)
+   C · Resultado-aware → leitora quer o entregável final
+─────────────────────────────────────────────────────────────── */
+type HeroCopy = {
+  headline: ReactNode;
+  subhead: string;
+};
+
+const HERO_COPY: Record<HeroVariant, HeroCopy> = {
+  A: {
+    headline: (
+      <>
+        Você sabe que tem um padrão.{" "}
+        <span style={{ color: "#C8B870", fontStyle: "italic", textTransform: "none" }}>
+          Agora veja qual é.
+        </span>
+      </>
+    ),
+    subhead:
+      "Em 3 minutos, o mapa de 6 eixos do que sustenta — e do que drena.",
+  },
+  B: {
+    headline: (
+      <>
+        Você começa, para,<br />
+        recomeça.{" "}
+        <span style={{ color: "#C8B870", fontStyle: "italic", textTransform: "none" }}>
+          E ainda não sabe por quê.
+        </span>
+      </>
+    ),
+    subhead:
+      "Em 3 minutos, o nome do padrão que decide por você — em corpo, dinheiro e relações.",
+  },
+  C: {
+    headline: (
+      <>
+        O nome do padrão{" "}
+        <span style={{ color: "#C8B870", fontStyle: "italic", textTransform: "none" }}>
+          que decide por você.
+        </span>
+      </>
+    ),
+    subhead:
+      "Em 3 minutos, o mapa que separa o que é seu do que é repetição.",
+  },
+};
 
 const BG_IMAGES = [
   "https://res.cloudinary.com/dnd2s2dv4/image/upload/f_auto,q_auto,w_1600/v1770421209/erlYw0HUWPflK_zMTmFiM_ijbdeo.avif",
@@ -83,16 +134,23 @@ const fade = {
 const LandingPage = () => {
   const nav = useNavigate();
   const reduced = useReducedMotion();
+  const [heroVariant, setHeroVariant] = useState<HeroVariant>("B");
 
-  // Analytics — landing view (uma única vez por sessão de página)
+  // Assign A/B/C variant on mount and fire landing_view with it
   useEffect(() => {
-    track("landing_view");
+    const v = getOrAssignHeroVariant();
+    setHeroVariant(v);
+    track("landing_view", { hero_variant: v });
   }, []);
 
   const goToQuiz = (origin: "hero" | "midpage") => {
-    track(origin === "hero" ? "cta_click_hero" : "cta_click_midpage");
+    track(origin === "hero" ? "cta_click_hero" : "cta_click_midpage", {
+      hero_variant: heroVariant,
+    });
     nav("/quiz-mapa-do-padrao?start=1");
   };
+
+  const copy = HERO_COPY[heroVariant];
 
   return (
     <div style={{ background: "#08090D", color: "#EDE6DB", minHeight: "100vh" }}>
@@ -157,6 +215,7 @@ const LandingPage = () => {
                  Versão sintoma-aware (Schwartz nível 2-3): nomeia o sintoma
                  que a leitora reconhece antes de oferecer diagnóstico. */}
             <motion.h1
+              key={`h1-${heroVariant}`}
               initial="hidden"
               animate="visible"
               custom={1}
@@ -170,16 +229,14 @@ const LandingPage = () => {
                 textTransform: "uppercase",
                 color: "#EDE6DB",
               }}
+              data-ab-variant={heroVariant}
             >
-              Você começa, para,<br />
-              recomeça.{" "}
-              <span style={{ color: GOLD, fontStyle: "italic", textTransform: "none" }}>
-                E ainda não sabe por quê.
-              </span>
+              {copy.headline}
             </motion.h1>
 
             {/* 3 · SUBHEAD — uma frase, promessa específica e mensurável */}
             <motion.p
+              key={`sub-${heroVariant}`}
               initial="hidden"
               animate="visible"
               custom={2}
@@ -191,8 +248,7 @@ const LandingPage = () => {
                 maxWidth: "440px",
               }}
             >
-              Em 3 minutos, o nome do padrão que decide por você — em corpo,
-              dinheiro e relações.
+              {copy.subhead}
             </motion.p>
 
             {/* 4 · CTA — gradiente oficial */}

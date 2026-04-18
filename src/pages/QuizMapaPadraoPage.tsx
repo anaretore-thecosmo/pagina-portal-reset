@@ -10,6 +10,7 @@ import {
   type QuizSession,
 } from "@/data/quizMapaPadrao";
 import { track } from "@/lib/analytics";
+import { getHeroVariant } from "@/lib/abTest";
 import quizIntroImage from "@/assets/quiz-intro-editorial.jpg";
 
 const STORAGE_KEY = "quiz-mapa-padrao-session";
@@ -723,7 +724,7 @@ const QuizMapaPadraoPage = () => {
     setCurrentQuestion(0);
     setRespiroIndex(0);
     setStep("question");
-    track("quiz_start", { sessionId });
+    track("quiz_start", { sessionId, hero_variant: getHeroVariant() });
   }, [sessionId]);
 
   const handleAnswer = useCallback(
