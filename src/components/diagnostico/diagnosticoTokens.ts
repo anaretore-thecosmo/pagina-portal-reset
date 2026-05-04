@@ -20,7 +20,7 @@ export const BORDER_LIGHT   = "rgba(26,26,24,0.08)";
 export const GOLD_DARK      = "#8B7A3A";
 
 /* URLs */
-export const KIWIFY_URL  = "https://pay.kiwify.com.br/ns0fjIx";
+export const KIWIFY_URL  = "https://pay.kiwify.com.br/SdH1PiX";
 export const PLANO_A_URL = "mailto:ana.retore@gmail.com?subject=Quero%20saber%20mais%20sobre%20o%20Plano%20A";
 
 /* Arquétipo palette */

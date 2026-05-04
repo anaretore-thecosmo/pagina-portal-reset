@@ -67,7 +67,7 @@ const ARQUETIPO_THEME: Record<string, { accent: string; accentAlpha: string; acc
 };
 
 /* ── Offer copy ─────────────────────────────────────── */
-const KIWIFY_URL  = "https://pay.kiwify.com.br/ns0fjIx";
+const KIWIFY_URL  = "https://pay.kiwify.com.br/SdH1PiX";
 const PLANO_A_URL = "mailto:ana.retore@gmail.com?subject=Quero%20saber%20mais%20sobre%20o%20Plano%20A";
 
 const ARQUETIPO_OFFER: Record<string, {
